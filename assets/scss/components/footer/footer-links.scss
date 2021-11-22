@@ -1,0 +1,11 @@
+.footer-links {
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  bottom: 32px;
+  width: 360px;
+
+  @media (max-width: $break-sms) {
+    width: 88%;
+  }
+}
