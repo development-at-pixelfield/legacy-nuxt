@@ -24,6 +24,35 @@ export default {
     setNewPass: "Set new password",
   },
 
+  landing: {
+    discover: "Discover",
+    roadmap: "Roadmap",
+    becomeTester: "Become a tester",
+    ourTeam: "Our team",
+    days: "Days",
+    hours: "Hours",
+    minutes: "Minutes",
+    seconds: "Seconds",
+    joinUs: "Join us on",
+    orFollow: "or follow us on other platforms",
+    discoverTitle: "Discover infinite possibilities with on-chain credentials",
+    discoverDesc: `Following the auction of Beeple's NFT-based work of art at Christie's,
+          which eventually sold for $69.3 million with fees, the NFTs as a model
+          of ownership seem to have been particularly attractive to
+          up-and-coming artists. With fewer barriers than the traditional art
+          market, it becomes easier to get your name out there, and earn some
+          (serious) money too. Even blue chip artists like Damien Hirst are
+          jumping on the NFT bandwagon.`,
+    soundGood: "Sounds good?",
+    orJoin: "or join us on other platforms",
+    joinUsDiscord: "Join us on our Discord community",
+    name: "Name",
+    signUp: "Sign up",
+    backTop: "BACK TO TOP",
+    teamDesc:
+      "The future is bright for Brian Cattelle photography in the world of NFTs.",
+  },
+
   validations: {
     notEmpty: "This field cannot be empty.",
     sameAsPassword: "Please make sure your passwords match.",

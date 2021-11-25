@@ -1,0 +1,65 @@
+.become-tester{
+  background: $c-background;
+  padding-top: 80px;
+  padding-bottom: 91px;
+
+  @media (max-width: $break-sms) {
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+
+  .content{
+    max-width: 848px;
+    margin: 0 auto;
+
+    @media (max-width: $break-sms) {
+      max-width: 100%;
+    }
+
+    .header-block{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+
+      @media (max-width: $break-sms) {
+        flex-direction: column;
+      }
+
+      .rocket-icon{
+        font-size: 64px;
+
+        @media (max-width: $break-sms) {
+          font-size: 37px;
+        }
+      }
+
+      h2{
+        color: $c-white;
+        text-align: center;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 64px;
+        line-height: 95%;
+        letter-spacing: -0.01em;
+        margin-top: 0;
+
+        @media (max-width: $break-sms) {
+          font-weight: 800;
+          font-size: 37px;
+          line-height: 110%;
+          letter-spacing: -0.02em
+        }
+      }
+    }
+
+    .form-group{
+      max-width: 416px;
+      margin: 0 auto;
+
+      @media (max-width: $break-sms) {
+        max-width: 100%;
+      }
+    }
+  }
+}
