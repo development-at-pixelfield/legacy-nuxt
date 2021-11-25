@@ -24,6 +24,7 @@
 
       @media (max-width: $break-sms) {
         flex-direction: column;
+        align-items: center;
       }
 
       .rocket-icon{
