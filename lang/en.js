@@ -30,6 +30,7 @@ export default {
     roadmap: "Roadmap",
     becomeTester: "Become a tester",
     ourTeam: "Our team",
+    ourRoadMap: "Our roadmap",
     days: "Days",
     hours: "Hours",
     minutes: "Minutes",
@@ -50,8 +51,10 @@ export default {
     name: "Name",
     signUp: "Sign up",
     backTop: "BACK TO TOP",
-    teamDesc:
-      "The future is bright for Brian Cattelle photography in the world of NFTs.",
+    teamDesc: `The future is bright for Brian Cattelle photography in the world of NFTs.`,
+    roadDesc: `The future is bright for Brian Cattelle <br/> photography in the world of NFTs.`,
+    ourGoal: "OUR GOAL",
+    trip: "Trip to the moon",
   },
 
   settings: {
