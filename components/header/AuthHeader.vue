@@ -1,6 +1,6 @@
 <template>
   <div class="auth-header">
-    <img src="~/assets/img/desktop-logo.svg" alt="logo" />
+    <img src="~/assets/img/header-logo.svg" alt="logo" />
   </div>
 </template>
 

@@ -1,0 +1,37 @@
+.setting-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 12px;
+  border: 1px solid $c-greyscale-120;
+  margin-bottom: 16px;
+
+  .left-side{
+    display: flex;
+    margin-right: 15px;
+
+    .icon-exists{
+      display: flex;
+      margin-right: 8px;
+    }
+
+    p{
+      color: $c-greyscale-20;
+    }
+  }
+
+  .action{
+    display: flex;
+  }
+
+  .action-text{
+    cursor: pointer;
+  }
+}
+
+.no-margin{
+  margin-bottom: 0;
+}
+.cursor{
+  cursor: pointer;
+}

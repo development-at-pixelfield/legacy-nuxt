@@ -2,6 +2,7 @@ export default {
   data() {
     return {
       inputTypePassword: "password",
+      inputTypeCurrentPassword: "password",
       inputTypeRepeat: "password",
       level: 0,
       customErrors: [],
@@ -20,6 +21,11 @@ export default {
   computed: {
     inputIconPassword() {
       return this.inputTypePassword === "password"
+        ? require("assets/img/icons/eye.svg")
+        : require("assets/img/icons/eye-slash.svg");
+    },
+    inputIconCurrentPassword() {
+      return this.inputTypeCurrentPassword === "password"
         ? require("assets/img/icons/eye.svg")
         : require("assets/img/icons/eye-slash.svg");
     },
@@ -67,6 +73,9 @@ export default {
       if (type === "password") {
         this.inputTypePassword =
           this.inputTypePassword === "password" ? "text" : "password";
+      } else if (type === "currentPassword") {
+        this.inputTypeCurrentPassword =
+          this.inputTypeCurrentPassword === "password" ? "text" : "password";
       } else {
         this.inputTypeRepeat =
           this.inputTypeRepeat === "password" ? "text" : "password";

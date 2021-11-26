@@ -20,6 +20,35 @@
       :color="'c-white'"
       :disabled="true"
     />
+
+    <!--    <SettingItem :type="'link'" :link="'/settings/change-password'">-->
+    <!--      <img slot="icon" src="~/assets/img/icons/eye.svg" alt="icon" />-->
+    <!--      <p slot="sub-title" class="text-m mtb subtitle">Change password</p>-->
+    <!--    </SettingItem>-->
+
+    <!--    <SettingItem :type="'action'">-->
+    <!--      <img slot="icon" src="~/assets/img/icons/eye.svg" alt="icon" />-->
+    <!--      <p slot="title" class="text-m-bold mtb">NFT alerts</p>-->
+    <!--      <p slot="sub-title" class="text-m mtb">-->
+    <!--        I want to receive NFT alerts to my email.-->
+    <!--      </p>-->
+    <!--      <Checkbox slot="action" :name.sync="showAlerts" />-->
+    <!--    </SettingItem>-->
+
+    <!--    <SettingItem :type="'action'">-->
+    <!--      <p slot="title" class="text-m-bold mtb">NFT alerts</p>-->
+    <!--      <p slot="sub-title" class="text-m mtb">-->
+    <!--        I want to receive NFT alerts to my email.-->
+    <!--      </p>-->
+    <!--      <Checkbox slot="action" :name.sync="showAlerts" />-->
+    <!--    </SettingItem>-->
+
+    <!--    <SettingItem :type="'action'">-->
+    <!--      <img slot="icon" src="~/assets/img/icons/eye.svg" alt="icon" />-->
+    <!--      <p slot="sub-title" class="text-m mtb">Verify your email</p>-->
+    <!--      <p slot="action" class="action-text text-m mtb subtitle">Resend</p>-->
+    <!--    </SettingItem>-->
+
     <div class="controls">
       <Checkbox :name.sync="checkBox" class="mb-32">
         <label slot="label" class="text-m"> Test </label>
