@@ -22,6 +22,7 @@ export default {
     code: "Code",
     newPassword: "New password",
     setNewPass: "Set new password",
+    logOut: "Log out",
   },
 
   landing: {
@@ -53,6 +54,22 @@ export default {
       "The future is bright for Brian Cattelle photography in the world of NFTs.",
   },
 
+  settings: {
+    settings: "Settings",
+    accountSettings: "Account settings",
+    changePassword: "Change password",
+    notifications: "Notifications",
+    NFTAlerts: "NFT alerts",
+    alertToEmail: "I want to receive NFT alerts to my email.",
+    basicVerification: "Basic verification",
+    updateChanges: "Update changes",
+    deleteAccount: "Delete account",
+    changeDesc:
+      "Change your password by confirming your current password and choosing a new one.",
+    currentPassword: "Current password",
+    profile: "Profile",
+  },
+
   validations: {
     notEmpty: "This field cannot be empty.",
     sameAsPassword: "Please make sure your passwords match.",
@@ -67,5 +84,14 @@ export default {
     checkInbox: "Recovery email sent! Please check your inbox.",
     passwordChanged:
       "Password changed successfully! You can now login with the new password.",
+    emailUpdate:
+      "Email changed. Please check your inbox to verify your new email.",
+    changePassword: "Password changed successfully.",
+    successDelete: "Account successfully deleted",
+  },
+
+  modals: {
+    modalClose: "No, go back :)",
+    deleteAccount: "Delete account",
   },
 };

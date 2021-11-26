@@ -7,6 +7,12 @@ export const defaultValues = () => ({
     message: "",
     color: "success",
   },
+  modal: {
+    show: false,
+    type: null,
+    data: null,
+    close: "",
+  },
 });
 
 export const state = defaultValues;
@@ -14,6 +20,9 @@ export const state = defaultValues;
 export const mutations = {
   setSnackbar(state, payload) {
     state.snackbar = payload;
+  },
+  setModal(state, payload) {
+    state.modal = payload;
   },
 };
 
@@ -25,6 +34,7 @@ export const actions = {
 
 export const getters = {
   snackbar: (state) => state.snackbar,
+  modal: (state) => state.modal,
 };
 
 const createStore = () =>
