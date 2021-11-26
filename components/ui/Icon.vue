@@ -2,6 +2,7 @@
   <span
     class="icon-wrapper"
     :class="{ 'big-size': size === 'big', 'small-size': size === 'small' }"
+    @click="$emit('on-click')"
   >
     <img :src="require(`assets/img/icons/${src}`)" alt="icon" />
   </span>

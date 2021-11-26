@@ -1,0 +1,90 @@
+.join-us-wrapper{
+  background: #420573;
+  padding: 67px 168px;
+  display: flex;
+  justify-content: space-between;
+
+  @media (max-width: $break-md) {
+    padding: 67px 60px;
+  }
+
+  @media (max-width: $break-smsm) {
+    flex-direction: column;
+    padding: 80px 60px;
+  }
+
+  .left-side{
+    @media (max-width: $break-smsm) {
+      margin-bottom: 40px;
+    }
+
+    h1{
+      color: $c-white;
+      font-weight: 800;
+      font-size: 64px;
+      line-height: 95%;
+      letter-spacing: -0.01em;
+      margin-bottom: 32px;
+
+      @media (max-width: $break-smsm) {
+        text-align: center;
+        margin-bottom: 24px;
+        font-size: 37px;
+        letter-spacing: -0.02em;
+      }
+    }
+
+    .action{
+      @media (max-width: $break-smsm) {
+        text-align: center;
+      }
+
+      .discord-btn{
+        display: inline-flex;
+        padding: 13px 16px;
+        background: #5865F2;
+        border-radius: 8px;
+      }
+    }
+  }
+
+  .right-side{
+
+    .follow{
+      font-style: normal;
+      font-weight: bold;
+      font-size: 25px;
+      line-height: 33px;
+      letter-spacing: -0.01em;
+      color: $c-white;
+      margin-bottom: 32px;
+
+      @media (max-width: $break-smsm) {
+        text-align: center;
+        margin-bottom: 24px;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 150%;
+      }
+    }
+
+    ul{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      li{
+        margin-right: 24px;
+
+        @media (max-width: $break-smsm) {
+          margin-right: 12px;
+          margin-left: 12px;
+        }
+
+        .social-link{
+          display: inline-flex;
+        }
+      }
+    }
+  }
+}

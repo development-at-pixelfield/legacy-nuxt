@@ -1,53 +1,58 @@
 <template>
-  <div class="custom-input" :class="{ 'no-margin': noMargin }">
-    <label :for="id ? id : uniqueId" class="label" :class="labelClasses">
-      {{ label }}
-    </label>
-    <!--    <Icon-->
-    <!--      v-if="icon"-->
-    <!--      :icon="icon"-->
-    <!--      :circle="iconCircle"-->
-    <!--      class="icon"-->
-    <!--      @click.native="$emit('icon-click')"-->
-    <!--    />-->
-    <input
-      :id="id ? id : uniqueId"
-      ref="customInput"
-      v-model.trim="propModel"
-      :type="type"
-      class="floating-input"
-      :class="inputClasses"
-      :max-length="maxLength"
-      :disabled="disabled"
-      autocomplete="off"
-      :placeholder="placeholder"
-      @keypress="keyPressHandler"
-      @keyup="keyUpHandler"
-      @blur="handleBlur"
-      @focus="focusHandler"
-    />
-    <span v-if="icon" class="icon" @click.stop="$emit('icon-click')">
-      <img :src="icon" alt="icon" />
-    </span>
-    <div v-if="withIndicator && checkError" class="indicators">
-      <div class="indicator-list">
-        <span
-          v-for="(item, index) in 4"
-          :key="item"
-          class="indicator"
-          :class="{ 'active-level': index < level }"
-        ></span>
+  <div>
+    <span v-if="header" class="text-m mb-4">{{ header }}</span>
+    <div class="custom-input" :class="{ 'no-margin': noMargin }">
+      <label :for="id ? id : uniqueId" class="label" :class="labelClasses">
+        {{ label }}
+      </label>
+      <!--    <Icon-->
+      <!--      v-if="icon"-->
+      <!--      :icon="icon"-->
+      <!--      :circle="iconCircle"-->
+      <!--      class="icon"-->
+      <!--      @click.native="$emit('icon-click')"-->
+      <!--    />-->
+      <input
+        :id="id ? id : uniqueId"
+        ref="customInput"
+        v-model.trim="propModel"
+        :type="type"
+        class="floating-input"
+        :class="inputClasses"
+        :max-length="maxLength"
+        :disabled="disabled"
+        autocomplete="off"
+        :placeholder="placeholder"
+        @keypress="keyPressHandler"
+        @keyup="keyUpHandler"
+        @blur="handleBlur"
+        @focus="focusHandler"
+      />
+      <span v-if="icon" class="icon" @click.stop="$emit('icon-click')">
+        <img :src="icon" alt="icon" />
+      </span>
+      <div v-if="withIndicator && checkError" class="indicators">
+        <div class="indicator-list">
+          <span
+            v-for="(item, index) in 4"
+            :key="item"
+            class="indicator"
+            :class="{ 'active-level': index < level }"
+          ></span>
+        </div>
+        <span class="indicator-status text-s-bold">{{
+          indicators[level]
+        }}</span>
       </div>
-      <span class="indicator-status text-s-bold">{{ indicators[level] }}</span>
+      <p v-if="helpText" class="text-s help-text">{{ helpText }}</p>
+      <InputErrorList
+        v-if="checkError"
+        :rules="rules"
+        :error="error"
+        :has-error="hasError"
+        :custom-error="customError"
+      />
     </div>
-    <p v-if="helpText" class="text-s help-text">{{ helpText }}</p>
-    <InputErrorList
-      v-if="checkError"
-      :rules="rules"
-      :error="error"
-      :has-error="hasError"
-      :custom-error="customError"
-    />
   </div>
 </template>
 
@@ -142,6 +147,10 @@ export default {
     icon: {
       type: String,
       default: null,
+    },
+    header: {
+      type: String,
+      default: "",
     },
     iconCircle: {
       type: Boolean,

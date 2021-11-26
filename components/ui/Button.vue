@@ -6,11 +6,11 @@
     class="custom-button"
     @click.stop="onClick"
   >
-    <slot name="icon" class="text"></slot>
     <slot name="input" class="input-upload"></slot>
     <span v-if="label" class="btn-label" :class="{ 'has-icon': hasIconSlot }">{{
       label
     }}</span>
+    <slot name="icon" class="text"></slot>
   </button>
 </template>
 
@@ -57,7 +57,7 @@ export default {
       type: String,
       default: "medium",
       validator(value) {
-        return ["medium", "full"].includes(value);
+        return ["medium", "full", "small"].includes(value);
       },
     },
     buttonHtmlType: {

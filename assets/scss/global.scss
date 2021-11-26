@@ -1,5 +1,6 @@
 html {
   overflow-y: scroll !important;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -63,6 +64,20 @@ ul{
   color: $c-white;
 }
 
+.text-l{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 150%;
+  color: $c-white;
+
+  @media (max-width: $break-sms){
+    font-size: 16px;
+    line-height: 150%;
+
+  }
+}
+
 .text-btn{
   font-style: normal;
   font-weight: bold;
@@ -90,6 +105,23 @@ ul{
   color:$c-white;
 }
 
+.text-xl{
+  font-style: normal;
+  font-weight: 800;
+  font-size: 64px;
+  line-height: 95%;
+  text-align: center;
+  letter-spacing: -0.01em;
+  color: $c-white;
+
+  @media (max-width: $break-sms) {
+    font-weight: 800;
+    font-size: 37px;
+    line-height: 110%;
+    letter-spacing: -0.02em;
+  }
+}
+
 
 //Margins
 .mtb{
@@ -101,6 +133,12 @@ ul{
 }
 .mb-0{
   margin-bottom: 0;
+}
+.mt-4{
+  margin-top: 4px;
+}
+.mb-4{
+  margin-bottom: 4px;
 }
 .mt-8{
   margin-top: 8px;
@@ -127,12 +165,22 @@ ul{
   margin-bottom: 32px;
 }
 
+.ml-8{
+  margin-left: 8px;
+}
+.ml-4{
+  margin-left: 4px;
+}
+
 .auth-wrapper{
   background: $c-background;
   height: 100vh;
   position: relative;
 }
 
+.text-center{
+  text-align: center;
+}
 .center-block{
   width: 100%;
   text-align: center;

@@ -103,6 +103,7 @@
     line-height: 150%;
     letter-spacing: 0.05em;
     border-radius: 3px;
+    font-family: $font-primary;
   }
   &__large{
     padding: 16px 56px;
@@ -110,7 +111,16 @@
     font-size: 16px;
     line-height: 24px;
     letter-spacing: 0.04em;
-    //font-family: $font-roboto;
+    font-family: $font-primary;
+    border-radius: 4px;
+  }
+  &__small{
+    padding: 4px 15px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.04em;
+    font-family: $font-primary;
     border-radius: 4px;
   }
   &__full{
@@ -122,8 +132,12 @@
     line-height: 150%;
     letter-spacing: 0.05em;
     border-radius: 3px;
+    font-family: $font-primary;
   }
 
+  .emoji{
+    font-weight: 100;
+  }
 
   &__c-white{
     color: $c-white;
