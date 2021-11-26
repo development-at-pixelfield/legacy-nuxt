@@ -166,7 +166,7 @@ export default {
         await this.$store.commit("setSnackbar", {
           show: true,
           message: this.$t("snackbar.successDelete"),
-          color: "success",
+          color: "normal",
         });
         await this.$router.push("/login");
       } catch (e) {

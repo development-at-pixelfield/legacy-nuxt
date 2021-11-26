@@ -1,11 +1,13 @@
 <template>
   <div class="dropdown-list-wrapper" :class="{ disabled: disabled }">
-    <div @click="openDropdown">
+    <div class="label-block" @click="openDropdown">
       <slot v-if="isLabel" name="label"></slot>
       <span v-else class="drop-img-block">
         <img v-if="src" :src="src" alt="profile-image" />
         <span v-else class="default-img"></span>
       </span>
+
+      <span class="red-circle"></span>
     </div>
     <ul v-if="show" class="dropdown-list" :style="style">
       <li v-for="(item, index) in items" :key="index">
@@ -18,12 +20,6 @@
           <div class="left-side">
             <img v-if="item.src" :src="item.src" alt="icon" class="icon-img" />
             <span class="text-m label-item">{{ item.label }}</span>
-            <!--            <span-->
-            <!--              v-if="item.type === 'action'"-->
-            <!--              :style="{ color: item.color }"-->
-            <!--              >{{ item.label }}</span-->
-            <!--            >-->
-            <!--            <span v-else :style="{ color: item.color }">{{ item.label }}</span>-->
           </div>
           <div class="right-side">
             <!--            <img-->

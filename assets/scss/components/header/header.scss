@@ -27,20 +27,15 @@ header{
     }
 
     .logo-block{
-      //position: absolute;
       width: 100%;
       display: flex;
       justify-content: center;
-
-      @media (max-width: $break-lg) {
-        position: static;
-        //width: auto;
-      }
     }
 
     .user-info{
       z-index: 1;
       display: flex;
+      position: absolute;
 
       .text-m{
         margin-right: 29px;

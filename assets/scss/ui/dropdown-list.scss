@@ -8,25 +8,39 @@
     cursor: not-allowed;
   }
 
+  .label-block{
+    position: relative;
 
-  .drop-img-block{
-    width: 24px;
-    height: 24px;
-    border: 1px solid #D6D2D9;
-    border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    cursor: pointer;
-
-    .default-img{
+    .drop-img-block{
       width: 24px;
       height: 24px;
-      display: block;
-      background: #261632;
+      border: 1px solid #D6D2D9;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      cursor: pointer;
 
-      &:hover{
-      background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), #301C3F;
+      .default-img{
+        width: 24px;
+        height: 24px;
+        display: block;
+        background: #261632;
+
+        &:hover{
+          background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), #301C3F;
+        }
       }
+    }
+
+    .red-circle{
+      width: 8px;
+      height: 8px;
+      display: inline-flex;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      background: $c-system-error;
+      border-radius: 50%;
     }
   }
 
@@ -58,11 +72,11 @@
         cursor: pointer;
 
         &:hover {
-          //background: $c-gray-300;
+          background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), #301C3F;;
         }
 
-        &:active{
-          background: rgba(0, 0, 0, 0.1) !important;
+        &:active .label-item{
+         font-weight: bold;
         }
 
         &:last-child{

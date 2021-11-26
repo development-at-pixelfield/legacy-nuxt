@@ -87,7 +87,7 @@ export default {
     emailUpdate:
       "Email changed. Please check your inbox to verify your new email.",
     changePassword: "Password changed successfully.",
-    successDelete: "Account successfully deleted",
+    successDelete: "Account deleted.",
   },
 
   modals: {

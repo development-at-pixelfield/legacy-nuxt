@@ -31,7 +31,7 @@ export default {
       items: [
         {
           label: this.$t("settings.profile"),
-          src: require("~/assets/img/icons/eye.svg"),
+          src: require("~/assets/img/icons/menu-profile.svg"),
           color: "#000",
           link: "/profile",
           type: "link",
@@ -39,7 +39,7 @@ export default {
 
         {
           label: this.$t("settings.settings"),
-          src: require("~/assets/img/icons/eye.svg"),
+          src: require("~/assets/img/icons/menu-settings.svg"),
           color: "#000",
           hasBorder: true,
           link: "/settings",
@@ -47,7 +47,7 @@ export default {
         },
         {
           label: this.$t("auth.logOut"),
-          src: require("~/assets/img/icons/eye.svg"),
+          src: require("~/assets/img/icons/menu-logout.svg"),
           color: "#8C8C8C",
           hasBorder: false,
           type: "action",
