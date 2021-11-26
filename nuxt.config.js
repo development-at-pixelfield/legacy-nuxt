@@ -102,5 +102,9 @@ export default {
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},
 
+  axios: {
+    baseUrl: process.env.API_URL,
+  },
+
   dev: process.env.NODE_ENV !== "production",
 };

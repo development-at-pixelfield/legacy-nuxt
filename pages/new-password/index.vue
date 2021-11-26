@@ -104,9 +104,11 @@ export default {
 
       if (!this.$v.$invalid) {
         try {
-          // TODO Add new password
-          // const data = {};
-          // await this.$store.dispatch("user/newPassword", data);
+          const data = {
+            token: this.code,
+            password: this.password,
+          };
+          await this.$store.dispatch("user/confirmRecoverPassword", data);
           await this.$store.commit("setSnackbar", {
             show: true,
             message: this.$t("snackbar.passwordChanged"),

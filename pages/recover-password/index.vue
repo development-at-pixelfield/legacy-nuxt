@@ -70,14 +70,16 @@ export default {
 
       if (!this.$v.$invalid) {
         try {
-          // TODO Add recover password
-          // const data = {};
-          // await this.$store.dispatch("user/recoverPassword", data);
+          const data = {
+            email: this.email,
+          };
+          await this.$store.dispatch("user/recoverPassword", data);
           await this.$store.commit("setSnackbar", {
             show: true,
             message: this.$t("snackbar.checkInbox"),
             color: "normal",
           });
+          this.$router.push("/new-password/");
         } catch (e) {
           await this.$store.commit("setSnackbar", {
             show: true,

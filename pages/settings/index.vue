@@ -16,7 +16,13 @@
             alt="icon"
           />
           <p slot="sub-title" class="text-m mtb">Verify your email</p>
-          <p slot="action" class="action-text text-m mtb subtitle">Resend</p>
+          <p
+            slot="action"
+            class="action-text text-m mtb subtitle"
+            @click="resendEmail"
+          >
+            Resend
+          </p>
         </SettingItem>
       </div>
 
@@ -127,9 +133,13 @@ export default {
 
     async updateChanges() {
       await this.beforeUpdate();
-
       if (!this.$v.$invalid) {
         try {
+          const data = {
+            email: this.email,
+            nft_notifications: this.showAlerts,
+          };
+          await this.$store.dispatch("user/updateProfile", data);
           await this.$store.commit("setSnackbar", {
             show: true,
             message: this.$t("snackbar.emailUpdate"),
@@ -143,6 +153,10 @@ export default {
           });
         }
       }
+    },
+
+    async resendEmail() {
+      await this.$store.dispatch("user/resendVerificationEmail");
     },
 
     openModal() {
@@ -162,6 +176,7 @@ export default {
     async deleteAccount() {
       try {
         // TODO delete account
+        await this.$store.dispatch("user/disableAccount");
         await this.$auth.logout();
         await this.$store.commit("setSnackbar", {
           show: true,

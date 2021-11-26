@@ -149,14 +149,18 @@ export default {
 
       if (this.isValid) {
         try {
-          // TODO Add register
-          // const data = {};
-          // await this.$store.dispatch("user/registerUser", data);
+          const data = {
+            email: this.email,
+            password: this.password,
+          };
+          await this.$store.dispatch("user/registerUser", data);
           await this.$store.commit("setSnackbar", {
             show: true,
             message: this.$t("snackbar.successRegister"),
             color: "success",
           });
+          // TODO redircet to the correct route
+          this.$router.push("/");
         } catch (e) {
           await this.$store.commit("setSnackbar", {
             show: true,

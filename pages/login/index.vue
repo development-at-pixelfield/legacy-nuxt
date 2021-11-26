@@ -102,14 +102,21 @@ export default {
 
       if (!this.$v.$invalid) {
         try {
-          // TODO Add login
-          // const data = {};
-          // await this.$store.dispatch("user/loginUser", data);
+          const data = {
+            email: this.email,
+            password: this.password,
+          };
+          const response = await this.$store.dispatch("user/loginUser", data);
+          this.$auth.setUserToken(response.access, response.refresh);
+          this.$auth.$storage.setUniversal("authSession", true);
+
           await this.$store.commit("setSnackbar", {
             show: true,
             message: this.$t("snackbar.successLoggedIn"),
             color: "success",
           });
+          // TDOD add correct route after login -> current = index
+          this.$router.push("/");
         } catch (e) {
           await this.$store.commit("setSnackbar", {
             show: true,
