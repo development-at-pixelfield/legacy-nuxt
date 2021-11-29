@@ -28,7 +28,13 @@ export default {
   },
   data() {
     return {
-      items: [
+      count: 3,
+    };
+  },
+
+  computed: {
+    items() {
+      return [
         {
           label: this.$t("settings.profile"),
           src: require("~/assets/img/icons/menu-profile.svg"),
@@ -36,7 +42,6 @@ export default {
           link: "/profile",
           type: "link",
         },
-
         {
           label: this.$t("settings.settings"),
           src: require("~/assets/img/icons/menu-settings.svg"),
@@ -44,6 +49,7 @@ export default {
           hasBorder: true,
           link: "/settings",
           type: "link",
+          haveNot: this.count,
         },
         {
           label: this.$t("auth.logOut"),
@@ -53,8 +59,8 @@ export default {
           type: "action",
           value: "logout",
         },
-      ],
-    };
+      ];
+    },
   },
   methods: {
     async actionHandler(item) {

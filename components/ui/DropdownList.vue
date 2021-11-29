@@ -22,11 +22,9 @@
             <span class="text-m label-item">{{ item.label }}</span>
           </div>
           <div class="right-side">
-            <!--            <img-->
-            <!--              :src="item.src"-->
-            <!--              alt="icon"-->
-            <!--              :class="{ 'right-arrow-icon': item.arrow }"-->
-            <!--            />-->
+            <span v-if="item.haveNot" class="new-not text-s-bold">{{
+              item.haveNot
+            }}</span>
           </div>
         </div>
         <div v-if="item.hasBorder" class="divider"></div>
@@ -72,6 +70,11 @@ export default {
       type: Boolean,
       required: false,
       default: false,
+    },
+    haveNot: {
+      type: Number,
+      required: false,
+      default: 0,
     },
     userAvatar: {
       type: String,

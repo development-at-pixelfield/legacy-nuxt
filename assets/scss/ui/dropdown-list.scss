@@ -110,10 +110,16 @@
           //@include text-s;
         }
 
-        //.right-arrow-icon{
-        //  width: 6px;
-        //  height: 10px;
-        //}
+        .new-not{
+          width: 24px;
+          height: 24px;
+          background: $c-system-error;
+          color: $c-white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+        }
       }
     }
   }

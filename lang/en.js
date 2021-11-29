@@ -57,6 +57,13 @@ export default {
     trip: "Trip to the moon",
   },
 
+  profile: {
+    verifyAccount: "Verify account",
+    stars: "Stars",
+    planets: "Planets",
+    points: "Points",
+  },
+
   settings: {
     settings: "Settings",
     accountSettings: "Account settings",
