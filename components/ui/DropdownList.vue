@@ -72,9 +72,9 @@ export default {
       default: false,
     },
     haveNot: {
-      type: Boolean,
+      type: Number,
       required: false,
-      default: false,
+      default: 0,
     },
     userAvatar: {
       type: String,
