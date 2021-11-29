@@ -63,6 +63,7 @@ export default {
     Input,
   },
   mixins: [passwordValidate],
+  // middleware: 'auth',
   layout: "auth",
   validations: {
     currentPassword: {

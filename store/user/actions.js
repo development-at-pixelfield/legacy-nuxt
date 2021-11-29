@@ -2,7 +2,7 @@ export const actions = {
   /**
    *
    * @param context
-   * @param payload {Object<{email: String, password: String, repeatPassword: String, agree: Boolean}>}
+   * @param payload {Object<{email: String, password: String, agree: Boolean}>}
    * @returns {Promise<AxiosResponse<any>>}
    */
   registerUser(context, payload) {
@@ -32,7 +32,7 @@ export const actions = {
   /**
    *
    * @param context
-   * @param payload {Object<{email: String, password: String}>}
+   * @param payload {Object<{password: String, code: String}>}
    * @returns {Promise<AxiosResponse<any>>}
    */
   confirmRecoverPassword(context, payload) {
@@ -42,7 +42,7 @@ export const actions = {
   /**
    *
    * @param context
-   * @param payload {Object<{token: String, password: String}>}
+   * @param payload {Object<{old_password: String, new_password: String}>}
    * @returns {Promise<AxiosResponse<any>>}
    */
   newPassword(context, payload) {

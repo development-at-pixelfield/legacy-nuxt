@@ -7,7 +7,7 @@
           <p class="mtb text-m-bold">
             {{ $t("settings.basicVerification") }}
           </p>
-          <span class="text-s">2 minutes</span>
+          <span class="text-s">2 {{ $t("settings.minutes") }}</span>
         </div>
         <SettingItem :type="'action'">
           <img
@@ -15,13 +15,15 @@
             src="~/assets/img/icons/warning-circle.svg"
             alt="icon"
           />
-          <p slot="sub-title" class="text-m mtb">Verify your email</p>
+          <p slot="sub-title" class="text-m mtb">
+            {{ $t("settings.verifyEmail") }}
+          </p>
           <p
             slot="action"
             class="action-text text-m mtb subtitle"
             @click="resendEmail"
           >
-            Resend
+            {{ $t("settings.resend") }}
           </p>
         </SettingItem>
       </div>
@@ -156,7 +158,20 @@ export default {
     },
 
     async resendEmail() {
-      await this.$store.dispatch("user/resendVerificationEmail");
+      try {
+        await this.$store.dispatch("user/resendVerificationEmail");
+        await this.$store.commit("setSnackbar", {
+          show: true,
+          message: this.$t("snackbar.checkInbox"),
+          color: "success",
+        });
+      } catch (e) {
+        await this.$store.commit("setSnackbar", {
+          show: true,
+          message: catchErrors(e),
+          color: "error",
+        });
+      }
     },
 
     openModal() {
