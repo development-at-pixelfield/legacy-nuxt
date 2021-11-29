@@ -110,8 +110,11 @@ export default {
       if (!this.$v.$invalid) {
         try {
           // TODO Add new password
-          // const data = {};
-          // await this.$store.dispatch("user/newPassword", data);
+          const data = {
+            old_password: this.currentPassword,
+            new_password: this.password,
+          };
+          await this.$store.dispatch("user/newPassword", data);
           await this.$store.commit("setSnackbar", {
             show: true,
             message: this.$t("snackbar.changePassword"),
