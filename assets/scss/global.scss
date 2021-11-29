@@ -229,3 +229,20 @@ ul{
   }
 }
 
+.main-container{
+  max-width: 944px;
+  margin: 0 auto;
+
+  @media (max-width: $break-md) {
+    max-width: 100%;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  @media (max-width: $break-sms) {
+    max-width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
