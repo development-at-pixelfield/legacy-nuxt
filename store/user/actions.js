@@ -1,12 +1,14 @@
+import { functions } from "../../utils";
+
 export const actions = {
   /**
    *
    * @param context
-   * @param payload {Object<{email: String, password: String, agree: Boolean}>}
+   * @param payload {Object<{email: String, password: String}>}
    * @returns {Promise<AxiosResponse<any>>}
    */
   registerUser(context, payload) {
-    return this.$axios.$post("/api/users/register/", payload);
+    return this.$axios.$post("/users/register/", payload);
   },
 
   /**
@@ -16,7 +18,7 @@ export const actions = {
    * @returns {Promise<AxiosResponse<any>>}
    */
   loginUser(context, payload) {
-    return this.$axios.$post("/api/users/auth/", payload);
+    return this.$axios.$post("/users/auth/", payload);
   },
 
   /**
@@ -26,17 +28,32 @@ export const actions = {
    * @returns {Promise<AxiosResponse<any>>}
    */
   recoverPassword(context, payload) {
-    return this.$axios.$post("/api/users/password/reset/", payload);
+    return this.$axios.$post("/users/password/reset/", payload);
   },
 
   /**
    *
    * @param context
-   * @param payload {Object<{password: String, code: String}>}
+   * @param payload {Object<{password: String, token: Number}>}
    * @returns {Promise<AxiosResponse<any>>}
    */
   confirmRecoverPassword(context, payload) {
-    return this.$axios.$post("/api/users/password/reset/confirm/", payload);
+    return this.$axios.$post("/users/password/reset/confirm/", payload);
+  },
+
+  /**
+   *
+   * @param context
+   * @param payload {Object<{file: File}>}
+   * @returns {Promise<AxiosResponse<any>>}
+   */
+  updateAvatar(context, payload) {
+    const avatar = payload.file;
+    const formData = functions.formData(payload, avatar);
+    const headers = functions.filesHeaders();
+    return this.$axios.$patch("/users/avatar/", formData, {
+      headers,
+    });
   },
 
   /**
@@ -46,7 +63,7 @@ export const actions = {
    * @returns {Promise<AxiosResponse<any>>}
    */
   newPassword(context, payload) {
-    return this.$axios.$post("/api/users/password/change/", payload);
+    return this.$axios.$post("/users/password/change/", payload);
   },
 
   /**
@@ -55,7 +72,7 @@ export const actions = {
    * @returns {Promise<AxiosResponse<any>>}
    */
   disableAccount(context) {
-    return this.$axios.$post("/api/users/disable/");
+    return this.$axios.$post("/users/disable/");
   },
 
   /**
@@ -65,7 +82,7 @@ export const actions = {
    * @returns {Promise<AxiosResponse<any>>}
    */
   verifyEmail(context, payload) {
-    return this.$axios.$post("/api/users/email/verify/", payload);
+    return this.$axios.$post("/users/email/verify/", payload);
   },
 
   /**
@@ -75,7 +92,7 @@ export const actions = {
    * @returns {Promise<AxiosResponse<any>>}
    */
   updateProfile(context, payload) {
-    return this.$axios.$patch("/api/users/update/", payload);
+    return this.$axios.$patch("/users/update/", payload);
   },
 
   /**
@@ -84,7 +101,7 @@ export const actions = {
    * @returns {Promise<AxiosResponse<any>>}
    */
   resendVerificationEmail(context) {
-    return this.$axios.$post("/api/users/email/resend/");
+    return this.$axios.$post("/users/email/resend/");
   },
 
   /**
@@ -95,7 +112,7 @@ export const actions = {
    */
   refreshTokens(context, payload) {
     return this.$axios.$post(
-      "/users/user/refresh",
+      "/users/auth/refresh/",
       {},
       {
         headers: {

@@ -4,7 +4,7 @@
     <p class="mb-24 mt-24 text-m">{{ $t("settings.changeDesc") }}</p>
     <div class="form-group mb-24">
       <Input
-        :type="inputTypePassword"
+        :type="inputTypeCurrentPassword"
         :model.sync="currentPassword"
         :label="$t('settings.currentPassword')"
         :icon="inputIconCurrentPassword"
@@ -63,8 +63,8 @@ export default {
     Input,
   },
   mixins: [passwordValidate],
-  // middleware: 'auth',
   layout: "auth",
+  middleware: "auth",
   validations: {
     currentPassword: {
       required,
@@ -110,7 +110,6 @@ export default {
 
       if (!this.$v.$invalid) {
         try {
-          // TODO Add new password
           const data = {
             old_password: this.currentPassword,
             new_password: this.password,
@@ -134,7 +133,3 @@ export default {
   },
 };
 </script>
-
-<!--<style lang="scss" scoped>-->
-<!--@import "assets/scss/pages/auth";-->
-<!--</style>-->

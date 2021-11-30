@@ -32,12 +32,14 @@ import { email, required } from "vuelidate/lib/validators";
 import Button from "../../components/ui/Button";
 import Input from "../../components/ui/Input";
 import { catchErrors } from "../../utils/catchErrors";
+import isLoggedIn from "../../middleware/isLoggedIn";
 export default {
   name: "Index",
   components: {
     Button,
     Input,
   },
+  middleware: [isLoggedIn],
   validations: {
     email: {
       required,
@@ -79,13 +81,14 @@ export default {
             message: this.$t("snackbar.checkInbox"),
             color: "normal",
           });
-          this.$router.push("/new-password/");
         } catch (e) {
           await this.$store.commit("setSnackbar", {
             show: true,
             message: catchErrors(e),
             color: "error",
           });
+        } finally {
+          this.email = "";
         }
       }
     },

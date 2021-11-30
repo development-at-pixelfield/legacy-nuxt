@@ -74,6 +74,7 @@ import Button from "../../components/ui/Button";
 import passwordValidate from "../../mixins/passwordValidate";
 import FooterLinks from "../../components/footer/FooterLinks";
 import { catchErrors } from "../../utils/catchErrors";
+import isLoggedIn from "../../middleware/isLoggedIn";
 export default {
   name: "Index",
   components: {
@@ -83,6 +84,7 @@ export default {
     FooterLinks,
   },
   mixins: [passwordValidate],
+  middleware: [isLoggedIn],
   validations: {
     email: {
       required,
@@ -154,13 +156,19 @@ export default {
             password: this.password,
           };
           await this.$store.dispatch("user/registerUser", data);
+          await this.$auth.loginWith("local", {
+            data: {
+              email: this.email,
+              password: this.password,
+            },
+          });
+
           await this.$store.commit("setSnackbar", {
             show: true,
             message: this.$t("snackbar.successRegister"),
             color: "success",
           });
-          // TODO redircet to the correct route
-          this.$router.push("/");
+          await this.$router.push("/profile");
         } catch (e) {
           await this.$store.commit("setSnackbar", {
             show: true,
