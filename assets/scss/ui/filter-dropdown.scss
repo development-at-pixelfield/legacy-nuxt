@@ -6,7 +6,7 @@
     cursor: pointer;
     background: $c-greyscale-100;
     border-radius: 3px;
-    transition: $transition-3;
+    //transition: $transition-3;
 
     &:hover{
       background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), #301C3F;
@@ -135,11 +135,11 @@
     }
 
     .hidden {
-      visibility: hidden;
+      display: none;
     }
 
     .visible {
-      visibility: visible;
+      display: block;
     }
   }
 

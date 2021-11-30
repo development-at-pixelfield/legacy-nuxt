@@ -50,7 +50,7 @@
         //padding: 8px 24px 8px 16px;
         //padding: 8px 16px 8px 12px;
         //padding: 8px 16px;
-        padding: 12px;
+        padding: 11px 12px;
         min-height: 48px;
 
         .left-side{
@@ -85,6 +85,7 @@
         .chip-list{
           width: 100%;
           display: flex;
+          flex-wrap: wrap;
 
           .chip{
             background: $c-greyscale-20;
@@ -94,6 +95,7 @@
             padding-right: 8px;
             display: flex;
             align-items: center;
+            margin-bottom: 3px;
 
             .text-m-bold{
               color: $c-greyscale-120;
@@ -177,6 +179,8 @@
 
     .visible {
       visibility: visible;
+      position: absolute;
+      width: 100%;
     }
   }
 
