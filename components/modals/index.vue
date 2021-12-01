@@ -2,11 +2,8 @@
   <transition v-if="modal.show" name="modal" :duration="333" mode="out-in">
     <div class="modal-mask">
       <div class="modal-wrapper">
-        <DeleteAccount
-          v-if="modal.type === 'delete-account'"
-          key="confirm"
-          @close="close"
-        />
+        <DeleteAccount v-if="modal.type === 'delete-account'" @close="close" />
+        <StarInfo v-if="modal.type === 'star-info'" @close="close" />
       </div>
     </div>
   </transition>
@@ -14,10 +11,12 @@
 
 <script>
 import DeleteAccount from "./DeleteAccount";
+import StarInfo from "./StarInfo";
 export default {
   name: "Modals",
   components: {
     DeleteAccount,
+    StarInfo,
   },
   computed: {
     modal() {

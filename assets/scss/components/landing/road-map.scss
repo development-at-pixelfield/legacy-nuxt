@@ -1,9 +1,9 @@
-.road-map{
+.road-map {
   background: $c-background;
   padding-top: 80px;
   padding-bottom: 91px;
 
-  h2{
+  h2 {
     margin-bottom: 32px;
 
     @media (max-width: $break-sms) {
@@ -11,7 +11,7 @@
     }
   }
 
-  .content{
+  .content {
     max-width: 500px;
     margin: 40px auto 0 auto;
     position: relative;
@@ -22,14 +22,76 @@
       padding-left: 16px;
     }
 
-    .row{
+    .row {
       margin-bottom: 20px;
 
-      .check-block{
+      .left-side, .center-side {
+        position: relative;
+        width: 125px;
+        cursor: pointer;
+
+        .done {
+          color: #62E3C2;
+        }
+
+        .progress {
+          color: $c-greyscale-20;
+          transition: all 0.2s ease-in-out;
+        }
+
+        .to-do {
+          color: $c-greyscale-40;
+          transition: all 0.2s ease-in-out;
+        }
+
+        .hover-text {
+          padding: 8px 24px;
+          background: rgba(0, 0, 0, 0.8);
+          border-radius: 3px;
+          position: absolute;
+          width: 280px;
+          top: -64px;
+          left: -77px;
+          visibility: hidden;
+          transition: visibility 0.2s ease-in-out;
+
+          @media (max-width: 767px) {
+            display: none;
+            visibility: hidden;
+          }
+
+          &::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-top: 6px solid rgba(0, 0, 0, 0.8);
+            bottom: -6px;
+            left: calc(50% - 7px);
+          }
+        }
+
+        .line-2 {
+          top: -84px;
+        }
+
+        &:hover .hover-text{
+          visibility: visible;
+        }
+
+        &:hover .progress, &:hover .to-do{
+          color: $c-white;
+        }
+
+      }
+
+      .check-block {
         display: flex;
       }
 
-      .star-text{
+      .star-text {
         font-style: normal;
         font-weight: bold;
         font-size: 9px;
@@ -38,65 +100,109 @@
         margin-right: 6px;
       }
 
-      .done{
-        color: #62E3C2;
-      }
-      .progress{
-        color: $c-greyscale-40;
-      }
-      .to-do{
-        color: $c-greyscale-80;
-      }
-
-      .star{
+      .star {
         display: inline-flex;
         cursor: pointer;
-        animation: shine;
-        animation-duration: 3s;
-        animation-iteration-count: infinite;
+
+        img {
+          animation: shine;
+          animation-duration: 3s;
+          animation-iteration-count: infinite;
+        }
       }
-      .circle{
+
+      .circle {
         display: inline-flex;
         cursor: pointer;
-        animation: shine-circle;
-        animation-duration: 3s;
-        animation-iteration-count: infinite;
-      }
-    }
+        position: relative;
 
-    .one-column{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      .center-side{
-        text-align: center;
-      }
-    }
-
-    .two-column{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      .left-side{
-        text-align: center;
-
-        .star-info{
-          display: flex;
-          align-items: center;
+        img {
+          animation: shine;
+          animation-duration: 3s;
+          animation-iteration-count: infinite;
         }
       }
     }
 
-    .big-star-container{
+    .one-column {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .center-side {
+        text-align: center;
+      }
+    }
+
+    .two-column {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .left-side {
+        text-align: center;
+      }
+    }
+
+    .star-info {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .new-justify {
+      justify-content: space-around;
+    }
+
+    .big-star-container {
       text-align: center;
 
-      .big-star{
-        cursor: pointer;
+      .big-star-text{
+        position: relative;
+        display: inline-flex;
+
+        .hover-text-star{
+          padding: 8px 24px;
+          background: rgba(0, 0, 0, 0.8);
+          border-radius: 3px;
+          position: absolute;
+          width: 280px;
+          top: -64px;
+          left: -86px;
+          visibility: hidden;
+          transition: visibility 0.2s ease-in-out;
+
+          @media (max-width: 767px) {
+            display: none;
+            visibility: hidden;
+          }
+
+          &::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-top: 6px solid rgba(0, 0, 0, 0.8);
+            bottom: -6px;
+            left: calc(50% - 7px);
+          }
+        }
+
+        &:hover .hover-text-star{
+          visibility: visible;
+        }
       }
 
-      .trip{
+      .big-star {
+        cursor: pointer;
+        animation: shine-star;
+        animation-duration: 5s;
+        animation-iteration-count: infinite;
+      }
+
+      .trip {
         font-family: $font-primary;
         font-style: normal;
         font-weight: 800;
@@ -107,7 +213,7 @@
       }
     }
 
-    .rocket{
+    .rocket {
       display: inline-flex;
       position: absolute;
       //right: -140px;
@@ -123,60 +229,59 @@
   }
 }
 
-@keyframes shine{
-  0%{
+@keyframes shine {
+  0% {
     filter: drop-shadow(0 0 1px #FFFEFC);
     transform: scale(1);
   }
-  50%{
+  50% {
     filter: drop-shadow(0 0 5px #FFFEFC);
     transform: scale(1.2);
   }
-  100%{
+  100% {
     filter: drop-shadow(0 0 1px #FFFEFC);
     transform: scale(1);
   }
 }
 
-@keyframes shine-circle{
+@keyframes shine-star{
   0%{
-    transform: scale(1);
+    filter: drop-shadow(0 0 1px #7839FE);
   }
   50%{
-    transform: scale(1.2);
+    filter: drop-shadow(0 0 20px #F9E78880);
   }
   100%{
-    transform: scale(1);
+    filter: drop-shadow(0 0 1px #7839FE);
   }
 }
 
 
-@keyframes fly{
-  0%{
+@keyframes fly {
+  0% {
     transform: translate(200%, -200%) rotate(-45deg);
     right: 0;
   }
-  12.5%{
+  12.5% {
     transform: translate(-450%, -350%) rotate(-50deg);
   }
-  25%{
+  25% {
     transform: translate(-800%, -500%) rotate(45deg);
   }
-  37.5%{
+  37.5% {
     transform: translate(-200%, -650%) rotate(65deg)
   }
-  50%{
+  50% {
     transform: translate(200%, -800%) rotate(-50deg);
   }
-  62.5%{
+  62.5% {
     transform: translate(-450%, -950%) rotate(-45deg);
   }
-  85%{
+  85% {
     transform: translate(-800%, -1100%) rotate(-185deg);
   }
-  100%{
+  100% {
     transform: translate(200%, -200%) rotate(-180deg);
     right: 0;
   }
-
 }
