@@ -1,0 +1,52 @@
+header{
+  height: 56px;
+  background: #08010E;
+  border-bottom: 1px solid #301C3F;
+
+  .content{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    height: 100%;
+    padding-right: 168px;
+    padding-left: 168px;
+
+    @media (max-width: $break-md) {
+      padding-right: 60px;
+      padding-left: 60px;
+    }
+
+    @media (max-width: $break-smsm) {
+      padding-right: 32px;
+      padding-left: 32px;
+    }
+
+    @media (max-width: $break-sms) {
+      padding-right: 16px;
+      padding-left: 16px;
+    }
+
+    .text-m{
+
+      @media (max-width: $break-sms) {
+        display: none;
+      }
+    }
+
+    .logo-block{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .user-info{
+      z-index: 1;
+      display: flex;
+      position: absolute;
+
+      .avatar{
+        display: flex;
+      }
+    }
+  }
+}
