@@ -14,6 +14,7 @@ export default {
     ],
     link: [
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      { rel: "stylesheet", href: "http://diamond.bypixelfield.com/three/examples/main.css" },
       {
         rel: "stylesheet",
         href:
@@ -100,7 +101,9 @@ export default {
 
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
-  build: {},
+  build: {
+    transpile:["three"]
+  },
 
   axios: {
     baseUrl: process.env.API_URL,
