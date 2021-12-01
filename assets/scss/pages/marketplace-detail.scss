@@ -13,12 +13,16 @@
 
     .nav{
       padding-top: 44px;
-      margin-bottom: 56px;
+      //margin-bottom: 56px;
 
       @media (max-width: $break-sms) {
         padding-top: 28px;
         margin-bottom: 29px;
       }
+    }
+
+    canvas{
+      margin: 0 auto;
     }
 
     .img-block{
@@ -27,8 +31,9 @@
       margin: 0 auto;
 
       @media (max-width: $break-sms) {
-        width: 180px;
-        height: 185px;
+        width: 300px;
+        height: 300px;
+        margin: -40px auto 0 auto;
       }
 
       img{
@@ -46,7 +51,7 @@
     margin-top: -100px;
 
     @media (max-width: $break-sms) {
-      margin-top: -160px;
+      margin-top: -120px;
       padding: 16px;
     }
 

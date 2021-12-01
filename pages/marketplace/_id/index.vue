@@ -8,7 +8,7 @@
           class="nav"
         />
         <div class="img-block">
-          <img src="~/assets/img/bear-head.svg" alt="detail-image" />
+          <WebGl :src="'../../bear.fbx'" />
         </div>
       </div>
     </div>
@@ -42,10 +42,12 @@
 
 <script>
 import Navigation from "../../../components/header/Navigation";
+import WebGl from "../../../components/marketplace/WebGl";
 export default {
   name: "Index",
   components: {
     Navigation,
+    WebGl,
   },
   layout: "auth",
   middleware: "auth",
