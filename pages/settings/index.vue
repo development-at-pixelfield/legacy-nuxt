@@ -3,7 +3,7 @@
     <h1 class="header-title">{{ $t("settings.settings") }}</h1>
     <div class="content">
       <div class="form-group mb-24">
-        <div class="header-row mb-16">
+        <div v-if="!$auth.user.is_email_verified" class="header-row mb-16">
           <p class="mtb text-m-bold">
             {{ $t("settings.basicVerification") }}
           </p>
@@ -102,8 +102,8 @@ export default {
     Checkbox,
     Button,
   },
-  // middleware: 'auth'
   layout: "auth",
+  middleware: "auth",
   validations: {
     email: {
       required,
@@ -125,6 +125,11 @@ export default {
         ],
       },
     };
+  },
+
+  created() {
+    this.email = this.$auth.user.email;
+    this.showAlerts = this.$auth.user.nft_notifications;
   },
 
   methods: {
@@ -190,7 +195,6 @@ export default {
 
     async deleteAccount() {
       try {
-        // TODO delete account
         await this.$store.dispatch("user/disableAccount");
         await this.$auth.logout();
         await this.$store.commit("setSnackbar", {

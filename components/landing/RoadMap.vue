@@ -146,7 +146,7 @@
       </div>
 
       <div class="big-star-container">
-        <p class="mtb big-star-text" @click="openModal(9)">
+        <p class="mtb big-star-text" @click="openModal(10)">
           <img
             src="~/assets/img/landing/big-star.svg"
             alt="star"

@@ -26,6 +26,13 @@ header{
       padding-left: 16px;
     }
 
+    .text-m{
+
+      @media (max-width: $break-sms) {
+        display: none;
+      }
+    }
+
     .logo-block{
       width: 100%;
       display: flex;
@@ -36,14 +43,6 @@ header{
       z-index: 1;
       display: flex;
       position: absolute;
-
-      .text-m{
-        margin-right: 29px;
-
-        @media (max-width: $break-sms) {
-          display: none;
-        }
-      }
 
       .avatar{
         display: flex;

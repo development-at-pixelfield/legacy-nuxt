@@ -124,6 +124,8 @@ export default {
       "Email changed. Please check your inbox to verify your new email.",
     changePassword: "Password changed successfully.",
     successDelete: "Account deleted.",
+    successAvatar: "Avatar updated successfully.",
+    successEmailVerify: "Email verified successfully!",
   },
 
   modals: {

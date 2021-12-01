@@ -56,6 +56,7 @@ import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
 import passwordValidate from "../../mixins/passwordValidate";
 import { catchErrors } from "../../utils/catchErrors";
+import isLoggedIn from "../../middleware/isLoggedIn";
 export default {
   name: "Index",
   components: {
@@ -64,6 +65,7 @@ export default {
     Button,
   },
   mixins: [passwordValidate],
+  middleware: [isLoggedIn],
   validations: {
     email: {
       required,
@@ -102,21 +104,19 @@ export default {
 
       if (!this.$v.$invalid) {
         try {
-          const data = {
-            email: this.email,
-            password: this.password,
-          };
-          const response = await this.$store.dispatch("user/loginUser", data);
-          this.$auth.setUserToken(response.access, response.refresh);
-          this.$auth.$storage.setUniversal("authSession", true);
+          await this.$auth.loginWith("local", {
+            data: {
+              email: this.email,
+              password: this.password,
+            },
+          });
 
           await this.$store.commit("setSnackbar", {
             show: true,
             message: this.$t("snackbar.successLoggedIn"),
             color: "success",
           });
-          // TDOD add correct route after login -> current = index
-          this.$router.push("/");
+          await this.$router.push("/profile");
         } catch (e) {
           await this.$store.commit("setSnackbar", {
             show: true,

@@ -1,11 +1,11 @@
 <template>
   <header>
     <div class="content">
+      <span class="text-m">Marketplace</span>
       <div class="logo-block">
         <img src="~/assets/img/header-logo.svg" alt="logo" />
       </div>
       <div class="user-info">
-        <span class="text-m">Marketplace</span>
         <span class="avatar">
           <DropdownList
             :items="items"

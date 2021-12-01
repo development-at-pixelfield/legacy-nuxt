@@ -69,30 +69,30 @@ export default {
     },
   },
 
-  // user: {
-  //   strategies: {
-  //     local: {
-  //       endpoints: {
-  //         login: {
-  //           url: "/users/user/",
-  //           method: "POST",
-  //           propertyName: "access",
-  //         },
-  //         user: {
-  //           url: "/users/details/",
-  //           method: "GET",
-  //           propertyName: false,
-  //           autoFetch: false
-  //         },
-  //         logout: false,
-  //       },
-  //       token: {
-  //         type: "Bearer",
-  //         maxAge: 1,
-  //       },
-  //     },
-  //   },
-  // },
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: "/users/auth/",
+            method: "POST",
+            propertyName: "access",
+          },
+          user: {
+            url: "/users/detail/",
+            method: "GET",
+            propertyName: false,
+            autoFetch: false
+          },
+          logout: false,
+        },
+        token: {
+          type: "Bearer",
+          maxAge: 1,
+        },
+      },
+    },
+  },
 
   styleResources: {
     scss: ["@/assets/scss/definitions.scss"],

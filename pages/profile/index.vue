@@ -9,7 +9,7 @@
           </div>
 
           <div class="user-block">
-            <p class="mt-0 mb-8 text-m">stars@galaxy.com</p>
+            <p class="mt-0 mb-8 text-m">{{ $auth.user.email }}</p>
             <ul class="user-states mt-0 mb-0">
               <li>
                 <p class="header-title mt-0 mb-0">3</p>
@@ -48,25 +48,29 @@
 
 <script>
 import Button from "../../components/ui/Button";
+import { catchErrors } from "../../utils/catchErrors";
 export default {
   name: "Index",
   components: {
     Button,
   },
-  // middleware: 'auth'
   layout: "auth",
+  middleware: "auth",
   data() {
     return {
       imgSrc: "",
-      uploadFile: null,
     };
+  },
+  created() {
+    if (this.$auth.user.avatar) {
+      this.imgSrc = this.$auth.user.avatar;
+    }
   },
   methods: {
     fileUpload(e) {
       const files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
 
-      this.uploadFile = files[0];
       const reader = new FileReader();
       const vm = this;
 
@@ -74,7 +78,26 @@ export default {
         vm.imgSrc = e.target.result;
       };
 
-      reader.readAsDataURL(this.uploadFile);
+      reader.readAsDataURL(files[0]);
+      this.updateAvatar(files[0]);
+    },
+
+    async updateAvatar(file) {
+      try {
+        await this.$store.dispatch("user/updateAvatar", { avatar: file });
+        await this.$auth.fetchUser();
+        await this.$store.commit("setSnackbar", {
+          show: true,
+          message: this.$t("snackbar.successAvatar"),
+          color: "success",
+        });
+      } catch (e) {
+        await this.$store.commit("setSnackbar", {
+          show: true,
+          message: catchErrors(e),
+          color: "error",
+        });
+      }
     },
   },
 };

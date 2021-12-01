@@ -105,7 +105,7 @@ export default {
       if (!this.$v.$invalid) {
         try {
           const data = {
-            code: this.code,
+            token: this.code,
             password: this.password,
           };
           await this.$store.dispatch("user/confirmRecoverPassword", data);
