@@ -106,6 +106,12 @@ export default {
     seconds: "seconds",
   },
 
+  marketplace: {
+    marketplace: "Marketplace",
+    luminosity: "Luminosity",
+    story: "Story",
+  },
+
   validations: {
     notEmpty: "This field cannot be empty.",
     sameAsPassword: "Please make sure your passwords match.",
