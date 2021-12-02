@@ -9,4 +9,8 @@
     padding-left: 24px;
     padding-right: 24px;
   }
+
+  @media (max-height: 800px) {
+    height: calc(100vh - 100px);
+  }
 }

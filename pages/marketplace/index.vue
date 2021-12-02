@@ -39,6 +39,10 @@
           </p>
         </MarketItem>
       </div>
+
+      <div class="pagination-wrapper">
+        <Pagination :total="380" />
+      </div>
     </div>
   </div>
 </template>
@@ -47,6 +51,7 @@
 import FilterDropdown from "../../components/ui/FilterDropdown";
 import MultiFilterDropdown from "../../components/ui/MultiFilterDropdown";
 import MarketItem from "../../components/marketplace/MarketItem";
+import Pagination from "../../components/marketplace/Pagination";
 import { functions } from "../../utils";
 export default {
   name: "Index",
@@ -54,6 +59,7 @@ export default {
     FilterDropdown,
     MultiFilterDropdown,
     MarketItem,
+    Pagination,
   },
   layout: "auth",
   middleware: "auth",
