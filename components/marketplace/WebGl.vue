@@ -83,6 +83,7 @@ export default {
       };
 
       const loader = new FBXLoader();
+      loader.setCrossOrigin("anonymous");
       const vm = this;
       loader.load(this.src, function (object) {
         // mixer = new THREE.AnimationMixer( object );
@@ -143,7 +144,6 @@ export default {
       pointLight4.position.set(0, 0, 150);
       this.scene.add(pointLight4);
 
-      console.log(window.devicePixelRatio, "window.devicePixelRatio");
       this.renderer.setPixelRatio(window.devicePixelRatio);
       // this.renderer.setSize(window.innerWidth - 17, window.innerHeight);
       // this.renderer.setSize(364, 375);
@@ -188,7 +188,6 @@ export default {
     onWindowResize() {
       // const width = window.innerWidth;
       // const height = window.innerHeight;
-      console.log(window.innerWidth, "999");
 
       this.camera.aspect = 1;
       this.camera.updateProjectionMatrix();
