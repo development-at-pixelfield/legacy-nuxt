@@ -1,5 +1,5 @@
 <template>
-  <div class="form-container">
+  <div class="form-container full-h">
     <h1 class="header-title mb-0">{{ $t("settings.changePassword") }}</h1>
     <p class="mb-24 mt-24 text-m">{{ $t("settings.changeDesc") }}</p>
     <div class="form-group mb-24">
