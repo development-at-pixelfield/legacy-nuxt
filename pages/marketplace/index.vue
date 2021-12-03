@@ -3,23 +3,15 @@
     class="marketplace-wrapper"
     :class="{ 'no-items': !nfts.results.length }"
   >
-    <div class="main-container">
+    <div class="filter">
+      <FilterList :is-open-panel.sync="isOpenPanel" />
+    </div>
+    <div class="main-container" :class="{ 'panel-open': isOpenPanel }">
       <div class="header mb-16">
-        <h2 class="header-big mtb">{{ $t("marketplace.marketplace") }}</h2>
+        <h2 class="header-big mtb">
+          {{ $t("marketplace.marketplace") }} {{ isOpenPanel }}
+        </h2>
         <div class="filter-block">
-          <MultiFilterDropdown
-            :list="multyFilterItems"
-            :return-object="false"
-            :item-value="'value'"
-            :item-label="'label'"
-            :name.sync="filter.luminosity__in"
-            :selected-items="
-              filter.luminosity__in ? filter.luminosity__in.split(',') : []
-            "
-            :placeholder="$t('marketplace.luminosity')"
-            class="mb-0 first-filter"
-          />
-
           <FilterDropdown
             :list="filterItems"
             :return-object="false"
@@ -28,6 +20,7 @@
             :name.sync="filter.ordering"
             class="mb-0"
           />
+          <FilterList class="mobile-filter" :is-open-panel.sync="isOpenPanel" />
         </div>
       </div>
 
@@ -67,12 +60,11 @@
 
 <script>
 import FilterDropdown from "../../components/ui/FilterDropdown";
-import MultiFilterDropdown from "../../components/ui/MultiFilterDropdown";
 import MarketItem from "../../components/marketplace/MarketItem";
 import Pagination from "../../components/marketplace/Pagination";
+import FilterList from "../../components/marketplace/filter/FilterList";
 import { functions } from "../../utils";
 import { catchErrors } from "../../utils/catchErrors";
-
 const filterDefaultVars = {
   page: 1,
   page_size: 30,
@@ -84,9 +76,9 @@ export default {
   name: "Index",
   components: {
     FilterDropdown,
-    MultiFilterDropdown,
     MarketItem,
     Pagination,
+    FilterList,
   },
   layout: "auth",
   middleware: "auth",
@@ -103,19 +95,12 @@ export default {
   },
   data() {
     return {
+      isOpenPanel: false,
       nfts: {},
       filterItems: [
         { label: "Recently listed", value: "recently_listed" },
         { label: "Price (ETH): Highest first", value: "highest" },
         { label: "Price (ETH): Lowest first", value: "lowest" },
-      ],
-      multyFilterItems: [
-        { label: "+1", value: "1" },
-        { label: "+2", value: "2" },
-        { label: "+3", value: "3" },
-        { label: "+4", value: "4" },
-        { label: "+5", value: "5" },
-        { label: "+6", value: "6" },
       ],
       filter: {},
     };
@@ -155,11 +140,11 @@ export default {
         this.setQuery(val, "ordering");
       });
 
-      this.$watch("filter.luminosity__in", (val) => {
-        if (!val.length) return this.setQuery(null, "luminosity__in");
-        const str = val.join(",");
-        this.setQuery(str, "luminosity__in");
-      });
+      // this.$watch("filter.luminosity__in", (val) => {
+      //   if (!val.length) return this.setQuery(null, "luminosity__in");
+      //   const str = val.join(",");
+      //   this.setQuery(str, "luminosity__in");
+      // });
     },
 
     async setQuery(val, type) {

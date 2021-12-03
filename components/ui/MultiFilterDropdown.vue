@@ -1,13 +1,16 @@
 <template>
   <div class="custom-filter-dropdown">
+    <span v-if="label" class="label-float text-semi-s">
+      <span class="text-s-bold">{{ label }}</span>
+      <span v-if="showCount && selectedItems.length"
+        >({{ selectedItems.length }})</span
+      >
+    </span>
     <div
       class="aselect"
       :class="{ 'disabled-cursor': disabled }"
       :style="selectorStyles"
     >
-      <span v-if="label" class="label-float text-semi-s">
-        <span>{{ label }}</span>
-      </span>
       <p v-if="subHeader.length" class="text-small">{{ subHeader }}</p>
       <div class="selector" @click="!disabled ? toggle($event) : null">
         <div class="label">
@@ -153,6 +156,10 @@ export default {
       default: false,
     },
     errorBorder: {
+      type: Boolean,
+      required: false,
+    },
+    showCount: {
       type: Boolean,
       required: false,
     },

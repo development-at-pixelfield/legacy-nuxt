@@ -110,6 +110,10 @@ export default {
     marketplace: "Marketplace",
     luminosity: "Luminosity",
     story: "Story",
+    filter: "Filter",
+    clearAll: "Clear All",
+    apply: "Apply",
+    quality: "Quality",
   },
 
   validations: {

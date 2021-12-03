@@ -1,6 +1,12 @@
 .custom-filter-dropdown{
   margin-bottom: 24px;
 
+  .label-float{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
   .aselect {
     width: 100%;
     cursor: pointer;
@@ -18,11 +24,6 @@
       display: block;
     }
 
-    .label-float{
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 8px;
-    }
     .label-icon {
       cursor: pointer;
       margin-right: 8px;
