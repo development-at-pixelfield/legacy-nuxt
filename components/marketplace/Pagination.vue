@@ -62,7 +62,7 @@
         />
       </svg>
     </span>
-    <span class="last-item">
+    <span class="last-item" @click="$emit('update:page', 2)">
       <svg
         width="25"
         height="24"

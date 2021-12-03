@@ -1,5 +1,8 @@
 <template>
-  <div class="marketplace-wrapper">
+  <div
+    class="marketplace-wrapper"
+    :class="{ 'no-items': !nfts.results.length }"
+  >
     <div class="main-container">
       <div class="header mb-16">
         <h2 class="header-big mtb">{{ $t("marketplace.marketplace") }}</h2>
@@ -9,8 +12,10 @@
             :return-object="false"
             :item-value="'value'"
             :item-label="'label'"
-            :name.sync="category"
-            :selected-items="category"
+            :name.sync="filter.luminosity__in"
+            :selected-items="
+              filter.luminosity__in ? filter.luminosity__in.split(',') : []
+            "
             :placeholder="$t('marketplace.luminosity')"
             class="mb-0 first-filter"
           />
@@ -20,28 +25,41 @@
             :return-object="false"
             :item-value="'value'"
             :item-label="'label'"
-            :name.sync="order"
+            :name.sync="filter.ordering"
             class="mb-0"
           />
         </div>
       </div>
 
-      <div class="content">
-        <MarketItem v-for="item in 16" :key="item" @on-click="toDetail(item)">
-          <img slot="image" src="~/assets/img/bear-head.svg" alt="image" />
+      <div v-if="nfts.results.length" class="content">
+        <MarketItem
+          v-for="item in nfts.results"
+          :key="item.uid"
+          @on-click="toDetail(item)"
+        >
+          <img
+            slot="image"
+            :src="
+              item.image_cover
+                ? item.image_cover
+                : require('~/assets/img/bear-head.svg')
+            "
+            alt="image"
+          />
           <p slot="title" class="text-m-bold mt-8 mb-8 text-center">
-            {Item name} <br />
-            2nd line
+            {{ item.name }} <br />
           </p>
-          <p slot="profit" class="profit mtb text-m text-center">107.50Ξ</p>
+          <p slot="profit" class="profit mtb text-m text-center">
+            {{ item.price }}Ξ
+          </p>
           <p slot="finance" class="finance mtb text-m-bold text-center">
-            est. $314.64K
+            {{ convertEthereum(item.price) }}
           </p>
         </MarketItem>
       </div>
 
-      <div class="pagination-wrapper">
-        <Pagination :total="380" />
+      <div v-if="nfts.count" class="pagination-wrapper">
+        <Pagination :total="nfts.count" :page.sync="filter.page" />
       </div>
     </div>
   </div>
@@ -53,6 +71,15 @@ import MultiFilterDropdown from "../../components/ui/MultiFilterDropdown";
 import MarketItem from "../../components/marketplace/MarketItem";
 import Pagination from "../../components/marketplace/Pagination";
 import { functions } from "../../utils";
+import { catchErrors } from "../../utils/catchErrors";
+
+const filterDefaultVars = {
+  page: 1,
+  page_size: 30,
+  ordering: "",
+  luminosity__in: [],
+};
+
 export default {
   name: "Index",
   components: {
@@ -63,10 +90,20 @@ export default {
   },
   layout: "auth",
   middleware: "auth",
+  async asyncData({ store, route }) {
+    try {
+      const query = route.query;
+      const filter = {};
+      Object.keys(filterDefaultVars).forEach((key) => {
+        filter[key] = query[key] || "";
+      });
+      const nfts = await store.dispatch("nfts/getNfts", filter);
+      return { nfts };
+    } catch (e) {}
+  },
   data() {
     return {
-      order: "",
-      category: [],
+      nfts: {},
       filterItems: [
         { label: "Recently listed", value: "recently_listed" },
         { label: "Price (ETH): Highest first", value: "highest" },
@@ -80,49 +117,75 @@ export default {
         { label: "+5", value: "5" },
         { label: "+6", value: "6" },
       ],
+      filter: {},
     };
   },
-  watch: {
-    order(val) {
-      if (!val) {
-        return this.setQuery(null, "order");
-      }
 
-      this.setQuery(val, "order");
-    },
-    category(val) {
-      if (!val.length) {
-        return this.setQuery(null, "category");
-      }
-
-      const str = val.join(",");
-      this.setQuery(str, "category");
+  computed: {
+    convertEthereum() {
+      return (price) => {
+        const defEthr = 0.00022;
+        const usd = price / defEthr;
+        return "est. $" + usd.toFixed(2) + "K";
+      };
     },
   },
   created() {
-    const query = functions.cleanObject(this.$route.query);
+    this.filter = { ...filterDefaultVars };
+    const query = this.$route.query;
 
-    if (query.category) this.category = query.category.split(",");
-    if (query.order) this.order = query.order;
+    Object.keys(this.filter).forEach((key) => {
+      if (query[key] && key === "luminosity__in") {
+        this.filter[key] = query[key].split(",");
+      } else this.filter[key] = query[key] || "";
+    });
 
-    this.$router.push({ path: `/marketplace`, query });
+    this.setDefaultWatch();
   },
   methods: {
-    setQuery(val, type) {
-      if (val?.length) {
-        let query = this.$route.query;
-        // query[type] = val;
-        query = { [type]: val };
-        // this.$router.replace({ query });
-        this.$router.push({ path: this.$route.path, query });
-      } else {
-        const query = Object.assign({}, this.$route.query);
-        delete query[type];
-        this.$router.replace({ query });
-      }
+    setDefaultWatch() {
+      this.$watch("filter.page", (val) => {
+        const cleanObject = functions.cleanObject(this.$route.query);
+        cleanObject.page = val;
+        this.fetchNfts(cleanObject);
+      });
+
+      this.$watch("filter.ordering", (val) => {
+        if (!val) return this.setQuery(null, "ordering");
+        this.setQuery(val, "ordering");
+      });
+
+      this.$watch("filter.luminosity__in", (val) => {
+        if (!val.length) return this.setQuery(null, "luminosity__in");
+        const str = val.join(",");
+        this.setQuery(str, "luminosity__in");
+      });
     },
+
+    async setQuery(val, type) {
+      let query = this.$route.query;
+      query = { ...this.$route.query, [type]: val };
+
+      const cleanObject = await functions.cleanObject(query);
+      await this.$router.replace({ query: cleanObject });
+
+      await this.fetchNfts(cleanObject);
+    },
+
     toDetail(item) {
-      this.$router.push(`/marketplace/${item}`);
+      this.$router.push(`/marketplace/${item.uid}`);
+    },
+
+    async fetchNfts(query) {
+      try {
+        this.nfts = await this.$store.dispatch("nfts/getNfts", query);
+      } catch (e) {
+        await this.$store.commit("setSnackbar", {
+          show: true,
+          message: catchErrors(e),
+          color: "error",
+        });
+      }
     },
   },
 };

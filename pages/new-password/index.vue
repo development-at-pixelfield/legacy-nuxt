@@ -22,6 +22,7 @@
         :error="$v.password"
         :rules="rules.password"
         :help-text="$t('auth.passwordRule')"
+        +
         :is-submit="isSubmit"
         @icon-click="iconClick('password')"
       />
