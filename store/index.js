@@ -1,5 +1,6 @@
 import Vuex from "vuex";
 import user from "./user/state";
+import nfts from "./nfts/state";
 
 export const defaultValues = () => ({
   snackbar: {
@@ -47,6 +48,7 @@ const createStore = () =>
     mutations,
     modules: {
       user,
+      nfts,
     },
   });
 
