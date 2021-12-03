@@ -83,7 +83,7 @@ export default {
       };
 
       const loader = new FBXLoader();
-      loader.setCrossOrigin("anonymous");
+      // loader.setCrossOrigin("anonymous");
       const vm = this;
       loader.load(this.src, function (object) {
         // mixer = new THREE.AnimationMixer( object );
