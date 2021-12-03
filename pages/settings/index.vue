@@ -1,5 +1,5 @@
 <template>
-  <div class="form-container">
+  <div class="form-container full-h">
     <h1 class="header-title">{{ $t("settings.settings") }}</h1>
     <div class="content">
       <div class="form-group mb-24">

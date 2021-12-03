@@ -9,6 +9,12 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: $font-primary;
+  background: $c-background;
+  height: 100vh;
+
+  @media (max-height: 800px) {
+    height: 100%;
+  }
 }
 
 *, ::before, ::after {
@@ -195,9 +201,11 @@ ul{
 }
 
 .auth-wrapper{
-  background: $c-background;
-  height: 100vh;
+  //background: $c-background;
+  //height: 100vh;
   position: relative;
+  height: 100%;
+  display: contents;
 }
 
 .text-center{
@@ -232,6 +240,13 @@ ul{
     max-width: 100%;
     padding-left: 16px;
     padding-right: 16px;
+    padding-bottom: 32px;
+  }
+}
+
+.full-h{
+  @media (max-height: 800px) {
+    height: 100vh;
   }
 }
 
