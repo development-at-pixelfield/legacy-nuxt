@@ -1,5 +1,5 @@
 html {
-  overflow-y: scroll !important;
+  overflow-y: scroll;
   scroll-behavior: smooth;
 }
 
@@ -211,6 +211,9 @@ ul{
 .text-center{
   text-align: center;
 }
+.text-jcenter{
+  justify-content: center !important;
+}
 .center-block{
   width: 100%;
   text-align: center;
@@ -264,6 +267,25 @@ ul{
     width: 100%;
     padding-left: 16px;
     padding-right: 16px;
+  }
+}
+
+.filter-check{
+  .custom-checkbox{
+    justify-content: space-between;
+
+    .toggle-label{
+      order: 1;
+      width: 240px;
+
+      label{
+        margin-left: 0 !important;
+      }
+    }
+
+    input{
+      order: 2;
+    }
   }
 }
 

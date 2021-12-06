@@ -28,11 +28,8 @@
             class="label-icon"
             @click.stop="removeValue"
           />
-          <div v-if="!disabled" class="arrow" :class="{ expanded: visible }">
-            <Icon src="caret-down.svg" size="big" />
-          </div>
-          <div v-else class="arrow" :class="{ expanded: visible }">
-            <Icon src="caret-down-dark.svg" size="big" />
+          <div class="arrow">
+            <Icon src="search.svg" size="big" />
           </div>
         </div>
         <div
@@ -40,7 +37,6 @@
           :class="{
             hidden: !visible,
             visible,
-            'must-scroll': visible && mustScroll,
           }"
         >
           <ul
@@ -52,7 +48,13 @@
             }"
             :style="styles"
           >
-            <li v-if="!filterByAlphaList.length" class="text-m">
+            <li v-if="visible && !value" class="text-m text-jcenter">
+              {{ $t("settings.startTyping") }}
+            </li>
+            <li
+              v-else-if="!filterByAlphaList.length"
+              class="text-m text-jcenter"
+            >
               {{ $t("settings.noResults") }}
             </li>
             <li
@@ -75,6 +77,12 @@
                 <img src="~/assets/img/icons/checkbox-mark.svg" alt="icon" />
               </span>
             </li>
+            <li
+              v-if="visible && value && filterByAlphaList.length"
+              class="text-btn no-hover"
+            >
+              {{ $t("settings.findItems") }} “{{ value }}”
+            </li>
           </ul>
         </div>
       </div>
@@ -90,7 +98,7 @@
 // import SvgSelectedOption from "~/assets/img/selected-option.svg?inline";
 import Icon from "./Icon";
 export default {
-  name: "FilterDropdown",
+  name: "SearchFilter",
   components: {
     Icon,
     // SvgSelectedOption,
@@ -105,10 +113,6 @@ export default {
       required: true,
     },
     returnObject: {
-      type: Boolean,
-      default: false,
-    },
-    mustScroll: {
       type: Boolean,
       default: false,
     },
@@ -377,5 +381,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "assets/scss/ui/filter-dropdown";
+@import "assets/scss/ui/search-filter";
 </style>

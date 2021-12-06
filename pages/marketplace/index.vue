@@ -9,7 +9,7 @@
     <div class="main-container" :class="{ 'panel-open': isOpenPanel }">
       <div class="header mb-16">
         <h2 class="header-big mtb">
-          {{ $t("marketplace.marketplace") }} {{ isOpenPanel }}
+          {{ $t("marketplace.marketplace") }}
         </h2>
         <div class="filter-block">
           <FilterDropdown
@@ -43,10 +43,10 @@
             {{ item.name }} <br />
           </p>
           <p slot="profit" class="profit mtb text-m text-center">
-            {{ item.price }}Ξ
+            {{ item.price_eth }}Ξ
           </p>
           <p slot="finance" class="finance mtb text-m-bold text-center">
-            {{ convertEthereum(item.price) }}
+            {{ convertEthereum(item.price_eth) }}
           </p>
         </MarketItem>
       </div>
@@ -69,7 +69,15 @@ const filterDefaultVars = {
   page: 1,
   page_size: 30,
   ordering: "",
+  name: "",
   luminosity__in: [],
+  quality_level__in: [],
+  color_class: "",
+  is_constellation: false,
+  nft_type: "",
+  eth_price__gte: 0.43,
+  eth_price__lte: 5.41,
+  constellation: "",
 };
 
 export default {
@@ -85,24 +93,25 @@ export default {
   async asyncData({ store, route }) {
     try {
       const query = route.query;
-      const filter = {};
-      Object.keys(filterDefaultVars).forEach((key) => {
-        filter[key] = query[key] || "";
+      const filter = { ...filterDefaultVars };
+      Object.keys(filter).forEach((key) => {
+        filter[key] = query[key] || filterDefaultVars[key];
       });
+
       const nfts = await store.dispatch("nfts/getNfts", filter);
-      return { nfts };
+      return { nfts, filter };
     } catch (e) {}
   },
   data() {
     return {
       isOpenPanel: false,
       nfts: {},
+      filter: {},
       filterItems: [
         { label: "Recently listed", value: "recently_listed" },
         { label: "Price (ETH): Highest first", value: "highest" },
         { label: "Price (ETH): Lowest first", value: "lowest" },
       ],
-      filter: {},
     };
   },
 
@@ -116,43 +125,62 @@ export default {
     },
   },
   created() {
-    this.filter = { ...filterDefaultVars };
-    const query = this.$route.query;
-
-    Object.keys(this.filter).forEach((key) => {
-      if (query[key] && key === "luminosity__in") {
-        this.filter[key] = query[key].split(",");
-      } else this.filter[key] = query[key] || "";
-    });
-
     this.setDefaultWatch();
   },
+
+  mounted() {
+    this.$nuxt.$on("applyFilters", async (values) => {
+      let cleanObject = {};
+      if (Object.keys(values).length) {
+        values.page = this.filter.page;
+        values.ordering = this.filter.ordering;
+        cleanObject = await functions.cleanObject(values);
+      } else {
+        const filters = { ...filterDefaultVars };
+        filters.page = this.filter.page;
+        filters.ordering = this.filter.ordering;
+        delete filters.page_size;
+        delete filters.eth_price__gte;
+        delete filters.eth_price__lte;
+
+        cleanObject = await functions.cleanObject(filters);
+      }
+
+      await this.$router.push({ query: cleanObject });
+      await this.fetchNfts(cleanObject);
+    });
+  },
+
+  beforeDestroy() {
+    this.$nuxt.$off("applyFilters");
+  },
+
   methods: {
     setDefaultWatch() {
-      this.$watch("filter.page", (val) => {
-        const cleanObject = functions.cleanObject(this.$route.query);
-        cleanObject.page = val;
-        this.fetchNfts(cleanObject);
-      });
+      // this.$watch("filter.page", (val) => {
+      //   const cleanObject = functions.cleanObject(this.$route.query);
+      //   cleanObject.page = val;
+      //   this.fetchNfts(cleanObject);
+      // });
 
       this.$watch("filter.ordering", (val) => {
-        if (!val) return this.setQuery(null, "ordering");
-        this.setQuery(val, "ordering");
+        if (!val) return this.setQuery(null);
+        return this.setQuery(val);
       });
-
-      // this.$watch("filter.luminosity__in", (val) => {
-      //   if (!val.length) return this.setQuery(null, "luminosity__in");
-      //   const str = val.join(",");
-      //   this.setQuery(str, "luminosity__in");
-      // });
     },
 
-    async setQuery(val, type) {
-      let query = this.$route.query;
-      query = { ...this.$route.query, [type]: val };
+    async setQuery(val) {
+      const query = { ...this.filter };
+      delete query.page;
+      delete query.page_size;
+
+      // if (!val) {
+      //   delete query.eth_price__gte;
+      //   delete query.eth_price__lte;
+      // }
 
       const cleanObject = await functions.cleanObject(query);
-      await this.$router.replace({ query: cleanObject });
+      await this.$router.push({ query: cleanObject });
 
       await this.fetchNfts(cleanObject);
     },

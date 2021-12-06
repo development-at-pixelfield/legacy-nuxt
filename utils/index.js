@@ -51,10 +51,13 @@ export const functions = {
       .join("&");
   },
   cleanObject(obj) {
-    return Object.entries(obj).reduce(
-      (a, [k, v]) => (v ? ((a[k] = v), a) : a),
-      {}
-    );
+    console.log(obj, "obj");
+    return Object.entries(obj).reduce((a, [k, v]) => {
+      return (typeof v === "object" && Object.keys(v).length) ||
+        (v && typeof v !== "object")
+        ? ((a[k] = v), a)
+        : a;
+    }, {});
   },
   objectToQuerySearch(obj) {
     const search = functions.cleanObject(obj);

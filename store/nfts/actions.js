@@ -13,6 +13,7 @@ export const actions = {
     payload = functions.cleanObject(payload);
     const queryString = functions.objectToQuery(payload);
     const url = `/nfts/?${queryString}`;
+    console.log(url, "url");
     return this.$axios.$get(url);
   },
 

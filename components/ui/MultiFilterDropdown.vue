@@ -87,7 +87,7 @@
             :style="styles"
           >
             <li v-if="!filterByAlphaList.length" class="text-m">
-              {{ $t("noResult") }}
+              {{ $t("settings.noResults") }}
             </li>
             <li
               v-for="(item, index) in filterByAlphaList"

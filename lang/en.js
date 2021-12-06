@@ -104,6 +104,9 @@ export default {
     minutes: "minutes",
     hours: "hours",
     seconds: "seconds",
+    noResults: "No Results",
+    startTyping: "Start typing...",
+    findItems: "Find items containing",
   },
 
   marketplace: {
@@ -114,6 +117,19 @@ export default {
     clearAll: "Clear All",
     apply: "Apply",
     quality: "Quality",
+    color: "Color",
+    select: "Select",
+    partTitle: "PART OF CONSTELLATION?",
+    partLabel: "Show only items that are a part of a constellation",
+    constellation: "CONSTELLATION",
+    planet: "Planet",
+    star: "Star",
+    search: "Search",
+    name: "Name",
+    type: "Type",
+    priceRange: "Price range",
+    minPrice: "Min price",
+    maxPrice: "Max price",
   },
 
   validations: {

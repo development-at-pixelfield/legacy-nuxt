@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header :class="{ fixed: $route.name === 'marketplace' }">
     <div class="content">
       <span class="text-m">Marketplace</span>
       <div class="logo-block">

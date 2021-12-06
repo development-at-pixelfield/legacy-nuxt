@@ -50,19 +50,28 @@
         </div>
       </div>
 
-      <div class="filters mt-24">
+      <div v-if="canShow" class="filters mt-24">
+        <SearchFilter
+          :list="searchItems"
+          :return-object="false"
+          :item-value="'value'"
+          :item-label="'label'"
+          :label="$t('marketplace.name')"
+          :placeholder="$t('marketplace.search')"
+          :name.sync="filter.name"
+          class="mb-0"
+        />
+
         <MultiFilterDropdown
           :list="luminosityFilterItems"
           :return-object="false"
           :item-value="'value'"
           :item-label="'label'"
           :name.sync="filter.luminosity__in"
-          :selected-items="
-            filter.luminosity__in ? filter.luminosity__in.split(',') : []
-          "
+          :selected-items="filter.luminosity__in"
           :label="$t('marketplace.luminosity')"
           :show-count="true"
-          :placeholder="$t('marketplace.luminosity')"
+          :placeholder="$t('marketplace.select')"
           class="mb-0 first-filter"
         />
 
@@ -71,12 +80,86 @@
           :return-object="false"
           :item-value="'value'"
           :item-label="'label'"
-          :name.sync="filter.quality"
-          :selected-items="filter.quality ? filter.quality.split(',') : []"
+          :name.sync="filter.quality_level__in"
+          :selected-items="filter.quality_level__in"
           :label="$t('marketplace.quality')"
           :show-count="true"
-          :placeholder="$t('marketplace.quality')"
+          :placeholder="$t('marketplace.select')"
           class="mb-0 first-filter"
+        />
+
+        <FilterDropdown
+          :list="colorItems"
+          :return-object="false"
+          :item-value="'value'"
+          :item-label="'label'"
+          :label="$t('marketplace.color')"
+          :placeholder="$t('marketplace.select')"
+          :name.sync="filter.color_class"
+          class="mb-0"
+        />
+
+        <p class="mt-24 mb- text-s-bold">{{ $t("marketplace.type") }}</p>
+        <div class="radio">
+          <Radio
+            :name.sync="filter.nft_type"
+            :radio-name="'filter-type'"
+            :value="'planet'"
+          >
+            <label slot="label" class="text-m">{{
+              $t("marketplace.planet")
+            }}</label>
+          </Radio>
+          <Radio
+            :name.sync="filter.nft_type"
+            :radio-name="'filter-type'"
+            :value="'star'"
+            class="ml-8"
+          >
+            <label slot="label" class="text-m">{{
+              $t("marketplace.star")
+            }}</label>
+          </Radio>
+        </div>
+
+        <Range
+          class="mb-8 mt-24"
+          :min-value.sync="filter.eth_price__gte"
+          :max-value.sync="filter.eth_price__lte"
+        />
+
+        <div class="apply-action mb-24">
+          <Button
+            :label="$t('marketplace.apply')"
+            :background="'ghost'"
+            :size="'custom-medium'"
+            :color="'c-white'"
+            @on-click="applyFilters"
+          />
+        </div>
+
+        <div class="mb-24">
+          <p class="mtb">{{ $t("marketplace.partTitle") }}</p>
+          <Checkbox
+            :name.sync="filter.is_constellation"
+            class="mt-4 filter-check"
+          >
+            <label slot="label" class="text-m">
+              {{ $t("marketplace.partLabel") }}
+            </label>
+          </Checkbox>
+        </div>
+
+        <FilterDropdown
+          :list="constellationItems"
+          :return-object="false"
+          :item-value="'value'"
+          :item-label="'label'"
+          :label="$t('marketplace.constellation')"
+          :placeholder="$t('marketplace.select')"
+          :name.sync="filter.constellation"
+          :must-scroll="true"
+          class="mb-0"
         />
       </div>
     </div>
@@ -85,23 +168,52 @@
 
 <script>
 import MultiFilterDropdown from "../../ui/MultiFilterDropdown";
+import FilterDropdown from "../../ui/FilterDropdown";
+import SearchFilter from "../../ui/SearchFilter";
 import Icon from "../../ui/Icon";
 import Button from "../../ui/Button";
+import Checkbox from "../../ui/Checkbox";
+import Radio from "../../ui/Radio";
+import Range from "../../ui/Range";
+const filterDefaultVars = {
+  name: "",
+  luminosity__in: [],
+  quality_level__in: [],
+  color_class: "",
+  is_constellation: false,
+  nft_type: "",
+  eth_price__gte: 0.43,
+  eth_price__lte: 5.41,
+  constellation: "",
+};
 export default {
   name: "FilterList",
   components: {
     Icon,
     MultiFilterDropdown,
+    FilterDropdown,
     Button,
+    Checkbox,
+    Radio,
+    SearchFilter,
+    Range,
   },
   data() {
     return {
       showPanel: false,
+      canShow: false,
       count: 3,
       type: "desktop",
       filter: {
-        luminosity__in: "",
-        quality: "",
+        name: "",
+        luminosity__in: [],
+        quality_level__in: [],
+        color_class: "",
+        is_constellation: false,
+        nft_type: "",
+        eth_price__gte: 0.43,
+        eth_price__lte: 5.41,
+        constellation: "",
       },
       luminosityFilterItems: [
         { label: "+1", value: "1" },
@@ -116,6 +228,21 @@ export default {
         { label: "Normal", value: "2" },
         { label: "Bad", value: "3" },
       ],
+      colorItems: [
+        { label: "Red", value: "red" },
+        { label: "Blue", value: "blue" },
+        { label: "Green", value: "green" },
+      ],
+      constellationItems: [
+        { label: "Red", value: "red" },
+        { label: "Blue", value: "blue" },
+        { label: "Green", value: "green" },
+      ],
+      searchItems: [
+        { label: "Red", value: "red" },
+        { label: "Blue", value: "blue" },
+        { label: "Green", value: "green" },
+      ],
     };
   },
   computed: {
@@ -129,7 +256,26 @@ export default {
   watch: {
     showPanel(val) {
       this.$emit("update:is-open-panel", val);
+      if (val) {
+        setTimeout(() => {
+          this.canShow = true;
+        }, 300);
+
+        if (this.type === "mobile") {
+          const html = document.getElementsByTagName("html")[0];
+          html.style.overflowY = "hidden";
+        }
+      } else this.canShow = false;
     },
+  },
+  created() {
+    const query = this.$route.query;
+    const filter = { ...this.filter };
+    Object.keys(filter).forEach((key) => {
+      filter[key] = query[key] || this.filter[key];
+    });
+
+    this.filter = filter;
   },
   mounted() {
     if (window.innerWidth < 767) {
@@ -141,10 +287,13 @@ export default {
       this.showPanel = !this.showPanel;
     },
     clearFilter() {
-      console.log("clearFilter");
+      this.showPanel = false;
+      this.filter = { ...filterDefaultVars };
+      this.$nuxt.$emit("applyFilters", {});
     },
     applyFilters() {
-      console.log("applyFilters");
+      this.showPanel = false;
+      this.$nuxt.$emit("applyFilters", this.filter);
     },
   },
 };
