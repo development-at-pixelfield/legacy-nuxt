@@ -51,7 +51,6 @@ export const functions = {
       .join("&");
   },
   cleanObject(obj) {
-    console.log(obj, "obj");
     return Object.entries(obj).reduce((a, [k, v]) => {
       return (typeof v === "object" && Object.keys(v).length) ||
         (v && typeof v !== "object")

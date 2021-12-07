@@ -68,7 +68,7 @@
           :item-value="'value'"
           :item-label="'label'"
           :name.sync="filter.luminosity__in"
-          :selected-items="filter.luminosity__in"
+          :selected-items="luminosityArr"
           :label="$t('marketplace.luminosity')"
           :show-count="true"
           :placeholder="$t('marketplace.select')"
@@ -81,7 +81,7 @@
           :item-value="'value'"
           :item-label="'label'"
           :name.sync="filter.quality_level__in"
-          :selected-items="filter.quality_level__in"
+          :selected-items="qualityLevelArr"
           :label="$t('marketplace.quality')"
           :show-count="true"
           :placeholder="$t('marketplace.select')"
@@ -215,6 +215,8 @@ export default {
         eth_price__lte: 5.41,
         constellation: "",
       },
+      luminosityArr: [],
+      qualityLevelArr: [],
       luminosityFilterItems: [
         { label: "+1", value: "1" },
         { label: "+2", value: "2" },
@@ -292,7 +294,7 @@ export default {
       this.$nuxt.$emit("applyFilters", {});
     },
     applyFilters() {
-      this.showPanel = false;
+      // this.showPanel = false;
       this.$nuxt.$emit("applyFilters", this.filter);
     },
   },

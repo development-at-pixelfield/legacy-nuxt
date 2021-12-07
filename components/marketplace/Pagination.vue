@@ -1,6 +1,10 @@
 <template>
   <div class="pagination">
-    <span class="first-item">
+    <span
+      class="first-item"
+      :class="{ disabled: disableLeft }"
+      @click="paginate('first')"
+    >
       <svg
         width="25"
         height="24"
@@ -24,7 +28,11 @@
         />
       </svg>
     </span>
-    <span class="prev-item">
+    <span
+      class="prev-item"
+      :class="{ disabled: disableLeft }"
+      @click="paginate('prev')"
+    >
       <svg
         width="10"
         height="18"
@@ -45,7 +53,11 @@
       <span class="current text-m">{{ showCount }} of </span>
       <span class="total text-m">{{ total }}</span>
     </p>
-    <span class="next-item">
+    <span
+      class="next-item"
+      :class="{ disabled: disableRight }"
+      @click="paginate('next')"
+    >
       <svg
         width="10"
         height="18"
@@ -62,7 +74,11 @@
         />
       </svg>
     </span>
-    <span class="last-item" @click="$emit('update:page', 2)">
+    <span
+      class="last-item"
+      :class="{ disabled: disableRight }"
+      @click="paginate('last')"
+    >
       <svg
         width="25"
         height="24"
@@ -97,13 +113,28 @@ export default {
       type: Number,
       default: 0,
     },
+    limit: {
+      type: Number,
+      default: 0,
+    },
+    currentPage: {
+      type: Number,
+      default: 0,
+    },
+    pageNumber: {
+      type: Number,
+      default: 0,
+    },
+    pagesCount: {
+      type: Number,
+      default: 0,
+    },
   },
   data() {
     return {
       disableLeft: true,
       disableRight: false,
-      limit: 30,
-      currentCount: 60,
+      currentCount: 10,
     };
   },
   computed: {
@@ -114,26 +145,50 @@ export default {
       return this.disableRight ? "#ACA4B2" : "#FFF";
     },
     showCount() {
-      return this.currentCount - this.limit + 1 + "-" + this.currentCount;
+      if (this.currentPage === 1) {
+        return this.currentPage + "-" + this.limit;
+      }
+
+      const count = (this.currentPage - 1) * this.limit;
+      if (count + this.limit > this.total) {
+        return count + "-" + this.total;
+      }
+      return count + "-" + (count + this.limit);
     },
   },
   watch: {
-    currentCount(val) {
-      if (val > this.limit && val < this.total - this.limit) {
-        this.disableLeft = true;
-        this.disableRight = true;
+    currentPage(val) {
+      if (val > 1 && val < this.pagesCount) {
+        this.disableLeft = false;
+        this.disableRight = false;
         return;
       }
 
-      if (val < this.limit) {
+      if (val === 1) {
         this.disableLeft = true;
         this.disableRight = false;
         return;
       }
 
-      if (val > this.total - this.limit) {
-        this.disableRight = true;
+      if (val === this.pagesCount) {
         this.disableLeft = false;
+        this.disableRight = true;
+      }
+    },
+  },
+  methods: {
+    paginate(type) {
+      if (type === "next" && !this.disableRight) {
+        return this.$emit("update:page", this.currentPage + 1);
+      }
+      if (type === "prev" && !this.disableLeft) {
+        return this.$emit("update:page", this.currentPage - 1);
+      }
+      if (type === "first" && !this.disableLeft) {
+        return this.$emit("update:page", 1);
+      }
+      if (type === "last" && !this.disableRight) {
+        return this.$emit("update:page", this.pagesCount);
       }
     },
   },

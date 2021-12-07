@@ -52,7 +52,13 @@
       </div>
 
       <div v-if="nfts.count" class="pagination-wrapper">
-        <Pagination :total="nfts.count" :page.sync="filter.page" />
+        <Pagination
+          :total="nfts.count"
+          :page.sync="filter.page"
+          :current-page="nfts.current"
+          :pages-count="nfts.pages_count"
+          :limit="filter.page_size"
+        />
       </div>
     </div>
   </div>
@@ -67,7 +73,7 @@ import { functions } from "../../utils";
 import { catchErrors } from "../../utils/catchErrors";
 const filterDefaultVars = {
   page: 1,
-  page_size: 30,
+  page_size: 5,
   ordering: "",
   name: "",
   luminosity__in: [],
@@ -130,24 +136,21 @@ export default {
 
   mounted() {
     this.$nuxt.$on("applyFilters", async (values) => {
-      let cleanObject = {};
       if (Object.keys(values).length) {
         values.page = this.filter.page;
         values.ordering = this.filter.ordering;
-        cleanObject = await functions.cleanObject(values);
+        values = this.arrayToStr(values);
+
+        await this.setQuery(values);
       } else {
         const filters = { ...filterDefaultVars };
         filters.page = this.filter.page;
         filters.ordering = this.filter.ordering;
-        delete filters.page_size;
         delete filters.eth_price__gte;
         delete filters.eth_price__lte;
 
-        cleanObject = await functions.cleanObject(filters);
+        await this.setQuery(filters);
       }
-
-      await this.$router.push({ query: cleanObject });
-      await this.fetchNfts(cleanObject);
     });
   },
 
@@ -156,33 +159,36 @@ export default {
   },
 
   methods: {
+    arrayToStr(values) {
+      if (values.luminosity__in.length) {
+        values.luminosity__in = values.luminosity__in.join(",");
+      }
+      if (values.quality_level__in.length) {
+        values.quality_level__in = values.quality_level__in.join(",");
+      }
+      console.log(values, "values");
+      return values;
+    },
     setDefaultWatch() {
-      // this.$watch("filter.page", (val) => {
-      //   const cleanObject = functions.cleanObject(this.$route.query);
-      //   cleanObject.page = val;
-      //   this.fetchNfts(cleanObject);
-      // });
+      this.$watch("filter.page", (val) => {
+        const cleanObject = functions.cleanObject(this.$route.query);
+        cleanObject.page = val;
+        this.fetchNfts(cleanObject);
+      });
 
       this.$watch("filter.ordering", (val) => {
-        if (!val) return this.setQuery(null);
-        return this.setQuery(val);
+        const query = { ...this.filter };
+        this.setQuery(query);
       });
     },
 
-    async setQuery(val) {
-      const query = { ...this.filter };
-      delete query.page;
-      delete query.page_size;
-
-      // if (!val) {
-      //   delete query.eth_price__gte;
-      //   delete query.eth_price__lte;
-      // }
-
+    async setQuery(query) {
       const cleanObject = await functions.cleanObject(query);
-      await this.$router.push({ query: cleanObject });
-
       await this.fetchNfts(cleanObject);
+
+      delete cleanObject.page;
+      delete cleanObject.page_size;
+      await this.$router.push({ query: cleanObject });
     },
 
     toDetail(item) {
