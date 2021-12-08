@@ -129,6 +129,7 @@ export default {
     try {
       const query = route.query;
       const filter = { ...filterDefaultVars };
+
       Object.keys(filter).forEach((key) => {
         if (typeof query.luminosity__in === "string") {
           filter.luminosity__in = query.luminosity__in.split(",");
@@ -139,6 +140,7 @@ export default {
         }
       });
 
+      console.log(filter, "filter");
       const nfts = await store.dispatch("nfts/getNfts", filter);
       return { nfts, filter };
     } catch (e) {}
@@ -177,8 +179,6 @@ export default {
       if (Object.keys(values).length) {
         values.page = this.filter.page;
         values.ordering = this.filter.ordering;
-
-        this.filter = values;
         await this.setQuery(values);
       } else {
         const filters = { ...filterDefaultVars };
@@ -186,8 +186,6 @@ export default {
         filters.ordering = this.filter.ordering;
         delete filters.eth_price__gte;
         delete filters.eth_price__lte;
-
-        this.filter = filters;
         await this.setQuery(filters);
       }
     });
@@ -215,11 +213,14 @@ export default {
     },
 
     async setQuery(query) {
+      this.filter = query;
+
       const cleanObject = await functions.cleanObject(query);
       await this.fetchNfts(cleanObject);
 
       delete cleanObject.page;
       delete cleanObject.page_size;
+
       this.filterHeader = cleanObject;
       await this.$router.push({ query: cleanObject });
     },

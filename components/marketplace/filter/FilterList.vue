@@ -175,6 +175,7 @@ import Button from "../../ui/Button";
 import Checkbox from "../../ui/Checkbox";
 import Radio from "../../ui/Radio";
 import Range from "../../ui/Range";
+import { functions } from "../../../utils";
 const filterDefaultVars = {
   name: "",
   luminosity__in: [],
@@ -268,6 +269,14 @@ export default {
     $route(val) {
       if (!Object.keys(val.query).length) {
         this.filter = { ...filterDefaultVars };
+      } else {
+        const cleanObject = functions.cleanObject(val.query);
+        delete cleanObject.page;
+        delete cleanObject.page_size;
+
+        console.log(cleanObject, "cleanObject");
+
+        // this.filter = cleanObject;
       }
     },
     applyFilter(val) {
@@ -301,6 +310,7 @@ export default {
     });
 
     this.filter = filter;
+    // console.log(this.filter, "this.filter77777777");
   },
   mounted() {
     if (window.innerWidth < 767) {

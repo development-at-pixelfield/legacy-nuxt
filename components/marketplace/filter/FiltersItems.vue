@@ -1,10 +1,10 @@
 <template>
   <div class="filters-items">
-    <div v-for="(item, index) in filters" :key="item.id" class="chip">
+    <div v-for="item in filters" :key="item.id" class="chip">
       <span class="text-m-bold chip-text"
         >{{ item.label }} ({{ item.value }})</span
       >
-      <span class="chip-img" @click="removeValue(item, index)">
+      <span class="chip-img" @click="removeValue(item)">
         <img src="~/assets/img/icons/chip-remove.svg" alt="" />
       </span>
     </div>
@@ -24,6 +24,17 @@
 import { functions } from "../../../utils";
 import Icon from "../../ui/Icon";
 
+const filterDefaultVars = {
+  name: "",
+  luminosity__in: [],
+  quality_level__in: [],
+  color_class: "",
+  is_constellation: false,
+  nft_type: "",
+  eth_price__gte: 0.43,
+  eth_price__lte: 5.41,
+  constellation: "",
+};
 export default {
   name: "FiltersItems",
   components: {
@@ -97,12 +108,13 @@ export default {
   },
   methods: {
     clearFilter() {
-      // this.showPanel = false;
-      // this.filter = { ...filterDefaultVars };
       this.$nuxt.$emit("applyFilters", {});
     },
-    removeValue(item, index) {
-      // console.log("111");
+    removeValue(item) {
+      const sendItems = { ...this.filter };
+      const key = item.id;
+      sendItems[key] = filterDefaultVars[item.id];
+      this.$nuxt.$emit("applyFilters", sendItems);
     },
   },
 };
