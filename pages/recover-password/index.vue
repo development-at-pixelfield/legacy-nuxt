@@ -81,14 +81,13 @@ export default {
             message: this.$t("snackbar.checkInbox"),
             color: "normal",
           });
+          this.$router.push("/login");
         } catch (e) {
           await this.$store.commit("setSnackbar", {
             show: true,
             message: catchErrors(e),
             color: "error",
           });
-        } finally {
-          this.email = "";
         }
       }
     },

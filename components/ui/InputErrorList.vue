@@ -10,11 +10,11 @@
       class="errors-list"
     >
       <p
-        v-for="(cError, index) in customError"
+        v-for="(cError, index) in customError.errors"
         :key="index"
         class="text-s error-message"
       >
-        {{ cError.text ? cError.text : "Something went wrong" }}
+        {{ cError ? cError : "Something went wrong" }}
       </p>
     </div>
     <div v-else-if="customError && customError.type" class="errors-list">

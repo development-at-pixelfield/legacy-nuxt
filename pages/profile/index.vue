@@ -67,7 +67,7 @@ export default {
     }
   },
   methods: {
-    fileUpload(e) {
+    async fileUpload(e) {
       const files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
 
@@ -79,7 +79,7 @@ export default {
       };
 
       reader.readAsDataURL(files[0]);
-      this.updateAvatar(files[0]);
+      await this.updateAvatar(files[0]);
     },
 
     async updateAvatar(file) {

@@ -48,10 +48,9 @@ export const actions = {
    * @returns {Promise<AxiosResponse<any>>}
    */
   updateAvatar(context, payload) {
-    const avatar = payload.file;
-    const formData = functions.formData(payload, avatar);
+    const formData = functions.formData(null, payload);
     const headers = functions.filesHeaders();
-    return this.$axios.$patch("/users/avatar/", formData, {
+    return this.$axios.$put("/users/avatar/", formData, {
       headers,
     });
   },
@@ -71,8 +70,8 @@ export const actions = {
    * @param context
    * @returns {Promise<AxiosResponse<any>>}
    */
-  disableAccount(context) {
-    return this.$axios.$post("/users/disable/");
+  deleteAccount(context, payload) {
+    return this.$axios.$delete("/users/delete/");
   },
 
   /**
