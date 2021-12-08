@@ -253,12 +253,16 @@ ul{
   }
 }
 
+.display-f{
+  display: flex;
+}
+
 .main-container{
-  max-width: 944px;
+  width: 944px;
   margin: 0 auto;
 
   @media (max-width: $break-md) {
-    max-width: 100%;
+    width: 100%;
     padding-left: 32px;
     padding-right: 32px;
   }

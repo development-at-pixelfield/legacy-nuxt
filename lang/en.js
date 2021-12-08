@@ -130,6 +130,8 @@ export default {
     priceRange: "Price range",
     minPrice: "Min price",
     maxPrice: "Max price",
+    applyFilters: "Apply filters",
+    emptyDesc: "Sorry, we couldn’t find a match. Try again ;)",
   },
 
   validations: {

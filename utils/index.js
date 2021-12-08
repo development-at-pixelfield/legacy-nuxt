@@ -5,6 +5,21 @@ export const functions = {
     const CancelToken = this.$axios.CancelToken;
     return CancelToken.source();
   },
+  arrayToStr(values) {
+    if (
+      typeof values.luminosity__in !== "string" &&
+      values.luminosity__in?.length
+    ) {
+      values.luminosity__in = values.luminosity__in.join(",");
+    }
+    if (
+      typeof values.quality_level__in !== "string" &&
+      values.quality_level__in?.length
+    ) {
+      values.quality_level__in = values.quality_level__in.join(",");
+    }
+    return values;
+  },
   formData(data, files) {
     const apiData = convertCamelToSnack(data);
     const formData = new FormData();

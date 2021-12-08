@@ -72,8 +72,31 @@
     .content{
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
+      //justify-content: space-between;
       padding-bottom: 32px;
+
+      @media (max-width: $break-md) {
+        justify-content: flex-start;
+      }
+
+      @media (max-width: 530px) {
+        justify-content: space-between;
+      }
+
+    }
+
+    .empty-wrapper{
+      max-width: 343px;
+      background: $c-greyscale-120;
+      border-radius: 3px;
+      margin: 0 auto;
+      padding: 40px 16px;
+
+      .empty-image{
+        display: block;
+        text-align: center;
+        margin-bottom: 3px;
+      }
     }
 
     .pagination-wrapper{

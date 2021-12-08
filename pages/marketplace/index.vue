@@ -4,7 +4,11 @@
     :class="{ 'no-items': !nfts.results.length }"
   >
     <div class="filter">
-      <FilterList :is-open-panel.sync="isOpenPanel" />
+      <FilterList
+        :is-open-panel.sync="isOpenPanel"
+        :apply-filter="isOpenPanel"
+        :count="count"
+      />
     </div>
     <div class="main-container" :class="{ 'panel-open': isOpenPanel }">
       <div class="header mb-16">
@@ -22,6 +26,10 @@
           />
           <FilterList class="mobile-filter" :is-open-panel.sync="isOpenPanel" />
         </div>
+      </div>
+
+      <div class="filters mb-16">
+        <FiltersItems :filter="filterHeader" :count.sync="count" />
       </div>
 
       <div v-if="nfts.results.length" class="content">
@@ -51,13 +59,30 @@
         </MarketItem>
       </div>
 
+      <div v-else class="empty-wrapper">
+        <span class="empty-image"
+          ><img src="~/assets/img/empty-img.svg" alt="empty-image"
+        /></span>
+        <p class="description mt-0 mb-16 text-center">
+          {{ $t("marketplace.emptyDesc") }}
+        </p>
+        <Button
+          class="mb-24"
+          :label="$t('marketplace.applyFilters')"
+          :background="'primary'"
+          :size="'full'"
+          :color="'c-white'"
+          @on-click="openFilter"
+        />
+      </div>
+
       <div v-if="nfts.count" class="pagination-wrapper">
         <Pagination
           :total="nfts.count"
           :page.sync="filter.page"
           :current-page="nfts.current"
           :pages-count="nfts.pages_count"
-          :limit="filter.page_size"
+          :limit="filter.page_size || nfts.page_size"
         />
       </div>
     </div>
@@ -69,11 +94,13 @@ import FilterDropdown from "../../components/ui/FilterDropdown";
 import MarketItem from "../../components/marketplace/MarketItem";
 import Pagination from "../../components/marketplace/Pagination";
 import FilterList from "../../components/marketplace/filter/FilterList";
+import FiltersItems from "../../components/marketplace/filter/FiltersItems";
+import Button from "../../components/ui/Button";
 import { functions } from "../../utils";
 import { catchErrors } from "../../utils/catchErrors";
 const filterDefaultVars = {
   page: 1,
-  page_size: 5,
+  page_size: 12,
   ordering: "",
   name: "",
   luminosity__in: [],
@@ -93,6 +120,8 @@ export default {
     MarketItem,
     Pagination,
     FilterList,
+    FiltersItems,
+    Button,
   },
   layout: "auth",
   middleware: "auth",
@@ -101,7 +130,13 @@ export default {
       const query = route.query;
       const filter = { ...filterDefaultVars };
       Object.keys(filter).forEach((key) => {
-        filter[key] = query[key] || filterDefaultVars[key];
+        if (typeof query.luminosity__in === "string") {
+          filter.luminosity__in = query.luminosity__in.split(",");
+        } else if (typeof query.quality_level__in === "string") {
+          filter.quality_level__in = query.quality_level__in.split(",");
+        } else {
+          filter[key] = query[key] || filterDefaultVars[key];
+        }
       });
 
       const nfts = await store.dispatch("nfts/getNfts", filter);
@@ -111,8 +146,10 @@ export default {
   data() {
     return {
       isOpenPanel: false,
+      count: 0,
       nfts: {},
       filter: {},
+      filterHeader: {},
       filterItems: [
         { label: "Recently listed", value: "recently_listed" },
         { label: "Price (ETH): Highest first", value: "highest" },
@@ -131,6 +168,7 @@ export default {
     },
   },
   created() {
+    this.filterHeader = { ...this.filter };
     this.setDefaultWatch();
   },
 
@@ -139,8 +177,8 @@ export default {
       if (Object.keys(values).length) {
         values.page = this.filter.page;
         values.ordering = this.filter.ordering;
-        values = this.arrayToStr(values);
 
+        this.filter = values;
         await this.setQuery(values);
       } else {
         const filters = { ...filterDefaultVars };
@@ -149,6 +187,7 @@ export default {
         delete filters.eth_price__gte;
         delete filters.eth_price__lte;
 
+        this.filter = filters;
         await this.setQuery(filters);
       }
     });
@@ -159,15 +198,8 @@ export default {
   },
 
   methods: {
-    arrayToStr(values) {
-      if (values.luminosity__in.length) {
-        values.luminosity__in = values.luminosity__in.join(",");
-      }
-      if (values.quality_level__in.length) {
-        values.quality_level__in = values.quality_level__in.join(",");
-      }
-      console.log(values, "values");
-      return values;
+    openFilter() {
+      this.isOpenPanel = true;
     },
     setDefaultWatch() {
       this.$watch("filter.page", (val) => {
@@ -188,6 +220,7 @@ export default {
 
       delete cleanObject.page;
       delete cleanObject.page_size;
+      this.filterHeader = cleanObject;
       await this.$router.push({ query: cleanObject });
     },
 

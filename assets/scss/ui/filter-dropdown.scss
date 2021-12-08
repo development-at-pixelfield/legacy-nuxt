@@ -151,8 +151,14 @@
     }
 
     .must-scroll{
-      height: 60px;
-      overflow-y: scroll;
+      padding-bottom: 30px;
+
+      @media (max-width: $break-sms) {
+        //height: 60px;
+        padding-bottom: 60px;
+        overflow-y: scroll;
+        @include scrollbar;
+      }
     }
   }
 

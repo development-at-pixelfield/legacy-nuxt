@@ -332,6 +332,7 @@ export default {
     },
     removeList() {
       this.visible = false;
+      this.value = "";
       this.$emit("update:name", []);
     },
     mouseHover(index) {

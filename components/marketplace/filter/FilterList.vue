@@ -68,7 +68,7 @@
           :item-value="'value'"
           :item-label="'label'"
           :name.sync="filter.luminosity__in"
-          :selected-items="luminosityArr"
+          :selected-items="filter.luminosity__in"
           :label="$t('marketplace.luminosity')"
           :show-count="true"
           :placeholder="$t('marketplace.select')"
@@ -81,7 +81,7 @@
           :item-value="'value'"
           :item-label="'label'"
           :name.sync="filter.quality_level__in"
-          :selected-items="qualityLevelArr"
+          :selected-items="filter.quality_level__in"
           :label="$t('marketplace.quality')"
           :show-count="true"
           :placeholder="$t('marketplace.select')"
@@ -198,11 +198,20 @@ export default {
     SearchFilter,
     Range,
   },
+  props: {
+    count: {
+      type: Number,
+      default: 0,
+    },
+    applyFilter: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       showPanel: false,
       canShow: false,
-      count: 3,
       type: "desktop",
       filter: {
         name: "",
@@ -256,6 +265,14 @@ export default {
     },
   },
   watch: {
+    $route(val) {
+      if (!Object.keys(val.query).length) {
+        this.filter = { ...filterDefaultVars };
+      }
+    },
+    applyFilter(val) {
+      this.showPanel = val;
+    },
     showPanel(val) {
       this.$emit("update:is-open-panel", val);
       if (val) {
@@ -274,7 +291,13 @@ export default {
     const query = this.$route.query;
     const filter = { ...this.filter };
     Object.keys(filter).forEach((key) => {
-      filter[key] = query[key] || this.filter[key];
+      if (typeof query.luminosity__in === "string") {
+        filter.luminosity__in = query.luminosity__in.split(",");
+      } else if (typeof query.quality_level__in === "string") {
+        filter.quality_level__in = query.quality_level__in.split(",");
+      } else {
+        filter[key] = query[key] || this.filter[key];
+      }
     });
 
     this.filter = filter;
@@ -294,7 +317,7 @@ export default {
       this.$nuxt.$emit("applyFilters", {});
     },
     applyFilters() {
-      // this.showPanel = false;
+      this.showPanel = false;
       this.$nuxt.$emit("applyFilters", this.filter);
     },
   },
