@@ -319,7 +319,7 @@ export default {
     document.addEventListener("click", this.close);
     let val = this.name;
     if (this.itemValue && this.itemLabel) {
-      let list = [...this.list];
+      let list = this.list?.length ? [...this.list] : [];
       if (list.length && list[0].label && !this.notFilter) {
         list = list.sort((a, b) => a.label.localeCompare(b.label));
       }

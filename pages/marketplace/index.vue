@@ -1,16 +1,16 @@
 <template>
   <div
     class="marketplace-wrapper"
-    :class="{ 'no-items': !nfts.results.length }"
+    :class="{ 'no-items': !nfts.results || !nfts.results.length }"
   >
     <div class="filter">
-      <!--      <FilterList-->
-      <!--        :is-open-panel.sync="isOpenPanel"-->
-      <!--        :apply-filter="isOpenPanel"-->
-      <!--        :count="count"-->
-      <!--        :query-filter="filter"-->
-      <!--        :form-options="formOptions"-->
-      <!--      />-->
+      <FilterList
+        :is-open-panel.sync="isOpenPanel"
+        :apply-filter="isOpenPanel"
+        :count="count"
+        :query-filter="filter"
+        :form-options="formOptions"
+      />
     </div>
     <div class="main-container" :class="{ 'panel-open': isOpenPanel }">
       <div class="header mb-16">
@@ -26,19 +26,26 @@
             :name.sync="filter.ordering"
             class="mb-0"
           />
-          <!--          <FilterList class="mobile-filter" :is-open-panel.sync="isOpenPanel" />-->
+          <FilterList
+            class="mobile-filter"
+            :is-open-panel.sync="isOpenPanel"
+            :apply-filter="isOpenPanel"
+            :form-options="formOptions"
+            :query-filter="filter"
+            :count="count"
+          />
         </div>
       </div>
 
       <div class="filters mb-16">
-        <!--        <FiltersItems-->
-        <!--          :filter="filterHeader"-->
-        <!--          :count.sync="count"-->
-        <!--          :form-options="formOptions"-->
-        <!--        />-->
+        <FiltersItems
+          :filter="filterHeader"
+          :count.sync="count"
+          :form-options="formOptions"
+        />
       </div>
 
-      <div v-if="nfts.results.length" class="content">
+      <div v-if="nfts.results && nfts.results.length" class="content">
         <MarketItem
           v-for="item in nfts.results"
           :key="item.uid"
@@ -99,8 +106,8 @@
 import FilterDropdown from "../../components/ui/FilterDropdown";
 import MarketItem from "../../components/marketplace/MarketItem";
 import Pagination from "../../components/marketplace/Pagination";
-// import FilterList from "../../components/marketplace/filter/FilterList";
-// import FiltersItems from "../../components/marketplace/filter/FiltersItems";
+import FilterList from "../../components/marketplace/filter/FilterList";
+import FiltersItems from "../../components/marketplace/filter/FiltersItems";
 import Button from "../../components/ui/Button";
 import { functions } from "../../utils";
 import { catchErrors } from "../../utils/catchErrors";
@@ -126,16 +133,17 @@ export default {
     FilterDropdown,
     MarketItem,
     Pagination,
-    // FilterList,
-    // FiltersItems,
+    FilterList,
+    FiltersItems,
     Button,
   },
   layout: "auth",
   middleware: "auth",
-  async asyncData({ store, route }) {
+  async asyncData({ store, route, error }) {
     try {
       const formOptions = await store.dispatch("nfts/getNftsForm");
-      console.log(formOptions, "form");
+
+      console.log(formOptions, "formOptions");
 
       const query = route.query;
       const filter = { ...filterDefaultVars };
@@ -152,7 +160,12 @@ export default {
 
       const nfts = await store.dispatch("nfts/getNfts", filter);
       return { nfts, filter, formOptions };
-    } catch (e) {}
+    } catch (e) {
+      const status = e.response.status;
+      if (status === 404) {
+        error({ statusCode: 404, message: "Not found" });
+      }
+    }
   },
   data() {
     return {
