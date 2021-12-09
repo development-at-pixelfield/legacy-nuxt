@@ -17,9 +17,9 @@
       <div class="detail">
         <h1 class="mb-8 mt-0 detail-title">{{ nfts.name }}</h1>
         <div class="finance">
-          <span class="header-title">{{ nfts.price }}Ξ</span>
+          <span class="header-title">{{ nfts.price_eth }}Ξ</span>
           <span class="header-title ml-16">{{
-            convertEthereum(nfts.price)
+            convertEthereum(nfts.price_eth)
           }}</span>
         </div>
 

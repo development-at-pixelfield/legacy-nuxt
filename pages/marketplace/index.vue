@@ -1,25 +1,23 @@
 <template>
   <div
     class="marketplace-wrapper"
-    :class="{ 'no-items': !nfts.results.length }"
+    :class="{ 'no-items': !nfts.results || !nfts.results.length }"
   >
-    <div class="main-container">
+    <div class="filter">
+      <FilterList
+        :is-open-panel.sync="isOpenPanel"
+        :apply-filter="isOpenPanel"
+        :count="count"
+        :query-filter="filter"
+        :form-options="formOptions"
+      />
+    </div>
+    <div class="main-container" :class="{ 'panel-open': isOpenPanel }">
       <div class="header mb-16">
-        <h2 class="header-big mtb">{{ $t("marketplace.marketplace") }}</h2>
+        <h2 class="header-big mtb">
+          {{ $t("marketplace.marketplace") }}
+        </h2>
         <div class="filter-block">
-          <MultiFilterDropdown
-            :list="multyFilterItems"
-            :return-object="false"
-            :item-value="'value'"
-            :item-label="'label'"
-            :name.sync="filter.luminosity__in"
-            :selected-items="
-              filter.luminosity__in ? filter.luminosity__in.split(',') : []
-            "
-            :placeholder="$t('marketplace.luminosity')"
-            class="mb-0 first-filter"
-          />
-
           <FilterDropdown
             :list="filterItems"
             :return-object="false"
@@ -28,10 +26,26 @@
             :name.sync="filter.ordering"
             class="mb-0"
           />
+          <FilterList
+            class="mobile-filter"
+            :is-open-panel.sync="isOpenPanel"
+            :apply-filter="isOpenPanel"
+            :form-options="formOptions"
+            :query-filter="filter"
+            :count="count"
+          />
         </div>
       </div>
 
-      <div v-if="nfts.results.length" class="content">
+      <div class="filters mb-16">
+        <FiltersItems
+          :filter="filterHeader"
+          :count.sync="count"
+          :form-options="formOptions"
+        />
+      </div>
+
+      <div v-if="nfts.results && nfts.results.length" class="content">
         <MarketItem
           v-for="item in nfts.results"
           :key="item.uid"
@@ -50,16 +64,41 @@
             {{ item.name }} <br />
           </p>
           <p slot="profit" class="profit mtb text-m text-center">
-            {{ item.price }}Ξ
+            {{ item.price_eth }}Ξ
           </p>
           <p slot="finance" class="finance mtb text-m-bold text-center">
-            {{ convertEthereum(item.price) }}
+            {{ convertEthereum(item.price_eth) }}
           </p>
         </MarketItem>
       </div>
 
+      <div v-else class="empty-wrapper">
+        <span class="empty-image"
+          ><img src="~/assets/img/empty-img.svg" alt="empty-image"
+        /></span>
+        <p class="description mt-0 mb-16 text-center">
+          {{ $t("marketplace.emptyDesc") }}
+        </p>
+        <Button
+          class="mb-24"
+          :label="$t('marketplace.applyFilters')"
+          :background="'primary'"
+          :size="'full'"
+          :color="'c-white'"
+          @on-click="openFilter"
+        />
+      </div>
+
       <div v-if="nfts.count" class="pagination-wrapper">
-        <Pagination :total="nfts.count" :page.sync="filter.page" />
+        <Pagination
+          :list="nfts.results"
+          :total="nfts.count"
+          :page.sync="filter.page"
+          :page-number="filter.page"
+          :current-page="nfts.current"
+          :pages-count="nfts.pages_count"
+          :limit="filter.page_size || nfts.page_size"
+        />
       </div>
     </div>
   </div>
@@ -67,57 +106,80 @@
 
 <script>
 import FilterDropdown from "../../components/ui/FilterDropdown";
-import MultiFilterDropdown from "../../components/ui/MultiFilterDropdown";
 import MarketItem from "../../components/marketplace/MarketItem";
 import Pagination from "../../components/marketplace/Pagination";
+import FilterList from "../../components/marketplace/filter/FilterList";
+import FiltersItems from "../../components/marketplace/filter/FiltersItems";
+import Button from "../../components/ui/Button";
 import { functions } from "../../utils";
 import { catchErrors } from "../../utils/catchErrors";
 
 const filterDefaultVars = {
   page: 1,
-  page_size: 30,
+  page_size: 12,
   ordering: "",
+  name: "",
   luminosity__in: [],
+  quality_level__in: [],
+  color_class: "",
+  is_constellation: false,
+  nft_type: "",
+  eth_price__gte: 0.43,
+  eth_price__lte: 5.41,
+  constellation: "",
 };
 
 export default {
   name: "Index",
   components: {
     FilterDropdown,
-    MultiFilterDropdown,
     MarketItem,
     Pagination,
+    FilterList,
+    FiltersItems,
+    Button,
   },
   layout: "auth",
   middleware: "auth",
-  async asyncData({ store, route }) {
+  async asyncData({ store, route, error }) {
     try {
+      const formOptions = await store.dispatch("nfts/getNftsForm");
+
+      // console.log(formOptions, "formOptions");
+
       const query = route.query;
-      const filter = {};
-      Object.keys(filterDefaultVars).forEach((key) => {
-        filter[key] = query[key] || "";
+      const filter = { ...filterDefaultVars };
+      const arr = ["luminosity__in", "quality_level__in"];
+      Object.keys(filter).forEach((key) => {
+        if (arr.includes(query[key]) && typeof query[key] === "string") {
+          filter[key] = query[key].split(",");
+        } else {
+          filter[key] = query[key] || filterDefaultVars[key];
+        }
       });
+
       const nfts = await store.dispatch("nfts/getNfts", filter);
-      return { nfts };
-    } catch (e) {}
+      return { nfts, filter, formOptions };
+    } catch (e) {
+      const status = e.response.status;
+      if (status === 404) {
+        error({ statusCode: 404, message: "Not found" });
+      }
+    }
   },
   data() {
     return {
+      isOpenPanel: false,
+      count: 0,
       nfts: {},
+      filter: {},
+      filterHeader: {},
+      formOptions: {},
       filterItems: [
         { label: "Recently listed", value: "recently_listed" },
         { label: "Price (ETH): Highest first", value: "highest" },
         { label: "Price (ETH): Lowest first", value: "lowest" },
       ],
-      multyFilterItems: [
-        { label: "+1", value: "1" },
-        { label: "+2", value: "2" },
-        { label: "+3", value: "3" },
-        { label: "+4", value: "4" },
-        { label: "+5", value: "5" },
-        { label: "+6", value: "6" },
-      ],
-      filter: {},
     };
   },
 
@@ -131,18 +193,38 @@ export default {
     },
   },
   created() {
-    this.filter = { ...filterDefaultVars };
-    const query = this.$route.query;
-
-    Object.keys(this.filter).forEach((key) => {
-      if (query[key] && key === "luminosity__in") {
-        this.filter[key] = query[key].split(",");
-      } else this.filter[key] = query[key] || "";
-    });
-
+    this.filterHeader = { ...this.filter };
     this.setDefaultWatch();
   },
+
+  mounted() {
+    this.$nuxt.$on("applyFilters", async (values) => {
+      if (Object.keys(values).length) {
+        values.page = this.filter.page;
+        values.ordering = this.filter.ordering;
+
+        await this.setQuery(values);
+      } else {
+        const filters = { ...filterDefaultVars };
+        filters.page = this.filter.page;
+        filters.ordering = this.filter.ordering;
+
+        delete filters.eth_price__gte;
+        delete filters.eth_price__lte;
+
+        await this.setQuery(filters);
+      }
+    });
+  },
+
+  beforeDestroy() {
+    this.$nuxt.$off("applyFilters");
+  },
+
   methods: {
+    openFilter() {
+      this.isOpenPanel = true;
+    },
     setDefaultWatch() {
       this.$watch("filter.page", (val) => {
         const cleanObject = functions.cleanObject(this.$route.query);
@@ -151,29 +233,24 @@ export default {
       });
 
       this.$watch("filter.ordering", (val) => {
-        if (!val) return this.setQuery(null, "ordering");
-        this.setQuery(val, "ordering");
-      });
-
-      this.$watch("filter.luminosity__in", (val) => {
-        if (!val.length) return this.setQuery(null, "luminosity__in");
-        const str = val.join(",");
-        this.setQuery(str, "luminosity__in");
+        const query = { ...this.filter };
+        this.setQuery(query);
       });
     },
 
-    async setQuery(val, type) {
-      let query = this.$route.query;
-      query = { ...this.$route.query, [type]: val };
-
+    async setQuery(query) {
       const cleanObject = await functions.cleanObject(query);
-      await this.$router.replace({ query: cleanObject });
-
       await this.fetchNfts(cleanObject);
-    },
 
-    toDetail(item) {
-      this.$router.push(`/marketplace/${item.uid}`);
+      delete cleanObject.page;
+      delete cleanObject.page_size;
+
+      await this.$router.push({ query: cleanObject });
+
+      setTimeout(() => {
+        this.filterHeader = cleanObject;
+        this.filter = query;
+      }, 0);
     },
 
     async fetchNfts(query) {
@@ -186,6 +263,10 @@ export default {
           color: "error",
         });
       }
+    },
+
+    toDetail(item) {
+      this.$router.push(`/marketplace/${item.uid}`);
     },
   },
 };

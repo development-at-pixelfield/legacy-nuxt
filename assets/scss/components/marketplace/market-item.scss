@@ -2,27 +2,20 @@
   padding: 26px 42px;
   background: $c-greyscale-120;
   border-radius: 3px;
-  width: 224px;
-  margin-right: 16px;
+  width: 220px;
+  margin-right: 8px;
+  margin-left: 8px;
   margin-bottom: 16px;
   cursor: pointer;
 
-  @media (max-width: $break-sms) {
-    width: 47.5%;
-    display: inline-block;
-    padding: 26px 20px;
+  @media (max-width: $break-md) {
+    margin-right: 16px;
   }
 
-  &:nth-child(4n){
-    @media (min-width: $break-md) {
-      margin-right: 0;
-    }
-  }
-
-  &:nth-child(2n){
-    @media (max-width: $break-sms) {
-      margin-right: 0;
-    }
+  @media (max-width: 530px) {
+    width: 45%;
+    padding: 26px 21px;
+    margin-right: 0;
   }
 
   .img-block{

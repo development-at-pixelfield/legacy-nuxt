@@ -57,7 +57,7 @@ export default {
       type: String,
       default: "medium",
       validator(value) {
-        return ["medium", "full", "small"].includes(value);
+        return ["medium", "full", "small", "custom-medium"].includes(value);
       },
     },
     buttonHtmlType: {

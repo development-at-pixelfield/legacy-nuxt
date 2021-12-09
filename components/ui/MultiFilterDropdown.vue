@@ -1,20 +1,23 @@
 <template>
   <div class="custom-filter-dropdown">
+    <span v-if="label" class="label-float text-semi-s">
+      <span class="text-s-bold">{{ label }}</span>
+      <span v-if="showCount && selectedItems.length"
+        >({{ selectedItems.length }})</span
+      >
+    </span>
     <div
       class="aselect"
       :class="{ 'disabled-cursor': disabled }"
       :style="selectorStyles"
     >
-      <span v-if="label" class="label-float text-semi-s">
-        <span>{{ label }}</span>
-      </span>
       <p v-if="subHeader.length" class="text-small">{{ subHeader }}</p>
       <div class="selector" @click="!disabled ? toggle($event) : null">
         <div class="label">
           <div class="left-side">
             <div v-if="selectedItems.length" class="chip-list">
               <div
-                v-for="chip in selectedItems"
+                v-for="chip in chips"
                 :key="returnObject ? chip.value : chip"
                 class="chip"
               >
@@ -84,13 +87,13 @@
             :style="styles"
           >
             <li v-if="!filterByAlphaList.length" class="text-m">
-              {{ $t("noResult") }}
+              {{ $t("settings.noResults") }}
             </li>
             <li
               v-for="(item, index) in filterByAlphaList"
               v-else
               ref="options"
-              :key="index"
+              :key="uniqueId(index)"
               :class="{
                 current: selectedItems.includes(item.value),
                 'hover-key': keyIndex === index,
@@ -156,6 +159,10 @@ export default {
       type: Boolean,
       required: false,
     },
+    showCount: {
+      type: Boolean,
+      required: false,
+    },
     error: {
       type: [Boolean, String, Object],
       default: false,
@@ -180,6 +187,11 @@ export default {
       default: null,
     },
     label: {
+      type: String,
+      required: false,
+      default: null,
+    },
+    field: {
       type: String,
       required: false,
       default: null,
@@ -219,6 +231,23 @@ export default {
     };
   },
   computed: {
+    chips() {
+      let arr = [];
+      this.selectedItems.forEach((item) => {
+        const obj = this.list.find((i) =>
+          [i.value, i.label, i.value.toString(), +i.value].includes(item)
+        );
+        if (obj && Object.keys(obj).length) {
+          arr = [...arr, obj.label];
+        }
+      });
+      return arr;
+    },
+    uniqueId() {
+      return (index) => {
+        return index.toString() + "_" + index.toString() + Math.random(1, 50);
+      };
+    },
     filterByAlphaList() {
       const list = [...this.listNew];
       if (list.length && list[0].label && !this.notFilter) {
@@ -280,11 +309,12 @@ export default {
       }
     },
     name(val) {
-      if (val === undefined || val === null) this.value = "";
+      if (!val.length) this.value = "";
     },
     visible(val) {
       if (val) {
         this.keyIndex = this.selectedIndex > 0 ? this.selectedIndex : 0;
+        this.value = "";
         this.getCountsArr();
         this.fixScrolling();
       }
@@ -298,7 +328,7 @@ export default {
     document.addEventListener("click", this.close);
     let val = this.name;
     if (this.itemValue && this.itemLabel) {
-      let list = [...this.list];
+      let list = this.list?.length ? [...this.list] : [];
       if (list.length && list[0].label && !this.notFilter) {
         list = list.sort((a, b) => a.label.localeCompare(b.label));
       }
@@ -325,6 +355,7 @@ export default {
     },
     removeList() {
       this.visible = false;
+      this.value = "";
       this.$emit("update:name", []);
     },
     mouseHover(index) {
@@ -332,10 +363,13 @@ export default {
     },
     getCountsArr() {
       let arr = [];
-      const count = Math.round(this.listNew.length / 7);
-      [...Array(count).keys()].forEach((item) => {
-        arr = [...arr, (item + 1) * 7];
-      });
+
+      if (this.listNew?.length) {
+        const count = Math.round(this.listNew.length / 7);
+        [...Array(count).keys()].forEach((item) => {
+          arr = [...arr, (item + 1) * 7];
+        });
+      }
 
       this.scrollCountArr = arr;
     },
@@ -417,6 +451,7 @@ export default {
       } else finalData = [...this.selectedItems, data];
 
       this.$emit("update:name", finalData);
+      this.value = "";
     },
     close(e) {
       if (!this.$el.contains(e.target)) {
