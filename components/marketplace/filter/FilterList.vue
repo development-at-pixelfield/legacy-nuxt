@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="filter-wrapper"
-    :class="{ 'big-desktop': showDesktopPanel, 'big-mobile': shoMobilePanel }"
-  >
+  <div class="filter-wrapper">
     <div v-if="!showPanel" class="toggle-item">
       <Icon
         src="filter.svg"
@@ -68,7 +65,7 @@
           :item-value="'value'"
           :item-label="'label'"
           :name.sync="filter.luminosity__in"
-          :selected-items="filter.luminosity__in"
+          :selected-items="convertArray(filter.luminosity__in)"
           :label="$t('marketplace.luminosity')"
           :show-count="true"
           :placeholder="$t('marketplace.select')"
@@ -81,7 +78,7 @@
           :item-value="'value'"
           :item-label="'label'"
           :name.sync="filter.quality_level__in"
-          :selected-items="filter.quality_level__in"
+          :selected-items="convertArray(filter.quality_level__in)"
           :label="$t('marketplace.quality')"
           :show-count="true"
           :placeholder="$t('marketplace.select')"
@@ -175,7 +172,6 @@ import Button from "../../ui/Button";
 import Checkbox from "../../ui/Checkbox";
 import Radio from "../../ui/Radio";
 import Range from "../../ui/Range";
-import { functions } from "../../../utils";
 const filterDefaultVars = {
   name: "",
   luminosity__in: [],
@@ -207,6 +203,10 @@ export default {
     applyFilter: {
       type: Boolean,
       default: false,
+    },
+    queryFilter: {
+      type: Object,
+      default: () => {},
     },
   },
   data() {
@@ -258,6 +258,16 @@ export default {
     };
   },
   computed: {
+    convertArray() {
+      return (items) => {
+        if (items) {
+          if (typeof items === "string") return items.split(",");
+
+          return items;
+        }
+        return [];
+      };
+    },
     showDesktopPanel() {
       return this.showPanel && this.type === "desktop";
     },
@@ -269,15 +279,10 @@ export default {
     $route(val) {
       if (!Object.keys(val.query).length) {
         this.filter = { ...filterDefaultVars };
-      } else {
-        const cleanObject = functions.cleanObject(val.query);
-        delete cleanObject.page;
-        delete cleanObject.page_size;
-
-        console.log(cleanObject, "cleanObject");
-
-        // this.filter = cleanObject;
       }
+    },
+    queryFilter(val) {
+      this.setFilters(val);
     },
     applyFilter(val) {
       this.showPanel = val;
@@ -297,20 +302,8 @@ export default {
     },
   },
   created() {
-    const query = this.$route.query;
     const filter = { ...this.filter };
-    Object.keys(filter).forEach((key) => {
-      if (typeof query.luminosity__in === "string") {
-        filter.luminosity__in = query.luminosity__in.split(",");
-      } else if (typeof query.quality_level__in === "string") {
-        filter.quality_level__in = query.quality_level__in.split(",");
-      } else {
-        filter[key] = query[key] || this.filter[key];
-      }
-    });
-
-    this.filter = filter;
-    // console.log(this.filter, "this.filter77777777");
+    this.setFilters(filter);
   },
   mounted() {
     if (window.innerWidth < 767) {
@@ -329,6 +322,21 @@ export default {
     applyFilters() {
       this.showPanel = false;
       this.$nuxt.$emit("applyFilters", this.filter);
+    },
+    setFilters(values) {
+      const query = this.$route.query;
+      const filter = { ...values };
+
+      const arr = ["luminosity__in", "quality_level__in"];
+      Object.keys(filterDefaultVars).forEach((key) => {
+        if (arr.includes(query[key]) && typeof query[key] === "string") {
+          filter[key] = query[key].split(",");
+        } else {
+          filter[key] = query[key] || filterDefaultVars[key];
+        }
+      });
+
+      this.filter = filter;
     },
   },
 };

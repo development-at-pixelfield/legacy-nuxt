@@ -8,6 +8,8 @@
         :is-open-panel.sync="isOpenPanel"
         :apply-filter="isOpenPanel"
         :count="count"
+        :query-filter="filter"
+        :class="{ 'big-desktop': isOpenPanel }"
       />
     </div>
     <div class="main-container" :class="{ 'panel-open': isOpenPanel }">
@@ -24,7 +26,11 @@
             :name.sync="filter.ordering"
             class="mb-0"
           />
-          <FilterList class="mobile-filter" :is-open-panel.sync="isOpenPanel" />
+          <FilterList
+            class="mobile-filter"
+            :class="{ 'big-mobile': isOpenPanel }"
+            :is-open-panel.sync="isOpenPanel"
+          />
         </div>
       </div>
 
@@ -98,6 +104,7 @@ import FiltersItems from "../../components/marketplace/filter/FiltersItems";
 import Button from "../../components/ui/Button";
 import { functions } from "../../utils";
 import { catchErrors } from "../../utils/catchErrors";
+
 const filterDefaultVars = {
   page: 1,
   page_size: 12,
@@ -127,20 +134,22 @@ export default {
   middleware: "auth",
   async asyncData({ store, route }) {
     try {
+      const form = await store.dispatch("nfts/getNftsForm");
+      console.log(form, "form");
+
       const query = route.query;
       const filter = { ...filterDefaultVars };
-
+      const arr = ["luminosity__in", "quality_level__in"];
       Object.keys(filter).forEach((key) => {
-        if (typeof query.luminosity__in === "string") {
-          filter.luminosity__in = query.luminosity__in.split(",");
-        } else if (typeof query.quality_level__in === "string") {
-          filter.quality_level__in = query.quality_level__in.split(",");
+        if (arr.includes(query[key]) && typeof query[key] === "string") {
+          filter[key] = query[key].split(",");
         } else {
           filter[key] = query[key] || filterDefaultVars[key];
         }
       });
 
       console.log(filter, "filter");
+
       const nfts = await store.dispatch("nfts/getNfts", filter);
       return { nfts, filter };
     } catch (e) {}
@@ -213,16 +222,18 @@ export default {
     },
 
     async setQuery(query) {
-      this.filter = query;
-
       const cleanObject = await functions.cleanObject(query);
       await this.fetchNfts(cleanObject);
 
       delete cleanObject.page;
       delete cleanObject.page_size;
 
-      this.filterHeader = cleanObject;
       await this.$router.push({ query: cleanObject });
+
+      setTimeout(() => {
+        this.filterHeader = cleanObject;
+        this.filter = query;
+      }, 0);
     },
 
     toDetail(item) {

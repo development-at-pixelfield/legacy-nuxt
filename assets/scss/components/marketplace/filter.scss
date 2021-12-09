@@ -114,15 +114,24 @@
   width: 312px;
   transition: width 0.3s ease-out;
   background: $c-greyscale-140;
+
+  @media (max-width: $break-smsm) {
+    display: none;
+  }
 }
 
 .big-mobile{
-  position: fixed;
-  width: 100%;
-  left: 0;
-  top: 55px;
-  //top: 0;
-  background: $c-greyscale-140;
-  z-index: 2;
-  //padding-top: 56px;
+  display: none;
+
+  @media (max-width: $break-smsm) {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 55px;
+    //top: 0;
+    background: $c-greyscale-140;
+    z-index: 2;
+    //padding-top: 56px;
+  }
 }

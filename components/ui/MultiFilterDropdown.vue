@@ -93,7 +93,7 @@
               v-for="(item, index) in filterByAlphaList"
               v-else
               ref="options"
-              :key="index"
+              :key="uniqueId(index)"
               :class="{
                 current: selectedItems.includes(item.value),
                 'hover-key': keyIndex === index,
@@ -226,6 +226,11 @@ export default {
     };
   },
   computed: {
+    uniqueId() {
+      return (index) => {
+        return index.toString() + "_" + index.toString() + Math.random(1, 50);
+      };
+    },
     filterByAlphaList() {
       const list = [...this.listNew];
       if (list.length && list[0].label && !this.notFilter) {
@@ -287,7 +292,7 @@ export default {
       }
     },
     name(val) {
-      if (val === undefined || val === null) this.value = "";
+      if (!val.length) this.value = "";
     },
     visible(val) {
       if (val) {

@@ -87,11 +87,9 @@ export default {
         }
       });
 
-      if (
-        arr.length ||
-        cleanObject.eth_price__gte > 0.43 ||
-        cleanObject.eth_price__lte < 5.41
-      ) {
+      const query = this.$route.query;
+
+      if (query.eth_price__gte || query.eth_price__lte) {
         const newObj = {
           id: "eth_price__gte",
           label: "Price range",
@@ -114,6 +112,12 @@ export default {
       const sendItems = { ...this.filter };
       const key = item.id;
       sendItems[key] = filterDefaultVars[item.id];
+
+      if (item.id === "eth_price__gte") {
+        delete sendItems.eth_price__gte;
+        delete sendItems.eth_price__lte;
+      }
+
       this.$nuxt.$emit("applyFilters", sendItems);
     },
   },

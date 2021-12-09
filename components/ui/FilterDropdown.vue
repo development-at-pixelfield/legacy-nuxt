@@ -244,7 +244,7 @@ export default {
       }
     },
     name(val) {
-      if (val === undefined || val === null) this.value = "";
+      if (!val) this.value = "";
     },
     visible(val) {
       if (val) {

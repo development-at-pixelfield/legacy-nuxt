@@ -4,20 +4,18 @@
       {{ $t("marketplace.priceRange") }}
     </p>
 
-    <div class="header">
-      <span class="text-s"
-        >{{ fixed(minValue) }}Ξ ({{ convertEthereum(minValue) }})
-      </span>
-      <span class="text-s"
-        >{{ fixed(maxValue) }}Ξ ({{ convertEthereum(maxValue) }})
-      </span>
-    </div>
+    <div class="track-block" :class="{ 'is-active': active }">
+      <div class="header">
+        <span class="text-s">{{ min }}Ξ ({{ convertEthereum(min) }}) </span>
+        <span class="text-s">{{ max }}Ξ ({{ convertEthereum(max) }}) </span>
+      </div>
 
-    <div class="track-container">
-      <div ref="_vpcTrack" class="track"></div>
-      <div ref="trackHighlight" class="track-highlight"></div>
-      <button ref="track1" class="track-btn track1"></button>
-      <button ref="track2" class="track-btn track2"></button>
+      <div class="track-container">
+        <div ref="_vpcTrack" class="track"></div>
+        <div ref="trackHighlight" class="track-highlight"></div>
+        <button ref="track1" class="track-btn track1"></button>
+        <button ref="track2" class="track-btn track2"></button>
+      </div>
     </div>
 
     <div class="show-counts mt-16">
@@ -64,6 +62,7 @@ export default {
       pos: {
         curTrack: null,
       },
+      active: false,
     };
   },
 
@@ -143,7 +142,7 @@ export default {
 
       const moveInPct = moveDiff / percentInPx;
 
-      if (moveInPct < 1 || moveInPct > 100) return;
+      if (moveInPct < 0 || moveInPct > 100) return;
       const value =
         Math.round(moveInPct / this.percentPerStep) * this.step + this.min;
       if (track === "track1") {
@@ -163,6 +162,7 @@ export default {
       if (this.isDragging) return;
       this.isDragging = true;
       this.pos.curTrack = track;
+      if (this.active) this.active = false;
     },
 
     touchstart(ev, track) {
@@ -172,6 +172,7 @@ export default {
     mouseup(ev, track) {
       if (!this.isDragging) return;
       this.isDragging = false;
+      if (this.active) this.active = false;
     },
 
     touchend(ev, track) {
@@ -181,6 +182,7 @@ export default {
     mousemove(ev, track) {
       if (!this.isDragging) return;
       this.moveTrack(track, ev);
+      if (!this.active) this.active = true;
     },
 
     touchmove(ev, track) {
@@ -208,16 +210,17 @@ export default {
       return percentInPx;
     },
 
-    setClickMove(ev) {
+    async setClickMove(ev) {
       const track1Left = this.$refs.track1.getBoundingClientRect().left;
       const track2Left = this.$refs.track2.getBoundingClientRect().left;
       if (ev.clientX < track1Left) {
-        this.moveTrack("track1", ev);
+        await this.moveTrack("track1", ev);
       } else if (ev.clientX - track1Left < track2Left - ev.clientX) {
-        this.moveTrack("track1", ev);
+        await this.moveTrack("track1", ev);
       } else {
-        this.moveTrack("track2", ev);
+        await this.moveTrack("track2", ev);
       }
+      await this.setTrackHightlight();
     },
   },
 };
