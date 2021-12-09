@@ -156,7 +156,7 @@
         </div>
 
         <FilterDropdown
-          :list="constellationItems"
+          :list="formOptions.constellations"
           :return-object="false"
           :item-value="'value'"
           :item-label="'label'"
@@ -239,11 +239,6 @@ export default {
       },
       luminosityArr: [],
       qualityLevelArr: [],
-      constellationItems: [
-        { label: "Red", value: "red" },
-        { label: "Blue", value: "blue" },
-        { label: "Green", value: "green" },
-      ],
       searchItems: [
         { label: "Red", value: "red" },
         { label: "Blue", value: "blue" },
@@ -255,7 +250,9 @@ export default {
     convertArray() {
       return (items) => {
         if (items) {
-          if (typeof items === "string") return items.split(",");
+          if (typeof items === "string") {
+            return items.split(",");
+          }
 
           return items;
         }
@@ -275,6 +272,9 @@ export default {
         this.filter = { ...filterDefaultVars };
       }
     },
+    type(val) {
+      if (val === "mobile") this.removeScroll();
+    },
     queryFilter(val) {
       this.setFilters(val);
     },
@@ -287,11 +287,6 @@ export default {
         setTimeout(() => {
           this.canShow = true;
         }, 300);
-
-        if (this.type === "mobile") {
-          const html = document.getElementsByTagName("html")[0];
-          html.style.overflowY = "hidden";
-        }
       } else this.canShow = false;
     },
   },
@@ -307,10 +302,6 @@ export default {
     window.removeEventListener("resize", this.reportWindowSize);
   },
   methods: {
-    reportWindowSize() {
-      if (window.innerWidth < 767) this.type = "mobile";
-      else this.type = "desktop";
-    },
     toggleFilter() {
       this.showPanel = !this.showPanel;
     },
@@ -337,6 +328,15 @@ export default {
       });
 
       this.filter = filter;
+    },
+
+    removeScroll() {
+      const html = document.getElementsByTagName("html")[0];
+      html.style.overflowY = "hidden";
+    },
+    reportWindowSize() {
+      if (window.innerWidth < 770) this.type = "mobile";
+      else this.type = "desktop";
     },
   },
 };

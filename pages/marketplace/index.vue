@@ -91,8 +91,10 @@
 
       <div v-if="nfts.count" class="pagination-wrapper">
         <Pagination
+          :list="nfts.results"
           :total="nfts.count"
           :page.sync="filter.page"
+          :page-number="filter.page"
           :current-page="nfts.current"
           :pages-count="nfts.pages_count"
           :limit="filter.page_size || nfts.page_size"
@@ -143,7 +145,7 @@ export default {
     try {
       const formOptions = await store.dispatch("nfts/getNftsForm");
 
-      console.log(formOptions, "formOptions");
+      // console.log(formOptions, "formOptions");
 
       const query = route.query;
       const filter = { ...filterDefaultVars };
@@ -156,7 +158,7 @@ export default {
         }
       });
 
-      console.log(filter, "filter");
+      // console.log(filter, "filter");
 
       const nfts = await store.dispatch("nfts/getNfts", filter);
       return { nfts, filter, formOptions };

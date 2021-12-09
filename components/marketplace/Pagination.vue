@@ -109,6 +109,10 @@
 export default {
   name: "Pagination",
   props: {
+    list: {
+      type: Array,
+      default: () => [],
+    },
     total: {
       type: Number,
       default: 0,
@@ -134,7 +138,6 @@ export default {
     return {
       disableLeft: true,
       disableRight: false,
-      currentCount: 10,
     };
   },
   computed: {
@@ -157,24 +160,12 @@ export default {
     },
   },
   watch: {
-    currentPage(val) {
-      if (val > 1 && val < this.pagesCount) {
-        this.disableLeft = false;
-        this.disableRight = false;
-        return;
-      }
-
-      if (val === 1) {
-        this.disableLeft = true;
-        this.disableRight = false;
-        return;
-      }
-
-      if (val === this.pagesCount) {
-        this.disableLeft = false;
-        this.disableRight = true;
-      }
+    list() {
+      this.checkEnabled(this.currentPage);
     },
+  },
+  mounted() {
+    this.checkEnabled(this.currentPage);
   },
   methods: {
     paginate(type) {
@@ -189,6 +180,31 @@ export default {
       }
       if (type === "last" && !this.disableRight) {
         return this.$emit("update:page", this.pagesCount);
+      }
+    },
+
+    checkEnabled(val) {
+      if (val > 1 && val < this.pagesCount) {
+        this.disableLeft = false;
+        this.disableRight = false;
+        return;
+      }
+
+      if (this.pagesCount === 1) {
+        this.disableLeft = true;
+        this.disableRight = true;
+        return;
+      }
+
+      if (val === this.pagesCount) {
+        this.disableLeft = false;
+        this.disableRight = true;
+        return;
+      }
+
+      if (val === 1 && this.pagesCount !== 1) {
+        this.disableLeft = true;
+        this.disableRight = false;
       }
     },
   },

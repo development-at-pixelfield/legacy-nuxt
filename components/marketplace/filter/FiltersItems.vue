@@ -92,15 +92,17 @@ export default {
             });
             value = splitArr.join(",");
           } else {
-            // let obj = {};
-            // if (this.formOptions[item.form]) {
-            //   obj = this.formOptions[item.form].find(
-            //     (option) => option.value === cleanObject[key]
-            //   );
-            // }
-            //
-            // value = obj ? obj.label : cleanObject[key];
-            value = cleanObject[key];
+            let obj = {};
+            if (this.formOptions[item.form]) {
+              obj = this.formOptions[item.form].find(
+                (option) => option.value === cleanObject[key]
+              );
+            }
+            console.log(obj);
+
+            value =
+              obj && Object.keys(obj).length ? obj.label : cleanObject[key];
+            // value = cleanObject[key];
           }
 
           const obj = {
