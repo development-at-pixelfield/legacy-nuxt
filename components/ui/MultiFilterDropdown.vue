@@ -17,13 +17,13 @@
           <div class="left-side">
             <div v-if="selectedItems.length" class="chip-list">
               <div
-                v-for="chip in selectedItems"
+                v-for="chip in chips"
                 :key="returnObject ? chip.value : chip"
                 class="chip"
               >
-                <span class="text-m-bold"
-                  >{{ showSymbol }} {{ returnObject ? chip.label : chip }}</span
-                >
+                <span class="text-m-bold">{{
+                  returnObject ? chip.label : chip
+                }}</span>
                 <img
                   src="~/assets/img/icons/chip-remove.svg"
                   alt=""
@@ -231,8 +231,17 @@ export default {
     };
   },
   computed: {
-    showSymbol() {
-      return this.field === "luminosity__in" ? "+" : null;
+    chips() {
+      let arr = [];
+      this.selectedItems.forEach((item) => {
+        const obj = this.list.find((i) =>
+          [i.value, i.label, i.value.toString(), +i.value].includes(item)
+        );
+        if (obj && Object.keys(obj).length) {
+          arr = [...arr, obj.label];
+        }
+      });
+      return arr;
     },
     uniqueId() {
       return (index) => {

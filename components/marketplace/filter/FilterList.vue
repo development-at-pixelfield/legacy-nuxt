@@ -250,9 +250,7 @@ export default {
     convertArray() {
       return (items) => {
         if (items) {
-          if (typeof items === "string") {
-            return items.split(",");
-          }
+          if (typeof items === "string") return items.split(",");
 
           return items;
         }

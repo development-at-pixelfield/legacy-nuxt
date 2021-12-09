@@ -73,48 +73,42 @@ export default {
       delete this.filter.page_size;
 
       let arr = [];
+      const query = this.$route.query;
       const cleanObject = functions.cleanObject(this.filter);
 
       Object.keys(cleanObject).forEach((key) => {
         const item = this.list.find((item) => item.key === key);
+
         if (item && item.value) {
           let value = "";
 
-          if (typeof cleanObject[key] === "object") {
-            value = cleanObject[key].join(",");
-          } else if (typeof cleanObject[key] === "boolean") {
+          if (typeof cleanObject[key] === "boolean") {
             value = cleanObject[key] ? "Yes" : "No";
-          } else if (key === "luminosity__in") {
-            const split = cleanObject[key].split(",");
-            const splitArr = split.map((item) => {
-              item = "+" + item;
-              return item;
-            });
-            value = splitArr.join(",");
-          } else {
-            let obj = {};
-            if (this.formOptions[item.form]) {
-              obj = this.formOptions[item.form].find(
-                (option) => option.value === cleanObject[key]
-              );
-            }
-            console.log(obj);
+          } else if (this.formOptions[item.form]) {
+            let valueArr = [];
+            const formOptions = this.formOptions[item.form];
+            const splitString = cleanObject[key].toString().split(",");
 
-            value =
-              obj && Object.keys(obj).length ? obj.label : cleanObject[key];
-            // value = cleanObject[key];
-          }
+            splitString.forEach((splI) => {
+              const obj = formOptions.find((i) =>
+                [i.value, i.label, i.value.toString(), +i.value].includes(splI)
+              );
+              valueArr = [...valueArr, obj.label];
+            });
+
+            value = valueArr.length ? valueArr.join(",") : cleanObject[key];
+            value = cleanObject[key];
+          } else value = cleanObject[key];
 
           const obj = {
             id: item.key,
             label: item.value,
             value,
           };
+
           arr = [...arr, obj];
         }
       });
-
-      const query = this.$route.query;
 
       if (query.eth_price__gte || query.eth_price__lte) {
         const newObj = {
