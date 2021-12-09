@@ -145,7 +145,7 @@ export default {
     try {
       const formOptions = await store.dispatch("nfts/getNftsForm");
 
-      console.log(formOptions, "formOptions");
+      // console.log(formOptions, "formOptions");
 
       const query = route.query;
       const filter = { ...filterDefaultVars };
@@ -202,13 +202,16 @@ export default {
       if (Object.keys(values).length) {
         values.page = this.filter.page;
         values.ordering = this.filter.ordering;
+
         await this.setQuery(values);
       } else {
         const filters = { ...filterDefaultVars };
         filters.page = this.filter.page;
         filters.ordering = this.filter.ordering;
+
         delete filters.eth_price__gte;
         delete filters.eth_price__lte;
+
         await this.setQuery(filters);
       }
     });
@@ -250,10 +253,6 @@ export default {
       }, 0);
     },
 
-    toDetail(item) {
-      this.$router.push(`/marketplace/${item.uid}`);
-    },
-
     async fetchNfts(query) {
       try {
         this.nfts = await this.$store.dispatch("nfts/getNfts", query);
@@ -264,6 +263,10 @@ export default {
           color: "error",
         });
       }
+    },
+
+    toDetail(item) {
+      this.$router.push(`/marketplace/${item.uid}`);
     },
   },
 };

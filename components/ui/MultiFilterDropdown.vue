@@ -363,10 +363,13 @@ export default {
     },
     getCountsArr() {
       let arr = [];
-      const count = Math.round(this.listNew.length / 7);
-      [...Array(count).keys()].forEach((item) => {
-        arr = [...arr, (item + 1) * 7];
-      });
+
+      if (this.listNew?.length) {
+        const count = Math.round(this.listNew.length / 7);
+        [...Array(count).keys()].forEach((item) => {
+          arr = [...arr, (item + 1) * 7];
+        });
+      }
 
       this.scrollCountArr = arr;
     },

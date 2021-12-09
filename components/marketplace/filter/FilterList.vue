@@ -289,8 +289,7 @@ export default {
     },
   },
   created() {
-    const filter = { ...this.filter };
-    this.setFilters(filter);
+    this.setFilters({ ...this.filter });
   },
   mounted() {
     window.addEventListener("resize", this.reportWindowSize);
