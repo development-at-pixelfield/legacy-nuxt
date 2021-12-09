@@ -14,9 +14,9 @@ export const functions = {
       });
     }
     if (files) {
-      Object.keys(files).forEach((item) =>
-        formData.append(toUnderscore(item), files[item])
-      );
+      Object.keys(files).forEach((item) => {
+        formData.append(toUnderscore(item), files[item]);
+      });
     }
 
     return formData;

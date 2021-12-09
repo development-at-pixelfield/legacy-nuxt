@@ -22,7 +22,6 @@
         :error="$v.password"
         :rules="rules.password"
         :help-text="$t('auth.passwordRule')"
-        +
         :is-submit="isSubmit"
         @icon-click="iconClick('password')"
       />
@@ -115,7 +114,7 @@ export default {
             message: this.$t("snackbar.passwordChanged"),
             color: "success",
           });
-          await this.$router.push("/login");
+          this.$router.push("/login");
         } catch (e) {
           await this.$store.commit("setSnackbar", {
             show: true,

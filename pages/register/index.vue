@@ -8,6 +8,7 @@
         :label="$t('auth.email')"
         :error="$v.email"
         :rules="rules.email"
+        :custom-error="customEmailErrors"
         :is-submit="isSubmit"
       />
 
@@ -18,9 +19,9 @@
         :icon="inputIconPassword"
         :level="level"
         :with-indicator="true"
-        :custom-error="customErrors"
         :error="$v.password"
         :rules="rules.password"
+        :custom-error="customErrors"
         :help-text="$t('auth.passwordRule')"
         :is-submit="isSubmit"
         @icon-click="iconClick('password')"
@@ -106,6 +107,7 @@ export default {
       agree: false,
       isSubmit: false,
       checkError: "",
+      customEmailErrors: {},
       rules: {
         email: [
           { name: "required", text: this.$t("validations.notEmpty") },
@@ -128,7 +130,12 @@ export default {
 
   computed: {
     isValid() {
-      return !this.$v.$invalid && !this.customErrors.length && !this.checkError;
+      return (
+        !this.$v.$invalid &&
+        !this.customErrors.length &&
+        !this.customEmailErrors.length &&
+        !this.checkError
+      );
     },
   },
 
@@ -170,6 +177,13 @@ export default {
           });
           await this.$router.push("/profile");
         } catch (e) {
+          if (e.response.data.detail === "Already registered") {
+            this.customEmailErrors = {
+              errors: ["This email has already been used"],
+              type: "object",
+            };
+            return;
+          }
           await this.$store.commit("setSnackbar", {
             show: true,
             message: catchErrors(e),

@@ -10,7 +10,7 @@
           <DropdownList
             :items="items"
             class="profile-dropdown"
-            :src="''"
+            :src="userAvatar"
             @action="actionHandler"
           />
         </span>
@@ -33,6 +33,10 @@ export default {
   },
 
   computed: {
+    userAvatar() {
+      return this.$auth.user.avatar ?? require("~/assets/img/header-logo.svg");
+    },
+
     items() {
       return [
         {

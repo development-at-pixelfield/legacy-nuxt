@@ -1,12 +1,17 @@
 <template>
   <div class="auth-header">
-    <img src="~/assets/img/header-logo.svg" alt="logo" />
+    <img :src="userAvatar" alt="logo" />
   </div>
 </template>
 
 <script>
 export default {
   name: "AuthHeader",
+  computed: {
+    userAvatar() {
+      return require("~/assets/img/header-logo.svg");
+    },
+  },
 };
 </script>
 

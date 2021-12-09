@@ -2,8 +2,8 @@
   <div class="form-container full-h">
     <h1 class="header-title">{{ $t("settings.settings") }}</h1>
     <div class="content">
-      <div class="form-group mb-24">
-        <div v-if="!$auth.user.is_email_verified" class="header-row mb-16">
+      <div v-if="!$auth.user.is_email_verified" class="form-group mb-24">
+        <div class="header-row mb-16">
           <p class="mtb text-m-bold">
             {{ $t("settings.basicVerification") }}
           </p>
@@ -195,7 +195,7 @@ export default {
 
     async deleteAccount() {
       try {
-        await this.$store.dispatch("user/disableAccount");
+        await this.$store.dispatch("user/deleteAccount");
         await this.$auth.logout();
         await this.$store.commit("setSnackbar", {
           show: true,
