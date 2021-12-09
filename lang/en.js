@@ -145,6 +145,7 @@ export default {
   snackbar: {
     successRegister: "Successfully registered",
     successLoggedIn: "Successfully loggedIn",
+    successTester: "Your application to become a tester was successful",
     successSend: "Successfully send",
     checkInbox: "Recovery email sent! Please check your inbox.",
     passwordChanged:
