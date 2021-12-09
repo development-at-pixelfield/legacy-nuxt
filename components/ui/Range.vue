@@ -48,6 +48,10 @@ export default {
       type: [Number, String],
       default: 5.41,
     },
+    type: {
+      type: String,
+      default: "desktop",
+    },
   },
 
   data() {
@@ -79,13 +83,16 @@ export default {
     },
   },
 
+  watch: {
+    type(oldVal, newVal) {
+      if (oldVal !== newVal) {
+        this.setTracks();
+      }
+    },
+  },
+
   mounted() {
-    this.totalSteps = (this.max - this.min) / this.step;
-    this.percentPerStep = 100 / this.totalSteps;
-    document.querySelector(".track1").style.left =
-      this.valueToPercent(this.minValue) + "%";
-    document.querySelector(".track2").style.left =
-      this.valueToPercent(this.maxValue) + "%";
+    this.setTracks();
     this.setTrackHightlight();
 
     const self = this;
@@ -131,6 +138,14 @@ export default {
   },
 
   methods: {
+    setTracks() {
+      this.totalSteps = (this.max - this.min) / this.step;
+      this.percentPerStep = 100 / this.totalSteps;
+      document.querySelector(".track1").style.left =
+        this.valueToPercent(this.minValue) + "%";
+      document.querySelector(".track2").style.left =
+        this.valueToPercent(this.maxValue) + "%";
+    },
     moveTrack(track, ev) {
       const percentInPx = this.getPercentInPx();
 

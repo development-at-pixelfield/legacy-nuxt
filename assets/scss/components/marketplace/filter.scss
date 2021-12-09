@@ -115,15 +115,15 @@
   transition: width 0.3s ease-out;
   background: $c-greyscale-140;
 
-  @media (max-width: $break-smsm) {
-    display: none;
-  }
+  //@media (max-width: $break-smsm) {
+  //  display: none;
+  //}
 }
 
 .big-mobile{
-  display: none;
+  //display: none;
 
-  @media (max-width: $break-smsm) {
+  //@media (max-width: $break-smsm) {
     display: flex;
     position: fixed;
     width: 100%;
@@ -131,7 +131,7 @@
     top: 55px;
     //top: 0;
     background: $c-greyscale-140;
-    z-index: 2;
+    z-index: 100;
     //padding-top: 56px;
-  }
+  //}
 }

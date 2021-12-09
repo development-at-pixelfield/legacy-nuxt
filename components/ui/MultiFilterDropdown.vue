@@ -21,9 +21,9 @@
                 :key="returnObject ? chip.value : chip"
                 class="chip"
               >
-                <span class="text-m-bold">{{
-                  returnObject ? chip.label : chip
-                }}</span>
+                <span class="text-m-bold"
+                  >{{ showSymbol }} {{ returnObject ? chip.label : chip }}</span
+                >
                 <img
                   src="~/assets/img/icons/chip-remove.svg"
                   alt=""
@@ -191,6 +191,11 @@ export default {
       required: false,
       default: null,
     },
+    field: {
+      type: String,
+      required: false,
+      default: null,
+    },
     src: {
       type: String,
       required: false,
@@ -226,6 +231,9 @@ export default {
     };
   },
   computed: {
+    showSymbol() {
+      return this.field === "luminosity__in" ? "+" : null;
+    },
     uniqueId() {
       return (index) => {
         return index.toString() + "_" + index.toString() + Math.random(1, 50);
@@ -297,6 +305,7 @@ export default {
     visible(val) {
       if (val) {
         this.keyIndex = this.selectedIndex > 0 ? this.selectedIndex : 0;
+        this.value = "";
         this.getCountsArr();
         this.fixScrolling();
       }
@@ -430,6 +439,7 @@ export default {
       } else finalData = [...this.selectedItems, data];
 
       this.$emit("update:name", finalData);
+      this.value = "";
     },
     close(e) {
       if (!this.$el.contains(e.target)) {

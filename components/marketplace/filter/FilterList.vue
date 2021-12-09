@@ -1,5 +1,8 @@
 <template>
-  <div class="filter-wrapper">
+  <div
+    class="filter-wrapper"
+    :class="{ 'big-desktop': showDesktopPanel, 'big-mobile': shoMobilePanel }"
+  >
     <div v-if="!showPanel" class="toggle-item">
       <Icon
         src="filter.svg"
@@ -60,7 +63,7 @@
         />
 
         <MultiFilterDropdown
-          :list="luminosityFilterItems"
+          :list="formOptions.luminosity"
           :return-object="false"
           :item-value="'value'"
           :item-label="'label'"
@@ -68,12 +71,13 @@
           :selected-items="convertArray(filter.luminosity__in)"
           :label="$t('marketplace.luminosity')"
           :show-count="true"
+          :field="'luminosity__in'"
           :placeholder="$t('marketplace.select')"
           class="mb-0 first-filter"
         />
 
         <MultiFilterDropdown
-          :list="qualityItems"
+          :list="formOptions.quality"
           :return-object="false"
           :item-value="'value'"
           :item-label="'label'"
@@ -86,7 +90,7 @@
         />
 
         <FilterDropdown
-          :list="colorItems"
+          :list="formOptions.color"
           :return-object="false"
           :item-value="'value'"
           :item-label="'label'"
@@ -123,6 +127,7 @@
           class="mb-8 mt-24"
           :min-value.sync="filter.eth_price__gte"
           :max-value.sync="filter.eth_price__lte"
+          :type="type"
         />
 
         <div class="apply-action mb-24">
@@ -208,6 +213,10 @@ export default {
       type: Object,
       default: () => {},
     },
+    formOptions: {
+      type: Object,
+      default: () => {},
+    },
   },
   data() {
     return {
@@ -234,16 +243,6 @@ export default {
         { label: "+4", value: "4" },
         { label: "+5", value: "5" },
         { label: "+6", value: "6" },
-      ],
-      qualityItems: [
-        { label: "Good", value: "1" },
-        { label: "Normal", value: "2" },
-        { label: "Bad", value: "3" },
-      ],
-      colorItems: [
-        { label: "Red", value: "red" },
-        { label: "Blue", value: "blue" },
-        { label: "Green", value: "green" },
       ],
       constellationItems: [
         { label: "Red", value: "red" },
@@ -306,11 +305,17 @@ export default {
     this.setFilters(filter);
   },
   mounted() {
-    if (window.innerWidth < 767) {
-      this.type = "mobile";
-    }
+    window.addEventListener("resize", this.reportWindowSize);
+    this.reportWindowSize();
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.reportWindowSize);
   },
   methods: {
+    reportWindowSize() {
+      if (window.innerWidth < 767) this.type = "mobile";
+      else this.type = "desktop";
+    },
     toggleFilter() {
       this.showPanel = !this.showPanel;
     },

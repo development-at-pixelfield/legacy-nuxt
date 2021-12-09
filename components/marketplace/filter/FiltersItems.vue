@@ -45,17 +45,25 @@ export default {
       type: Object,
       default: () => {},
     },
+    formOptions: {
+      type: Object,
+      default: () => {},
+    },
   },
   data() {
     return {
       list: [
-        { key: "name", value: "Name" },
-        { key: "luminosity__in", value: "Luminosity" },
-        { key: "quality_level__in", value: "Quality" },
-        { key: "color_class", value: "Color" },
+        { key: "name", value: "Name", form: "name" },
+        { key: "luminosity__in", value: "Luminosity", form: "luminosity" },
+        { key: "quality_level__in", value: "Quality", form: "quality" },
+        { key: "color_class", value: "Color", form: "color" },
         { key: "is_constellation", value: "Part of constellation" },
         { key: "nft_type", value: "Type" },
-        { key: "constellation", value: "Constellation" },
+        {
+          key: "constellation",
+          value: "Constellation",
+          form: "constellations",
+        },
       ],
     };
   },
@@ -76,7 +84,23 @@ export default {
             value = cleanObject[key].join(",");
           } else if (typeof cleanObject[key] === "boolean") {
             value = cleanObject[key] ? "Yes" : "No";
-          } else value = cleanObject[key];
+          } else if (key === "luminosity__in") {
+            const split = cleanObject[key].split(",");
+            const splitArr = split.map((item) => {
+              item = "+" + item;
+              return item;
+            });
+            value = splitArr.join(",");
+          } else {
+            let obj = {};
+            if (this.formOptions[item.form]) {
+              obj = this.formOptions[item.form].find(
+                (option) => option.value === cleanObject[key]
+              );
+            }
+
+            value = obj ? obj.label : cleanObject[key];
+          }
 
           const obj = {
             id: item.key,

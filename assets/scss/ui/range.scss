@@ -1,7 +1,7 @@
 .range-wrapper {
 
   .track-container {
-    width: 255px;
+    width: 240px;
     position: relative;
     cursor: pointer;
     height: 8px;
@@ -54,7 +54,7 @@
       height:24px;
       border-radius: 50%;
       top: calc(-50% - 0.25rem);
-      margin-left: -1rem;
+      margin-left: -0.5rem;
       border: none;
       background-color: $c-primary;
       -ms-touch-action: pan-x;
@@ -65,6 +65,10 @@
       background-color 0.3s ease;
       transition: transform 0.3s ease-out, box-shadow 0.3s ease-out,
       background-color 0.3s ease, -webkit-transform 0.3s ease-out;
+    }
+
+    .track2{
+      margin-left: -1rem;
     }
   }
 
@@ -91,7 +95,7 @@
       border: 1px solid $c-greyscale-120;
       box-sizing: border-box;
       border-radius: 3px;
-      padding: 6px 9px;
+      padding: 6px;
       width: 140px;
 
       @media (max-width: $break-sms) {

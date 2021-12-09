@@ -4,13 +4,13 @@
     :class="{ 'no-items': !nfts.results.length }"
   >
     <div class="filter">
-      <FilterList
-        :is-open-panel.sync="isOpenPanel"
-        :apply-filter="isOpenPanel"
-        :count="count"
-        :query-filter="filter"
-        :class="{ 'big-desktop': isOpenPanel }"
-      />
+      <!--      <FilterList-->
+      <!--        :is-open-panel.sync="isOpenPanel"-->
+      <!--        :apply-filter="isOpenPanel"-->
+      <!--        :count="count"-->
+      <!--        :query-filter="filter"-->
+      <!--        :form-options="formOptions"-->
+      <!--      />-->
     </div>
     <div class="main-container" :class="{ 'panel-open': isOpenPanel }">
       <div class="header mb-16">
@@ -26,16 +26,16 @@
             :name.sync="filter.ordering"
             class="mb-0"
           />
-          <FilterList
-            class="mobile-filter"
-            :class="{ 'big-mobile': isOpenPanel }"
-            :is-open-panel.sync="isOpenPanel"
-          />
+          <!--          <FilterList class="mobile-filter" :is-open-panel.sync="isOpenPanel" />-->
         </div>
       </div>
 
       <div class="filters mb-16">
-        <FiltersItems :filter="filterHeader" :count.sync="count" />
+        <!--        <FiltersItems-->
+        <!--          :filter="filterHeader"-->
+        <!--          :count.sync="count"-->
+        <!--          :form-options="formOptions"-->
+        <!--        />-->
       </div>
 
       <div v-if="nfts.results.length" class="content">
@@ -99,8 +99,8 @@
 import FilterDropdown from "../../components/ui/FilterDropdown";
 import MarketItem from "../../components/marketplace/MarketItem";
 import Pagination from "../../components/marketplace/Pagination";
-import FilterList from "../../components/marketplace/filter/FilterList";
-import FiltersItems from "../../components/marketplace/filter/FiltersItems";
+// import FilterList from "../../components/marketplace/filter/FilterList";
+// import FiltersItems from "../../components/marketplace/filter/FiltersItems";
 import Button from "../../components/ui/Button";
 import { functions } from "../../utils";
 import { catchErrors } from "../../utils/catchErrors";
@@ -126,16 +126,16 @@ export default {
     FilterDropdown,
     MarketItem,
     Pagination,
-    FilterList,
-    FiltersItems,
+    // FilterList,
+    // FiltersItems,
     Button,
   },
   layout: "auth",
   middleware: "auth",
   async asyncData({ store, route }) {
     try {
-      const form = await store.dispatch("nfts/getNftsForm");
-      console.log(form, "form");
+      const formOptions = await store.dispatch("nfts/getNftsForm");
+      console.log(formOptions, "form");
 
       const query = route.query;
       const filter = { ...filterDefaultVars };
@@ -151,7 +151,7 @@ export default {
       console.log(filter, "filter");
 
       const nfts = await store.dispatch("nfts/getNfts", filter);
-      return { nfts, filter };
+      return { nfts, filter, formOptions };
     } catch (e) {}
   },
   data() {
@@ -161,6 +161,7 @@ export default {
       nfts: {},
       filter: {},
       filterHeader: {},
+      formOptions: {},
       filterItems: [
         { label: "Recently listed", value: "recently_listed" },
         { label: "Price (ETH): Highest first", value: "highest" },
