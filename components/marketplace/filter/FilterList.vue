@@ -272,6 +272,7 @@ export default {
     },
     type(val) {
       if (val === "mobile") this.removeScroll();
+      else this.addScroll();
     },
     queryFilter(val) {
       this.setFilters(val);
@@ -330,6 +331,10 @@ export default {
     removeScroll() {
       const html = document.getElementsByTagName("html")[0];
       html.style.overflowY = "hidden";
+    },
+    addScroll() {
+      const html = document.getElementsByTagName("html")[0];
+      html.style.overflowY = "scroll";
     },
     reportWindowSize() {
       if (window.innerWidth < 770) this.type = "mobile";
