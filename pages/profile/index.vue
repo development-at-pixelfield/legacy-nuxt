@@ -37,6 +37,7 @@
             @on-click="$router.push('/settings')"
           />
           <Button
+            v-if="!metamaskAccount"
             class="first-btn"
             :label="$t('profile.ConnectMetaMask')"
             :background="'ghost'"
@@ -44,6 +45,7 @@
             :color="'c-white'"
             @on-click="connectMetamask"
           />
+          <span>Metamask connected {{ metamaskAccount }}</span>
         </div>
       </div>
     </div>
@@ -68,6 +70,16 @@ export default {
     return {
       imgSrc: "",
     };
+  },
+  computed: {
+    metamask() {
+      return this.$metamask();
+    },
+    metamaskAccount() {
+      return async () => {
+        return await this.metamask.selectedAccount();
+      };
+    },
   },
   created() {
     if (this.$auth.user.avatar) {
@@ -109,15 +121,25 @@ export default {
     },
     async connectMetamask() {
       console.log("Start connect metamask");
-      console.log(this.$metamask.ethereum);
-      console.log(window.ethereum);
-      if (!this.$metamask.isEnabled) {
+      if (!this.metamask.isEnabled) {
         await this.$store.commit("setSnackbar", {
           show: true,
           message: this.$t("snackbar.metaMask.extensionNotInstalled"),
           color: "error",
         });
+        return;
       }
+      const accounts = await this.metamask.getAccounts();
+      if (!accounts.length) {
+        await this.$store.commit("setSnackbar", {
+          show: true,
+          message: this.$t("snackbar.metaMask.accountsIsNotConnected"),
+          color: "error",
+        });
+        return;
+      }
+      this.metamaskAccount = accounts.shift();
+      console.log(accounts);
     },
   },
 };

@@ -158,6 +158,7 @@ export default {
     metaMask: {
       extensionNotInstalled:
         "For connect account, please install MetaMask extension",
+      accountsIsNotConnected: "You have no connected accounts to Metamask",
     },
   },
 

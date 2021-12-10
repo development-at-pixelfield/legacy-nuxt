@@ -11,7 +11,7 @@ export default ({ app }, inject) => {
       isSupport: process.client && window,
       isEnabled: typeof window.ethereum !== "undefined",
       ethereum: window.ethereum,
-      connect: async () => {
+      async connect() {
         if (!this.isSupport) {
           throw this.errors.client;
         }
@@ -20,11 +20,14 @@ export default ({ app }, inject) => {
         }
         return await this.getAccounts();
       },
-      getAccounts: async () => {
+      async getAccounts() {
         return await this.ethereumRequest(this.methods.requestAccounts);
       },
-      ethereumRequest: async (method) => {
-        await this.ethereum.request({ method });
+      async ethereumRequest(method) {
+        return await this.ethereum.request({ method });
+      },
+      async selectedAccount() {
+        return await this.ethereum.selectedAddress;
       },
     };
   });
