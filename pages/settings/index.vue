@@ -2,7 +2,7 @@
   <div class="form-container full-h">
     <h1 class="header-title">{{ $t("settings.settings") }}</h1>
     <div class="content">
-      <div v-if="!$auth.user.is_email_verified" class="form-group mb-24">
+      <div v-if="showVerifyEmail" class="form-group mb-24">
         <div class="header-row mb-16">
           <p class="mtb text-m-bold">
             {{ $t("settings.basicVerification") }}
@@ -15,7 +15,7 @@
             src="~/assets/img/icons/warning-circle.svg"
             alt="icon"
           />
-          <p slot="sub-title" class="text-m mtb">
+          <p slot="sub-title" class="text-m-bold mtb">
             {{ $t("settings.verifyEmail") }}
           </p>
           <p
@@ -24,6 +24,21 @@
             @click="resendEmail"
           >
             {{ $t("settings.resend") }}
+          </p>
+        </SettingItem>
+      </div>
+      <div v-else-if="showVerificationInProgress">
+        <SettingVerificationItem />
+      </div>
+      <div v-else>
+        <SettingItem :type="'card'">
+          <img
+            slot="icon"
+            src="~/assets/img/icons/green-checkbox-cirlce.svg"
+            alt="icon"
+          />
+          <p slot="sub-title" class="text-m mtb">
+            {{ $t("settings.emailVerified") }}
           </p>
         </SettingItem>
       </div>
@@ -94,6 +109,7 @@ import SettingItem from "../../components/settings/SettingItem";
 import Checkbox from "../../components/ui/Checkbox";
 import Button from "../../components/ui/Button";
 import { catchErrors } from "../../utils/catchErrors";
+import SettingVerificationItem from "~/components/settings/SettingVerificationItem.vue";
 export default {
   name: "Index",
   components: {
@@ -101,6 +117,7 @@ export default {
     SettingItem,
     Checkbox,
     Button,
+    SettingVerificationItem,
   },
   layout: "auth",
   middleware: "auth",
@@ -127,6 +144,21 @@ export default {
     };
   },
 
+  computed: {
+    showVerificationInProgress() {
+      return (
+        this.$auth.user.verification_in_progress &&
+        !this.$auth.user.is_email_verified
+      );
+    },
+    showVerifyEmail() {
+      return (
+        !this.$auth.user.is_email_verified &&
+        !this.$auth.user.verification_in_progress
+      );
+    },
+  },
+
   created() {
     this.email = this.$auth.user.email;
     this.showAlerts = this.$auth.user.nft_notifications;
@@ -147,6 +179,7 @@ export default {
             nft_notifications: this.showAlerts,
           };
           await this.$store.dispatch("user/updateProfile", data);
+          await this.$auth.fetchUser();
           await this.$store.commit("setSnackbar", {
             show: true,
             message: this.$t("snackbar.emailUpdate"),
@@ -165,6 +198,7 @@ export default {
     async resendEmail() {
       try {
         await this.$store.dispatch("user/resendVerificationEmail");
+        await this.$auth.fetchUser();
         await this.$store.commit("setSnackbar", {
           show: true,
           message: this.$t("snackbar.checkInbox"),
