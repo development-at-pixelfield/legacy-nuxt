@@ -41,6 +41,7 @@ export default {
     LandingFooter,
   },
   layout: "landing",
+  middleware: ["isLoggedIn"],
 };
 </script>
 

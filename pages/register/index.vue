@@ -43,9 +43,12 @@
       <Checkbox :name.sync="agree" class="mb-32" :error="checkError">
         <label slot="label" class="text-m">
           {{ $t("auth.agreeWith") }} &nbsp;
-          <nuxt-link to="/term-cond" class="no-color-link">{{
-            $t("auth.termCond")
-          }}</nuxt-link>
+          <a
+            href="https://storage.googleapis.com/pfld-outdoor-production-documents-bucket/ISIAjobs_Terms_and_Conditions_2021_10_05_revMP_fin%20(1).pdf"
+            target="_blank"
+            class="no-color-link"
+            >{{ $t("auth.termCond") }}</a
+          >
         </label>
       </Checkbox>
 
