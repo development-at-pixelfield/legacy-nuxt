@@ -63,6 +63,39 @@
           </div>
         </div>
       </div>
+
+      <span id="cloud1" class="cloud1">
+        <img src="~/assets/img/landing/cloud1.svg" alt="" />
+      </span>
+
+      <span id="cloud2" class="cloud2">
+        <img src="~/assets/img/landing/cloud2.svg" alt="" />
+      </span>
+
+      <footer>
+        <div class="content">
+          <p class="mt-0 mb-8 text-m-bold">{{ $t("landing.joinUs") }}</p>
+          <div class="action">
+            <a href="" class="discord-btn">
+              <img
+                src="~/assets/img/icons/discord-big.svg"
+                alt="discord-icon"
+              />
+            </a>
+          </div>
+        </div>
+
+        <Button
+          class="top-btn"
+          :label="$t('landing.backTop')"
+          :background="'primary'"
+          :size="'medium'"
+          :color="'c-white'"
+          @on-click="scrollTop"
+        >
+          <span slot="icon" class="ml-4 emoji">👆</span>
+        </Button>
+      </footer>
     </div>
   </div>
 </template>
@@ -70,6 +103,37 @@
 <script>
 export default {
   name: "OurTeam",
+
+  mounted() {
+    window.addEventListener("scroll", this.scrollHandler);
+  },
+
+  methods: {
+    scrollHandler(e) {
+      const element = document.querySelector("#our-team");
+      const posParent = element.getBoundingClientRect();
+
+      if (posParent.top + 250 < window.innerHeight && posParent.bottom >= 0) {
+        const cloud1 = document.querySelector("#cloud1");
+        const cloud2 = document.querySelector("#cloud2");
+        const diff = window.scrollY - posParent.y;
+
+        const cloud1Style = (diff - 3600) / 2.5;
+        const cloud2Style = (diff - 3000) / 2;
+
+        if (cloud1Style > 100) {
+          cloud1.style.bottom = `${cloud1Style}px`;
+        }
+        if (cloud2Style > 500) {
+          cloud2.style.bottom = `${cloud2Style}px`;
+        }
+      }
+    },
+
+    scrollTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    },
+  },
 };
 </script>
 
