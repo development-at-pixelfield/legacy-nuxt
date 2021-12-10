@@ -37,17 +37,14 @@ export default {
     seconds: "Seconds",
     joinUs: "Join us on",
     orFollow: "or follow us on other platforms",
-    discoverTitle: "Discover infinite possibilities with on-chain credentials",
-    discoverDesc: `Following the auction of Beeple's NFT-based work of art at Christie's,
-          which eventually sold for $69.3 million with fees, the NFTs as a model
-          of ownership seem to have been particularly attractive to
-          up-and-coming artists. With fewer barriers than the traditional art
-          market, it becomes easier to get your name out there, and earn some
-          (serious) money too. Even blue chip artists like Damien Hirst are
-          jumping on the NFT bandwagon.`,
-    soundGood: "Sounds good?",
+    discoverTitle:
+      "Be the first one to wear luxury diamond assets in the metaverse.",
+    discoverDesc: `We are aware of all the magic the NFT world brings and what is currently happening in our and NFT world. Therefore, we want to bring something new. Something unique. The only thing we can see is a big goal ahead of us - to become the first and largest vendor of luxury diamond assets in the metaverse(s). <br/>
+Where did the idea of our NFT project come from? Diamonds are fallen stars. We've decided to put them back where they belong. Back to the sky. To the galaxy.`,
+    soundGood: "Join our Discord community?",
     orJoin: "or join us on other platforms",
-    joinUsDiscord: "Join us on our Discord community",
+    joinUsDiscord:
+      "to have a chance to become the first owner of our 3D NFT or to win luxury diamond jewelery.",
     name: "Name",
     signUp: "Sign up",
     backTop: "BACK TO TOP",
@@ -76,6 +73,7 @@ export default {
     starTitle7: "own metaverse",
     starTitle8: "VR estates",
     starTitle9: "VR events",
+    becomeTesterTitle: "Get the latest info first, join the galaxy community",
   },
 
   profile: {

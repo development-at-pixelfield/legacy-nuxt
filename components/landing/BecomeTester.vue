@@ -3,7 +3,7 @@
     <div class="content">
       <div class="mt-0 header-block">
         <span class="rocket-icon">🚀</span>
-        <h2>Become a tester</h2>
+        <h2>{{ $t("landing.becomeTesterTitle") }}</h2>
       </div>
       <div class="form-group">
         <Input
@@ -15,6 +15,7 @@
           :rules="rules.name"
           :is-submit="isSubmit"
         />
+
         <Input
           :model.sync="email"
           :header="$t('auth.email')"
