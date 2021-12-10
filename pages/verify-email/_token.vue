@@ -7,12 +7,13 @@ import { catchErrors } from "~/utils/catchErrors";
 
 export default {
   name: "Code",
-  async created() {
+  async mounted() {
     try {
       const data = {
         token: this.$route.query.token,
       };
       await this.$store.dispatch("user/verifyEmail", data);
+      await this.$auth.fetchUser();
       await this.$store.commit("setSnackbar", {
         show: true,
         message: this.$t("snackbar.successEmailVerify"),
