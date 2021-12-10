@@ -36,6 +36,14 @@
             :color="'c-white'"
             @on-click="$router.push('/settings')"
           />
+          <Button
+            class="first-btn"
+            :label="$t('profile.ConnectMetaMask')"
+            :background="'ghost'"
+            :size="'medium'"
+            :color="'c-white'"
+            @on-click="connectMetamask"
+          />
         </div>
       </div>
     </div>
@@ -95,6 +103,18 @@ export default {
         await this.$store.commit("setSnackbar", {
           show: true,
           message: catchErrors(e),
+          color: "error",
+        });
+      }
+    },
+    async connectMetamask() {
+      console.log("Start connect metamask");
+      console.log(this.$metamask.ethereum);
+      console.log(window.ethereum);
+      if (!this.$metamask.isEnabled) {
+        await this.$store.commit("setSnackbar", {
+          show: true,
+          message: this.$t("snackbar.metaMask.extensionNotInstalled"),
           color: "error",
         });
       }

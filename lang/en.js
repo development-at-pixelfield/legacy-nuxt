@@ -155,6 +155,10 @@ export default {
     successDelete: "Account deleted.",
     successAvatar: "Avatar updated successfully.",
     successEmailVerify: "Email verified successfully!",
+    metaMask: {
+      extensionNotInstalled:
+        "For connect account, please install MetaMask extension",
+    },
   },
 
   modals: {

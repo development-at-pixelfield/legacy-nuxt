@@ -11,12 +11,6 @@ export default ({ app }, inject) => {
       isSupport: process.client,
       isEnabled: typeof window.ethereum !== "undefined",
       ethereum: window.ethereum,
-      init: () => {
-        return {
-          supported: this.isSupport,
-          isEnabled: this.isEnabled,
-        };
-      },
       connect: async () => {
         if (!this.isSupport) {
           throw this.errors.client;
