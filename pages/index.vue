@@ -42,9 +42,6 @@ export default {
   },
   layout: "landing",
   middleware: ["isLoggedIn"],
-  created() {
-    console.log("last version");
-  },
 };
 </script>
 
