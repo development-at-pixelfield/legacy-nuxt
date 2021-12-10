@@ -179,19 +179,32 @@ export default {
 
     async updateChanges() {
       await this.beforeUpdate();
+      const isEmailChanged = this.email !== this.$auth.user.email;
+      const isNftNotififcationsChanged =
+        this.showAlerts !== this.$auth.user.nft_notifications;
+
+      if (!isEmailChanged && !isNftNotififcationsChanged) {
+        await this.$store.commit("setSnackbar", {
+          show: true,
+          message: this.$t("snackbar.noSettingsChanged"),
+          color: "error",
+        });
+        return;
+      }
       if (!this.$v.$invalid) {
         try {
           const data = {
             nft_notifications: this.showAlerts,
+            email: this.email,
           };
-          if (this.email !== this.$auth.user.email) {
-            data.email = this.email;
-          }
+
           await this.$store.dispatch("user/updateProfile", data);
           await this.$auth.fetchUser();
           await this.$store.commit("setSnackbar", {
             show: true,
-            message: this.$t("snackbar.emailUpdate"),
+            message: isEmailChanged
+              ? this.$t("snackbar.emailUpdate")
+              : this.$t("snackbar.notificationsUpdate"),
             color: "success",
           });
         } catch (e) {
