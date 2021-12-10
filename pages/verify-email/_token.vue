@@ -24,6 +24,12 @@ export default {
         await this.$router.push("/profile");
       } else await this.$router.push("/");
     } catch (e) {
+      if (this.$auth.loggedIn) {
+        await this.$auth.fetchUser();
+        this.$router.push("/settings");
+      } else {
+        this.$router.push("/login");
+      }
       await this.$store.commit("setSnackbar", {
         show: true,
         message: catchErrors(e),
