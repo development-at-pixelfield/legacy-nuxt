@@ -8,7 +8,7 @@ export default ({ app }, inject) => {
       methods: {
         requestAccounts: "eth_requestAccounts",
       },
-      isSupport: process.client,
+      isSupport: process.client && window,
       isEnabled: typeof window.ethereum !== "undefined",
       ethereum: window.ethereum,
       connect: async () => {
