@@ -182,9 +182,11 @@ export default {
       if (!this.$v.$invalid) {
         try {
           const data = {
-            email: this.email,
             nft_notifications: this.showAlerts,
           };
+          if (this.email !== this.$auth.user.email) {
+            data.email = this.email;
+          }
           await this.$store.dispatch("user/updateProfile", data);
           await this.$auth.fetchUser();
           await this.$store.commit("setSnackbar", {
