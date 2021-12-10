@@ -10,7 +10,9 @@
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint:style": "stylelint **/*.{vue,css} --ignore-path .gitignore",
     "lint": "npm run lint:js && npm run lint:style",
-    "test": "jest"
+    "test": "jest",
+    "build-cloud": "gcloud builds submit --tag gcr.io/pfld-galaxy/pfld-galaxy-nuxt . --project pfld-galaxy",
+    "deploy-cloud": "gcloud run deploy pfld-galaxy-nuxt --project pfld-galaxy --update-env-vars API_URL=https://api-galaxy.bypixelfield.com/api/ --image=gcr.io/pfld-galaxy/pfld-galaxy-nuxt --region europe-west3 --platform managed --port 3000"
   },
   "lint-staged": {
     "*.{js,vue}": "eslint",
