@@ -14,7 +14,13 @@
         :key="index"
         class="text-s error-message"
       >
-        {{ cError ? cError : "Something went wrong" }}
+        <span v-if="cError === 'This email is already registered'">
+          {{ cError }}
+          <nuxt-link to="/login" class="red-link"
+            >Try to login instead?</nuxt-link
+          >
+        </span>
+        <span v-else>{{ cError ? cError : "Something went wrong" }}</span>
       </p>
     </div>
     <div v-else-if="customError && customError.type" class="errors-list">

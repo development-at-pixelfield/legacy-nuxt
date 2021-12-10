@@ -269,6 +269,10 @@ export default {
       }
     },
   },
+  mounted() {
+    // this.isFocusTrue = true;
+    // console.log(this.model);
+  },
   methods: {
     handleBlur() {
       this.$emit("handle-blur");

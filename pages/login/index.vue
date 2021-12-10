@@ -70,6 +70,9 @@ export default {
     email: {
       required,
       email,
+      checkEmailSymbol(email) {
+        return email.includes("@");
+      },
     },
     password: {
       required,
@@ -85,6 +88,10 @@ export default {
           { name: "required", text: this.$t("validations.notEmpty") },
           {
             name: "email",
+            text: this.$t("validations.validEmail"),
+          },
+          {
+            name: "checkEmailSymbol",
             text: this.$t("validations.addEmail"),
           },
         ],
