@@ -160,6 +160,8 @@ export default {
     successDelete: "Account deleted.",
     successAvatar: "Avatar updated successfully.",
     successEmailVerify: "Email verified successfully!",
+    noSettingsChanged: "Please change a setting in order to update it",
+    notificationsUpdate: "NFT notifications have been updated",
   },
 
   modals: {
