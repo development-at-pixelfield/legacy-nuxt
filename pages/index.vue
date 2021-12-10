@@ -9,6 +9,8 @@
 
       <Discover />
 
+      <Interactive />
+
       <RoadMap />
 
       <BecomeTester />
@@ -29,8 +31,10 @@ import OurTeam from "../components/landing/OurTeam";
 import LandingFooter from "../components/footer/LandingFooter";
 import ComingSoon from "../components/landing/ComingSoon";
 import RoadMap from "../components/landing/RoadMap";
+import Interactive from "../components/landing/Interactive";
 export default {
   components: {
+    Interactive,
     RoadMap,
     LandingHeader,
     JoinUs,
