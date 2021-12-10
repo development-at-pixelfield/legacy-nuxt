@@ -114,7 +114,7 @@ export default {
             message: this.$t("snackbar.passwordChanged"),
             color: "success",
           });
-          this.$router.push("/login");
+          await this.$router.push("/login");
         } catch (e) {
           await this.$store.commit("setSnackbar", {
             show: true,

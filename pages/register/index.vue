@@ -43,7 +43,7 @@
       <Checkbox :name.sync="agree" class="mb-32" :error="checkError">
         <label slot="label" class="text-m">
           {{ $t("auth.agreeWith") }} &nbsp;
-          <nuxt-link to="/" class="no-color-link">{{
+          <nuxt-link to="/term-cond" class="no-color-link">{{
             $t("auth.termCond")
           }}</nuxt-link>
         </label>
@@ -90,6 +90,9 @@ export default {
     email: {
       required,
       email,
+      checkEmailSymbol(email) {
+        return email.includes("@");
+      },
     },
     password: {
       required,
@@ -113,6 +116,10 @@ export default {
           { name: "required", text: this.$t("validations.notEmpty") },
           {
             name: "email",
+            text: this.$t("validations.validEmail"),
+          },
+          {
+            name: "checkEmailSymbol",
             text: this.$t("validations.addEmail"),
           },
         ],
@@ -142,6 +149,11 @@ export default {
   watch: {
     agree(val) {
       if (val) this.checkError = "";
+    },
+    email(val) {
+      if (!this.$v.email.$invalid) {
+        this.customEmailErrors = {};
+      }
     },
   },
 
@@ -179,7 +191,7 @@ export default {
         } catch (e) {
           if (e.response.data.detail === "Already registered") {
             this.customEmailErrors = {
-              errors: ["This email has already been used"],
+              errors: [`This email is already registered`],
               type: "object",
             };
             return;

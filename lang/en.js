@@ -139,6 +139,7 @@ export default {
     sameAsPassword: "Please make sure your passwords match.",
     termAgree: "Please agree to  Terms and Conditions.",
     addEmail: "Please include an ‘@’ in the email address.",
+    validEmail: "Please enter valid email address",
     emailUsed: "This email has already been registered",
   },
 
