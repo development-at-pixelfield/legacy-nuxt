@@ -101,7 +101,7 @@ export const actions = {
    * @returns {Promise<AxiosResponse<any>>}
    */
   updateProfile(context, payload) {
-    return this.$axios.$patch("/users/update/", payload);
+    return this.$axios.$put("/users/update/", payload);
   },
 
   /**

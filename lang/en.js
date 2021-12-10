@@ -107,6 +107,9 @@ export default {
     noResults: "No Results",
     startTyping: "Start typing...",
     findItems: "Find items containing",
+    emailVerified: "Email verified",
+    verificationInProgress: "Verification in progress...",
+    checkInbox: "Check your inbox for the verification email",
   },
 
   marketplace: {
