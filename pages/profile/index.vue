@@ -46,6 +46,7 @@
             @on-click="connectMetamask"
           />
           <span>Metamask connected {{ metamaskAccount }}</span>
+          <span v-if="balanceLoaded">Current balance: {{ balance }}</span>
         </div>
       </div>
     </div>
@@ -59,27 +60,22 @@
 <script>
 import Button from "../../components/ui/Button";
 import { catchErrors } from "../../utils/catchErrors";
+import metamask from "../../mixins/metamask";
 export default {
   name: "Index",
   components: {
     Button,
   },
+  mixins: [metamask],
   layout: "auth",
   middleware: "auth",
   data() {
     return {
       imgSrc: "",
+      metamaskAccount: "",
+      balance: 0,
+      balanceLoaded: false,
     };
-  },
-  computed: {
-    metamask() {
-      return this.$metamask();
-    },
-    metamaskAccount() {
-      return async () => {
-        return await this.metamask.selectedAccount();
-      };
-    },
   },
   created() {
     if (this.$auth.user.avatar) {
@@ -118,28 +114,6 @@ export default {
           color: "error",
         });
       }
-    },
-    async connectMetamask() {
-      console.log("Start connect metamask");
-      if (!this.metamask.isEnabled) {
-        await this.$store.commit("setSnackbar", {
-          show: true,
-          message: this.$t("snackbar.metaMask.extensionNotInstalled"),
-          color: "error",
-        });
-        return;
-      }
-      const accounts = await this.metamask.getAccounts();
-      if (!accounts.length) {
-        await this.$store.commit("setSnackbar", {
-          show: true,
-          message: this.$t("snackbar.metaMask.accountsIsNotConnected"),
-          color: "error",
-        });
-        return;
-      }
-      this.metamaskAccount = accounts.shift();
-      console.log(accounts);
     },
   },
 };
