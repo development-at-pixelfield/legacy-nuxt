@@ -51,7 +51,7 @@
           <div class="team mb-8 yellow">
             <div class="team-info">
               <p class="position mt-0 mb-4">Diamond team</p>
-              <p class="text-m mtb">Diamond team</p>
+              <p class="text-m mtb">United Arab Emirates</p>
             </div>
             <div class="country">
               <img

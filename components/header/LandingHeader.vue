@@ -1,24 +1,24 @@
 <template>
   <header>
-    <div class="desktop-header">
+    <div class="desktop-header full-container">
       <ul class="list">
         <li>
-          <a href="#discover" class="no-color-dec-link">{{
+          <a href="#discover" class="no-color-dec-link text-m">{{
             $t("landing.discover")
           }}</a>
         </li>
         <li>
-          <a href="#road-map" class="no-color-dec-link">{{
+          <a href="#road-map" class="no-color-dec-link text-m">{{
             $t("landing.roadmap")
           }}</a>
         </li>
         <li>
-          <a href="#become-tester" class="no-color-dec-link">{{
+          <a href="#become-tester" class="no-color-dec-link text-m">{{
             $t("landing.becomeTester")
           }}</a>
         </li>
         <li>
-          <a href="#our-team" class="no-color-dec-link">{{
+          <a href="#our-team" class="no-color-dec-link text-m">{{
             $t("landing.ourTeam")
           }}</a>
         </li>
@@ -34,6 +34,7 @@
           :background="'primary'"
           :size="'small'"
           :color="'c-white'"
+          @on-click="anchorLink"
         />
       </div>
     </div>
@@ -48,6 +49,7 @@
           :background="'primary'"
           :size="'small'"
           :color="'c-white'"
+          @on-click="anchorLink"
         />
       </div>
     </div>
@@ -60,6 +62,11 @@ export default {
   name: "LandingHeader",
   components: {
     Button,
+  },
+  methods: {
+    anchorLink() {
+      document.location = "#become-tester";
+    },
   },
 };
 </script>

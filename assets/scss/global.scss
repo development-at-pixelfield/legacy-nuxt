@@ -325,14 +325,14 @@ input{
 }
 
 .full-container{
-  max-width: 1380px;
+  max-width: 1280px;
   margin: 0 auto;
 
   @media (max-width: 1716px) {
     margin: 0 168px;
   }
 
-  @media (max-width: 1380px) {
+  @media (max-width: 1280px) {
     padding-left: 168px;
     padding-right: 168px;
     margin: 0;

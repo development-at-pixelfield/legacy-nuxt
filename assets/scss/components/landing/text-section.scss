@@ -32,14 +32,13 @@
         font-size: 40px;
         line-height: 95%;
         letter-spacing: -0.01em;
+        color: $c-white;
 
         @media (max-width: $break-smsm) {
           font-size: 37px;
           letter-spacing: -0.02em;
           margin-bottom: 24px;
         }
-
-
       }
     }
 
