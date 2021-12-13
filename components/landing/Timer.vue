@@ -44,7 +44,7 @@ export default {
     const vm = this;
 
     this.updateInterval = setInterval(function () {
-      const comingDate = new Date("Dec 8, 2021 00:00:00");
+      const comingDate = new Date("Jan 10, 2022 00:00:00");
       const now = new Date();
       const des = comingDate.getTime() - now.getTime();
       const days = Math.floor(des / (1000 * 60 * 60 * 24));

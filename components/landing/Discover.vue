@@ -1,18 +1,22 @@
 <template>
   <div id="discover" class="discover-wrapper">
     <div class="discover">
-      <div class="left-side">
-        <h2 class="mt-0">
-          {{ $t("landing.discoverTitle") }}
-        </h2>
-        <p class="mb-0 text-l">
-          {{ $t("landing.discoverDesc") }}
-        </p>
-      </div>
-      <div class="right-side">
-        <span class="img-block">
-          <img class="bear-img" src="~/assets/img/bear-front.png" alt="bear" />
-        </span>
+      <div class="full-container">
+        <div class="left-side">
+          <h2 class="mt-0">
+            {{ $t("landing.discoverTitle") }}
+          </h2>
+          <p class="mb-0 text-l" v-html="$t('landing.discoverDesc')"></p>
+        </div>
+        <div class="right-side">
+          <span class="img-block">
+            <img
+              class="bear-img"
+              src="~/assets/img/bear-front.png"
+              alt="bear"
+            />
+          </span>
+        </div>
       </div>
     </div>
 
@@ -23,7 +27,9 @@
         </span>
         <div class="sound-block">
           <h2>{{ $t("landing.soundGood") }}</h2>
-          <p class="mt-0 mb-24 title-big">{{ $t("landing.joinUsDiscord") }}</p>
+          <p class="mt-0 mb-24 text-m subtitle">
+            {{ $t("landing.joinUsDiscord") }}
+          </p>
           <div class="action">
             <a href="" class="discord-btn">
               <img
@@ -61,18 +67,18 @@
       <div class="right-side">
         <div class="desktop-sound">
           <div class="first-column column">
-            <span class="img-block odd">
+            <span class="img-block1 odd">
               <img src="~/assets/img/landing/desktop-img1.svg" alt="image1" />
             </span>
-            <span class="img-block">
+            <span class="img-block1">
               <img src="~/assets/img/landing/desktop-img3.svg" alt="image3" />
             </span>
           </div>
           <div class="second-column column">
-            <span class="img-block odd">
+            <span class="img-block1 odd">
               <img src="~/assets/img/landing/desktop-img2.svg" alt="image2" />
             </span>
-            <span class="img-block">
+            <span class="img-block1">
               <img src="~/assets/img/landing/desktop-img4.svg" alt="image4" />
             </span>
           </div>
@@ -80,18 +86,18 @@
 
         <div class="mobile-sound">
           <div class="first-column column">
-            <span class="img-block odd">
+            <span class="img-block1 odd">
               <img src="~/assets/img/landing/mobile-img1.svg" alt="image1" />
             </span>
-            <span class="img-block">
+            <span class="img-block1">
               <img src="~/assets/img/landing/mobile-img3.svg" alt="image3" />
             </span>
           </div>
           <div class="second-column column">
-            <span class="img-block odd">
+            <span class="img-block1 odd">
               <img src="~/assets/img/landing/mobile-img2.svg" alt="image2" />
             </span>
-            <span class="img-block">
+            <span class="img-block1">
               <img src="~/assets/img/landing/mobile-img4.svg" alt="image4" />
             </span>
           </div>

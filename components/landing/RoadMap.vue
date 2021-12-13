@@ -1,165 +1,186 @@
 <template>
   <div id="road-map" class="road-map">
-    <h2 class="text-xl mt-0">{{ $t("landing.ourRoadMap") }}</h2>
-    <p class="mtb text-l text-center" v-html="$t('landing.roadDesc')"></p>
+    <div class="full-container">
+      <h2 class="text-xl mt-0">{{ $t("landing.ourRoadMap") }}</h2>
+      <p
+        class="mtb text-l text-center desc"
+        v-html="$t('landing.roadDesc')"
+      ></p>
 
-    <div class="content">
-      <!--      <div-->
-      <!--        v-for="(chunks, chunkIndex) in roadMapChunked"-->
-      <!--        :key="`${chunks.length}_${chunkIndex}`"-->
-      <!--        class="row"-->
-      <!--        :class="{-->
-      <!--          'two-column': chunks.length === 2,-->
-      <!--          'one-column': chunks.length === 2,-->
-      <!--        }"-->
-      <!--      >-->
-      <!--        <div v-for="(item, index) in chunks" :key="index" class="left-side">-->
-      <!--          <div class="star">-->
-      <!--            <img src="~/assets/img/landing/star-shine.svg" alt="" />-->
-      <!--          </div>-->
-      <!--          <div class="star-info">-->
-      <!--            <span class="star-text" :class="{ done: item.status === 'done' }">{{-->
-      <!--              item.text-->
-      <!--            }}</span>-->
-      <!--            <span v-if="item.status === 'done'" class="check-block"-->
-      <!--              ><img src="~/assets/img/landing/success-check.svg" alt="check"-->
-      <!--            /></span>-->
-      <!--          </div>-->
-      <!--        </div>-->
-      <!--      </div>-->
+      <div class="content">
+        <!--      <div-->
+        <!--        v-for="(chunks, chunkIndex) in roadMapChunked"-->
+        <!--        :key="`${chunks.length}_${chunkIndex}`"-->
+        <!--        class="row"-->
+        <!--        :class="{-->
+        <!--          'two-column': chunks.length === 2,-->
+        <!--          'one-column': chunks.length === 2,-->
+        <!--        }"-->
+        <!--      >-->
+        <!--        <div v-for="(item, index) in chunks" :key="index" class="left-side">-->
+        <!--          <div class="star">-->
+        <!--            <img src="~/assets/img/landing/star-shine.svg" alt="" />-->
+        <!--          </div>-->
+        <!--          <div class="star-info">-->
+        <!--            <span class="star-text" :class="{ done: item.status === 'done' }">{{-->
+        <!--              item.text-->
+        <!--            }}</span>-->
+        <!--            <span v-if="item.status === 'done'" class="check-block"-->
+        <!--              ><img src="~/assets/img/landing/success-check.svg" alt="check"-->
+        <!--            /></span>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <!--      </div>-->
 
-      <div class="row two-column">
-        <div class="left-side">
-          <div class="star" @click="openModal(0)">
-            <img src="~/assets/img/landing/star-shine.svg" alt="" />
+        <div class="row two-column">
+          <div class="left-side">
+            <div class="star" @click="openModal(0)">
+              <img src="~/assets/img/landing/star-shine.svg" alt="" />
+            </div>
+            <div class="star-info">
+              <span class="star-text done">{{ $t("landing.starTitle0") }}</span>
+              <span class="check-block"
+                ><img src="~/assets/img/landing/success-check.svg" alt="check"
+              /></span>
+            </div>
+            <span class="hover-text text-m">{{ staticText[0] }}</span>
           </div>
-          <div class="star-info">
-            <span class="star-text done">{{ $t("landing.starTitle0") }}</span>
-            <span class="check-block"
-              ><img src="~/assets/img/landing/success-check.svg" alt="check"
-            /></span>
+
+          <div class="left-side">
+            <div class="star" @click="openModal(1)">
+              <img src="~/assets/img/landing/big-circle.svg" alt="" />
+            </div>
+            <div class="star-info">
+              <span class="star-text progress">{{
+                $t("landing.starTitle1")
+              }}</span>
+            </div>
+            <span class="hover-text text-m">{{ staticText[1] }}</span>
           </div>
-          <span class="hover-text text-m">{{ staticText[0] }}</span>
         </div>
 
-        <div class="left-side">
-          <div class="star" @click="openModal(1)">
-            <img src="~/assets/img/landing/big-circle.svg" alt="" />
+        <div class="row one-column">
+          <div class="center-side">
+            <div class="circle" @click="openModal(2)">
+              <img src="~/assets/img/landing/small-circle.svg" alt="" />
+            </div>
+            <div class="star-info">
+              <span class="star-text to-do">{{
+                $t("landing.starTitle2")
+              }}</span>
+            </div>
+            <span class="hover-text text-m">{{ staticText[2] }}</span>
           </div>
-          <div class="star-info">
-            <span class="star-text progress">{{
-              $t("landing.starTitle1")
-            }}</span>
-          </div>
-          <span class="hover-text text-m">{{ staticText[1] }}</span>
         </div>
+
+        <div class="row two-column new-justify">
+          <div class="left-side">
+            <div class="star" @click="openModal(3)">
+              <img src="~/assets/img/landing/small-circle.svg" alt="" />
+            </div>
+            <div class="star-info">
+              <span class="star-text to-do">{{
+                $t("landing.starTitle3")
+              }}</span>
+            </div>
+            <span class="hover-text text-m">{{ staticText[3] }}</span>
+          </div>
+
+          <div class="left-side">
+            <div class="star" @click="openModal(4)">
+              <img src="~/assets/img/landing/small-circle.svg" alt="" />
+            </div>
+            <div class="star-info">
+              <span class="star-text to-do">{{
+                $t("landing.starTitle4")
+              }}</span>
+            </div>
+            <span class="hover-text text-m line-2">{{ staticText[4] }}</span>
+          </div>
+        </div>
+
+        <div class="row one-column">
+          <div class="center-side">
+            <div class="circle" @click="openModal(5)">
+              <img src="~/assets/img/landing/small-circle.svg" alt="" />
+            </div>
+            <div class="star-info">
+              <span class="star-text to-do">{{
+                $t("landing.starTitle5")
+              }}</span>
+            </div>
+            <span class="hover-text text-m">{{ staticText[5] }}</span>
+          </div>
+        </div>
+
+        <div class="row two-column">
+          <div class="left-side">
+            <div class="star" @click="openModal(6)">
+              <img src="~/assets/img/landing/small-circle.svg" alt="" />
+            </div>
+            <div class="star-info">
+              <span class="star-text to-do">{{
+                $t("landing.starTitle6")
+              }}</span>
+            </div>
+            <span class="hover-text text-m line-2">{{ staticText[6] }}</span>
+          </div>
+
+          <div class="left-side">
+            <div class="star" @click="openModal(7)">
+              <img src="~/assets/img/landing/small-circle.svg" alt="" />
+            </div>
+            <div class="star-info">
+              <span class="star-text to-do">{{
+                $t("landing.starTitle7")
+              }}</span>
+            </div>
+            <span class="hover-text text-m">{{ staticText[7] }}</span>
+          </div>
+        </div>
+
+        <div class="row two-column new-justify">
+          <div class="left-side">
+            <div class="star" @click="openModal(8)">
+              <img src="~/assets/img/landing/small-circle.svg" alt="" />
+            </div>
+            <div class="star-info">
+              <span class="star-text to-do">{{
+                $t("landing.starTitle8")
+              }}</span>
+            </div>
+            <span class="hover-text text-m line-2">{{ staticText[8] }}</span>
+          </div>
+
+          <div class="left-side">
+            <div class="star" @click="openModal(9)">
+              <img src="~/assets/img/landing/small-circle.svg" alt="" />
+            </div>
+            <div class="star-info">
+              <span class="star-text to-do">{{
+                $t("landing.starTitle9")
+              }}</span>
+            </div>
+            <span class="hover-text text-m">{{ staticText[9] }}</span>
+          </div>
+        </div>
+
+        <div class="big-star-container">
+          <p class="mtb big-star-text" @click="openModal(10)">
+            <img
+              src="~/assets/img/landing/big-star.svg"
+              alt="star"
+              class="big-star"
+            />
+            <span class="hover-text-star text-m">{{ staticText[10] }}</span>
+          </p>
+          <p class="trip">{{ $t("landing.trip") }}</p>
+        </div>
+
+        <span class="rocket">
+          <img src="~/assets/img/landing/rocket.svg" alt="rocket" />
+        </span>
       </div>
-
-      <div class="row one-column">
-        <div class="center-side">
-          <div class="circle" @click="openModal(2)">
-            <img src="~/assets/img/landing/small-circle.svg" alt="" />
-          </div>
-          <div class="star-info">
-            <span class="star-text to-do">{{ $t("landing.starTitle2") }}</span>
-          </div>
-          <span class="hover-text text-m">{{ staticText[2] }}</span>
-        </div>
-      </div>
-
-      <div class="row two-column new-justify">
-        <div class="left-side">
-          <div class="star" @click="openModal(3)">
-            <img src="~/assets/img/landing/small-circle.svg" alt="" />
-          </div>
-          <div class="star-info">
-            <span class="star-text to-do">{{ $t("landing.starTitle3") }}</span>
-          </div>
-          <span class="hover-text text-m">{{ staticText[3] }}</span>
-        </div>
-
-        <div class="left-side">
-          <div class="star" @click="openModal(4)">
-            <img src="~/assets/img/landing/small-circle.svg" alt="" />
-          </div>
-          <div class="star-info">
-            <span class="star-text to-do">{{ $t("landing.starTitle4") }}</span>
-          </div>
-          <span class="hover-text text-m line-2">{{ staticText[4] }}</span>
-        </div>
-      </div>
-
-      <div class="row one-column">
-        <div class="center-side">
-          <div class="circle" @click="openModal(5)">
-            <img src="~/assets/img/landing/small-circle.svg" alt="" />
-          </div>
-          <div class="star-info">
-            <span class="star-text to-do">{{ $t("landing.starTitle5") }}</span>
-          </div>
-          <span class="hover-text text-m">{{ staticText[5] }}</span>
-        </div>
-      </div>
-
-      <div class="row two-column">
-        <div class="left-side">
-          <div class="star" @click="openModal(6)">
-            <img src="~/assets/img/landing/small-circle.svg" alt="" />
-          </div>
-          <div class="star-info">
-            <span class="star-text to-do">{{ $t("landing.starTitle6") }}</span>
-          </div>
-          <span class="hover-text text-m line-2">{{ staticText[6] }}</span>
-        </div>
-
-        <div class="left-side">
-          <div class="star" @click="openModal(7)">
-            <img src="~/assets/img/landing/small-circle.svg" alt="" />
-          </div>
-          <div class="star-info">
-            <span class="star-text to-do">{{ $t("landing.starTitle7") }}</span>
-          </div>
-          <span class="hover-text text-m">{{ staticText[7] }}</span>
-        </div>
-      </div>
-
-      <div class="row two-column new-justify">
-        <div class="left-side">
-          <div class="star" @click="openModal(8)">
-            <img src="~/assets/img/landing/small-circle.svg" alt="" />
-          </div>
-          <div class="star-info">
-            <span class="star-text to-do">{{ $t("landing.starTitle8") }}</span>
-          </div>
-          <span class="hover-text text-m line-2">{{ staticText[8] }}</span>
-        </div>
-
-        <div class="left-side">
-          <div class="star" @click="openModal(9)">
-            <img src="~/assets/img/landing/small-circle.svg" alt="" />
-          </div>
-          <div class="star-info">
-            <span class="star-text to-do">{{ $t("landing.starTitle9") }}</span>
-          </div>
-          <span class="hover-text text-m">{{ staticText[9] }}</span>
-        </div>
-      </div>
-
-      <div class="big-star-container">
-        <p class="mtb big-star-text" @click="openModal(10)">
-          <img
-            src="~/assets/img/landing/big-star.svg"
-            alt="star"
-            class="big-star"
-          />
-          <span class="hover-text-star text-m">{{ staticText[10] }}</span>
-        </p>
-        <p class="trip">{{ $t("landing.trip") }}</p>
-      </div>
-
-      <span class="rocket">
-        <img src="~/assets/img/landing/rocket.svg" alt="rocket" />
-      </span>
     </div>
   </div>
 </template>
