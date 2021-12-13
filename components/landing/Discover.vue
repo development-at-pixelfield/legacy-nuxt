@@ -23,7 +23,7 @@
     <div class="sounds">
       <div class="left-side">
         <span class="start-block">
-          <img src="~/assets/img/landing/sounds-start.svg" alt="star" />
+          <img src="~/assets/img/landing/sound-star.svg" alt="star" />
         </span>
         <div class="sound-block">
           <h2>{{ $t("landing.soundGood") }}</h2>
@@ -47,7 +47,7 @@
             <li>
               <a
                 target="_blank"
-                href="https://www.facebook.com/galaxydiamondsnft/"
+                href="https://www.facebook.com/Galaxydiamonds-101350175672894"
                 class="social-link"
               >
                 <Icon src="facebook-negative.svg" size="big"></Icon>

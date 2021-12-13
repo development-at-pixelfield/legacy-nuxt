@@ -15,9 +15,10 @@
     border-radius: 16px;
     padding: 46px 40px;
     position: relative;
+    max-width: 1360px;
 
     @media (max-width: 1380px) {
-      margin: 0 168px 0 168px;
+      margin: 0 128px 0 128px;
     }
 
     @media (max-width: 1100px) {

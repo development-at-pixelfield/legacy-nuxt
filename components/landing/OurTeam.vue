@@ -76,7 +76,7 @@
         <div class="content">
           <p class="mt-0 mb-8 text-m-bold">{{ $t("landing.joinUs") }}</p>
           <div class="action">
-            <a href="" class="discord-btn">
+            <a href="https://discord.com/invite/tRMheTFp" class="discord-btn">
               <img
                 src="~/assets/img/icons/discord-big.svg"
                 alt="discord-icon"
