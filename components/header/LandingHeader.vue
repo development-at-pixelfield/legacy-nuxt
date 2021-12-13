@@ -25,7 +25,11 @@
       </ul>
 
       <div class="logo-block">
-        <img src="~/assets/img/desktop-landing-logo.svg" alt="logo" />
+        <img
+          src="~/assets/img/desktop-landing-logo.svg"
+          alt="logo"
+          @click="toLink"
+        />
       </div>
 
       <div class="action">
@@ -41,7 +45,11 @@
 
     <div class="mobile-header">
       <div class="logo-block">
-        <img src="~/assets/img/desktop-landing-logo.svg" alt="logo" />
+        <img
+          src="~/assets/img/desktop-landing-logo.svg"
+          alt="logo"
+          @click="toLink"
+        />
       </div>
       <div class="action">
         <Button
@@ -66,6 +74,9 @@ export default {
   methods: {
     anchorLink() {
       document.location = "#become-tester";
+    },
+    toLink() {
+      this.$router.push("/");
     },
   },
 };

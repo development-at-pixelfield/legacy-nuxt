@@ -237,6 +237,9 @@
         animation: fly;
         animation-duration: 20s;
         animation-iteration-count: infinite;
+        -webkit-animation: fly;
+        -webkit-animation-duration: 20s;
+        -webkit-animation-iteration-count: infinite;
       }
 
       @media (max-width: 769px) {
