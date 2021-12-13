@@ -97,6 +97,10 @@
         align-items: center;
         justify-content: flex-end;
 
+        @media (max-width: $break-sms) {
+          justify-content: center;
+        }
+
         li{
           margin-right: 24px;
 
