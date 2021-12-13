@@ -45,7 +45,8 @@ header{
       display: flex;
       justify-content: center;
 
-      @media (max-width: $break-lg) {
+
+      @media (max-width: 1380px) {
         position: static;
         width: auto;
       }
