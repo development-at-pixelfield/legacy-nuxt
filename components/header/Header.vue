@@ -26,17 +26,14 @@ export default {
   components: {
     DropdownList,
   },
-  data() {
-    return {
-      count: 3,
-    };
-  },
 
   computed: {
     userAvatar() {
       return this.$auth.user.avatar ?? require("~/assets/img/header-logo.svg");
     },
-
+    count() {
+      return !this.$auth.user.is_email_verified ? 1 : 0;
+    },
     items() {
       return [
         {
