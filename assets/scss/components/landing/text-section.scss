@@ -1,19 +1,17 @@
 .text-section{
-  padding-bottom: 80px;
-  padding-top: 80px;
   background: #11011F;
 
-  @media (max-width: $break-smsm) {
-    padding-top: 60px;
-    padding-bottom: 60px;
-  }
 
   .full-container{
     display: flex;
     justify-content: space-between;
+    padding-top: 80px;
+    padding-bottom: 80px;
 
     @media (max-width: $break-smsm) {
       flex-direction: column;
+      padding-top: 40px;
+      padding-bottom: 40px;
     }
 
     .left-side{
@@ -37,7 +35,6 @@
         @media (max-width: $break-smsm) {
           font-size: 37px;
           letter-spacing: -0.02em;
-          margin-bottom: 24px;
         }
       }
     }
