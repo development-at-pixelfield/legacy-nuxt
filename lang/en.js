@@ -105,6 +105,9 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     noResults: "No Results",
     startTyping: "Start typing...",
     findItems: "Find items containing",
+    emailVerified: "Email verified",
+    verificationInProgress: "Verification in progress...",
+    checkInbox: "Check your inbox for the verification email",
   },
 
   marketplace: {
@@ -155,6 +158,8 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     successDelete: "Account deleted.",
     successAvatar: "Avatar updated successfully.",
     successEmailVerify: "Email verified successfully!",
+    noSettingsChanged: "Please change a setting in order to update it",
+    notificationsUpdate: "NFT notifications have been updated",
   },
 
   modals: {

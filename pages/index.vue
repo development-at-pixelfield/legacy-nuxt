@@ -45,6 +45,7 @@ export default {
     TextSection,
   },
   layout: "landing",
+  middleware: ["isLoggedIn"],
 };
 </script>
 
