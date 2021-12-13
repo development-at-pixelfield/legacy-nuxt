@@ -28,6 +28,9 @@
       color: #fff;
       margin-bottom: 40px;
       margin-top: 40px;
+      opacity: 0;
+      transition: all 0.5s ease-in-out;
+      transform: translateY(-15px);
 
       @media (max-width: $break-sms) {
         font-weight: 800;
@@ -35,74 +38,39 @@
         line-height: 95%;
       }
     }
+
+    span{
+      opacity: 0;
+      transition: all 0.5s ease-in-out;
+      transform: translateY(-15px);
+    }
+
+    .action{
+      opacity: 0;
+      transition: all 0.5s ease-in-out;
+      transform: translateY(-15px);
+    }
+
+    .show{
+      opacity: 1;
+      transform: translateY(1px);
+    }
   }
 }
 
-//.stars{
-//  position: absolute;
-//  width: 100%;
-//  height: 100%;
-//  background: url("~assets/img/landing/starsgroup.png");
-//  background-position: center;
-//  margin: 0 auto;
-//}
-//.stars-img{
-//  width: 100%;
-//  height: 100%;
-//  object-fit: cover;
-//}
-//.app-content{
-//  text-align: center;
-//  width: 100%;
-//  margin: 0;
-//  position: absolute;
-//  top: 48%;
-//  left: 50%;
-//  -ms-transform: translate(-50%, -50%);
-//  transform: translate(-50%, -50%);
-//
-//  @media (max-width: $break-sms) {
-//    top: calc(30% + 80px);
-//  }
-//}
-//.main-banner{
-//  background: url("~assets/img/landing/galaxy-banner.png");
-//  width: 478px;
-//  height: 354px;
-//  margin: 0 auto 30px auto;
-//}
-//
-//.text{
-//  font-style: normal;
-//  font-weight: bold;
-//  font-size: 16px;
-//  line-height: 120%;
-//  display: flex;
-//  align-items: center;
-//  text-align: center;
-//  letter-spacing: -0.025em;
-//  color: #FFF;
-//  width: 100%;
-//  justify-content: center;
-//}
-//
-//.timer{
-//  width: 478px;
-//  margin: 0 auto 30px auto;
-//
-//  @media (max-width: $break-sms) {
-//    width: 80%;
-//    margin: 0 auto;
-//  }
-//}
-//
-//
-//@media only screen and (max-width: 470px){
-//  .main-banner{
-//    width: 80%;
-//    height: 200px;
-//    background-position: center;
-//    background-size: contain;
-//    background-repeat: no-repeat;
-//  }
-//}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s
+}
+
+.fade-enter,
+.fade-leave-to
+  /* .fade-leave-active in <2.1.8 */
+
+{
+  opacity: 0
+}
+
+.all-show{
+  height: 608px;
+}

@@ -72,7 +72,7 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     starTitle5: "Mobile app",
     starTitle6: "Smartwatch integration",
     starTitle7: "COLLAB WITH METAVERSES",
-    starTitle8: "VR estates",
+    starTitle8: "DUBAI EVENT",
     starTitle9: "HOLOGRAM",
     becomeTesterTitle: "Get the latest info first, join the galaxy community",
     textSecTitle:

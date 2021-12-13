@@ -19,7 +19,7 @@
           <li>
             <a
               target="_blank"
-              href="https://www.facebook.com/galaxydiamondsnft/"
+              href="https://www.facebook.com/Galaxydiamonds-101350175672894"
               class="social-link"
             >
               <Icon src="facebook-negative.svg" size="big"></Icon>

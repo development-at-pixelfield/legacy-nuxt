@@ -3,16 +3,19 @@
     <LandingHeader />
 
     <div class="content full-container">
-      <span>
+      <span :class="{ show: show }">
         <img src="~/assets/img/landing/bear-front.svg" alt="header-logo" />
       </span>
-      <h1>Own a piece of Galaxy through Diamond-backed NFT</h1>
-      <div class="action">
+      <h1 :class="{ show: show1 }">
+        Own a piece of Galaxy through Diamond-backed NFT
+      </h1>
+      <div class="action" :class="{ show: show2 }">
         <Button
           :label="$t('landing.learnMore')"
           :background="'primary'"
           :size="'medium'"
           :color="'c-white'"
+          @on-click="anchorLink"
         />
       </div>
     </div>
@@ -28,10 +31,31 @@ export default {
     LandingHeader,
     Button,
   },
+  data() {
+    return {
+      show: false,
+      show1: false,
+      show2: false,
+    };
+  },
+  mounted() {
+    const vm = this;
+
+    setTimeout(function () {
+      vm.show = true;
+    }, 1000);
+
+    setTimeout(function () {
+      vm.show1 = true;
+    }, 1250);
+
+    setTimeout(function () {
+      vm.show2 = true;
+    }, 1500);
+  },
   methods: {
-    anchor() {
-      console.log("fsfs");
-      document.location = "#become-tester";
+    anchorLink() {
+      document.location = "#discover";
     },
   },
 };
