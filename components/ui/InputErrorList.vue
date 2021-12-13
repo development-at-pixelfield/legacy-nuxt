@@ -6,7 +6,9 @@
       </p>
     </div>
     <div
-      v-if="customError && typeof customError === 'object'"
+      v-if="
+        customError && typeof customError === 'object' && customError.errors
+      "
       class="errors-list"
     >
       <p
@@ -21,6 +23,15 @@
           >
         </span>
         <span v-else>{{ cError ? cError : "Something went wrong" }}</span>
+      </p>
+    </div>
+    <div v-else-if="customError && customError.length" class="errors-list">
+      <p
+        v-for="(cError, index) in customError"
+        :key="index"
+        class="text-s error-message"
+      >
+        <span>{{ cError.text ? cError.text : "Something went wrong" }}</span>
       </p>
     </div>
     <div v-else-if="customError && customError.type" class="errors-list">
