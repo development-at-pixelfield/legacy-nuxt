@@ -29,7 +29,7 @@ export default {
 
   computed: {
     userAvatar() {
-      return this.$auth.user.avatar ?? require("~/assets/img/header-logo.svg");
+      return this.$auth.user.avatar ?? "";
     },
     count() {
       return !this.$auth.user.is_email_verified ? 1 : 0;
