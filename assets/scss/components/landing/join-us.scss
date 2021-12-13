@@ -2,6 +2,11 @@
   background: #11011F;
   //padding-top: 67px;
   //padding-bottom: 67px;
+  padding-top: 80px;
+
+  @media (max-width: 1100px) {
+    padding-top: 0;
+  }
 
   .full-container{
     display: flex;
@@ -9,11 +14,10 @@
     background: #420573;
     border-radius: 16px;
     padding: 46px 40px;
-    margin-top: -50px;
     position: relative;
 
     @media (max-width: 1380px) {
-      margin: -50px 168px 0 168px;
+      margin: 0 168px 0 168px;
     }
 
     @media (max-width: 1100px) {
@@ -94,6 +98,10 @@
 
         li{
           margin-right: 24px;
+
+          &:last-child{
+            margin-right: 0;
+          }
 
           @media (max-width: $break-smsm) {
             margin-right: 12px;

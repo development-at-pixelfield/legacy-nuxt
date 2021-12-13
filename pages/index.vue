@@ -1,7 +1,5 @@
 <template>
   <div class="landing-wrapper">
-    <LandingHeader />
-
     <main>
       <ComingSoon />
 
@@ -23,7 +21,6 @@
 </template>
 
 <script>
-import LandingHeader from "../components/header/LandingHeader";
 import JoinUs from "../components/landing/JoinUs";
 import Discover from "../components/landing/Discover";
 import BecomeTester from "../components/landing/BecomeTester";
@@ -36,7 +33,6 @@ export default {
   components: {
     Interactive,
     RoadMap,
-    LandingHeader,
     JoinUs,
     Discover,
     BecomeTester,

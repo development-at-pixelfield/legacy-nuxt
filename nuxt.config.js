@@ -14,7 +14,6 @@ export default {
     ],
     link: [
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-      { rel: "stylesheet", href: "http://diamond.bypixelfield.com/three/examples/main.css" },
       {
         rel: "stylesheet",
         href:

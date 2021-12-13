@@ -4,7 +4,11 @@
       <div class="left-side">
         <h1 class="mt-0">{{ $t("landing.joinUs") }}</h1>
         <div class="action">
-          <a href="" class="discord-btn">
+          <a
+            href="https://discord.com/invite/tRMheTFp"
+            class="discord-btn"
+            target="_blank"
+          >
             <img src="~/assets/img/icons/discord-big.svg" alt="discord-icon" />
           </a>
         </div>
@@ -13,22 +17,38 @@
         <p class="follow">{{ $t("landing.orFollow") }}</p>
         <ul class="mtb">
           <li>
-            <a href="" class="social-link">
+            <a
+              target="_blank"
+              href="https://www.facebook.com/galaxydiamondsnft/"
+              class="social-link"
+            >
               <Icon src="facebook-negative.svg" size="big"></Icon>
             </a>
           </li>
           <li>
-            <a href="" class="social-link">
+            <a
+              href="https://twitter.com/GalaxyDiaNFT"
+              class="social-link"
+              target="_blank"
+            >
               <Icon src="twitter-negative.svg" size="big"></Icon>
             </a>
           </li>
           <li>
-            <a href="" class="social-link">
+            <a
+              href="https://www.instagram.com/galaxydiamondsnft/"
+              class="social-link"
+              target="_blank"
+            >
               <Icon src="instagram-negative.svg" size="big"></Icon>
             </a>
           </li>
           <li>
-            <a href="" class="social-link">
+            <a
+              target="_blank"
+              href="https://t.me/joinchat/QExLizfchzg1ZTNk"
+              class="social-link"
+            >
               <Icon src="telegram-negative.svg" size="big"></Icon>
             </a>
           </li>
