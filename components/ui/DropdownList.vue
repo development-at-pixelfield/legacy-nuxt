@@ -7,7 +7,7 @@
         <span v-else class="default-img"></span>
       </span>
 
-      <span class="red-circle"></span>
+      <span v-if="hasNotifications" class="red-circle"></span>
     </div>
     <ul v-if="show" class="dropdown-list" :style="style">
       <li v-for="(item, index) in items" :key="index">
@@ -92,6 +92,9 @@ export default {
         top: this.top ? this.top : "13px",
         left: this.left ? this.left : "-192px",
       };
+    },
+    hasNotifications() {
+      return !this.$auth.user.is_email_verified;
     },
   },
   watch: {
