@@ -74,6 +74,17 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     starTitle8: "VR estates",
     starTitle9: "HOLOGRAM",
     becomeTesterTitle: "Get the latest info first, join the galaxy community",
+    textSecTitle:
+      " A diamond company with more than 15 years experience has our backs.",
+    textSecDesc1: `To give our project even more credibility, we are proud to announce
+          that Diamond International Corporation (DIC) company stands behind the
+          project. We have many years of experience with luxury diamond
+          jewellery. As well as luxury showrooms in the main cities of the Czech
+          and Slovak Republic. Facts: DIC manufactured the crowns for MISS
+          Universe in the years 2014-2016. DIC is also a member of prestigious
+          world diamond exchanges.`,
+    textSecDesc2: `Diamonds are long-standing security for many investors, now, you can
+          be the first to experience this in the NFT world with us.`,
   },
 
   profile: {
