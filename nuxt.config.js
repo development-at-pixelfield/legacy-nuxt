@@ -23,7 +23,7 @@ export default {
     ],
   },
 
-  loading: { color: "#2A328C" },
+  loading: { color: "#6B00C1" },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: ["@/assets/scss/global.scss"],

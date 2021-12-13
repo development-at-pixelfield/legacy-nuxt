@@ -157,7 +157,7 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
 
   snackbar: {
     successRegister: "Successfully registered",
-    successLoggedIn: "Successfully loggedIn",
+    successLoggedIn: "Successfully logged in",
     successTester: "Your application to become a tester was successful",
     successSend: "Successfully send",
     checkInbox: "Recovery email sent! Please check your inbox.",
