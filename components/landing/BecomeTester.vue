@@ -3,7 +3,7 @@
     <div class="content">
       <div class="mt-0 header-block">
         <span class="rocket-icon">🚀</span>
-        <h2>{{ $t("landing.becomeTesterTitle") }}</h2>
+        <span class="header-h">{{ $t("landing.becomeTesterTitle") }}</span>
       </div>
       <div class="form-group">
         <Input

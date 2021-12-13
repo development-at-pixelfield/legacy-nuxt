@@ -87,6 +87,7 @@
       @media (max-width: $break-sms) {
         padding-left: 32px;
         padding-right: 32px;
+        padding-top: 32px;
       }
 
       h2 {
@@ -162,13 +163,18 @@
       position: relative;
 
       @media (max-width: $break-sms) {
-        padding-bottom: 90px;
+        padding-bottom: 40px;
+        padding-top: 0;
       }
 
       .content {
         width: 200px;
         margin: 0 auto;
         text-align: center;
+
+        @media (max-width: $break-sms) {
+          width: 100%;
+        }
 
         .discord-btn {
           display: inline-flex;

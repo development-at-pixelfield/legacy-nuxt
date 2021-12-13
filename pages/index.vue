@@ -15,10 +15,10 @@
 
       <BecomeTester />
 
+      <TextSection />
+
       <OurTeam />
     </main>
-
-    <!--    <LandingFooter />-->
   </div>
 </template>
 
@@ -28,10 +28,10 @@ import JoinUs from "../components/landing/JoinUs";
 import Discover from "../components/landing/Discover";
 import BecomeTester from "../components/landing/BecomeTester";
 import OurTeam from "../components/landing/OurTeam";
-// import LandingFooter from "../components/footer/LandingFooter";
 import ComingSoon from "../components/landing/ComingSoon";
 import RoadMap from "../components/landing/RoadMap";
 import Interactive from "../components/landing/Interactive";
+import TextSection from "../components/landing/TextSection";
 export default {
   components: {
     Interactive,
@@ -42,7 +42,7 @@ export default {
     BecomeTester,
     ComingSoon,
     OurTeam,
-    // LandingFooter,
+    TextSection,
   },
   layout: "landing",
 };
