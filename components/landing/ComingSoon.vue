@@ -4,7 +4,7 @@
 
     <div class="content full-container">
       <span :class="{ show: show }">
-        <img src="~/assets/img/landing/bear-front.svg" alt="header-logo" />
+        <img src="~/assets/img/landing/Bear_front.png" alt="header-logo" />
       </span>
       <h1 :class="{ show: show1 }">
         Own a piece of Galaxy through Diamond-backed NFT

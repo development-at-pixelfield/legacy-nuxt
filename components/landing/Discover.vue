@@ -91,7 +91,7 @@
               <img src="~/assets/img/landing/desktop-img1.svg" alt="image1" />
             </span>
             <span class="img-block1">
-              <img src="~/assets/img/landing/desktop-img3.svg" alt="image3" />
+              <img src="~/assets/img/landing/desktop-img3.png" alt="image3" />
             </span>
           </div>
           <div class="second-column column">

@@ -282,31 +282,77 @@
 @keyframes fly {
   0% {
     transform: translate(200%, -200%) rotate(-45deg);
+    -webkit-transform: translate(200%, -200%) rotate(-45deg);
     right: 0;
   }
   12.5% {
     transform: translate(-450%, -350%) rotate(-50deg);
+    -webkit-transform: translate(-450%, -350%) rotate(-50deg);
   }
   25% {
     transform: translate(-800%, -500%) rotate(45deg);
+    -webkit-transform: translate(-800%, -500%) rotate(45deg);
   }
   37.5% {
-    transform: translate(-200%, -650%) rotate(65deg)
+    transform: translate(-200%, -650%) rotate(65deg);
+    -webkit-transform: translate(-200%, -650%) rotate(65deg)
   }
   50% {
     transform: translate(200%, -800%) rotate(-50deg);
+    -webkit-transform: translate(200%, -800%) rotate(-50deg);
   }
   62.5% {
     transform: translate(-450%, -950%) rotate(-45deg);
+    -webkit-transform: translate(-450%, -950%) rotate(-45deg);
   }
   85% {
     transform: translate(-800%, -1100%) rotate(-185deg);
+    -webkit-transform: translate(-800%, -1100%) rotate(-185deg);
   }
   100% {
     transform: translate(200%, -200%) rotate(-180deg);
+    -webkit-transform: translate(200%, -200%) rotate(-180deg);
     right: 0;
   }
 }
+
+@-webkit-keyframes fly {
+  0% {
+    transform: translate(200%, -200%) rotate(-45deg);
+    -webkit-transform: translate(200%, -200%) rotate(-45deg);
+    right: 0;
+  }
+  12.5% {
+    transform: translate(-450%, -350%) rotate(-50deg);
+    -webkit-transform: translate(-450%, -350%) rotate(-50deg);
+  }
+  25% {
+    transform: translate(-800%, -500%) rotate(45deg);
+    -webkit-transform: translate(-800%, -500%) rotate(45deg);
+  }
+  37.5% {
+    transform: translate(-200%, -650%) rotate(65deg);
+    -webkit-transform: translate(-200%, -650%) rotate(65deg)
+  }
+  50% {
+    transform: translate(200%, -800%) rotate(-50deg);
+    -webkit-transform: translate(200%, -800%) rotate(-50deg);
+  }
+  62.5% {
+    transform: translate(-450%, -950%) rotate(-45deg);
+    -webkit-transform: translate(-450%, -950%) rotate(-45deg);
+  }
+  85% {
+    transform: translate(-800%, -1100%) rotate(-185deg);
+    -webkit-transform: translate(-800%, -1100%) rotate(-185deg);
+  }
+  100% {
+    transform: translate(200%, -200%) rotate(-180deg);
+    -webkit-transform: translate(200%, -200%) rotate(-180deg);
+    right: 0;
+  }
+}
+
 
 @keyframes fly-mobile {
   0% {
