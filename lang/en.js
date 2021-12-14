@@ -183,7 +183,10 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     },
   },
   nft_modal: {
+    transactionHash: "Transaction hash",
+    ownerOf: "You've just become the owner of",
     processingPurchase: "Processing your purchase",
+    congratulations: "Congratulations",
     waitingConfirmation: "Waiting for confirmation...",
     confirmFromMetaMask:
       "Please confirm the transaction in your MetaMask wallet.",
