@@ -14,6 +14,7 @@ export const defaultValues = () => ({
     data: null,
     close: "",
   },
+  query: {},
 });
 
 export const state = defaultValues;
@@ -24,6 +25,9 @@ export const mutations = {
   },
   setModal(state, payload) {
     state.modal = payload;
+  },
+  setQuery(state, payload) {
+    state.query = payload;
   },
 };
 
@@ -36,6 +40,7 @@ export const actions = {
 export const getters = {
   snackbar: (state) => state.snackbar,
   modal: (state) => state.modal,
+  query: (state) => state.query,
 };
 
 const createStore = () =>

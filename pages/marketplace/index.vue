@@ -266,6 +266,7 @@ export default {
     },
 
     toDetail(item) {
+      this.$store.commit("setQuery", this.$route.query);
       this.$router.push(`/marketplace/${item.uid}`);
     },
   },

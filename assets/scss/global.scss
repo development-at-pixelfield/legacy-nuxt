@@ -121,6 +121,15 @@ ul{
   }
 }
 
+.header-title1{
+  font-style: normal;
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 33px;
+  letter-spacing: -0.01em;
+  color: $c-white;
+}
+
 .link{
   font-style: normal;
   font-weight: normal;
@@ -198,6 +207,13 @@ ul{
 }
 .ml-4{
   margin-left: 4px;
+}
+
+.mr-4{
+  margin-right: 4px;
+}
+.mr-8{
+  margin-right: 8px;
 }
 
 .auth-wrapper{

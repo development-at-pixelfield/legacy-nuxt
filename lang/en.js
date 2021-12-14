@@ -146,6 +146,9 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     maxPrice: "Max price",
     applyFilters: "Apply filters",
     emptyDesc: "Sorry, we couldn’t find a match. Try again ;)",
+    payCard: "Pay with card",
+    buyNow: "Buy now",
+    exchangeToken: "Exchange token",
   },
 
   validations: {

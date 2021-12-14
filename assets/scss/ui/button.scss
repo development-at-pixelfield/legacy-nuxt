@@ -96,6 +96,11 @@
     border: 1px solid rgba(214, 210, 217, 1);
   }
 
+  &__grey{
+    background: $c-greyscale-80;
+    position: relative;
+  }
+
   &__warning{
     background: transparent;
     position: relative;
@@ -176,6 +181,9 @@
   }
   &__c-warning{
     color: $c-system-error
+  }
+  &__c-grey{
+    color: $c-greyscale-20
   }
 
 
