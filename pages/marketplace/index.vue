@@ -67,7 +67,7 @@
             {{ item.price_eth }}Ξ
           </p>
           <p slot="finance" class="finance mtb text-m-bold text-center">
-            {{ convertEthereum(item.price_eth) }}
+            {{ convertEthereum(1) }}
           </p>
         </MarketItem>
       </div>
@@ -113,6 +113,7 @@ import FiltersItems from "../../components/marketplace/filter/FiltersItems";
 import Button from "../../components/ui/Button";
 import { functions } from "../../utils";
 import { catchErrors } from "../../utils/catchErrors";
+import converter from "../../mixins/converter";
 
 const filterDefaultVars = {
   page: 1,
@@ -139,6 +140,7 @@ export default {
     FiltersItems,
     Button,
   },
+  mixins: [converter],
   layout: "auth",
   middleware: "auth",
   async asyncData({ store, route, error }) {
@@ -186,9 +188,7 @@ export default {
   computed: {
     convertEthereum() {
       return (price) => {
-        const defEthr = 0.00022;
-        const usd = price / defEthr;
-        return "est. $" + usd.toFixed(2) + "K";
+        return this.calculateEthToUsd(price);
       };
     },
   },
