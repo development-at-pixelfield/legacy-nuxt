@@ -176,6 +176,11 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     successEmailVerify: "Email verified successfully!",
     noSettingsChanged: "Please change a setting in order to update it",
     notificationsUpdate: "NFT notifications have been updated",
+    metaMask: {
+      extensionNotInstalled:
+        "For connect account, please install MetaMask extension",
+      accountsIsNotConnected: "You have no connected accounts to Metamask",
+    },
   },
 
   modals: {

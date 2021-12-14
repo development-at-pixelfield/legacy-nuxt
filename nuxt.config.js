@@ -93,6 +93,7 @@ export default {
     { src: "~/plugins/vuelidate.js" },
     { src: "~/plugins/vue-multyselect" },
     { src: "~/plugins/axios.js" },
+    { src: "~/plugins/metamask.js", mode: "client" },
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

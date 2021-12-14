@@ -49,16 +49,21 @@
 <script>
 import Button from "../../components/ui/Button";
 import { catchErrors } from "../../utils/catchErrors";
+import metamask from "../../mixins/metamask";
 export default {
   name: "Index",
   components: {
     Button,
   },
+  mixins: [metamask],
   layout: "auth",
   middleware: "auth",
   data() {
     return {
       imgSrc: "",
+      metamaskAccount: "",
+      balance: 0,
+      balanceLoaded: false,
     };
   },
   created() {
