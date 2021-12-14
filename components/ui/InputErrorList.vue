@@ -34,9 +34,12 @@
         <span>{{ cError.text ? cError.text : "Something went wrong" }}</span>
       </p>
     </div>
-    <div v-else-if="customError && customError.type" class="errors-list">
+    <div
+      v-else-if="customError && customError.type === 'text'"
+      class="errors-list"
+    >
       <p class="text-s error-message">
-        {{ customError.text ? customError.text : "Something went wrong" }}
+        {{ customError.message ? customError.message : "Something went wrong" }}
       </p>
     </div>
   </div>

@@ -274,6 +274,10 @@ export default {
       }
     },
   },
+  mounted() {
+    // this.$refs.customInput.focus();
+  },
+
   methods: {
     handleBlur() {
       this.$emit("handle-blur");
