@@ -26,6 +26,7 @@ export default {
   },
 
   landing: {
+    mainTitle: "Own a piece of Galaxy through Diamond-backed NFT",
     discover: "Discover",
     roadmap: "Roadmap",
     becomeTester: "Become a tester",

@@ -4,10 +4,15 @@
 
     <div class="content full-container">
       <span :class="{ show: show }">
-        <img src="~/assets/img/landing/Bear_front.png" alt="header-logo" />
+        <img
+          id="header-logo"
+          src="~/assets/img/landing/Bear_front.png"
+          alt="header-logo"
+          @load="isLoaded = true"
+        />
       </span>
       <h1 :class="{ show: show1 }">
-        Own a piece of Galaxy through Diamond-backed NFT
+        {{ $t("landing.mainTitle") }}
       </h1>
       <div class="action" :class="{ show: show2 }">
         <Button
@@ -36,26 +41,32 @@ export default {
       show: false,
       show1: false,
       show2: false,
+      isLoaded: false,
     };
   },
-  mounted() {
-    const vm = this;
-
-    setTimeout(function () {
-      vm.show = true;
-    }, 1000);
-
-    setTimeout(function () {
-      vm.show1 = true;
-    }, 1250);
-
-    setTimeout(function () {
-      vm.show2 = true;
-    }, 1500);
+  watch: {
+    isLoaded(val) {
+      if (val) this.showAnimation();
+    },
   },
   methods: {
     anchorLink() {
       document.location = "#discover";
+    },
+    showAnimation() {
+      const vm = this;
+
+      setTimeout(function () {
+        vm.show = true;
+      }, 500);
+
+      setTimeout(function () {
+        vm.show1 = true;
+      }, 750);
+
+      setTimeout(function () {
+        vm.show2 = true;
+      }, 1000);
     },
   },
 };

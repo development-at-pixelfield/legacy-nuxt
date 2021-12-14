@@ -1,6 +1,6 @@
 <template>
   <div class="auth-header">
-    <img :src="userAvatar" alt="logo" @click="toLink" />
+    <nuxt-link to="/"><img :src="userAvatar" alt="logo" /></nuxt-link>
   </div>
 </template>
 
@@ -10,11 +10,6 @@ export default {
   computed: {
     userAvatar() {
       return require("~/assets/img/header-logo.svg");
-    },
-  },
-  methods: {
-    toLink() {
-      this.$router.push("/");
     },
   },
 };

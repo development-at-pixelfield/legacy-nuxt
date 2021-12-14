@@ -178,7 +178,7 @@
         </div>
 
         <span class="rocket">
-          <img src="~/assets/img/landing/rocket.svg" alt="rocket" />
+          <img src="~/assets/img/landing/rocket.png" alt="rocket" />
         </span>
       </div>
     </div>

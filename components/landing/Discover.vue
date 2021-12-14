@@ -88,7 +88,7 @@
         <div class="desktop-sound">
           <div class="first-column column">
             <span class="img-block1 odd">
-              <img src="~/assets/img/landing/desktop-img1.svg" alt="image1" />
+              <img src="~/assets/img/landing/desktop-img1.png" alt="image1" />
             </span>
             <span class="img-block1">
               <img src="~/assets/img/landing/desktop-img3.png" alt="image3" />
@@ -96,10 +96,10 @@
           </div>
           <div class="second-column column">
             <span class="img-block1 odd">
-              <img src="~/assets/img/landing/desktop-img2.svg" alt="image2" />
+              <img src="~/assets/img/landing/desktop-img2.png" alt="image2" />
             </span>
             <span class="img-block1">
-              <img src="~/assets/img/landing/desktop-img4.svg" alt="image4" />
+              <img src="~/assets/img/landing/desktop-img4.png" alt="image4" />
             </span>
           </div>
         </div>
@@ -107,18 +107,18 @@
         <div class="mobile-sound">
           <div class="first-column column">
             <span class="img-block1 odd">
-              <img src="~/assets/img/landing/mobile-img1.svg" alt="image1" />
+              <img src="~/assets/img/landing/mobile-img1.png" alt="image1" />
             </span>
             <span class="img-block1">
-              <img src="~/assets/img/landing/mobile-img3.svg" alt="image3" />
+              <img src="~/assets/img/landing/mobile-img3.png" alt="image3" />
             </span>
           </div>
           <div class="second-column column">
             <span class="img-block1 odd">
-              <img src="~/assets/img/landing/mobile-img2.svg" alt="image2" />
+              <img src="~/assets/img/landing/mobile-img2.png" alt="image2" />
             </span>
             <span class="img-block1">
-              <img src="~/assets/img/landing/mobile-img4.svg" alt="image4" />
+              <img src="~/assets/img/landing/mobile-img4.png" alt="image4" />
             </span>
           </div>
         </div>
