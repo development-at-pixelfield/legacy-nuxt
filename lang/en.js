@@ -131,7 +131,7 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     clearAll: "Clear All",
     apply: "Apply",
     quality: "Quality",
-    color: "Color",
+    age: "Age",
     select: "Select",
     partTitle: "PART OF CONSTELLATION?",
     partLabel: "Show only items that are a part of a constellation",
