@@ -5,7 +5,7 @@ export const actions = {
    *
    * @param context
    * @param payload {Object<{page: Number, page_size: Number, ordering: String, luminosity__in: String, quality_level__in: String, name: String,
-   * color_class: String, is_constellation: Boolean, nft_type: String, eth_price__gte: Number, eth_price__lte: Number, constellation: String}>}
+   * age: String, is_constellation: Boolean, nft_type: String, eth_price__gte: Number, eth_price__lte: Number, constellation: String}>}
    * @returns {Promise<AxiosResponse<any>>}
    */
   getNfts(context, payload) {
