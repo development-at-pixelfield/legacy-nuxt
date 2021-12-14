@@ -26,9 +26,18 @@ export default {
       type: String,
       default: "",
     },
+    withQuery: {
+      type: Boolean,
+      default: false,
+    },
   },
   methods: {
     back() {
+      if (this.withQuery) {
+        const query = this.$store.getters.query;
+        return this.$router.push({ path: this.customLink, query });
+      }
+
       if (this.customLink) {
         return this.$router.push(this.customLink);
       }

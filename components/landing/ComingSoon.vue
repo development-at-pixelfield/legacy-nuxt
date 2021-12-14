@@ -1,64 +1,75 @@
 <template>
   <div class="coming-soon">
-    <div id="stars" class="stars"></div>
+    <LandingHeader />
 
-    <div id="app-content" class="app-content">
-      <div id="banner" class="main-banner"></div>
-      <Timer class="timer" />
+    <div class="content full-container">
+      <span :class="{ show: show }">
+        <img
+          id="header-logo"
+          src="~/assets/img/landing/Bear_front.png"
+          alt="header-logo"
+          @load="isLoaded = true"
+        />
+      </span>
+      <h1 :class="{ show: show1 }">
+        {{ $t("landing.mainTitle") }}
+      </h1>
+      <div class="action" :class="{ show: show2 }">
+        <Button
+          :label="$t('landing.learnMore')"
+          :background="'primary'"
+          :size="'medium'"
+          :color="'c-white'"
+          @on-click="anchorLink"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Timer from "./Timer";
+import LandingHeader from "../header/LandingHeader";
+import Button from "../ui/Button";
 export default {
   name: "ComingSoon",
   components: {
-    Timer,
+    LandingHeader,
+    Button,
   },
+  data() {
+    return {
+      show: false,
+      show1: false,
+      show2: false,
+      isLoaded: false,
+    };
+  },
+  // watch: {
+  //   isLoaded(val) {
+  //     if (val) this.showAnimation();
+  //   },
+  // },
   mounted() {
-    document.addEventListener("mousemove", this.parallax);
-    document.addEventListener("touchmove", this.parallax);
+    this.showAnimation();
   },
-
-  beforeDestroy() {
-    document.removeEventListener("mousemove", this.parallax);
-    document.removeEventListener("touchmove", this.parallax);
-  },
-
   methods: {
-    parallax(e) {
-      const elem = document.querySelector("#stars");
-      const _w = window.innerWidth / 2;
-      const _h = window.innerHeight / 2;
-      const _mouseX = e.clientX ? e.clientX : e.touches[0].clientX;
-      const _mouseY = e.clientY ? e.clientY : e.touches[0].clientY;
-      const _depth1 = `${50 - (_w - _mouseX) * 0.01}% ${
-        50 - (_h - _mouseY) * 0.01
-      }%`;
-      const _depth2 = `${50 - (_w - _mouseX) * 0.02}% ${
-        50 - (_h - _mouseY) * 0.02
-      }%`;
-      const _depth3 = `${50 - (_w - _mouseX) * 0.06}% ${
-        50 - (_h - _mouseY) * 0.06
-      }%`;
-      const x = `${_depth3}, ${_depth2}, ${_depth1}`;
-      elem.style.backgroundPosition = x;
-
-      this.banner(e);
+    anchorLink() {
+      document.location = "#discover";
     },
+    showAnimation() {
+      const vm = this;
 
-    banner(e) {
-      const elemBanner = document.querySelector("#banner");
-      const _w = window.innerWidth / 2;
-      const _h = window.innerHeight / 2;
-      const _mouseX = e.clientX ? e.clientX : e.touches[0].clientX;
-      const _mouseY = e.clientY ? e.clientY : e.touches[0].clientY;
-      const _depthT1 = `${0 - (_mouseX - _w) * 0.03}`;
-      const _depthT2 = `${25 - (_mouseY - _h) * 0.03}`;
-      elemBanner.style.transform =
-        "translate(" + _depthT1 + "px," + _depthT2 + "px)";
-      elemBanner.style.transition = "all 0.2s";
+      setTimeout(function () {
+        vm.show = true;
+      }, 500);
+
+      setTimeout(function () {
+        vm.show1 = true;
+      }, 750);
+
+      setTimeout(function () {
+        vm.show2 = true;
+      }, 1000);
     },
   },
 };

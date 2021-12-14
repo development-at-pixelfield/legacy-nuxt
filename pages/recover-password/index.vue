@@ -44,6 +44,9 @@ export default {
     email: {
       required,
       email,
+      checkEmailSymbol(email) {
+        return email.includes("@");
+      },
     },
   },
   data() {
@@ -55,6 +58,10 @@ export default {
           { name: "required", text: this.$t("validations.notEmpty") },
           {
             name: "email",
+            text: this.$t("validations.validEmail"),
+          },
+          {
+            name: "checkEmailSymbol",
             text: this.$t("validations.addEmail"),
           },
         ],
@@ -81,7 +88,7 @@ export default {
             message: this.$t("snackbar.checkInbox"),
             color: "normal",
           });
-          this.$router.push("/login");
+          await this.$router.push("/login");
         } catch (e) {
           await this.$store.commit("setSnackbar", {
             show: true,

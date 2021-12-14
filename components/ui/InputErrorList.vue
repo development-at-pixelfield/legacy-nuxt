@@ -6,7 +6,9 @@
       </p>
     </div>
     <div
-      v-if="customError && typeof customError === 'object'"
+      v-if="
+        customError && typeof customError === 'object' && customError.errors
+      "
       class="errors-list"
     >
       <p
@@ -14,12 +16,30 @@
         :key="index"
         class="text-s error-message"
       >
-        {{ cError ? cError : "Something went wrong" }}
+        <span v-if="cError === 'This email is already registered'">
+          {{ cError }}
+          <nuxt-link to="/login" class="red-link"
+            >Try to login instead?</nuxt-link
+          >
+        </span>
+        <span v-else>{{ cError ? cError : "Something went wrong" }}</span>
       </p>
     </div>
-    <div v-else-if="customError && customError.type" class="errors-list">
+    <div v-else-if="customError && customError.length" class="errors-list">
+      <p
+        v-for="(cError, index) in customError"
+        :key="index"
+        class="text-s error-message"
+      >
+        <span>{{ cError.text ? cError.text : "Something went wrong" }}</span>
+      </p>
+    </div>
+    <div
+      v-else-if="customError && customError.type === 'text'"
+      class="errors-list"
+    >
       <p class="text-s error-message">
-        {{ customError.text ? customError.text : "Something went wrong" }}
+        {{ customError.message ? customError.message : "Something went wrong" }}
       </p>
     </div>
   </div>

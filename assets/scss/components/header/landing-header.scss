@@ -1,7 +1,25 @@
 header{
-  background: #030306;
-  height: 48px;
-  padding: 8px 24px;
+  height: 56px;
+  padding: 8px 0;
+  border-bottom: 1px solid #1D1126;
+
+  @media (max-width: 990px) {
+    padding: 12px 24px;
+  }
+
+  .full-container {
+    @media (max-width: 1716px){
+      margin: 0 auto !important;
+    }
+    //@media (max-width: 1280px){
+    //  padding-left: 24px !important;
+    //  padding-right: 24px !important;
+    //}
+  }
+
+  .link-header{
+    display: flex;
+  }
 
   .desktop-header{
     width: 100%;
@@ -11,7 +29,7 @@ header{
     justify-content: space-between;
     position: relative;
 
-    @media (max-width: $break-smsm) {
+    @media (max-width: $break-md) {
       display: none;
     }
 
@@ -31,9 +49,19 @@ header{
       display: flex;
       justify-content: center;
 
-      @media (max-width: $break-lg) {
-        position: static;
-        width: auto;
+
+      @media (max-width: 1380px) {
+        position: absolute;
+        width: 74%;
+      }
+      @media (max-width: 1100px) {
+        width: 83%;
+      }
+      //position: static;
+      //width: auto;
+
+      img{
+        cursor: pointer;
       }
     }
 
@@ -45,7 +73,7 @@ header{
   .mobile-header{
     display: none;
 
-    @media (max-width: $break-smsm) {
+    @media (max-width: $break-md) {
       display: flex;
       align-items: center;
       justify-content: space-between;

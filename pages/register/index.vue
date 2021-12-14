@@ -43,9 +43,12 @@
       <Checkbox :name.sync="agree" class="mb-32" :error="checkError">
         <label slot="label" class="text-m">
           {{ $t("auth.agreeWith") }} &nbsp;
-          <nuxt-link to="/" class="no-color-link">{{
-            $t("auth.termCond")
-          }}</nuxt-link>
+          <a
+            href="https://storage.googleapis.com/pfld-outdoor-production-documents-bucket/ISIAjobs_Terms_and_Conditions_2021_10_05_revMP_fin%20(1).pdf"
+            target="_blank"
+            class="no-color-link"
+            >{{ $t("auth.termCond") }}</a
+          >
         </label>
       </Checkbox>
 
@@ -90,6 +93,9 @@ export default {
     email: {
       required,
       email,
+      checkEmailSymbol(email) {
+        return email.includes("@");
+      },
     },
     password: {
       required,
@@ -113,6 +119,10 @@ export default {
           { name: "required", text: this.$t("validations.notEmpty") },
           {
             name: "email",
+            text: this.$t("validations.validEmail"),
+          },
+          {
+            name: "checkEmailSymbol",
             text: this.$t("validations.addEmail"),
           },
         ],
@@ -142,6 +152,11 @@ export default {
   watch: {
     agree(val) {
       if (val) this.checkError = "";
+    },
+    email(val) {
+      if (!this.$v.email.$invalid) {
+        this.customEmailErrors = {};
+      }
     },
   },
 
@@ -177,9 +192,9 @@ export default {
           });
           await this.$router.push("/profile");
         } catch (e) {
-          if (e.response.data.detail === "Already registered") {
+          if (e.response.data.detail === "User is already regsitered") {
             this.customEmailErrors = {
-              errors: ["This email has already been used"],
+              errors: [`This email is already registered`],
               type: "object",
             };
             return;

@@ -92,14 +92,14 @@
         />
 
         <FilterDropdown
-          v-if="formOptions.color"
-          :list="formOptions.color"
+          v-if="formOptions.ages"
+          :list="formOptions.ages"
           :return-object="false"
           :item-value="'value'"
           :item-label="'label'"
-          :label="$t('marketplace.color')"
+          :label="$t('marketplace.age')"
           :placeholder="$t('marketplace.select')"
-          :name.sync="filter.color_class"
+          :name.sync="filter.age"
           class="mb-0"
         />
 
@@ -184,7 +184,7 @@ const filterDefaultVars = {
   name: "",
   luminosity__in: [],
   quality_level__in: [],
-  color_class: "",
+  age: "",
   is_constellation: false,
   nft_type: "",
   eth_price__gte: 0.43,
@@ -230,7 +230,7 @@ export default {
         name: "",
         luminosity__in: [],
         quality_level__in: [],
-        color_class: "",
+        age: "",
         is_constellation: false,
         nft_type: "",
         eth_price__gte: 0.43,

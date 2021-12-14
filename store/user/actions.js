@@ -44,6 +44,16 @@ export const actions = {
   /**
    *
    * @param context
+   * @param payload {Object<{name: String, email: String}>}
+   * @returns {Promise<AxiosResponse<any>>}
+   */
+  submitTester(context, payload) {
+    return this.$axios.$post("/nfts/submit/tester/", payload);
+  },
+
+  /**
+   *
+   * @param context
    * @param payload {Object<{file: File}>}
    * @returns {Promise<AxiosResponse<any>>}
    */
@@ -91,7 +101,7 @@ export const actions = {
    * @returns {Promise<AxiosResponse<any>>}
    */
   updateProfile(context, payload) {
-    return this.$axios.$patch("/users/update/", payload);
+    return this.$axios.$put("/users/update/", payload);
   },
 
   /**
