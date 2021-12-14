@@ -231,21 +231,27 @@
       position: absolute;
       //right: -140px;
       //bottom: 180px;
+      animation: fly;
+      animation-duration: 20s;
+      animation-iteration-count: infinite;
+      animation-delay: 1.5s;
+      -webkit-animation: fly;
+      -webkit-animation-duration: 20s;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-delay: 1.5s;
 
 
-      @media (min-width: $break-smsm) {
-        animation: fly;
-        animation-duration: 20s;
-        animation-iteration-count: infinite;
-        -webkit-animation: fly;
-        -webkit-animation-duration: 20s;
-        -webkit-animation-iteration-count: infinite;
-      }
+      //@media (min-width: $break-smsm) {
+      //
+      //}
 
       @media (max-width: 769px) {
         animation: fly-mobile;
         animation-duration: 20s;
         animation-iteration-count: infinite;
+        -webkit-animation: fly-mobile;
+        -webkit-animation-duration: 20s;
+        -webkit-animation-iteration-count: infinite;
       }
     }
   }

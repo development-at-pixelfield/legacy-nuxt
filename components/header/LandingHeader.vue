@@ -25,11 +25,9 @@
       </ul>
 
       <div class="logo-block">
-        <img
-          src="~/assets/img/desktop-landing-logo.svg"
-          alt="logo"
-          @click="toLink"
-        />
+        <nuxt-link to="/" class="link-header">
+          <img src="~/assets/img/desktop-landing-logo.svg" alt="logo" />
+        </nuxt-link>
       </div>
 
       <div class="action">
@@ -45,11 +43,9 @@
 
     <div class="mobile-header">
       <div class="logo-block">
-        <img
-          src="~/assets/img/desktop-landing-logo.svg"
-          alt="logo"
-          @click="toLink"
-        />
+        <nuxt-link to="/" class="link-header">
+          <img src="~/assets/img/desktop-landing-logo.svg" alt="logo" />
+        </nuxt-link>
       </div>
       <div class="action">
         <Button
@@ -74,9 +70,6 @@ export default {
   methods: {
     anchorLink() {
       document.location = "#become-tester";
-    },
-    toLink() {
-      this.$router.push("/");
     },
   },
 };
