@@ -7,6 +7,7 @@
     @click.stop="onClick"
   >
     <slot name="input" class="input-upload"></slot>
+    <slot name="left-icon" class="text"></slot>
     <span v-if="label" class="btn-label" :class="{ 'has-icon': hasIconSlot }">{{
       label
     }}</span>

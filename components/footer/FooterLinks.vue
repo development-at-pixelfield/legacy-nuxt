@@ -1,11 +1,17 @@
 <template>
   <div class="footer-links">
-    <nuxt-link to="/term-cond" class="no-color-dec-link text-btn">{{
-      $t("auth.termCond")
-    }}</nuxt-link>
-    <nuxt-link to="/privacy-policy" class="no-color-dec-link text-btn">{{
-      $t("auth.policy")
-    }}</nuxt-link>
+    <a
+      target="_blank"
+      href="https://storage.googleapis.com/pfld-outdoor-production-documents-bucket/ISIAjobs_Terms_and_Conditions_2021_10_05_revMP_fin%20(1).pdf"
+      class="no-color-dec-link text-btn"
+      >{{ $t("auth.termCond") }}</a
+    >
+    <a
+      target="_blank"
+      href="https://storage.googleapis.com/pfld-outdoor-production-documents-bucket/ISIAjobs_Privacy_Policy_2021_10_05_v1_revMP_fin.pdf"
+      class="no-color-dec-link text-btn"
+      >{{ $t("auth.policy") }}</a
+    >
   </div>
 </template>
 

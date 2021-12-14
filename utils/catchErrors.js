@@ -1,4 +1,5 @@
 export const catchErrors = function (e) {
+  console.log(e.response, "e.response");
   if (e.response && e.response.status === 422) {
     // eslint-disable-next-line valid-typeof
     if (e.response.data.detail && e.response.data.detail.length) {

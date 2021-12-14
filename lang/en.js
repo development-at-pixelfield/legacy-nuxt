@@ -26,33 +26,32 @@ export default {
   },
 
   landing: {
+    mainTitle: "Own a piece of Galaxy through Diamond-backed NFT",
     discover: "Discover",
     roadmap: "Roadmap",
     becomeTester: "Become a tester",
+    learnMore: "Learn More",
     ourTeam: "Our team",
-    ourRoadMap: "Our roadmap",
+    ourRoadMap: "Roadmap",
     days: "Days",
     hours: "Hours",
     minutes: "Minutes",
     seconds: "Seconds",
     joinUs: "Join us on",
     orFollow: "or follow us on other platforms",
-    discoverTitle: "Discover infinite possibilities with on-chain credentials",
-    discoverDesc: `Following the auction of Beeple's NFT-based work of art at Christie's,
-          which eventually sold for $69.3 million with fees, the NFTs as a model
-          of ownership seem to have been particularly attractive to
-          up-and-coming artists. With fewer barriers than the traditional art
-          market, it becomes easier to get your name out there, and earn some
-          (serious) money too. Even blue chip artists like Damien Hirst are
-          jumping on the NFT bandwagon.`,
-    soundGood: "Sounds good?",
+    discoverTitle:
+      "Be the first one to wear luxury diamond assets in the metaverse.",
+    discoverDesc: `We are aware of all the magic the NFT world brings and what is currently happening in our and NFT world. Therefore, we want to bring something new. Something unique. The only thing we can see is a big goal ahead of us - to become the first and largest vendor of luxury diamond assets in the metaverse(s). <br/>
+Where did the idea of our NFT project come from? Diamonds are fallen stars. We've decided to put them back where they belong. Back to the sky. To the galaxy.`,
+    soundGood: "Join our Discord community?",
     orJoin: "or join us on other platforms",
-    joinUsDiscord: "Join us on our Discord community",
+    joinUsDiscord:
+      "to have a chance to become the first owner of our 3D NFT or to win luxury diamond jewelery.",
     name: "Name",
     signUp: "Sign up",
     backTop: "BACK TO TOP",
-    teamDesc: `The future is bright for Brian Cattelle photography in the world of NFTs.`,
-    roadDesc: `The future is bright for Brian Cattelle <br/> photography in the world of NFTs.`,
+    teamDesc: `Our team is based around the world.`,
+    roadDesc: `Find out more about our plans by clicking on each star.`,
     ourGoal: "OUR GOAL",
     trip: "FINISH LINE?",
     starText0: "Creation of the first 3D collection",
@@ -66,16 +65,28 @@ export default {
     starText8: "Galaxy building and colonizing (+ virtual real estate/equity)",
     starText9: "Virtual reality (+ special events)",
     starText10: "See your star for yourself.",
-    starTitle0: "3D collection",
-    starTitle1: "tester platform",
+    starTitle0: "3D INTERACTIVE stars collection",
+    starTitle1: "3D INTERACTIVE DIAMOND ASSETS",
     starTitle2: "Official launch",
     starTitle3: "collaborations",
     starTitle4: "Giveaways",
     starTitle5: "Mobile app",
     starTitle6: "Smartwatch integration",
-    starTitle7: "own metaverse",
-    starTitle8: "VR estates",
-    starTitle9: "VR events",
+    starTitle7: "COLLAB WITH METAVERSES",
+    starTitle8: "DUBAI EVENT",
+    starTitle9: "HOLOGRAM",
+    becomeTesterTitle: "Get the latest info first, join the galaxy community",
+    textSecTitle:
+      " A diamond company with more than 15 years experience has our backs.",
+    textSecDesc1: `To give our project even more credibility, we are proud to announce
+          that Diamond International Corporation (DIC) company stands behind the
+          project. We have many years of experience with luxury diamond
+          jewellery. As well as luxury showrooms in the main cities of the Czech
+          and Slovak Republic. Facts: DIC manufactured the crowns for MISS
+          Universe in the years 2014-2016. DIC is also a member of prestigious
+          world diamond exchanges.`,
+    textSecDesc2: `Diamonds are long-standing security for many investors, now, you can
+          be the first to experience this in the NFT world with us.`,
   },
 
   profile: {
@@ -107,6 +118,9 @@ export default {
     noResults: "No Results",
     startTyping: "Start typing...",
     findItems: "Find items containing",
+    emailVerified: "Email verified",
+    verificationInProgress: "Verification in progress...",
+    checkInbox: "Check your inbox for the verification email",
   },
 
   marketplace: {
@@ -117,7 +131,7 @@ export default {
     clearAll: "Clear All",
     apply: "Apply",
     quality: "Quality",
-    color: "Color",
+    age: "Age",
     select: "Select",
     partTitle: "PART OF CONSTELLATION?",
     partLabel: "Show only items that are a part of a constellation",
@@ -132,6 +146,9 @@ export default {
     maxPrice: "Max price",
     applyFilters: "Apply filters",
     emptyDesc: "Sorry, we couldn’t find a match. Try again ;)",
+    payCard: "Pay with card",
+    buyNow: "Buy now",
+    exchangeToken: "Exchange token",
   },
 
   validations: {
@@ -139,12 +156,14 @@ export default {
     sameAsPassword: "Please make sure your passwords match.",
     termAgree: "Please agree to  Terms and Conditions.",
     addEmail: "Please include an ‘@’ in the email address.",
+    validEmail: "Please enter valid email address",
     emailUsed: "This email has already been registered",
   },
 
   snackbar: {
     successRegister: "Successfully registered",
-    successLoggedIn: "Successfully loggedIn",
+    successLoggedIn: "Successfully logged in",
+    successTester: "Your application to become a tester was successful",
     successSend: "Successfully send",
     checkInbox: "Recovery email sent! Please check your inbox.",
     passwordChanged:
@@ -155,6 +174,8 @@ export default {
     successDelete: "Account deleted.",
     successAvatar: "Avatar updated successfully.",
     successEmailVerify: "Email verified successfully!",
+    noSettingsChanged: "Please change a setting in order to update it",
+    notificationsUpdate: "NFT notifications have been updated",
   },
 
   modals: {

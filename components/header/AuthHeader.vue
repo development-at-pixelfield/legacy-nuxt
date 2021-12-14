@@ -1,6 +1,6 @@
 <template>
   <div class="auth-header">
-    <img :src="userAvatar" alt="logo" />
+    <nuxt-link to="/"><img :src="userAvatar" alt="logo" /></nuxt-link>
   </div>
 </template>
 

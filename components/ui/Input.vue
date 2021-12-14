@@ -2,7 +2,12 @@
   <div>
     <span v-if="header" class="text-m mb-4">{{ header }}</span>
     <div class="custom-input" :class="{ 'no-margin': noMargin }">
-      <label :for="id ? id : uniqueId" class="label" :class="labelClasses">
+      <label
+        :for="id ? id : uniqueId"
+        class="label"
+        :class="labelClasses"
+        @click="focusHandler"
+      >
         {{ label }}
       </label>
       <!--    <Icon-->
@@ -269,6 +274,10 @@ export default {
       }
     },
   },
+  mounted() {
+    // this.$refs.customInput.focus();
+  },
+
   methods: {
     handleBlur() {
       this.$emit("handle-blur");

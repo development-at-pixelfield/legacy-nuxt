@@ -1,56 +1,82 @@
 <template>
   <div id="discover" class="discover-wrapper">
     <div class="discover">
-      <div class="left-side">
-        <h2 class="mt-0">
-          {{ $t("landing.discoverTitle") }}
-        </h2>
-        <p class="mb-0 text-l">
-          {{ $t("landing.discoverDesc") }}
-        </p>
-      </div>
-      <div class="right-side">
-        <span class="img-block">
-          <img class="bear-img" src="~/assets/img/bear-front.png" alt="bear" />
-        </span>
+      <div class="full-container">
+        <div class="left-side">
+          <h2 class="mt-0">
+            {{ $t("landing.discoverTitle") }}
+          </h2>
+          <p class="mb-0 text-m" v-html="$t('landing.discoverDesc')"></p>
+        </div>
+        <div class="right-side">
+          <span class="img-block">
+            <img
+              class="bear-img"
+              src="~/assets/img/bear-front.png"
+              alt="bear"
+            />
+          </span>
+        </div>
       </div>
     </div>
 
     <div class="sounds">
       <div class="left-side">
         <span class="start-block">
-          <img src="~/assets/img/landing/sounds-start.svg" alt="star" />
+          <img src="~/assets/img/landing/sound-star.svg" alt="star" />
         </span>
         <div class="sound-block">
           <h2>{{ $t("landing.soundGood") }}</h2>
-          <p class="mt-0 mb-24 title-big">{{ $t("landing.joinUsDiscord") }}</p>
+          <p class="mt-0 mb-24 text-m subtitle">
+            {{ $t("landing.joinUsDiscord") }}
+          </p>
           <div class="action">
-            <a href="" class="discord-btn">
+            <a
+              href="https://discord.com/invite/tRMheTFp"
+              class="discord-btn"
+              target="_blank"
+            >
               <img
                 src="~/assets/img/icons/discord-big.svg"
                 alt="discord-icon"
               />
             </a>
           </div>
-          <p class="mb-24 mt-0 text-m">{{ $t("landing.orJoin") }}</p>
+          <p class="mb-24 mt-0 text-m join-us">{{ $t("landing.orJoin") }}</p>
           <ul class="mtb">
             <li>
-              <a href="" class="social-link">
+              <a
+                target="_blank"
+                href="https://www.facebook.com/Galaxydiamonds-101350175672894"
+                class="social-link"
+              >
                 <Icon src="facebook-negative.svg" size="big"></Icon>
               </a>
             </li>
             <li>
-              <a href="" class="social-link">
+              <a
+                href="https://twitter.com/GalaxyDiaNFT"
+                class="social-link"
+                target="_blank"
+              >
                 <Icon src="twitter-negative.svg" size="big"></Icon>
               </a>
             </li>
             <li>
-              <a href="" class="social-link">
+              <a
+                target="_blank"
+                href="https://www.instagram.com/galaxydiamondsnft/"
+                class="social-link"
+              >
                 <Icon src="instagram-negative.svg" size="big"></Icon>
               </a>
             </li>
             <li>
-              <a href="" class="social-link">
+              <a
+                target="_blank"
+                href="https://t.me/joinchat/QExLizfchzg1ZTNk"
+                class="social-link"
+              >
                 <Icon src="telegram-negative.svg" size="big"></Icon>
               </a>
             </li>
@@ -61,38 +87,38 @@
       <div class="right-side">
         <div class="desktop-sound">
           <div class="first-column column">
-            <span class="img-block odd">
-              <img src="~/assets/img/landing/desktop-img1.svg" alt="image1" />
+            <span class="img-block1 odd">
+              <img src="~/assets/img/landing/desktop-img1.png" alt="image1" />
             </span>
-            <span class="img-block">
-              <img src="~/assets/img/landing/desktop-img3.svg" alt="image3" />
+            <span class="img-block1">
+              <img src="~/assets/img/landing/desktop-img3.png" alt="image3" />
             </span>
           </div>
           <div class="second-column column">
-            <span class="img-block odd">
-              <img src="~/assets/img/landing/desktop-img2.svg" alt="image2" />
+            <span class="img-block1 odd">
+              <img src="~/assets/img/landing/desktop-img2.png" alt="image2" />
             </span>
-            <span class="img-block">
-              <img src="~/assets/img/landing/desktop-img4.svg" alt="image4" />
+            <span class="img-block1">
+              <img src="~/assets/img/landing/desktop-img4.png" alt="image4" />
             </span>
           </div>
         </div>
 
         <div class="mobile-sound">
           <div class="first-column column">
-            <span class="img-block odd">
-              <img src="~/assets/img/landing/mobile-img1.svg" alt="image1" />
+            <span class="img-block1 odd">
+              <img src="~/assets/img/landing/mobile-img1.png" alt="image1" />
             </span>
-            <span class="img-block">
-              <img src="~/assets/img/landing/mobile-img3.svg" alt="image3" />
+            <span class="img-block1">
+              <img src="~/assets/img/landing/mobile-img3.png" alt="image3" />
             </span>
           </div>
           <div class="second-column column">
-            <span class="img-block odd">
-              <img src="~/assets/img/landing/mobile-img2.svg" alt="image2" />
+            <span class="img-block1 odd">
+              <img src="~/assets/img/landing/mobile-img2.png" alt="image2" />
             </span>
-            <span class="img-block">
-              <img src="~/assets/img/landing/mobile-img4.svg" alt="image4" />
+            <span class="img-block1">
+              <img src="~/assets/img/landing/mobile-img4.png" alt="image4" />
             </span>
           </div>
         </div>

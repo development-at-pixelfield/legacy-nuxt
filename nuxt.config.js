@@ -1,8 +1,8 @@
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    titleTemplate: "Galaxy - project name",
-    title: "Galaxy",
+    titleTemplate: "Galaxy.diamonds | Own the universe",
+    title: "Galaxy.diamonds | Own the universe",
     meta: [
       { charset: "utf-8" },
       {
@@ -10,20 +10,80 @@ export default {
         content:
           "width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1",
       },
-      { hid: "description", name: "description", content: "" },
+      { name: "msapplication-TileColor", content: "#da532c" },
+      { name: "theme-color", content: "#ffffff" },
+      { hid: "description", name: "description", content: "NFT floating through galaxy. Own a piece of the universe." },
+      { hid: "author", name: "author", content: "Galaxy.diamonds" },
+      { hid: "DC.title", name: "DC.title", content: "Galaxy.diamonds" },
+      { hid: "DC.creator", name: "DC.creator", content: "Galaxy.diamonds" },
+      { hid: "og:type", name: "og:type", content: "website" },
+      { hid: "og:url", name: "og:url", content: "https://galaxy.diamonds/" },
+      {
+        hid: "og:title",
+        name: "og:title",
+        content: "Galaxy.diamonds | Own the universe",
+      },
+      {
+        hid: "og:description",
+        name: "og:description",
+        content:
+          "🚀 NFT floating through galaxy. Own a piece of the universe.",
+      },
+      {
+        hid: "og:image",
+        name: "og:image",
+        content:
+          "https://galaxy.diamonds/galaxy-opengraph.jpg",
+      },
+      {
+        hid: "twitter:image",
+        name: "twitter:image",
+        content:
+          "https://galaxy.diamonds/galaxy-opengraph.jpg",
+      },
     ],
     link: [
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-      { rel: "stylesheet", href: "http://diamond.bypixelfield.com/three/examples/main.css" },
+      { rel: "manifest", href: "/site.webmanifest" },
       {
         rel: "stylesheet",
         href:
           "https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;500;600;700;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap",
       },
+      {
+        rel: "apple-touch-icon",
+        sizes: "76x76",
+        href: "/apple-touch-icon.png",
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "32x32",
+        href: "/favicon-32x32.png",
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "16x16",
+        href: "/favicon-16x16.png",
+      },
+      {
+        rel: "mask-icon",
+        href: "/safari-pinned-tab.svg",
+      },
+      {
+        rel: "alternate",
+        hreflang: "en",
+        href: "/",
+      },
+      {
+        rel: "image_src",
+        href: "https://galaxy.diamonds/galaxy-opengraph.jpg",
+      },
     ],
   },
 
-  loading: { color: "#2A328C" },
+  loading: { color: "#6B00C1" },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: ["@/assets/scss/global.scss"],
