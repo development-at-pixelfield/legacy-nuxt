@@ -5,7 +5,7 @@
     </div>
     <div class="divider" />
     <div class="summary">
-      <div>Total</div>
+      <div>{{ $t("nft_modal.total") }}</div>
       <div>
         <div class="summary_heading">{{ nft.price_eth }}</div>
         <div class="summary_sub-heading">{{ nft.price_usd }}</div>
@@ -25,7 +25,7 @@
         :background="'ghost'"
         :size="'medium'"
         :color="'c-white'"
-        :label="`Add funds`"
+        :label="$t('nft_modal.addFunds')"
         @on-click="addFunds"
         ><span slot="left_icon" class="icon-button"
           ><img src="~/assets/img/icons/credit-card.svg" /></span
@@ -49,7 +49,7 @@
           : 'current-balance_negative'
       "
     >
-      Available balance {{ userBalance }}Ξ ($2.013.000)
+      {{ $t("nft_modal.availableBalance") }} {{ userBalance }}Ξ ($2.013.000)
     </div>
   </ScaffoldModal>
 </template>
@@ -88,8 +88,8 @@ export default {
   computed: {
     canPurchaseText() {
       return this.userHasEnoughFunds
-        ? `Pay ${this.nft.price_eth}`
-        : "Not enough funds";
+        ? `${this.$t("nft_modal.pay")} ${this.nft.price_eth}`
+        : this.$t("nft_modal.noFunds");
     },
     userHasEnoughFunds() {
       // TODO implement user hvaing enough funds

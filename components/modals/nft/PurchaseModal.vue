@@ -77,10 +77,14 @@ export default {
     },
   },
   methods: {
-    copyToClip() {
+    async copyToClip() {
       const copyText = this.nft.hash;
       navigator.clipboard.writeText(copyText);
-      alert("copied to clipboard");
+      await this.$store.commit("setSnackbar", {
+        show: true,
+        message: this.$t("nft_modal.copiedToClip"),
+        color: "success",
+      });
     },
     next() {
       if (this.status === "approval") {

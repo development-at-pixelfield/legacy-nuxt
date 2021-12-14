@@ -183,6 +183,8 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     },
   },
   nft_modal: {
+    pay: "Pay",
+    noFunds: "Not enough funds",
     transactionHash: "Transaction hash",
     ownerOf: "You've just become the owner of",
     processingPurchase: "Processing your purchase",
@@ -194,6 +196,10 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     connect_wallet: "Connect wallet",
     checkout: "Checkout",
     you_are_buying: "You are buying",
+    availableBalance: "Available balance",
+    addFunds: "Add funds",
+    total: "Total",
+    copiedToClip: "Successfully copied hash to clipboard",
   },
   modals: {
     modalClose: "No, go back :)",
