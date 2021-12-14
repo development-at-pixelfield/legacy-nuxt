@@ -5,7 +5,7 @@ export default {
     },
     calculateEthToUsd() {
       return (ethAmount) => {
-        return "est. $" + this.fetchEthPrice * ethAmount + "K";
+        return "est. $" + this.fetchEthPrice.rate * ethAmount + "K";
       };
     },
   },
