@@ -67,7 +67,7 @@
             {{ item.price_eth }}Ξ
           </p>
           <p slot="finance" class="finance mtb text-m-bold text-center">
-            {{ convertEthereum(1) }}
+            {{ convertEthereum(item.price_eth) }}
           </p>
         </MarketItem>
       </div>
