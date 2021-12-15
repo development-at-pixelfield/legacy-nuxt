@@ -171,6 +171,7 @@ export default {
       count: 0,
       nfts: {},
       filter: {},
+      ethPrice: null,
       filterHeader: {},
       formOptions: {},
       filterItems: [
@@ -184,7 +185,7 @@ export default {
   computed: {
     convertEthereum() {
       return (price) => {
-        return this.calculateEthToUsd(price);
+        return "est. $" + this.ethPrice * price + "K";
       };
     },
   },
@@ -193,7 +194,7 @@ export default {
     this.setDefaultWatch();
   },
 
-  mounted() {
+  async mounted() {
     this.$nuxt.$on("applyFilters", async (values) => {
       if (Object.keys(values).length) {
         values.page = this.filter.page;
@@ -211,6 +212,7 @@ export default {
         await this.setQuery(filters);
       }
     });
+    this.ethPrice = (await this.$store.dispatch("fetchEthPrice")).rate;
   },
 
   beforeDestroy() {
