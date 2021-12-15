@@ -28,7 +28,7 @@ const filterDefaultVars = {
   name: "",
   luminosity__in: [],
   quality_level__in: [],
-  age: "",
+  age__in: [],
   is_constellation: false,
   nft_type: "",
   eth_price__gte: 0.43,
@@ -56,7 +56,7 @@ export default {
         { key: "name", value: "Name", form: "name" },
         { key: "luminosity__in", value: "Luminosity", form: "luminosity" },
         { key: "quality_level__in", value: "Quality", form: "quality" },
-        { key: "age", value: "Age", form: "age" },
+        { key: "age__in", value: "Age", form: "age" },
         { key: "is_constellation", value: "Part of constellation" },
         { key: "nft_type", value: "Type" },
         {
