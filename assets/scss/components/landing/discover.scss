@@ -53,6 +53,10 @@
         position: absolute;
         left: -145px;
 
+        @media (max-width: 1600px) {
+          position: static;
+        }
+
         @media (max-width: $break-md) {
           display: none;
         }
@@ -169,6 +173,14 @@
       .desktop-sound {
         display: flex;
         transform: translateX(180px);
+
+        @media (max-width: 1700px) {
+          transform: translateX(80px);
+        }
+
+        @media (max-width: 1600px) {
+          transform: translateX(0);
+        }
 
         @media (max-width: $break-lgs) {
           height: 100%;
