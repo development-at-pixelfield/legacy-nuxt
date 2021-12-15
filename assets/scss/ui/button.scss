@@ -206,6 +206,13 @@
     }
   }
 
+  &__disabled-default{
+    cursor: not-allowed;
+    background: #594965;
+    border: none;
+    color: #D6D2D9;
+  }
+
 }
 
 

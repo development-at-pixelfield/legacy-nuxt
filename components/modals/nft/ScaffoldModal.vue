@@ -1,0 +1,48 @@
+<template>
+  <transition v-if="showModal" name="modal" :duration="333" mode="out-in">
+    <div class="modal-mask">
+      <div class="modal-wrapper">
+        <div class="modal-container">
+          <HeadingRow :title="heading" />
+          <slot></slot>
+        </div>
+      </div>
+    </div>
+  </transition>
+</template>
+
+<script>
+import HeadingRow from "~/components/modals/nft/HeadingRow.vue";
+
+export default {
+  name: "NftWalletModal",
+  components: {
+    HeadingRow,
+  },
+  props: {
+    showModal: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
+    heading: {
+      type: String,
+      required: true,
+      default: "",
+    },
+  },
+  methods: {
+    addWallet(wallet) {
+      this.$emit("addWallet", wallet);
+    },
+
+    close() {
+      this.$emit("close");
+    },
+  },
+};
+</script>
+
+<style scoped lang="scss">
+@import "~assets/scss/modals/nft/index";
+</style>

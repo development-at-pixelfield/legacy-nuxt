@@ -1,6 +1,14 @@
 import { convertCamelToSnack } from "~/utils/convertCamelToSnack";
 import { toUnderscore } from "~/utils/toUnderscore";
 export const functions = {
+  refineHash(hash) {
+    if (hash.length > 6) {
+      const start = hash.substring(0, 5);
+      const end = hash.substring(hash.length - 6, hash.length);
+      return `${start}...${end}`;
+    }
+    return hash;
+  },
   source() {
     const CancelToken = this.$axios.CancelToken;
     return CancelToken.source();
