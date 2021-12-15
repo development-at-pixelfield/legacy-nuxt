@@ -122,11 +122,7 @@ const filterDefaultVars = {
   name: "",
   luminosity__in: [],
   quality_level__in: [],
-  age: "",
-  is_constellation: false,
-  nft_type: "",
-  eth_price__gte: 0.43,
-  eth_price__lte: 5.41,
+  age__in: [],
   constellation: "",
 };
 

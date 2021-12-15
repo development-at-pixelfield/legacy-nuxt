@@ -91,7 +91,7 @@
           class="mb-0 first-filter"
         />
 
-        <FilterDropdown
+        <MultiFilterDropdown
           v-if="formOptions.ages"
           :list="formOptions.ages"
           :return-object="false"
@@ -99,61 +99,11 @@
           :item-label="'label'"
           :label="$t('marketplace.age')"
           :placeholder="$t('marketplace.select')"
-          :name.sync="filter.age"
+          :selected-items="convertArray(filter.age__in)"
+          :show-count="true"
+          :name.sync="filter.age__in"
           class="mb-0"
         />
-
-        <p class="mt-24 mb- text-s-bold">{{ $t("marketplace.type") }}</p>
-        <div class="radio">
-          <Radio
-            :name.sync="filter.nft_type"
-            :radio-name="'filter-type'"
-            :value="'planet'"
-          >
-            <label slot="label" class="text-m">{{
-              $t("marketplace.planet")
-            }}</label>
-          </Radio>
-          <Radio
-            :name.sync="filter.nft_type"
-            :radio-name="'filter-type'"
-            :value="'star'"
-            class="ml-8"
-          >
-            <label slot="label" class="text-m">{{
-              $t("marketplace.star")
-            }}</label>
-          </Radio>
-        </div>
-
-        <Range
-          class="mb-8 mt-24"
-          :min-value.sync="filter.eth_price__gte"
-          :max-value.sync="filter.eth_price__lte"
-          :type="type"
-        />
-
-        <div class="apply-action mb-24">
-          <Button
-            :label="$t('marketplace.apply')"
-            :background="'ghost'"
-            :size="'custom-medium'"
-            :color="'c-white'"
-            @on-click="applyFilters"
-          />
-        </div>
-
-        <div class="mb-24">
-          <p class="mtb">{{ $t("marketplace.partTitle") }}</p>
-          <Checkbox
-            :name.sync="filter.is_constellation"
-            class="mt-4 filter-check"
-          >
-            <label slot="label" class="text-m">
-              {{ $t("marketplace.partLabel") }}
-            </label>
-          </Checkbox>
-        </div>
 
         <FilterDropdown
           :list="formOptions.constellations"
@@ -166,6 +116,19 @@
           :must-scroll="true"
           class="mb-0"
         />
+        <div class="apply-action mb-24">
+          <Button
+            :label="$t('marketplace.apply')"
+            :background="'primary'"
+            :size="'full'"
+            :color="'c-white'"
+            @on-click="applyFilters"
+          />
+        </div>
+        <div class="apply-clear" @click="clearFilter(false)">
+          <div>{{ $t("marketplace.clearAll") }}</div>
+          <img src="~/assets/img/icons/close-modal.svg" />
+        </div>
       </div>
     </div>
   </div>
@@ -177,18 +140,12 @@ import FilterDropdown from "../../ui/FilterDropdown";
 import SearchFilter from "../../ui/SearchFilter";
 import Icon from "../../ui/Icon";
 import Button from "../../ui/Button";
-import Checkbox from "../../ui/Checkbox";
-import Radio from "../../ui/Radio";
-import Range from "../../ui/Range";
 const filterDefaultVars = {
   name: "",
   luminosity__in: [],
   quality_level__in: [],
-  age: "",
-  is_constellation: false,
-  nft_type: "",
-  eth_price__gte: 0.43,
-  eth_price__lte: 5.41,
+  age__in: [],
+
   constellation: "",
 };
 export default {
@@ -198,10 +155,7 @@ export default {
     MultiFilterDropdown,
     FilterDropdown,
     Button,
-    Checkbox,
-    Radio,
     SearchFilter,
-    Range,
   },
   props: {
     count: {
@@ -230,11 +184,7 @@ export default {
         name: "",
         luminosity__in: [],
         quality_level__in: [],
-        age: "",
-        is_constellation: false,
-        nft_type: "",
-        eth_price__gte: 0.43,
-        eth_price__lte: 5.41,
+        age__in: [],
         constellation: "",
       },
       luminosityArr: [],
@@ -303,8 +253,8 @@ export default {
     toggleFilter() {
       this.showPanel = !this.showPanel;
     },
-    clearFilter() {
-      this.showPanel = false;
+    clearFilter(hidePanel = true) {
+      if (hidePanel) this.showPanel = false;
       this.filter = { ...filterDefaultVars };
       this.$nuxt.$emit("applyFilters", {});
     },
@@ -316,7 +266,7 @@ export default {
       const query = this.$route.query;
       const filter = { ...values };
 
-      const arr = ["luminosity__in", "quality_level__in"];
+      const arr = ["luminosity__in", "quality_level__in", "age__in"];
       Object.keys(filterDefaultVars).forEach((key) => {
         if (arr.includes(query[key]) && typeof query[key] === "string") {
           filter[key] = query[key].split(",");
