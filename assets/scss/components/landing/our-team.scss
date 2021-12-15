@@ -4,6 +4,11 @@
   position: relative;
   overflow: hidden;
 
+  .back-img{
+    width: 100%;
+    position: absolute;
+  }
+
   //&::after{
   //  content: "";
   //  background: url("~assets/img/landing/cloud1.svg") no-repeat;
@@ -34,11 +39,11 @@
 
   .map-wrapper {
     //background: url("~assets/img/landing/map.png") no-repeat fixed center;
-    background: url("~assets/img/landing/map.png") no-repeat center;
+    //background: url("~assets/img/landing/map.png") no-repeat center;
     width: 100%;
     height: 100%;
     position: relative;
-    background-size: 100% 100%;
+    //background-size: 100% 100%;
 
     @media (max-width: $break-md) {
       background-size: cover;
