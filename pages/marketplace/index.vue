@@ -137,8 +137,11 @@ export default {
     Button,
   },
   mixins: [converter],
-  layout: "auth",
-  middleware: "auth",
+  layout(context) {
+    if (context.$auth.$state.user) {
+      return "auth";
+    }
+  },
   async asyncData({ store, route, error }) {
     try {
       const formOptions = await store.dispatch("nfts/getNftsForm");
@@ -183,6 +186,9 @@ export default {
   },
 
   computed: {
+    layout() {
+      return this.$auth.user ? ["auth"] : [];
+    },
     convertEthereum() {
       return (price) => {
         return "est. $" + this.ethPrice * price + "K";

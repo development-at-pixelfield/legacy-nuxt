@@ -44,7 +44,12 @@ export default {
     Navigation,
     WebGl,
   },
-  layout: "auth",
+  layout(context) {
+    if (context.$auth.$state.user) {
+      return "auth";
+    }
+  },
+  auth: false,
   middleware: "auth",
   async asyncData({ store, params }) {
     try {
