@@ -1,6 +1,8 @@
 <template>
   <div class="landing-wrapper">
     <main>
+      <BlackWhole />
+
       <ComingSoon />
 
       <JoinUs />
@@ -29,6 +31,7 @@ import ComingSoon from "../components/landing/ComingSoon";
 import RoadMap from "../components/landing/RoadMap";
 import Interactive from "../components/landing/Interactive";
 import TextSection from "../components/landing/TextSection";
+import BlackWhole from "../components/landing/BlackWhole";
 export default {
   components: {
     Interactive,
@@ -39,12 +42,10 @@ export default {
     ComingSoon,
     OurTeam,
     TextSection,
+    BlackWhole,
   },
   layout: "landing",
   middleware: ["isLoggedIn"],
-  created() {
-    console.log("last version");
-  },
 };
 </script>
 

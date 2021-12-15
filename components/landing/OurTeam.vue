@@ -1,5 +1,19 @@
 <template>
   <div id="our-team" class="our-team">
+    <img
+      class="back-img"
+      src="~/assets/img/landing/map.png"
+      alt=""
+      srcset="
+        ~/assets/img/landing/map.png,
+        ~/assets/img/landing/map.png 1.5x,
+        ~/assets/img/landing/map.png 2x
+      "
+      sizes="(max-width: 320px) 280px,
+            (max-width: 480px) 440px,
+            800px"
+    />
+
     <div class="map-wrapper">
       <div class="content">
         <h2 class="text-xl mt-0">{{ $t("landing.ourTeam") }}</h2>
