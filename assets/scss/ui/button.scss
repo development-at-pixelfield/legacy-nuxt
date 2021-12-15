@@ -8,26 +8,43 @@
   justify-content: center;
   //overflow: hidden;
 
-  //&::before {
-  //  content: "";
-  //  position: absolute;
-  //  z-index: 1;
-  //  max-width: 54px;
-  //  height: 54px;
-  //  top: -7px;
-  //  left: 23px;
-  //  right: 0;
-  //  bottom: 0;
-  //  background: red;
-  //  border-radius: 50%;
-  //  transform: scale(0);
-  //  transition: transform 0.3s ease-out;
-  //  mix-blend-mode: normal;
-  //}
+  .tooltip{
+    display: none;
+  }
 
-  //&:focus::before{
-  //  transform: scale(2);
-  //}
+  &:hover{
+    .tooltip{
+      display: block;
+      position: absolute;
+      top: -55px;
+      background: rgba(0, 0, 0, 0.8);
+      border-radius: 3px;
+      padding: 8px 24px;
+      width: 310px;
+
+      @media (max-width: 600px) {
+        width: 100%;
+      }
+
+      @media (max-width: 400px) {
+        padding: 8px;
+      }
+
+      &::after{
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        border-top: 6px solid rgba(0, 0, 0, 0.8);
+        right: 47.5%;
+        top: 40px;
+
+      }
+    }
+  }
+
 
   .has-icon{
     @media (max-width: $break-sms) {
@@ -206,11 +223,10 @@
     }
   }
 
-  &__disabled-default{
+  &__disabled-new{
     cursor: not-allowed;
-    background: #594965;
-    border: none;
-    color: #D6D2D9;
+    background: $c-greyscale-80;
+    color: $c-greyscale-20;
   }
 
 }

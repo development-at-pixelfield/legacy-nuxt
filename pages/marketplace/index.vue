@@ -161,6 +161,7 @@ export default {
       });
 
       const nfts = await store.dispatch("nfts/getNfts", filter);
+      console.log(nfts, "nfts");
       return { nfts, filter, formOptions };
     } catch (e) {
       const status = e.response.status;
