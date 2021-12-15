@@ -28,3 +28,9 @@ export default {
   head() {},
 };
 </script>
+
+<style lang="scss" scoped>
+h1 {
+  color: $c-white;
+}
+</style>
