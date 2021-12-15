@@ -6,10 +6,13 @@
   width: 360px;
 
   @media (max-width: $break-sms) {
-    width: 88%;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 8px;
   }
   @media (max-height: 800px) {
     position: static;
     padding-top: 40px;
+    padding-bottom: 30px;
   }
 }
