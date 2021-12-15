@@ -4,9 +4,6 @@ header{
   border-bottom: 1px solid #301C3F;
 
   .content{
-    display: flex;
-    align-items: center;
-    justify-content: right;
     height: 100%;
     padding-right: 168px;
     padding-left: 168px;
@@ -27,12 +24,17 @@ header{
     }
 
     .text-m{
-
       @media (max-width: $break-sms) {
         display: none;
       }
     }
-
+    .content-wrapper{
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: right;
+      height: 100%;
+    }
     .logo-block{
       width: 100%;
       display: flex;
@@ -43,10 +45,21 @@ header{
       z-index: 1;
       display: flex;
       position: absolute;
+      right: 0;
 
       .avatar{
         display: flex;
       }
     }
   }
+}
+
+.marketplace-link {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+a {
+  text-decoration: none;
 }

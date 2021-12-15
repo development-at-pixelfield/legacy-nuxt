@@ -15,6 +15,8 @@ export const defaultValues = () => ({
     close: "",
   },
   query: {},
+  eth: null,
+  ethPrice: null,
 });
 
 export const state = defaultValues;
@@ -29,18 +31,24 @@ export const mutations = {
   setQuery(state, payload) {
     state.query = payload;
   },
+  setEthPrice(state, amount) {
+    state.ethPrice = amount;
+  },
 };
 
 export const actions = {
-  // sharedDocuments(context, payload) {
-  //   return this.$axios.$get("/shared/documents/list/?format=json");
-  // },
+  async fetchEthPrice(context) {
+    const response = await this.$axios.$get(`/nfts/fetch/eth-to-usd/`);
+    context.commit("setEthPrice", response.rate);
+    return response;
+  },
 };
 
 export const getters = {
   snackbar: (state) => state.snackbar,
   modal: (state) => state.modal,
   query: (state) => state.query,
+  ethPrice: (state) => state.ethPrice,
 };
 
 const createStore = () =>

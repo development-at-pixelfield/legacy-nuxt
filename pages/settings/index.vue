@@ -197,7 +197,9 @@ export default {
             nft_notifications: this.showAlerts,
             email: this.email,
           };
-
+          if (this.email !== this.$auth.user.email) {
+            data.email = this.email;
+          }
           await this.$store.dispatch("user/updateProfile", data);
           await this.$auth.fetchUser();
           await this.$store.commit("setSnackbar", {

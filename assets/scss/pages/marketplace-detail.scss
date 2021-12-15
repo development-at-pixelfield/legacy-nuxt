@@ -1,6 +1,7 @@
 .marketplace-detail{
   background: $c-background;
   padding-bottom: 40px;
+  height: 100vh;
 
   .done{
     color: #1DD1A1;
@@ -138,6 +139,7 @@
             flex-direction: column;
             align-items: flex-start;
             justify-content: flex-start;
+            padding: 16px;
           }
 
           .left-side-s{

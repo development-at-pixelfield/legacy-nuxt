@@ -12,15 +12,18 @@
       :background-color="snackbar.color"
       @close="closeSnackbar"
     />
+    <Modal />
   </div>
 </template>
 <script>
 import Snackbar from "../components/ui/Snackbar";
 import AuthHeader from "../components/header/AuthHeader";
+import Modal from "~/components/modals/nft/PurchaseModal.vue";
 export default {
   components: {
     Snackbar,
     AuthHeader,
+    Modal,
   },
   data() {
     return {};

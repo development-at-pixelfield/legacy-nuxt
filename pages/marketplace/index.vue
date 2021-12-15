@@ -113,6 +113,7 @@ import FiltersItems from "../../components/marketplace/filter/FiltersItems";
 import Button from "../../components/ui/Button";
 import { functions } from "../../utils";
 import { catchErrors } from "../../utils/catchErrors";
+import converter from "../../mixins/converter";
 
 const filterDefaultVars = {
   page: 1,
@@ -121,11 +122,7 @@ const filterDefaultVars = {
   name: "",
   luminosity__in: [],
   quality_level__in: [],
-  age: "",
-  is_constellation: false,
-  nft_type: "",
-  eth_price__gte: 0.43,
-  eth_price__lte: 5.41,
+  age__in: [],
   constellation: "",
 };
 
@@ -139,8 +136,12 @@ export default {
     FiltersItems,
     Button,
   },
-  layout: "auth",
-  middleware: "auth",
+  mixins: [converter],
+  layout(context) {
+    if (context.$auth.$state.user) {
+      return "auth";
+    }
+  },
   async asyncData({ store, route, error }) {
     try {
       const formOptions = await store.dispatch("nfts/getNftsForm");
@@ -173,6 +174,7 @@ export default {
       count: 0,
       nfts: {},
       filter: {},
+      ethPrice: null,
       filterHeader: {},
       formOptions: {},
       filterItems: [
@@ -184,11 +186,12 @@ export default {
   },
 
   computed: {
+    layout() {
+      return this.$auth.user ? ["auth"] : [];
+    },
     convertEthereum() {
       return (price) => {
-        const defEthr = 0.00022;
-        const usd = price / defEthr;
-        return "est. $" + usd.toFixed(2) + "K";
+        return "est. $" + this.ethPrice * price + "K";
       };
     },
   },
@@ -197,7 +200,7 @@ export default {
     this.setDefaultWatch();
   },
 
-  mounted() {
+  async mounted() {
     this.$nuxt.$on("applyFilters", async (values) => {
       if (Object.keys(values).length) {
         values.page = this.filter.page;
@@ -215,6 +218,7 @@ export default {
         await this.setQuery(filters);
       }
     });
+    this.ethPrice = (await this.$store.dispatch("fetchEthPrice")).rate;
   },
 
   beforeDestroy() {
