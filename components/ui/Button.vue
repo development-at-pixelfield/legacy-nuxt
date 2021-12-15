@@ -1,18 +1,24 @@
 <template>
-  <button
-    :type="buttonHtmlType"
-    :class="classes"
-    :disabled="disabled"
-    class="custom-button"
-    @click.stop="onClick"
-  >
-    <slot name="input" class="input-upload"></slot>
-    <slot name="left-icon" class="text"></slot>
-    <span v-if="label" class="btn-label" :class="{ 'has-icon': hasIconSlot }">{{
-      label
-    }}</span>
-    <slot name="icon" class="text"></slot>
-  </button>
+  <div>
+    <button
+      :type="buttonHtmlType"
+      :class="classes"
+      :disabled="disabled"
+      class="custom-button"
+      @click.stop="onClick"
+    >
+      <span v-if="tooltip" class="tooltip text-m">{{ tooltip }}</span>
+      <slot name="input" class="input-upload"></slot>
+      <slot name="left-icon" class="text"></slot>
+      <span
+        v-if="label"
+        class="btn-label"
+        :class="{ 'has-icon': hasIconSlot }"
+        >{{ label }}</span
+      >
+      <slot name="icon" class="text"></slot>
+    </button>
+  </div>
 </template>
 
 <script>
@@ -24,6 +30,11 @@ export default {
       type: String,
       required: false,
       default: null,
+    },
+    tooltip: {
+      type: String,
+      required: false,
+      default: "",
     },
     src: {
       type: String,

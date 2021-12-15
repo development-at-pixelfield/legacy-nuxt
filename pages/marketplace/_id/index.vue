@@ -24,7 +24,7 @@
           </div>
 
           <div class="right-side">
-            <div v-if="false" class="sold-action">
+            <div v-if="true" class="sold-action">
               <div class="left-side-s">
                 <span class="img-block-s">
                   <img
@@ -44,9 +44,9 @@
                 <Button
                   class="single-btn"
                   :label="$t('marketplace.buyNow')"
-                  :background="'grey'"
+                  :background="'disabled-new'"
                   :size="'medium'"
-                  :color="'c-grey'"
+                  :tooltip="'Community re-listing coming soon!'"
                 />
               </div>
             </div>
@@ -84,7 +84,7 @@
           </div>
         </div>
 
-        <div class="auction block-margin">
+        <div v-if="showAuction" class="auction block-margin">
           <div class="left-side">
             <div class="img-block">
               <img src="~/assets/img/auction.png" alt="auction" />
@@ -107,7 +107,12 @@
                 >The current price is valid for</span
               >
             </div>
-            <div class="timer text-l">02:59:00</div>
+            <div class="timer text-l">
+              <AuctionTimer
+                :time="'Dec 16, 2021 11:07:00'"
+                :show-auction.sync="showAuction"
+              />
+            </div>
           </div>
         </div>
 
@@ -186,6 +191,7 @@
 import Navigation from "../../../components/header/Navigation";
 import WebGl from "../../../components/marketplace/WebGl";
 import Button from "../../../components/ui/Button";
+import AuctionTimer from "../../../components/marketplace/AuctionTimer";
 
 export default {
   name: "Index",
@@ -193,6 +199,7 @@ export default {
     Navigation,
     WebGl,
     Button,
+    AuctionTimer,
   },
   layout: "auth",
   middleware: "auth",
@@ -205,6 +212,7 @@ export default {
   data() {
     return {
       showCard: false,
+      showAuction: true,
     };
   },
   computed: {
