@@ -16,6 +16,7 @@ export const defaultValues = () => ({
   },
   query: {},
   eth: null,
+  ethPrice: null,
 });
 
 export const state = defaultValues;
@@ -30,26 +31,17 @@ export const mutations = {
   setQuery(state, payload) {
     state.query = payload;
   },
-  setEthPrice(state, value) {
-    if (
-      new Date().getTime() / 1000 - value.last_fetched.getTime() / 1000 >= 10 ||
-      !this.eth
-    ) {
-      // console.log("fetching");
-      state.ethPrice = value;
-    }
+  setEthPrice(state, amount) {
+    state.ethPrice = amount;
   },
 };
 
 export const actions = {
-  async nuxtServerInit({ commit }) {
+  async fetchEthPrice(context) {
     const response = await this.$axios.$get(`/nfts/fetch/eth-to-usd/`);
-    commit("setEthPrice", { rate: response.rate, last_fetched: new Date() });
+    context.commit("setEthPrice", response.rate);
     return response;
   },
-  // sharedDocuments(context, payload) {
-  //   return this.$axios.$get("/shared/documents/list/?format=json");
-  // },
 };
 
 export const getters = {

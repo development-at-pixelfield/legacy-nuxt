@@ -20,6 +20,9 @@ export const functions = {
     ) {
       values.luminosity__in = values.luminosity__in.join(",");
     }
+    if (typeof values.age__in !== "string" && values.age__in?.length) {
+      values.age__in = values.age__in.join(",");
+    }
     if (
       typeof values.quality_level__in !== "string" &&
       values.quality_level__in?.length

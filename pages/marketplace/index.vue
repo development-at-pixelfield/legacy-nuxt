@@ -122,11 +122,7 @@ const filterDefaultVars = {
   name: "",
   luminosity__in: [],
   quality_level__in: [],
-  age: "",
-  is_constellation: false,
-  nft_type: "",
-  eth_price__gte: 0.43,
-  eth_price__lte: 5.41,
+  age__in: [],
   constellation: "",
 };
 
@@ -141,8 +137,11 @@ export default {
     Button,
   },
   mixins: [converter],
-  layout: "auth",
-  middleware: "auth",
+  layout(context) {
+    if (context.$auth.$state.user) {
+      return "auth";
+    }
+  },
   async asyncData({ store, route, error }) {
     try {
       const formOptions = await store.dispatch("nfts/getNftsForm");
@@ -161,7 +160,6 @@ export default {
       });
 
       const nfts = await store.dispatch("nfts/getNfts", filter);
-      console.log(nfts, "nfts");
       return { nfts, filter, formOptions };
     } catch (e) {
       const status = e.response.status;
@@ -176,6 +174,7 @@ export default {
       count: 0,
       nfts: {},
       filter: {},
+      ethPrice: null,
       filterHeader: {},
       formOptions: {},
       filterItems: [
@@ -187,9 +186,12 @@ export default {
   },
 
   computed: {
+    layout() {
+      return this.$auth.user ? ["auth"] : [];
+    },
     convertEthereum() {
       return (price) => {
-        return this.calculateEthToUsd(price);
+        return "est. $" + this.ethPrice * price + "K";
       };
     },
   },
@@ -198,7 +200,7 @@ export default {
     this.setDefaultWatch();
   },
 
-  mounted() {
+  async mounted() {
     this.$nuxt.$on("applyFilters", async (values) => {
       if (Object.keys(values).length) {
         values.page = this.filter.page;
@@ -216,6 +218,7 @@ export default {
         await this.setQuery(filters);
       }
     });
+    this.ethPrice = (await this.$store.dispatch("fetchEthPrice")).rate;
   },
 
   beforeDestroy() {

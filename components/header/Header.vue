@@ -2,9 +2,16 @@
   <header :class="{ fixed: $route.name === 'marketplace' }">
     <div class="content">
       <div class="content-wrapper">
-        <span class="text-m">Marketplace</span>
+        <nuxt-link to="/marketplace"
+          ><span class="text-m marketplace-link">Marketplace</span></nuxt-link
+        >
         <div class="logo-block">
-          <img src="~/assets/img/header-logo.svg" alt="logo" />
+          <nuxt-link :to="logoLink"
+            ><img
+              class="marketplace-link"
+              src="~/assets/img/header-logo.svg"
+              alt="logo"
+          /></nuxt-link>
         </div>
         <div class="user-info">
           <span class="avatar">
@@ -30,6 +37,9 @@ export default {
   },
 
   computed: {
+    logoLink() {
+      return this.$auth.user ? "/profile" : "/landing";
+    },
     userAvatar() {
       return this.$auth.user.avatar ?? "";
     },
