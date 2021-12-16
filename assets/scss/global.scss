@@ -221,6 +221,12 @@ ul{
 
 }
 
+.register-wrapper{
+  @media (max-height: 800px) {
+    height: 120vh;
+  }
+}
+
 .text-center{
   text-align: center;
 }
