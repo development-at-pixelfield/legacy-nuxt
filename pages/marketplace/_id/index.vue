@@ -29,11 +29,15 @@
           </div>
 
           <div class="right-side">
-            <div v-if="true" class="sold-action">
+            <div v-if="nfts.is_sold" class="sold-action">
               <div class="left-side-s">
                 <span class="img-block-s">
                   <img
-                    src="~/assets/img/auction.png"
+                    :src="
+                      nfts.owner.avatar
+                        ? nfts.owner
+                        : require('assets/img/auction.png')
+                    "
                     alt="auction"
                     class="img-s"
                   />
@@ -41,7 +45,7 @@
 
                 <div>
                   <p class="mtb text-m-bold">Current owner</p>
-                  <p class="mtb text-m-bold">Username</p>
+                  <p class="mtb text-m-bold">{{ nfts.owner.display_name }}</p>
                 </div>
               </div>
 
@@ -58,7 +62,6 @@
 
             <div v-else class="action">
               <Button
-                v-if="showCard"
                 class="first-btn"
                 :label="$t('marketplace.payCard')"
                 :background="'ghost'"
