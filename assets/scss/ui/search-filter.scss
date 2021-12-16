@@ -165,11 +165,12 @@
 }
 
 ::placeholder {
-  font-weight: normal;
-  font-size: 16px;
+  font-weight: 400;
+  font-size: 17px;
   line-height: 150%;
   color: $c-greyscale-20;
   opacity: 1;
+  font-family: $font-primary;
 }
 
 .disabled-cursor {

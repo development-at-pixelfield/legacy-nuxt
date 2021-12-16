@@ -2,7 +2,7 @@
   <div class="custom-filter-dropdown">
     <span v-if="label" class="label-float text-semi-s">
       <span class="text-s-bold">{{ label }}</span>
-      <span v-if="showCount && selectedItems.length" class="count"
+      <span v-if="showCount && selectedItems.length" class="count text-s-bold"
         >({{ selectedItems.length }})</span
       >
     </span>
@@ -350,7 +350,21 @@ export default {
       let data = [];
       if (this.returnObject) {
         data = this.selectedItems.filter((item) => item.value !== chip);
-      } else data = this.selectedItems.filter((item) => item !== chip);
+      } else {
+        data = this.selectedItems.filter((item) => {
+          if (this.field === "luminosity__in") {
+            if ("+" + item !== chip) {
+              return item;
+            }
+          } else if (
+            item.toUpperCase() !== chip &&
+            item.toLowerCase() !== chip
+          ) {
+            return item;
+          }
+        });
+      }
+
       this.$emit("update:name", data);
     },
     removeList() {
