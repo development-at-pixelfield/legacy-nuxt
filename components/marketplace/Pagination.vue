@@ -149,7 +149,7 @@ export default {
     },
     showCount() {
       if (this.currentPage === 1) {
-        return this.currentPage + "-" + this.limit;
+        return this.total;
       }
 
       const count = (this.currentPage - 1) * this.limit;
