@@ -20,11 +20,12 @@
           <div class="left-side">
             <h1 class="mb-8 mt-0 detail-title">{{ nfts.name }}</h1>
             <span class="header-title1"
-              >Current price: {{ nfts.price_eth }}Ξ</span
+              >Current price:
+              {{ (+nfts.last_offer.eth_current_price).toFixed(2) }}Ξ</span
             >
-            <span class="header-title1 ml-16"
-              >est. ${{ (+nfts.price_usd).toFixed(2) }}</span
-            >
+            <span class="header-title1 ml-16">{{
+              convertEthereum(nfts.last_offer.eth_current_price)
+            }}</span>
           </div>
 
           <div class="right-side">
@@ -113,7 +114,7 @@
             </div>
             <div class="timer text-l">
               <AuctionTimer
-                :time="'Dec 16, 2021 11:07:00'"
+                :time="nfts.last_offer.price_changes_at"
                 :show-auction.sync="showAuction"
               />
             </div>
@@ -221,25 +222,28 @@ export default {
   },
   auth: false,
   middleware: "auth",
-  async asyncData({ store, params }) {
+  async asyncData({ app, store, params }) {
     try {
       const nfts = await store.dispatch("nfts/getNftsById", { uid: params.id });
+      const ethPrice = (await store.dispatch("fetchEthPrice")).rate;
+
+      let showAuction = false;
+      if (nfts.last_offer.category === "timed") showAuction = true;
+
       console.log(nfts, "nfts");
-      return { nfts };
+      return { nfts, ethPrice, showAuction };
     } catch (e) {}
   },
   data() {
     return {
       showCard: false,
-      showAuction: true,
+      showAuction: false,
     };
   },
   computed: {
     convertEthereum() {
       return (price) => {
-        const defEthr = 0.00022;
-        const usd = price / defEthr;
-        return "est. $" + usd.toFixed(2) + "K";
+        return "est. $" + Number(this.ethPrice * price).toFixed(3) + "K";
       };
     },
   },
