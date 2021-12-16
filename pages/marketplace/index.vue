@@ -180,9 +180,9 @@ export default {
       filterHeader: {},
       formOptions: {},
       filterItems: [
-        { label: "Recently listed", value: "recently_listed" },
-        { label: "Price (ETH): Highest first", value: "highest" },
-        { label: "Price (ETH): Lowest first", value: "lowest" },
+        { label: "Recently listed", value: "created_at" },
+        { label: "Price (ETH): Highest first", value: "price_eth" },
+        { label: "Price (ETH): Lowest first", value: "-price_eth" },
       ],
     };
   },
@@ -193,7 +193,7 @@ export default {
     },
     convertEthereum() {
       return (price) => {
-        return "est. $" + this.ethPrice * price + "K";
+        return "est. $" + Number(this.ethPrice).toFixed(3) * price + "K";
       };
     },
   },

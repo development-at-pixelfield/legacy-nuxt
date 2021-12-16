@@ -143,7 +143,9 @@
   justify-content: center;
   margin-top: 24px;
   
-  &:hover {
-    cursor: pointer;
-  }
+  &_item {
+    &:hover {
+      cursor: pointer;
+    }
+}
 }

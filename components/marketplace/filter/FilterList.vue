@@ -125,9 +125,15 @@
             @on-click="applyFilters"
           />
         </div>
-        <div class="apply-clear" @click="clearFilter(false)">
-          <div>{{ $t("marketplace.clearAll") }}</div>
-          <img src="~/assets/img/icons/close-modal.svg" />
+        <div class="apply-clear">
+          <div class="apply-clear_item" @click="clearFilter(false)">
+            {{ $t("marketplace.clearAll") }}
+          </div>
+          <img
+            class="apply-clear_item"
+            src="~/assets/img/icons/close-modal.svg"
+            @click="clearFilter(false)"
+          />
         </div>
       </div>
     </div>
