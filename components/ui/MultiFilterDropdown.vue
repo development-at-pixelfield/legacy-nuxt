@@ -104,6 +104,7 @@
             >
               <span
                 v-if="selectedItems.includes(item.value)"
+                class="checkmark-box"
                 style="margin-right: 8px"
               >
                 <img src="~/assets/img/icons/checkbox-mark.svg" alt="icon" />
