@@ -24,6 +24,8 @@
             :item-value="'value'"
             :item-label="'label'"
             :name.sync="filter.ordering"
+            :placeholder="'Recently listed'"
+            :show-remove="false"
             class="mb-0"
           />
           <FilterList
