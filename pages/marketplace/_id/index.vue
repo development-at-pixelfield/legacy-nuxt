@@ -9,7 +9,7 @@
           class="nav"
         />
         <div class="img-block">
-          <WebGl :src="nfts.model_file" />
+          <WebGl :src="nft.model_file" />
         </div>
       </div>
     </div>
@@ -18,24 +18,24 @@
       <div class="detail">
         <div class="main-info block-margin">
           <div class="left-side">
-            <h1 class="mb-8 mt-0 detail-title">{{ nfts.name }}</h1>
+            <h1 class="mb-8 mt-0 detail-title">{{ nft.name }}</h1>
             <span class="header-title1"
               >Current price:
-              {{ (+nfts.last_offer.eth_current_price).toFixed(2) }}Ξ</span
+              {{ (+nft.last_offer.eth_current_price).toFixed(2) }}Ξ</span
             >
             <span class="header-title1 ml-16">{{
-              convertEthereum(nfts.last_offer.eth_current_price)
+              convertEthereum(nft.last_offer.eth_current_price)
             }}</span>
           </div>
 
           <div class="right-side">
-            <div v-if="nfts.is_sold" class="sold-action">
+            <div v-if="nft.is_sold" class="sold-action">
               <div class="left-side-s">
                 <span class="img-block-s">
                   <img
                     :src="
-                      nfts.owner.avatar
-                        ? nfts.owner
+                      nft.owner.avatar
+                        ? nft.owner
                         : require('assets/img/auction.png')
                     "
                     alt="auction"
@@ -45,7 +45,7 @@
 
                 <div>
                   <p class="mtb text-m-bold">Current owner</p>
-                  <p class="mtb text-m-bold">{{ nfts.owner.display_name }}</p>
+                  <p class="mtb text-m-bold">{{ nft.owner.display_name }}</p>
                 </div>
               </div>
 
@@ -117,8 +117,9 @@
             </div>
             <div class="timer text-l">
               <AuctionTimer
-                :time="nfts.last_offer.price_changes_at"
+                :time="nft.last_offer.price_changes_at"
                 :show-auction.sync="showAuction"
+                @finished="timerFinished"
               />
             </div>
           </div>
@@ -127,37 +128,41 @@
         <div class="content block-margin">
           <div class="header-title">{{ $t("marketplace.story") }}</div>
           <p class="mtb text-m">
-            {{ nfts.description }}
+            {{ nft.description }}
           </p>
           <ul class="tags">
-            <li v-if="nfts.luminosity">
+            <li v-if="nft.luminosity">
               <span class="tag text-s-bold"
-                >Luminosity (+{{ nfts.luminosity }})</span
+                >Luminosity (+{{ nft.luminosity }})</span
               >
             </li>
-            <li v-if="nfts.quality_level">
+            <li v-if="nft.quality_level">
               <span class="tag text-s-bold"
-                >Quality ({{ nfts.quality_level }})</span
+                >Quality ({{ nft.quality_level }})</span
               >
             </li>
-            <li v-if="nfts.age">
-              <span class="tag text-s-bold">Age ({{ nfts.age }})</span>
+            <li v-if="nft.age">
+              <span class="tag text-s-bold">Age ({{ nft.age }})</span>
             </li>
-            <li v-if="nfts.nft_type">
-              <span class="tag text-s-bold">Type ({{ nfts.nft_type }})</span>
+            <li v-if="nft.nft_type">
+              <span class="tag text-s-bold">Type ({{ nft.nft_type }})</span>
             </li>
-            <li v-if="nfts.is_constellation">
+            <li v-if="nft.is_constellation">
               <span class="tag text-s-bold">Path of constellation (Yes)</span>
             </li>
-            <li v-if="nfts.constellation">
+            <li v-if="nft.constellation">
               <span class="tag text-s-bold"
-                >Constellation ({{ nfts.constellation.name }})</span
+                >Constellation ({{ nft.constellation.name }})</span
               >
             </li>
           </ul>
         </div>
 
-        <div class="history block-margin">
+        <a
+          :href="transactionsListLink"
+          target="_blank"
+          class="history block-margin"
+        >
           <div class="left-side">
             <span class="display-f mr-8">
               <img src="~/assets/img/icons/clock-counter.svg" alt="counter" />
@@ -166,11 +171,11 @@
           </div>
 
           <div class="right-side">
-            <nuxt-link to="/" class="no-color-dec-link text-m-bold show-history"
-              >Show history</nuxt-link
+            <span class="no-color-dec-link text-m-bold show-history"
+              >Show history</span
             >
           </div>
-        </div>
+        </a>
 
         <div class="auction satisfaction">
           <div class="left-side">
@@ -208,6 +213,7 @@ import WebGl from "../../../components/marketplace/WebGl";
 import Button from "../../../components/ui/Button";
 import AuctionTimer from "../../../components/marketplace/AuctionTimer";
 import converter from "../../../mixins/converter";
+import metamask from "../../../mixins/metamask";
 
 export default {
   name: "Index",
@@ -217,7 +223,7 @@ export default {
     Button,
     AuctionTimer,
   },
-  mixins: [converter],
+  mixins: [converter, metamask],
   layout(context) {
     if (context.$auth.$state.user) {
       return "auth";
@@ -227,20 +233,22 @@ export default {
   middleware: "auth",
   async asyncData({ app, store, params }) {
     try {
-      const nfts = await store.dispatch("nfts/getNftsById", { uid: params.id });
+      const nft = await store.dispatch("nfts/getNftsById", { uid: params.id });
       const ethPrice = (await store.dispatch("fetchEthPrice")).rate;
 
       let showAuction = false;
-      if (nfts.last_offer.category === "timed") showAuction = true;
+      if (nft.last_offer.category === "timed") showAuction = true;
 
-      console.log(nfts, "nfts");
-      return { nfts, ethPrice, showAuction };
+      console.log(nft, "nft");
+      return { nft, ethPrice, showAuction };
     } catch (e) {}
   },
   data() {
     return {
       showCard: false,
       showAuction: false,
+      ethPrice: null,
+      nft: null,
     };
   },
   computed: {
@@ -249,13 +257,29 @@ export default {
         return "est. $" + Number(this.ethPrice * price).toFixed(3) + "K";
       };
     },
+    transactionsListLink() {
+      const token = this.nft.nft_token;
+      return `${process.env.NETWORK_ETHERSCAN}token/${token.contract_address}?a=${token.token_id}`;
+    },
+    user() {
+      return this.$auth.user;
+    },
+    isVerified() {
+      return this.user;
+    },
   },
   methods: {
     payCard() {},
 
-    buyNow() {},
+    buyNow() {
+      console.log(this.user);
+    },
 
     exchangeToken() {},
+
+    timerFinished() {
+      this.$router.app.refresh();
+    },
   },
 };
 </script>
