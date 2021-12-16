@@ -2,7 +2,7 @@
   <div class="custom-filter-dropdown">
     <span v-if="label" class="label-float text-semi-s">
       <span class="text-s-bold">{{ label }}</span>
-      <span v-if="showCount && selectedItems.length"
+      <span v-if="showCount && selectedItems.length" class="count"
         >({{ selectedItems.length }})</span
       >
     </span>
