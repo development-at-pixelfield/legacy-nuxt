@@ -1,6 +1,12 @@
 .auth-header{
   text-align: center;
-  padding: 20px;
+  padding: 16px;
+  border-bottom: 1px solid #1d1126;
+
+  a{
+    display: flex;
+    justify-content: center;
+  }
 
   img{
     cursor: pointer;

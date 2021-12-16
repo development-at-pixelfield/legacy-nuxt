@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+}
+
 header{
   height: 56px;
   background: #08010E;
@@ -39,6 +43,10 @@ header{
       width: 100%;
       display: flex;
       justify-content: center;
+
+      a{
+        display: flex;
+      }
     }
 
     .user-info{
@@ -60,6 +68,4 @@ header{
   }
 }
 
-a {
-  text-decoration: none;
-}
+
