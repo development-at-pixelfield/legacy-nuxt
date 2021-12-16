@@ -71,10 +71,11 @@ export default {
         vm.hours = vm.getTrueNumber(hours);
         vm.minutes = vm.getTrueNumber(mins);
         vm.seconds = vm.getTrueNumber(secs);
-
         if (des <= 0) {
           clearInterval(vm.updateInterval);
-          // vm.$emit("update:show-auction", false);
+        }
+        if (des <= 1) {
+          vm.$emit("finished");
         }
       }, 1000);
     }

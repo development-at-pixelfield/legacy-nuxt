@@ -182,6 +182,7 @@
       visibility: visible;
       position: absolute;
       width: 100%;
+      top: 56px;
     }
   }
 
@@ -209,4 +210,12 @@
 
 .count {
   color: white;
+}
+
+.checkmark-box{
+  width: 24px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
