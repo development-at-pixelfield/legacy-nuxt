@@ -23,7 +23,7 @@
             @keydown="onKeyDown"
           />
           <img
-            v-if="value"
+            v-if="value && showRemove"
             src="~/assets/img/icons/circle-remove.svg"
             class="label-icon"
             @click.stop="removeValue"
@@ -169,6 +169,10 @@ export default {
     showDefaultOrder: {
       type: Boolean,
       default: false,
+    },
+    showRemove: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {
