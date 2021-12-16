@@ -239,7 +239,6 @@ export default {
       let showAuction = false;
       if (nft.last_offer.category === "timed") showAuction = true;
 
-      console.log(nft, "nft");
       return { nft, ethPrice, showAuction };
     } catch (e) {}
   },
@@ -265,7 +264,7 @@ export default {
       return this.$auth.user;
     },
     isVerified() {
-      return this.user;
+      return this.user.is_email_verified && this.user.is_verified;
     },
   },
   methods: {
