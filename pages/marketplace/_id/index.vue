@@ -19,8 +19,12 @@
         <div class="main-info block-margin">
           <div class="left-side">
             <h1 class="mb-8 mt-0 detail-title">{{ nfts.name }}</h1>
-            <span class="header-title1">Current price: 107.50Ξ</span>
-            <span class="header-title1 ml-16">{{ convertEthereum(50) }}</span>
+            <span class="header-title1"
+              >Current price: {{ nfts.price_eth }}Ξ</span
+            >
+            <span class="header-title1 ml-16"
+              >est. ${{ (+nfts.price_usd).toFixed(2) }}</span
+            >
           </div>
 
           <div class="right-side">
@@ -119,25 +123,32 @@
         <div class="content block-margin">
           <div class="header-title">{{ $t("marketplace.story") }}</div>
           <p class="mtb text-m">
-            It is the 29th-brightest star in the sky (the 4th-brightest in
-            Orion) and is a blue supergiant. Together with Mintaka and Alnitak,
-            the three stars make up Orion's belt, known by many names across
-            many ancient cultures. Alnilam is the middle star. It is slightly
-            variable, from magnitude 1.64 to 1.74. Since 1943, the spectrum of
-            this star has served as one of the stable anchor points by which
-            other stars are classified. It is also one of the 58 stars used in
-            celestial navigation. It is at its highest point in the sky around
-            midnight on December 15.
+            {{ nfts.description }}
           </p>
           <ul class="tags">
-            <li>
-              <span class="tag text-s-bold">Luminosity (+3)</span>
+            <li v-if="nfts.luminosity">
+              <span class="tag text-s-bold"
+                >Luminosity (+{{ nfts.luminosity }})</span
+              >
             </li>
-            <li>
-              <span class="tag text-s-bold">Quality (+3)</span>
+            <li v-if="nfts.quality_level">
+              <span class="tag text-s-bold"
+                >Quality ({{ nfts.quality_level }})</span
+              >
             </li>
-            <li>
-              <span class="tag text-s-bold">Colour (Colour)</span>
+            <li v-if="nfts.age">
+              <span class="tag text-s-bold">Age ({{ nfts.age }})</span>
+            </li>
+            <li v-if="nfts.nft_type">
+              <span class="tag text-s-bold">Type ({{ nfts.nft_type }})</span>
+            </li>
+            <li v-if="nfts.is_constellation">
+              <span class="tag text-s-bold">Path of constellation (Yes)</span>
+            </li>
+            <li v-if="nfts.constellation">
+              <span class="tag text-s-bold"
+                >Constellation ({{ nfts.constellation.name }})</span
+              >
             </li>
           </ul>
         </div>
@@ -192,6 +203,7 @@ import Navigation from "../../../components/header/Navigation";
 import WebGl from "../../../components/marketplace/WebGl";
 import Button from "../../../components/ui/Button";
 import AuctionTimer from "../../../components/marketplace/AuctionTimer";
+import converter from "../../../mixins/converter";
 
 export default {
   name: "Index",
@@ -201,6 +213,7 @@ export default {
     Button,
     AuctionTimer,
   },
+  mixins: [converter],
   layout(context) {
     if (context.$auth.$state.user) {
       return "auth";
@@ -211,6 +224,7 @@ export default {
   async asyncData({ store, params }) {
     try {
       const nfts = await store.dispatch("nfts/getNftsById", { uid: params.id });
+      console.log(nfts, "nfts");
       return { nfts };
     } catch (e) {}
   },
