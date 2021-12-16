@@ -11,12 +11,6 @@ export default {
       return this.$metamask();
     },
   },
-  async created() {
-    if (process.client) {
-      await this.connectMetamask();
-      await this.getBalance();
-    }
-  },
   methods: {
     async getBalance() {
       if (this.metamaskAccount) {
@@ -35,16 +29,25 @@ export default {
         });
         return;
       }
-      const accounts = await this.metamask.getAccounts();
-      if (!accounts.length) {
+      console.log("get accounts");
+      try {
+        const accounts = await this.metamask.getAccounts();
+        if (!accounts.length) {
+          await this.$store.commit("setSnackbar", {
+            show: true,
+            message: this.$t("snackbar.metaMask.accountsIsNotConnected"),
+            color: "error",
+          });
+          return;
+        }
+        this.metamaskAccount = accounts.shift();
+      } catch (e) {
         await this.$store.commit("setSnackbar", {
           show: true,
           message: this.$t("snackbar.metaMask.accountsIsNotConnected"),
           color: "error",
         });
-        return;
       }
-      this.metamaskAccount = accounts.shift();
     },
   },
 };

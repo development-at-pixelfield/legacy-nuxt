@@ -26,7 +26,7 @@
         :class="inputClasses"
         :max-length="maxLength"
         :disabled="disabled"
-        autocomplete="off"
+        autocomplete="on"
         :placeholder="placeholder"
         @keypress="keyPressHandler"
         @keyup="keyUpHandler"
