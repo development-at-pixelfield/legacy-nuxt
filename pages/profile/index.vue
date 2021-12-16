@@ -10,7 +10,7 @@
 
           <div class="user-block">
             <p class="mt-0 mb-8 header-title">
-              {{ $auth.user.email }}
+              { Username }
               <img
                 :src="require(`assets/img/icons/verified-account.svg`)"
                 alt="icon"
