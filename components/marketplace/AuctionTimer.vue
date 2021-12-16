@@ -74,7 +74,7 @@ export default {
 
         if (des <= 0) {
           clearInterval(vm.updateInterval);
-          vm.$emit("update:show-auction", false);
+          // vm.$emit("update:show-auction", false);
         }
       }, 1000);
     }
