@@ -78,11 +78,11 @@
         <span class="empty-image"
           ><img src="~/assets/img/empty-img.svg" alt="empty-image"
         /></span>
-        <p class="description mt-0 mb-16 text-center">
-          {{ $t("marketplace.emptyDesc") }}
-        </p>
+        <p
+          class="description mt-0 mb-16 text-center"
+          v-html="$t('marketplace.emptyDesc')"
+        ></p>
         <Button
-          class="mb-24"
           :label="$t('marketplace.applyFilters')"
           :background="'primary'"
           :size="'full'"
