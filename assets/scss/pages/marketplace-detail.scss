@@ -1,7 +1,7 @@
 .marketplace-detail{
   background: $c-background;
   padding-bottom: 40px;
-  height: 100vh;
+  //height: 100vh;
 
   .done{
     color: #1DD1A1;
@@ -108,6 +108,10 @@
       .right-side{
         @media (max-width: $break-sms) {
           width: 100%;
+        }
+
+        .action{
+          display: flex;
         }
 
         .first-btn{

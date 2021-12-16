@@ -85,7 +85,8 @@ export default {
       const loader = new FBXLoader();
       // loader.setCrossOrigin("anonymous");
       const vm = this;
-      loader.load(vm.src, function (object) {
+      // https://threejs.org/examples/models/fbx/Samba%20Dancing.fbx
+      loader.load(this.src, function (object) {
         // mixer = new THREE.AnimationMixer( object );
 
         // const action = mixer.clipAction( object.animations[ 0 ] );

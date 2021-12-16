@@ -1,5 +1,8 @@
 <template>
-  <div class="auth-wrapper">
+  <div
+    class="auth-wrapper"
+    :class="{ 'register-wrapper': $route.name === 'register' }"
+  >
     <AuthHeader />
     <nuxt />
     <Snackbar

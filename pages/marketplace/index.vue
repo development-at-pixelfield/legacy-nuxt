@@ -193,7 +193,7 @@ export default {
     },
     convertEthereum() {
       return (price) => {
-        return "est. $" + Number(this.ethPrice).toFixed(3) * price + "K";
+        return "est. $" + Number(this.ethPrice * price).toFixed(3) + "K";
       };
     },
   },
