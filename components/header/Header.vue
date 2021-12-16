@@ -13,6 +13,11 @@
               alt="logo"
           /></nuxt-link>
         </div>
+        <div class="waller-info">
+          <span class="avatar">
+            <DropdownWallet class="profile-dropdown" />
+          </span>
+        </div>
         <div class="user-info">
           <span class="avatar">
             <DropdownList
@@ -30,10 +35,12 @@
 
 <script>
 import DropdownList from "../ui/DropdownList";
+import DropdownWallet from "../ui/DropdownWallet";
 export default {
   name: "Header",
   components: {
     DropdownList,
+    DropdownWallet,
   },
 
   computed: {
