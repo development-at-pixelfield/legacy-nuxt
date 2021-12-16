@@ -94,6 +94,24 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     stars: "Stars",
     planets: "Planets",
     points: "Points",
+    miles: "Galaxy Miles",
+    verifyTitle: "Verify your identity",
+    verifyDesc1:
+      "Before buying or making an offer you must verify your identity.",
+    verifyDesc2:
+      "You will need your valid ID card, passport or driving licence",
+    verifyBtn: "Start verification (5min)",
+    walletTitle: "We can’t detect your wallet",
+    walletDesc1:
+      "Connect your wallet to view your collection and transactions history!",
+    walletDesc2:
+      "Follow our step by step guide if you are not sure what to do next :)",
+    walletBtn: "Connect wallet",
+    collectionTitle: "Start collecting today!",
+    collectionDesc1:
+      "Once you collect your first Galaxy NFT you will see it displayed right here.",
+    collectionDesc2: "For now, why don’t you look around our marketplace?",
+    collectionBtn: "Visit marketplace",
   },
 
   settings: {
@@ -204,5 +222,17 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
   modals: {
     modalClose: "No, go back :)",
     deleteAccount: "Delete account",
+    connect: "Connect",
+    disconnect: "Disconnect",
+    wallet: "Galaxy wallet",
+    walletStatus: "Wallet Status",
+    walletId: "Wallet ID",
+    walletLinks: "Useful links",
+    walletActive: "Active",
+    walletNot: "You need a MetaMask wallet to buy Galaxy NFTs",
+    walletMore: "Learn more",
+    walletInfoTitle: "Unsure how to set up the wallet?",
+    walletInfo:
+      "We created easy to follow guides that will help you to set up a MetaMask wallet and get it ready to buy your first Galaxy NFT!",
   },
 };

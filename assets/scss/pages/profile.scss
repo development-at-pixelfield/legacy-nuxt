@@ -1,4 +1,6 @@
 .profile-container {
+  background: $c-background;
+  padding-bottom: 50px;
   .user-info {
     background: url("~assets/img/landing/starsgroup.png");
     background-position: center;
@@ -6,18 +8,64 @@
     @media (max-width: $break-sms) {
       height: 260px;
     }
+    .header-title {
+      display: flex;
+      align-items: center;
+      @media (max-width: $break-sms) {
+        justify-content: center;
+      }
+      img {
+        font-size: 0;
+        margin-left: 13px;
+      }
+    }
 
     .user {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 143px;
+      padding-top: 207px;
       padding-bottom: 32px;
 
       @media (max-width: $break-sms) {
        display: block;
         text-align: center;
-        padding-top: 168px;
+        padding-top: 40px;
+      }
+
+      &-tag {
+        background-color: $c-greyscale-100;
+        border-radius: 3px;
+        padding: 4px 8px;
+        display: flex;
+        margin-right: 8px;
+        align-items: center;
+        @media (max-width: $break-sms) {
+          justify-content: center;
+          margin-bottom: 8px;
+          margin-right: 0;
+        }
+        &-state {
+          margin-right: 4px;
+          width: 8px;
+          height: 8px;
+          border-radius: 8px;
+          display: block;
+          background-color: $c-connected;
+        }
+        &-text {
+          margin-right: 4px;
+        }
+        &-gift {
+          margin-right: 5px;
+        }
+        &.view-offline {
+          .user-tag {
+            &-state {
+              background-color: $c-not-connected;
+            }
+          }
+        }
       }
 
       .left-side {
@@ -68,16 +116,9 @@
 
             @media (max-width: $break-sms) {
               justify-content: center;
-              margin-bottom: 24px;
-            }
-
-            li {
-              margin-right: 32px;
-              text-align: center;
-
-              &:last-child {
-                margin-right: 0;
-              }
+              flex-direction: column;
+              align-items: center;
+              margin-bottom: 64px;
             }
           }
         }
@@ -86,11 +127,72 @@
   }
 
   .user-content{
-    margin-top: 80px;
-    height: 200px;
+    margin-top: 28px;
+    // height: 200px;
 
     @media (max-width: $break-sms) {
-      margin-top: 253px;
+      margin-top: 32px;
+    }
+    .user {
+      &-action {
+        &-block {
+          display: flex;
+          align-items: center;
+          padding: 18px 24px 2px 24px;
+          background: $c-greyscale-100;
+          border-radius: 3px;
+          @media (max-width: $break-mds) {
+            flex-direction: column;
+            text-align: center;
+            padding: 8px 16px 16px;
+            .user-action-block {
+              &-text {
+                padding-bottom: 16px;
+              }
+              &-button {
+                padding-bottom: 0;
+              }
+            }
+          }
+          @media (max-width: $break-sms) {
+           .user-action-block-button {
+            width: 100%;
+           }
+          }
+          & + .user-action-block {
+            margin-top: 24px;
+          }
+          &-icon {
+            padding-right: 36px;
+            font-size: 0;
+          }
+          &-text {
+            flex: 1;
+            padding-bottom: 11px;
+            padding-right: 10px;
+          }
+          &-button {
+            padding-bottom: 11px;
+          }
+          &.view-wallet {
+            padding: 24px;
+            @media (max-width: $break-mds) {
+              padding: 16px;
+            }
+            .user-action-block {
+              &-text {
+                padding-bottom: 0;
+                @media (max-width: $break-mds) {
+                  padding-bottom: 16px;
+                }
+              }
+              &-button {
+                padding-bottom: 0;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

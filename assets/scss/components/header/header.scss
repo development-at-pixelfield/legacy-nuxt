@@ -51,6 +51,16 @@ header{
         display: flex;
       }
     }
+    .waller-info{
+      z-index: 1;
+      display: flex;
+      position: absolute;
+      right: 47px;
+
+      .avatar{
+        display: flex;
+      }
+    }
   }
 }
 
