@@ -118,7 +118,7 @@
         />
         <div class="apply-action mb-24">
           <Button
-            :label="$t('marketplace.apply')"
+            :label="$t('marketplace.applyFilters')"
             :background="'primary'"
             :size="'full'"
             :color="'c-white'"
@@ -126,7 +126,7 @@
           />
         </div>
         <div class="apply-clear">
-          <div class="apply-clear_item" @click="clearFilter(false)">
+          <div class="apply-clear_item text-m-bold" @click="clearFilter(false)">
             {{ $t("marketplace.clearAll") }}
           </div>
           <img
