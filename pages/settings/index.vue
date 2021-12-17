@@ -58,6 +58,16 @@
           :is-submit="isSubmit"
         />
 
+        <Input
+          class="mb-16"
+          :type="'text'"
+          :model.sync="username"
+          :label="$t('auth.username')"
+          :error="$v.username"
+          :rules="rules.username"
+          :is-submit="isSubmit"
+        />
+
         <SettingItem :type="'link'" :link="'/settings/change-password'">
           <p slot="sub-title" class="text-m mtb subtitle">
             {{ $t("settings.changePassword") }}
@@ -103,7 +113,7 @@
 </template>
 
 <script>
-import { email, required } from "vuelidate/lib/validators";
+import { email, minLength, required } from "vuelidate/lib/validators";
 import Input from "../../components/ui/Input";
 import SettingItem from "../../components/settings/SettingItem";
 import Checkbox from "../../components/ui/Checkbox";
@@ -129,11 +139,15 @@ export default {
         return email.includes("@");
       },
     },
+    username: {
+      minLength: minLength(5),
+    },
   },
   data() {
     return {
       isSubmit: false,
       email: "",
+      username: "",
       showAlerts: false,
       rules: {
         email: [
@@ -145,6 +159,12 @@ export default {
           {
             name: "checkEmailSymbol",
             text: this.$t("validations.addEmail"),
+          },
+        ],
+        username: [
+          {
+            name: "minLength",
+            text: "Must have more 5 characters",
           },
         ],
       },
@@ -167,7 +187,9 @@ export default {
   },
 
   created() {
+    console.log(this.$auth.user, "this.$auth.user");
     this.email = this.$auth.user.email;
+    this.username = this.$auth.user.username || "";
     this.showAlerts = this.$auth.user.nft_notifications;
   },
 
@@ -196,6 +218,7 @@ export default {
           const data = {
             nft_notifications: this.showAlerts,
             email: this.email,
+            username: this.username,
           };
           if (this.email !== this.$auth.user.email) {
             data.email = this.email;
