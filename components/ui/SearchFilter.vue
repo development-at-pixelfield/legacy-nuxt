@@ -68,7 +68,6 @@
               }"
               class="text-m"
               @click="select(item, index)"
-              @mouseover="mouseHover(index)"
             >
               <span class="label-text">{{
                 itemLabel ? item[itemLabel] : item.label
@@ -227,6 +226,7 @@ export default {
   },
   watch: {
     value(val) {
+      this.$emit("update:name", val);
       if (val) {
         this.listNew = this.list.filter((item) => {
           const label = this.itemLabel ? this.itemLabel : "label";
@@ -238,7 +238,7 @@ export default {
           ) {
             return item;
           } else if (item.value === val) {
-            this.value = item.label;
+            // this.value = val;
             return item;
           }
         });
@@ -257,9 +257,10 @@ export default {
         this.fixScrolling();
       }
 
-      if (!val && !this.listNew.length) {
-        this.value = "";
-      }
+      // if (!val && !this.listNew.length) {
+      //   console.log("11111");
+      //   this.value = "";
+      // }
     },
   },
   mounted() {
@@ -333,7 +334,23 @@ export default {
       this.visible = !this.visible;
       if (this.visible) {
         this.$refs.inputFilter.focus();
-        this.listNew = this.list;
+
+        if (this.value) {
+          this.listNew = this.list.filter((item) => {
+            const label = this.itemLabel ? this.itemLabel : "label";
+            if (
+              item[label] &&
+              (item[label].includes(this.value) ||
+                item[label].toUpperCase().includes(this.value) ||
+                item[label].toLowerCase().includes(this.value))
+            ) {
+              return item;
+            } else if (item.value === this.value) {
+              this.value = item.label;
+              return item;
+            }
+          });
+        } else this.listNew = this.list;
       } else {
         this.$emit("touched");
       }

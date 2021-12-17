@@ -112,6 +112,9 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
       "Once you collect your first Galaxy NFT you will see it displayed right here.",
     collectionDesc2: "For now, why don’t you look around our marketplace?",
     collectionBtn: "Visit marketplace",
+    email_is_not_verified: "Please, verify your email to be able to buy nft",
+    is_not_logged: "Please, log in to be able to buy nft",
+    user_not_verified: "Please, verify your person to be able to buy nft",
   },
 
   settings: {
