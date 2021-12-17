@@ -29,27 +29,6 @@
         </div>
       </div>
 
-      <div class="mobile-header header">
-        <div class="left-side">
-          <span class="text-m-bold">{{ $t("marketplace.clearAll") }}</span>
-          <Icon
-            src="close-modal.svg"
-            size="big"
-            class="pointer"
-            @on-click="clearFilter"
-          />
-        </div>
-        <div class="right-side">
-          <Button
-            :label="$t('marketplace.apply')"
-            :background="'primary'"
-            :size="'custom-medium'"
-            :color="'c-white'"
-            @on-click="applyFilters"
-          />
-        </div>
-      </div>
-
       <div v-if="canShow" class="filters mt-24">
         <SearchFilter
           :list="searchItems"
@@ -126,13 +105,13 @@
           />
         </div>
         <div class="apply-clear">
-          <div class="apply-clear_item text-m-bold" @click="clearFilter(false)">
+          <div class="apply-clear_item text-m-bold" @click="clearFilter()">
             {{ $t("marketplace.clearAll") }}
           </div>
           <img
             class="apply-clear_item"
             src="~/assets/img/icons/close-modal.svg"
-            @click="clearFilter(false)"
+            @click="clearFilter()"
           />
         </div>
       </div>
@@ -227,7 +206,7 @@ export default {
       }
     },
     type(val) {
-      if (val === "mobile") this.removeScroll();
+      if (val === "mobile" && this.showPanel) this.removeScroll();
       else this.addScroll();
     },
     queryFilter(val) {
@@ -237,6 +216,9 @@ export default {
       this.showPanel = val;
     },
     showPanel(val) {
+      if (this.type === "mobile" && val) this.removeScroll();
+      else this.addScroll();
+
       this.$emit("update:is-open-panel", val);
       if (val) {
         setTimeout(() => {
