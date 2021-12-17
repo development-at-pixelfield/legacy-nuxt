@@ -175,9 +175,7 @@ export default {
   methods: {
     paginate(type) {
       if (type === "next" && !this.disableRight) {
-        // console.log("update");
-        this.$emit("update:page", this.currentPage + 1);
-        return;
+        return this.$emit("update:page", this.currentPage + 1);
       }
       if (type === "prev" && !this.disableLeft) {
         return this.$emit("update:page", this.currentPage - 1);

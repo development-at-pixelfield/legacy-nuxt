@@ -92,7 +92,6 @@
       </div>
 
       <div v-if="nfts.count" class="pagination-wrapper">
-        <h1>{{ filter.page }}</h1>
         <Pagination
           :list="nfts.results"
           :total="nfts.count"
@@ -101,6 +100,7 @@
           :current-page="nfts.current"
           :pages-count="nfts.pages_count"
           :limit="filter.page_size || nfts.page_size"
+          @update:page="updatePage"
         />
       </div>
     </div>
@@ -231,12 +231,17 @@ export default {
   },
 
   methods: {
+    updatePage(val) {
+      const cleanObject = functions.cleanObject(this.$route.query);
+      this.filter.page = val;
+      cleanObject.page = val;
+      this.fetchNfts(cleanObject);
+    },
     openFilter() {
       this.isOpenPanel = true;
     },
     setDefaultWatch() {
       this.$watch("filter.page", (val) => {
-        console.log(val, "888");
         const cleanObject = functions.cleanObject(this.$route.query);
         cleanObject.page = val;
         this.fetchNfts(cleanObject);
