@@ -44,7 +44,6 @@
         >{{ $t("auth.newHere") }}</nuxt-link
       >
     </div>
-
     <FooterLinks />
   </div>
 </template>

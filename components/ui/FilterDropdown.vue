@@ -187,18 +187,18 @@ export default {
   },
   computed: {
     filterByAlphaList() {
-      const list = [...this.listNew];
-      if (list.length && list[0].label && !this.notFilter) {
-        if (this.showDefaultOrder) {
-          return list;
-        } else {
-          return list.sort((a, b) => a.label.localeCompare(b.label));
-        }
-      }
+      return [...this.listNew];
+      // if (list.length && list[0].label && !this.notFilter) {
+      //   if (this.showDefaultOrder) {
+      //     return list;
+      //   } else {
+      //     return list.sort((a, b) => a.label.localeCompare(b.label));
+      //   }
+      // }
       // if (list.length && list[0].value && !this.notFilter) {
       //   return list.sort((a, b) => a.value.localeCompare(b.value));
       // }
-      return list;
+      // return list;
     },
     mozHeight() {
       return this.listNew.length <= 6;
@@ -265,10 +265,10 @@ export default {
     document.addEventListener("click", this.close);
     let val = this.name;
     if (this.itemValue && this.itemLabel) {
-      let list = this.list?.length ? [...this.list] : [];
-      if (list.length && list[0].label && !this.notFilter) {
-        list = list.sort((a, b) => a.label.localeCompare(b.label));
-      }
+      const list = this.list?.length ? [...this.list] : [];
+      // if (list.length && list[0].label && !this.notFilter) {
+      //   list = list.sort((a, b) => a.label.localeCompare(b.label));
+      // }
 
       const objIndex = list.findIndex((v) => v[this.itemValue] === this.name);
       if (objIndex > -1) {

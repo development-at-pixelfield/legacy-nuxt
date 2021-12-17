@@ -1,7 +1,9 @@
 .marketplace-wrapper{
-  background: $c-background;
+  //background: $c-background;
   display: flex;
-  height: 100vh;
+  //height: 100vh;
+  //height: 100%;
+  min-height: 100%;
 
   .filter{
     @media (max-width: $break-smsm) {

@@ -48,22 +48,26 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     joinUsDiscord:
       "to have a chance to become the first owner of our 3D NFT or to win luxury diamond jewelery.",
     name: "Name",
-    signUp: "Sign up",
+    signUp: "Join the community",
     backTop: "BACK TO TOP",
     teamDesc: `Our team is based around the world.`,
     roadDesc: `Find out more about our plans by clicking on each star.`,
     ourGoal: "OUR GOAL",
     trip: "FINISH LINE?",
     starText0: "Creation of the first 3D collection",
-    starText1: "Launch of the tester platform",
+    starText1:
+      "Wear a luxury diamond asset in form of jewellery in the metaverse.",
     starText2: "Official launch of the NFT platform",
     starText3: "Cooperation with influencers",
     starText4: "Frequent valuable challenges and giveaways for our community",
     starText5: "Mobile app",
     starText6: "Integration of the NFT platform with smartwatches",
-    starText7: "Own metaverse",
-    starText8: "Galaxy building and colonizing (+ virtual real estate/equity)",
-    starText9: "Virtual reality (+ special events)",
+    starText7:
+      "Thanks to the collab with various metaverses you can put on your items.",
+    starText8:
+      "Opportunity for our diamond community to meet in Dubai, what do you say?",
+    starText9:
+      "Become an owner of your very unique NFT and keep it at your fingertips.",
     starText10: "See your star for yourself.",
     starTitle0: "3D INTERACTIVE stars collection",
     starTitle1: "3D INTERACTIVE DIAMOND ASSETS",
@@ -184,7 +188,8 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
   snackbar: {
     successRegister: "Successfully registered",
     successLoggedIn: "Successfully logged in",
-    successTester: "Your application to become a tester was successful",
+    successTester:
+      "Your application to become a galaxy member was successful, please, check your email.",
     successSend: "Successfully send",
     checkInbox: "Recovery email sent! Please check your inbox.",
     passwordChanged:
@@ -204,6 +209,11 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     },
   },
   nft_modal: {
+    learnMore: "Learn more",
+    installMetamask: "Install MetaMask",
+    installMetamaskUnsure: "Unsure how to install MetaMask?",
+    installMetamaskText:
+      "We created easy to follow guides that will help you to set up a MetaMask wallet and get it ready to buy your first Galaxy NFT!",
     pay: "Pay",
     noFunds: "Not enough funds",
     transactionHash: "Transaction hash",
@@ -211,6 +221,10 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     processingPurchase: "Processing your purchase",
     congratulations: "Congratulations",
     waitingConfirmation: "Waiting for confirmation...",
+    verifyIdentity: "Verify your identity",
+    verificationText: `Before buying an NFT you must verify your identity.
+    You will need your valid ID card, passport or driving licence `,
+    startVerification: "Start verification (5min)",
     confirmFromMetaMask:
       "Please confirm the transaction in your MetaMask wallet.",
     approveForTrading: "Approve ETH for trading",
