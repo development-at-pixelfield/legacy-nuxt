@@ -36,13 +36,14 @@
 <script>
 import DropdownList from "../ui/DropdownList";
 import DropdownWallet from "../ui/DropdownWallet";
+import metamask from "../../mixins/metamask";
 export default {
   name: "Header",
   components: {
     DropdownList,
     DropdownWallet,
   },
-
+  mixins: [metamask],
   computed: {
     logoLink() {
       return this.$auth.user ? "/profile" : "/landing";
@@ -81,6 +82,22 @@ export default {
         },
       ];
     },
+  },
+  created() {
+    if (this.$auth.user) {
+      if (
+        this.$auth.user.wallet_address != null &&
+        this.$auth.user.wallet_address !== ""
+      ) {
+        this.connectMetamask();
+      } else {
+        this.$store.commit("setWallet", false);
+        this.$store.commit("setWalletAccount", null);
+      }
+    } else {
+      this.$store.commit("setWallet", false);
+      this.$store.commit("setWalletAccount", null);
+    }
   },
   methods: {
     async actionHandler(item) {

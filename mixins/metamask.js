@@ -4,6 +4,7 @@ export default {
       metamaskAccount: "",
       balance: 0,
       balanceLoaded: false,
+      hasWallet: false,
     };
   },
   computed: {
@@ -27,9 +28,15 @@ export default {
           message: this.$t("snackbar.metaMask.extensionNotInstalled"),
           color: "error",
         });
+        this.$store.commit("setWallet", false);
+        this.$store.commit("setWalletAccount", null);
+        const data = {
+          email: this.$auth.user.email,
+          wallet_address: "",
+        };
+        await this.$store.dispatch("user/saveWallet", data);
         return;
       }
-      console.log("get accounts");
       try {
         const accounts = await this.metamask.getAccounts();
         if (!accounts.length) {
@@ -38,15 +45,37 @@ export default {
             message: this.$t("snackbar.metaMask.accountsIsNotConnected"),
             color: "error",
           });
+          this.$store.commit("setWallet", false);
+          this.$store.commit("setWalletAccount", null);
+          const data = {
+            email: this.$auth.user.email,
+            wallet_address: "",
+          };
+          await this.$store.dispatch("user/saveWallet", data);
           return;
         }
         this.metamaskAccount = accounts.shift();
+        this.hasWallet = true;
+        this.$store.commit("setWallet", true);
+        this.$store.commit("setWalletAccount", this.metamaskAccount);
+        const data = {
+          email: this.$auth.user.email,
+          wallet_address: this.metamaskAccount,
+        };
+        await this.$store.dispatch("user/saveWallet", data);
       } catch (e) {
         await this.$store.commit("setSnackbar", {
           show: true,
           message: this.$t("snackbar.metaMask.accountsIsNotConnected"),
           color: "error",
         });
+        this.$store.commit("setWallet", false);
+        this.$store.commit("setWalletAccount", null);
+        const data = {
+          email: this.$auth.user.email,
+          wallet_address: "",
+        };
+        await this.$store.dispatch("user/saveWallet", data);
       }
     },
   },
