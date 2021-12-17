@@ -103,7 +103,9 @@
         justify-content: flex-end;
 
         @media (max-width: $break-smsm) {
-          display: none;
+          width: 247px;
+          justify-content: center;
+          margin: 0 auto 24px auto;
         }
       }
     }
@@ -142,7 +144,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 24px;
-  
+
   &_item {
     &:hover {
       cursor: pointer;

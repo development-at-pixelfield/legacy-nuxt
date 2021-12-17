@@ -71,16 +71,21 @@
     }
 
     .content{
-      display: flex;
-      flex-wrap: wrap;
+      //display: flex;
+      //flex-wrap: wrap;
       //justify-content: space-between;
       padding-bottom: 32px;
+      display: grid;
+      grid-gap: 16px 16px;
+      grid-template-columns: repeat(auto-fill, 224px);
 
-      @media (max-width: $break-md) {
-        justify-content: flex-start;
-      }
-
+      //@media (max-width: $break-md) {
+      //  justify-content: flex-start;
+      //}
+      //
       @media (max-width: 530px) {
+        display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
       }
 
@@ -104,6 +109,7 @@
       display: flex;
       width: 100%;
       justify-content: center;
+      padding-bottom: 40px;
     }
   }
 
