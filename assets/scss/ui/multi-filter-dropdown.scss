@@ -36,7 +36,7 @@
       width: 100%;
 
       .arrow {
-        display: flex;
+        display: inline-flex;
         transform: rotateZ(0deg) translateY(0);
         transition-duration: 0.3s;
         transition-timing-function: cubic-bezier(.59,1.39,.37,1.01);
@@ -81,7 +81,8 @@
         }
 
         .icons-block{
-          display: flex;
+          display: inline-flex !important;
+          justify-content: flex-end;
         }
         .chip-list{
           width: 100%;
@@ -219,3 +220,4 @@
   align-items: center;
   display: flex;
 }
+

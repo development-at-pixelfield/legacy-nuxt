@@ -206,8 +206,8 @@ export default {
       }
     },
     type(val) {
-      if (val === "mobile" && this.showPanel) this.removeScroll();
-      else this.addScroll();
+      if (val === "mobile" && this.showPanel) this.addFixed();
+      else this.removeFixed();
     },
     queryFilter(val) {
       this.setFilters(val);
@@ -216,8 +216,8 @@ export default {
       this.showPanel = val;
     },
     showPanel(val) {
-      if (this.type === "mobile" && val) this.removeScroll();
-      else this.addScroll();
+      if (this.type === "mobile" && val) this.addFixed();
+      else this.removeFixed();
 
       this.$emit("update:is-open-panel", val);
       if (val) {
@@ -266,13 +266,13 @@ export default {
       this.filter = filter;
     },
 
-    removeScroll() {
-      const html = document.getElementsByTagName("html")[0];
-      html.style.overflowY = "hidden";
+    removeFixed() {
+      const header = document.getElementById("header");
+      header.style.position = "static";
     },
-    addScroll() {
-      const html = document.getElementsByTagName("html")[0];
-      html.style.overflowY = "scroll";
+    addFixed() {
+      const header = document.getElementById("header");
+      header.style.position = "fixed";
     },
     reportWindowSize() {
       if (window.innerWidth < 770) this.type = "mobile";

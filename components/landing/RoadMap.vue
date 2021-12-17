@@ -55,7 +55,7 @@
                 $t("landing.starTitle1")
               }}</span>
             </div>
-            <span class="hover-text text-m">{{ staticText[1] }}</span>
+            <span class="hover-text text-m line-2">{{ staticText[1] }}</span>
           </div>
         </div>
 
@@ -135,7 +135,7 @@
                 $t("landing.starTitle7")
               }}</span>
             </div>
-            <span class="hover-text text-m">{{ staticText[7] }}</span>
+            <span class="hover-text text-m line-2">{{ staticText[7] }}</span>
           </div>
         </div>
 
@@ -145,7 +145,7 @@
               <img src="~/assets/img/landing/small-circle.svg" alt="" />
             </div>
             <div class="star-info">
-              <span class="star-text to-do">{{
+              <span class="star-text to-do line-2">{{
                 $t("landing.starTitle8")
               }}</span>
             </div>
@@ -161,7 +161,7 @@
                 $t("landing.starTitle9")
               }}</span>
             </div>
-            <span class="hover-text text-m">{{ staticText[9] }}</span>
+            <span class="hover-text text-m line-2">{{ staticText[9] }}</span>
           </div>
         </div>
 
