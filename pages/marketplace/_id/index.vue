@@ -239,7 +239,6 @@ export default {
       let showAuction = false;
       if (nft.last_offer.category === "timed") showAuction = true;
 
-      console.log(nft, "nft");
       return { nft, ethPrice, showAuction };
     } catch (e) {}
   },
@@ -264,15 +263,50 @@ export default {
     user() {
       return this.$auth.user;
     },
-    isVerified() {
-      return this.user;
+    isEmailVerified() {
+      return this.user.is_email_verified;
+    },
+    isUserVerified() {
+      return this.user.is_verified;
     },
   },
   methods: {
     payCard() {},
 
     buyNow() {
-      console.log(this.user);
+      const states = this.availToPay();
+      console.log(states);
+      console.log(this.isEmailVerified, "email");
+      console.log(this.isUserVerified, "user verified");
+    },
+
+    availToPay() {
+      const states = {
+        not_auth: !!this.user,
+        email_not_verified: this.isEmailVerified,
+        user_not_verified: this.isUserVerified,
+      };
+      if (Object.values(states).every((item) => item === true)) {
+        return true;
+      }
+      const state = Object.keys(states)
+        .filter((item) => states[item] === false)
+        .shift();
+      const errors = {
+        not_auth: this.$t("snackbar.profile.is_not_logged"),
+        email_not_verified: this.$t("snackbar.profile.email_is_not_verified"),
+        user_not_verified: this.$t("snackbar.profile.user_not_verified"),
+      };
+      const actions = {
+        not_auth: "guestTryToPay",
+        email_not_verified: "emailNotVerifiedTryToPay",
+        user_not_verified: "userNotVerifiedTryToPay",
+      };
+      return {
+        state,
+        method: actions[state],
+        error: errors[state],
+      };
     },
 
     exchangeToken() {},

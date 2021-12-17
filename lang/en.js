@@ -94,6 +94,9 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     stars: "Stars",
     planets: "Planets",
     points: "Points",
+    email_is_not_verified: "Please, verify your email to be able to buy nft",
+    is_not_logged: "Please, log in to be able to buy nft",
+    user_not_verified: "Please, verify your person to be able to buy nft",
   },
 
   settings: {
