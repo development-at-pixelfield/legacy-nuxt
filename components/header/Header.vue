@@ -1,5 +1,5 @@
 <template>
-  <header :class="{ fixed: $route.name === 'marketplace' }">
+  <header id="header" :class="{ fixed: $route.name === 'marketplace' }">
     <div class="content">
       <div class="content-wrapper">
         <nuxt-link to="/marketplace"
