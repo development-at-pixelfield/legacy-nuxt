@@ -44,13 +44,10 @@ export default {
       isLoaded: false,
     };
   },
-  // watch: {
-  //   isLoaded(val) {
-  //     if (val) this.showAnimation();
-  //   },
-  // },
-  mounted() {
-    this.showAnimation();
+  watch: {
+    isLoaded(val) {
+      if (val) this.showAnimation();
+    },
   },
   methods: {
     anchorLink() {
