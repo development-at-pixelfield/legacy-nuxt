@@ -264,20 +264,24 @@ export default {
       return this.$auth.user;
     },
     isEmailVerified() {
-      return this.user.is_email_verified;
+      return this.user && this.user.is_email_verified;
     },
     isUserVerified() {
-      return this.user.is_verified;
+      return this.user && this.user.is_verified;
     },
   },
   methods: {
     payCard() {},
 
-    buyNow() {
-      const states = this.availToPay();
-      console.log(states);
-      console.log(this.isEmailVerified, "email");
-      console.log(this.isUserVerified, "user verified");
+    async buyNow() {
+      const availToPayOrState = this.availToPay();
+      if (availToPayOrState !== true) {
+        await this[availToPayOrState.action]();
+      }
+      const method = this.nft.last_offer.category;
+      const tokenContract = this.nft.nft_token.contract_address;
+      const tokenId = this.nft.nft_token.token_id;
+      await this.metamask.payNFT(tokenContract, tokenId, method);
     },
 
     availToPay() {
@@ -292,11 +296,6 @@ export default {
       const state = Object.keys(states)
         .filter((item) => states[item] === false)
         .shift();
-      const errors = {
-        not_auth: this.$t("snackbar.profile.is_not_logged"),
-        email_not_verified: this.$t("snackbar.profile.email_is_not_verified"),
-        user_not_verified: this.$t("snackbar.profile.user_not_verified"),
-      };
       const actions = {
         not_auth: "guestTryToPay",
         email_not_verified: "emailNotVerifiedTryToPay",
@@ -304,11 +303,34 @@ export default {
       };
       return {
         state,
-        method: actions[state],
-        error: errors[state],
+        action: actions[state],
       };
     },
-
+    async guestTryToPay() {
+      await this.$store.commit("setSnackbar", {
+        show: true,
+        message: this.$t("snackbar.payments.loginRequired"),
+        color: "error",
+      });
+      const link = `/login?back=${this.$route.path}`;
+      await this.$router.push(link);
+    },
+    async emailNotVerifiedTryToPay() {
+      await this.$store.commit("setModal", {
+        show: true,
+        type: "verification-required",
+        data: {
+          title: this.$t("nft_modal.emailVerificationTitle"),
+          description: this.$t("nft_modal.emailVerificationDescription"),
+        },
+      });
+    },
+    async userNotVerifiedTryToPay() {
+      await this.$store.commit("setModal", {
+        show: true,
+        type: "verification-required",
+      });
+    },
     exchangeToken() {},
 
     timerFinished() {

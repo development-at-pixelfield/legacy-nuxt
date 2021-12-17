@@ -56,7 +56,30 @@ export default ({ app }, inject) => {
       fromEthToWei(wei) {
         return this.web3.utils.toWei(wei, "ether");
       },
-      requestTransaction(fromAccount, toAccount, priceValue, data) {},
+      /**
+       * Execute payment
+       * @param tokenContract
+       * @param nftTokenId
+       * @param method
+       * @returns {Promise<void>}
+       */
+      async payNFT(tokenContract, nftTokenId, method) {
+        // https://ethereum.stackexchange.com/questions/25431/metamask-how-to-access-call-deployed-contracts-functions-using-metamask
+        /**
+         * Abi
+         * @type {*}
+         */
+        const selectedAccount = await this.connect();
+        const transactionParameters = {
+          to: process.env.TRADE_CONTRACT_ADDRESS,
+          from: selectedAccount[0],
+          data: [tokenContract, nftTokenId],
+        };
+        await this.ethereum.request({
+          method,
+          params: [transactionParameters],
+        });
+      },
     };
   });
 };

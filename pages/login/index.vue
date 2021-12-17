@@ -98,7 +98,11 @@ export default {
       },
     };
   },
-
+  computed: {
+    redirectRoute() {
+      return this.$route.query.back ?? "/profile";
+    },
+  },
   methods: {
     async beforeUpdate() {
       await this.$v.$touch();
@@ -122,7 +126,7 @@ export default {
             message: this.$t("snackbar.successLoggedIn"),
             color: "success",
           });
-          await this.$router.push("/profile");
+          await this.$router.push(this.redirectRoute);
         } catch (e) {
           await this.$store.commit("setSnackbar", {
             show: true,

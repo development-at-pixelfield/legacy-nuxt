@@ -189,6 +189,9 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
         "For connect account, please install MetaMask extension",
       accountsIsNotConnected: "You have no connected accounts to Metamask",
     },
+    payments: {
+      loginRequired: "Before buying an NFT you must be logged in",
+    },
   },
   nft_modal: {
     learnMore: "Learn more",
@@ -217,6 +220,9 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     addFunds: "Add funds",
     total: "Total",
     copiedToClip: "Successfully copied hash to clipboard",
+    emailVerificationTitle: "Verify your email",
+    emailVerificationDescription:
+      "Before buying an NFT you must verify your email and identity.",
   },
   modals: {
     modalClose: "No, go back :)",

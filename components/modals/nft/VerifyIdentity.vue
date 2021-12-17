@@ -1,22 +1,19 @@
 <template>
-  <ScaffoldModal
-    :heading="$t('nft_modal.verifyIdentity')"
-    @close="handle('close')"
-  >
+  <ScaffoldModal :heading="data.title" @close="close('close')">
     <div class="verification-container">
       <img src="~/assets/img/icons/verification-symbol.svg" />
       <div class="verification-container_textbox">
         <div class="verification-container_textbox_title">
-          {{ $t("nft_modal.verifyIdentity") }}
+          {{ data.title }}
         </div>
         <div class="verification-container_textbox_desc">
-          {{ $t("nft_modal.verificationText") }}
+          {{ data.description }}
         </div>
         <Button
           :size="'full'"
           :color="'c-white'"
           :label="$t('nft_modal.startVerification')"
-          @on-click="handle('startVerification')"
+          @on-click="verify()"
         />
       </div>
     </div>
@@ -33,9 +30,22 @@ export default {
     Button,
     ScaffoldModal,
   },
+  computed: {
+    data() {
+      const data = this.$store.getters.modal.data;
+      return {
+        title: data?.title ?? this.$t("nft_modal.verifyIdentity"),
+        description: data?.description ?? this.$t("nft_modal.verificationText"),
+      };
+    },
+  },
   methods: {
-    handle(emit) {
-      this.$emit(emit);
+    close() {
+      this.$emit("close");
+    },
+    async verify() {
+      this.close();
+      await this.$router.push("/settings");
     },
   },
 };
