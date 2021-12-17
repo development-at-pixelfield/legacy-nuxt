@@ -19,8 +19,9 @@
             </p>
             <ul class="user-states mt-0 mb-0">
               <li
-                class="user-tag"
+                class="user-tag pointer"
                 :class="{ 'view-offline': !connectedWallet }"
+                @click="openWallet()"
               >
                 <span class="user-tag-state"></span>
                 <span
@@ -100,7 +101,7 @@
               :size="'medium'"
               :color="'c-white'"
               :label="$t('profile.walletBtn')"
-              @on-click="$router.push('/settings')"
+              @on-click="openWallet"
             />
           </div>
         </div>
@@ -191,6 +192,10 @@ export default {
     }
   },
   methods: {
+    openWallet() {
+      this.$nuxt.$emit("openWallet");
+      window.scrollTo(0, 0);
+    },
     async fileUpload(e) {
       const files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;

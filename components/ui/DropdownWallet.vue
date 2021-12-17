@@ -155,9 +155,13 @@ export default {
   },
   mounted() {
     document.addEventListener("click", this.close);
+    this.$nuxt.$on("openWallet", (values) => {
+      this.show = true;
+    });
   },
   beforeDestroy() {
     document.removeEventListener("click", this.close);
+    this.$nuxt.$off("openWallet");
   },
   methods: {
     connectWaller() {
