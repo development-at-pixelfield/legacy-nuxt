@@ -198,6 +198,10 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     processingPurchase: "Processing your purchase",
     congratulations: "Congratulations",
     waitingConfirmation: "Waiting for confirmation...",
+    verifyIdentity: "Verify your identity",
+    verificationText: `Before buying an NFT you must verify your identity.
+    You will need your valid ID card, passport or driving licence `,
+    startVerification: "Start verification (5min)",
     confirmFromMetaMask:
       "Please confirm the transaction in your MetaMask wallet.",
     approveForTrading: "Approve ETH for trading",
