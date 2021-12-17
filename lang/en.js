@@ -48,7 +48,7 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     joinUsDiscord:
       "to have a chance to become the first owner of our 3D NFT or to win luxury diamond jewelery.",
     name: "Name",
-    signUp: "Sign up",
+    signUp: "Join the community",
     backTop: "BACK TO TOP",
     teamDesc: `Our team is based around the world.`,
     roadDesc: `Find out more about our plans by clicking on each star.`,
@@ -164,7 +164,8 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
   snackbar: {
     successRegister: "Successfully registered",
     successLoggedIn: "Successfully logged in",
-    successTester: "Your application to become a tester was successful",
+    successTester:
+      "Your application to become a galaxy member was successful, please, check your email.",
     successSend: "Successfully send",
     checkInbox: "Recovery email sent! Please check your inbox.",
     passwordChanged:

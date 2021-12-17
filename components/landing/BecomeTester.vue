@@ -29,7 +29,7 @@
         <div class="action center-block">
           <Button
             class="mt-32"
-            :label="'Join the community'"
+            :label="$t('landing.signUp')"
             :background="'primary'"
             :size="'medium'"
             :color="'c-white'"
