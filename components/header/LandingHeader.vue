@@ -13,9 +13,9 @@
           }}</a>
         </li>
         <li>
-          <a href="#become-tester" class="no-color-dec-link text-m">{{
-            $t("landing.becomeTester")
-          }}</a>
+          <a href="#become-tester" class="no-color-dec-link text-m">
+            Galaxy Community
+          </a>
         </li>
         <li>
           <a href="#our-team" class="no-color-dec-link text-m">{{

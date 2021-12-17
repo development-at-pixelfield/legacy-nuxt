@@ -4,20 +4,20 @@ export default {
     titleTemplate: "Galaxy.diamonds | Own the universe",
     title: "Galaxy.diamonds | Own the universe",
     meta: [
-      { charset: "utf-8" },
+      {charset: "utf-8"},
       {
         name: "viewport",
         content:
           "width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1",
       },
-      { name: "msapplication-TileColor", content: "#da532c" },
-      { name: "theme-color", content: "#ffffff" },
-      { hid: "description", name: "description", content: "NFT floating through galaxy. Own a piece of the universe." },
-      { hid: "author", name: "author", content: "Galaxy.diamonds" },
-      { hid: "DC.title", name: "DC.title", content: "Galaxy.diamonds" },
-      { hid: "DC.creator", name: "DC.creator", content: "Galaxy.diamonds" },
-      { hid: "og:type", name: "og:type", content: "website" },
-      { hid: "og:url", name: "og:url", content: "https://galaxy.diamonds/" },
+      {name: "msapplication-TileColor", content: "#da532c"},
+      {name: "theme-color", content: "#ffffff"},
+      {hid: "description", name: "description", content: "NFT floating through galaxy. Own a piece of the universe."},
+      {hid: "author", name: "author", content: "Galaxy.diamonds"},
+      {hid: "DC.title", name: "DC.title", content: "Galaxy.diamonds"},
+      {hid: "DC.creator", name: "DC.creator", content: "Galaxy.diamonds"},
+      {hid: "og:type", name: "og:type", content: "website"},
+      {hid: "og:url", name: "og:url", content: "https://galaxy.diamonds/"},
       {
         hid: "og:title",
         name: "og:title",
@@ -43,8 +43,8 @@ export default {
       },
     ],
     link: [
-      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-      { rel: "manifest", href: "/site.webmanifest" },
+      {rel: "icon", type: "image/x-icon", href: "/favicon.ico"},
+      {rel: "manifest", href: "/site.webmanifest"},
       {
         rel: "stylesheet",
         href:
@@ -81,18 +81,33 @@ export default {
         href: "https://galaxy.diamonds/galaxy-opengraph.jpg",
       },
     ],
+    script: [
+      {
+        hid: "lead-hub",
+        innerHTML: `
+         (function(w,d,x,n,u,t,f,s,o){f='LHInsights';w[n]=w[f]=w[f]||function(n,d){
+        (w[f].q=w[f].q||[]).push([n,d])};w[f].l=1*new Date();s=d.createElement(x);
+        s.async=1;s.src=u+'?t='+t;o=d.getElementsByTagName(x)[0];o.parentNode.insertBefore(s,o)
+        })(window,document,'script','lhi','//www.lhinsights.com/agent.js','SgpQueeBRUaTeFm');
+        lhi('pageview');
+        `,
+        type: "text/javascript",
+        charset: "utf-8",
+      },
+    ],
+    __dangerouslyDisableSanitizers: ['script'],
   },
 
-  loading: { color: "#1DD1A1" },
+  loading: {color: "#1DD1A1"},
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: ["@/assets/scss/global.scss"],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    { src: "~/plugins/vuelidate.js" },
-    { src: "~/plugins/vue-multyselect" },
-    { src: "~/plugins/axios.js" },
+    {src: "~/plugins/vuelidate.js"},
+    {src: "~/plugins/vue-multyselect"},
+    {src: "~/plugins/axios.js"},
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -162,7 +177,7 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
-    transpile:["three"]
+    transpile: ["three"]
   },
 
   axios: {

@@ -37,7 +37,7 @@
       width: 100%;
 
       .arrow {
-        display: flex;
+        display: inline-flex;
         transform: rotateZ(0deg) translateY(0);
         transition-duration: 0.3s;
         transition-timing-function: cubic-bezier(.59, 1.39, .37, 1.01);
@@ -186,4 +186,9 @@
 
 .selected-check {
   margin-bottom: -3px;
+}
+
+.icons-block{
+  display: inline-flex !important;
+  justify-content: flex-end;
 }

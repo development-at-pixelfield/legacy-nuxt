@@ -55,15 +55,19 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     ourGoal: "OUR GOAL",
     trip: "FINISH LINE?",
     starText0: "Creation of the first 3D collection",
-    starText1: "Launch of the tester platform",
+    starText1:
+      "Wear a luxury diamond asset in form of jewellery in the metaverse.",
     starText2: "Official launch of the NFT platform",
     starText3: "Cooperation with influencers",
     starText4: "Frequent valuable challenges and giveaways for our community",
     starText5: "Mobile app",
     starText6: "Integration of the NFT platform with smartwatches",
-    starText7: "Own metaverse",
-    starText8: "Galaxy building and colonizing (+ virtual real estate/equity)",
-    starText9: "Virtual reality (+ special events)",
+    starText7:
+      "Thanks to the collab with various metaverses you can put on your items.",
+    starText8:
+      "Opportunity for our diamond community to meet in Dubai, what do you say?",
+    starText9:
+      "Become an owner of your very unique NFT and keep it at your fingertips.",
     starText10: "See your star for yourself.",
     starTitle0: "3D INTERACTIVE stars collection",
     starTitle1: "3D INTERACTIVE DIAMOND ASSETS",
