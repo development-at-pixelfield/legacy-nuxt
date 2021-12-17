@@ -192,7 +192,7 @@ export default {
           });
           await this.$router.push("/profile");
         } catch (e) {
-          if (e.response.data.detail === "Already registered") {
+          if (e.response.data.detail === "User is already regsitered") {
             this.customEmailErrors = {
               errors: [`This email is already registered`],
               type: "object",
