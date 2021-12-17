@@ -195,9 +195,9 @@ export default {
           return list.sort((a, b) => a.label.localeCompare(b.label));
         }
       }
-      // if (list.length && list[0].value && !this.notFilter) {
-      //   return list.sort((a, b) => a.value.localeCompare(b.value));
-      // }
+      if (list.length && list[0].value && !this.notFilter) {
+        return list.sort((a, b) => a.value.localeCompare(b.value));
+      }
       return list;
     },
     mozHeight() {
@@ -267,7 +267,7 @@ export default {
     if (this.itemValue && this.itemLabel) {
       let list = this.list?.length ? [...this.list] : [];
       if (list.length && list[0].label && !this.notFilter) {
-        list = list.sort((a, b) => a.label && a.label.localeCompare(b.label));
+        list = list.sort((a, b) => a.label.localeCompare(b.label));
       }
 
       const objIndex = list.findIndex((v) => v[this.itemValue] === this.name);
