@@ -66,7 +66,6 @@
               }"
               class="text-m"
               @click="select(item, index)"
-              @mouseover="mouseHover(index)"
             >
               <span class="label-text">{{
                 itemLabel ? item[itemLabel] : item.label

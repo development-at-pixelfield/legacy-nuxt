@@ -95,15 +95,19 @@
               ref="options"
               :key="uniqueId(index)"
               :class="{
-                current: selectedItems.includes(item.value),
+                current:
+                  selectedItems.includes(item.value.toString()) ||
+                  selectedItems.includes(item.value),
                 'hover-key': keyIndex === index,
               }"
               class="text-m"
               @click.stop="select(item, index)"
-              @mouseover="mouseHover(index)"
             >
               <span
-                v-if="selectedItems.includes(item.value)"
+                v-if="
+                  selectedItems.includes(item.value.toString()) ||
+                  selectedItems.includes(item.value)
+                "
                 class="checkmark-box"
                 style="margin-right: 8px"
               >
@@ -261,6 +265,7 @@ export default {
       if (list.length && list[0].value && !this.notFilter) {
         return list.sort((a, b) => a.value.localeCompare(b.value));
       }
+
       return list;
     },
     mozHeight() {
@@ -273,6 +278,7 @@ export default {
           : this.listNew.length <= 6
           ? "fit-content"
           : "280px",
+        top: this.chips.length ? "8px" : "8px",
       };
     },
     selectorStyles() {

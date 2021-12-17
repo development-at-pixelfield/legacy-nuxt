@@ -2,18 +2,18 @@
   padding: 26px 42px;
   background: $c-greyscale-120;
   border-radius: 3px;
-  width: 220px;
-  margin-right: 8px;
-  margin-left: 8px;
-  margin-bottom: 16px;
+  //width: 220px;
+  //margin-right: 8px;
+  //margin-left: 8px;
+  //margin-bottom: 16px;
   cursor: pointer;
 
-  @media (max-width: $break-md) {
-    margin-right: 16px;
-  }
+  //@media (max-width: $break-md) {
+  //  margin-right: 16px;
+  //}
 
   @media (max-width: 530px) {
-    width: 45%;
+    width: 47%;
     padding: 26px 21px;
     margin-right: 0;
   }
