@@ -48,7 +48,7 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     joinUsDiscord:
       "to have a chance to become the first owner of our 3D NFT or to win luxury diamond jewelery.",
     name: "Name",
-    signUp: "Sign up",
+    signUp: "Join the community",
     backTop: "BACK TO TOP",
     teamDesc: `Our team is based around the world.`,
     roadDesc: `Find out more about our plans by clicking on each star.`,
@@ -170,7 +170,8 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
   snackbar: {
     successRegister: "Successfully registered",
     successLoggedIn: "Successfully logged in",
-    successTester: "Your application to become a tester was successful",
+    successTester:
+      "Your application to become a galaxy member was successful, please, check your email.",
     successSend: "Successfully send",
     checkInbox: "Recovery email sent! Please check your inbox.",
     passwordChanged:
@@ -190,6 +191,11 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     },
   },
   nft_modal: {
+    learnMore: "Learn more",
+    installMetamask: "Install MetaMask",
+    installMetamaskUnsure: "Unsure how to install MetaMask?",
+    installMetamaskText:
+      "We created easy to follow guides that will help you to set up a MetaMask wallet and get it ready to buy your first Galaxy NFT!",
     pay: "Pay",
     noFunds: "Not enough funds",
     transactionHash: "Transaction hash",
@@ -197,6 +203,10 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     processingPurchase: "Processing your purchase",
     congratulations: "Congratulations",
     waitingConfirmation: "Waiting for confirmation...",
+    verifyIdentity: "Verify your identity",
+    verificationText: `Before buying an NFT you must verify your identity.
+    You will need your valid ID card, passport or driving licence `,
+    startVerification: "Start verification (5min)",
     confirmFromMetaMask:
       "Please confirm the transaction in your MetaMask wallet.",
     approveForTrading: "Approve ETH for trading",

@@ -283,7 +283,6 @@ export default {
   },
   watch: {
     value(val) {
-      console.log(val, "val");
       if (val && val.length) {
         this.listNew = this.list.filter((item) => {
           const label = this.itemLabel ? this.itemLabel : "label";
@@ -323,8 +322,6 @@ export default {
   mounted() {
     document.addEventListener("click", this.close);
     let val = this.name;
-    console.log(this.itemValue, "this.itemValue");
-    console.log(this.itemLabel, "this.itemLabel");
     if (this.itemValue && this.itemLabel) {
       const list = this.list?.length ? [...this.list] : [];
 

@@ -18,6 +18,7 @@
           {{ $t("marketplace.marketplace") }}
         </h2>
         <div class="filter-block">
+          {{ filter.ordering }}
           <FilterDropdown
             :list="filterItems"
             :return-object="false"
@@ -100,6 +101,7 @@
           :current-page="nfts.current"
           :pages-count="nfts.pages_count"
           :limit="filter.page_size || nfts.page_size"
+          @update:page="updatePage"
         />
       </div>
     </div>
@@ -230,6 +232,12 @@ export default {
   },
 
   methods: {
+    updatePage(val) {
+      const cleanObject = functions.cleanObject(this.$route.query);
+      this.filter.page = val;
+      cleanObject.page = val;
+      this.fetchNfts(cleanObject);
+    },
     openFilter() {
       this.isOpenPanel = true;
     },
