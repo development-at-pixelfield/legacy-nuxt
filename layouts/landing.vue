@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Leaderboard />
     <Modals />
     <nuxt />
     <Snackbar
@@ -16,6 +17,7 @@
 </template>
 
 <script>
+import Leaderboard from "../components/header/Leaderboard";
 import Snackbar from "../components/ui/Snackbar";
 import Modals from "../components/modals/index";
 export default {
@@ -23,6 +25,7 @@ export default {
   components: {
     Modals,
     Snackbar,
+    Leaderboard,
   },
   data() {
     return {};
