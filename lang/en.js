@@ -191,6 +191,11 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     },
   },
   nft_modal: {
+    learnMore: "Learn more",
+    installMetamask: "Install MetaMask",
+    installMetamaskUnsure: "Unsure how to install MetaMask?",
+    installMetamaskText:
+      "We created easy to follow guides that will help you to set up a MetaMask wallet and get it ready to buy your first Galaxy NFT!",
     pay: "Pay",
     noFunds: "Not enough funds",
     transactionHash: "Transaction hash",
