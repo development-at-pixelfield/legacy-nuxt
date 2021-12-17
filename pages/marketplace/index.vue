@@ -92,6 +92,7 @@
       </div>
 
       <div v-if="nfts.count" class="pagination-wrapper">
+        <h1>{{ filter.page }}</h1>
         <Pagination
           :list="nfts.results"
           :total="nfts.count"
@@ -235,6 +236,7 @@ export default {
     },
     setDefaultWatch() {
       this.$watch("filter.page", (val) => {
+        console.log(val, "888");
         const cleanObject = functions.cleanObject(this.$route.query);
         cleanObject.page = val;
         this.fetchNfts(cleanObject);

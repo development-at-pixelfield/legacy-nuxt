@@ -148,11 +148,16 @@ export default {
       return this.disableRight ? "#ACA4B2" : "#FFF";
     },
     showCount() {
-      if (this.currentPage === 1) {
+      if (this.currentPage === 1 && this.total <= this.limit) {
         return this.total;
       }
 
-      const count = (this.currentPage - 1) * this.limit;
+      let count = (this.currentPage - 1) * this.limit;
+
+      if (this.currentPage === 1) {
+        return (count = 1 + "-" + (count + this.limit));
+      }
+
       if (count + this.limit > this.total) {
         return count + "-" + this.total;
       }
@@ -170,7 +175,9 @@ export default {
   methods: {
     paginate(type) {
       if (type === "next" && !this.disableRight) {
-        return this.$emit("update:page", this.currentPage + 1);
+        // console.log("update");
+        this.$emit("update:page", this.currentPage + 1);
+        return;
       }
       if (type === "prev" && !this.disableLeft) {
         return this.$emit("update:page", this.currentPage - 1);
