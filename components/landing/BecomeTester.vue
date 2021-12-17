@@ -29,13 +29,13 @@
         <div class="action center-block">
           <Button
             class="mt-32"
-            :label="$t('landing.signUp')"
+            :label="'Join the community'"
             :background="'primary'"
             :size="'medium'"
             :color="'c-white'"
             @on-click="submitTester"
           >
-            <span slot="icon" class="ml-4 emoji">😎</span>
+            <span slot="icon" class="ml-4 emoji">✨</span>
           </Button>
         </div>
       </div>

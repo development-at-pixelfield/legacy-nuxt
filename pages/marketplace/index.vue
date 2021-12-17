@@ -161,6 +161,8 @@ export default {
         }
       });
 
+      if (!query.ordering) filter.ordering = "created_at";
+
       const nfts = await store.dispatch("nfts/getNfts", filter);
       return { nfts, filter, formOptions };
     } catch (e) {

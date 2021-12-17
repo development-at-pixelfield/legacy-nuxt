@@ -32,7 +32,7 @@
           </p>
           <div class="action">
             <a
-              href="https://discord.com/invite/tRMheTFp"
+              href="https://discord.com/invite/galaxydiamonds"
               class="discord-btn"
               target="_blank"
             >
