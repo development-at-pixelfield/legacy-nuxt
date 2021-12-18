@@ -30,6 +30,7 @@ export default {
     discover: "Discover",
     roadmap: "Roadmap",
     becomeTester: "Become a tester",
+    joinTheCommunity: "Join the community",
     learnMore: "Learn More",
     ourTeam: "Our team",
     ourRoadMap: "Roadmap",
