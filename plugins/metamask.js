@@ -60,25 +60,37 @@ export default ({ app }, inject) => {
        * Execute payment
        * @param tokenContract
        * @param nftTokenId
-       * @param method
+       * @param methodType
        * @returns {Promise<void>}
        */
-      async payNFT(tokenContract, nftTokenId, method) {
+      async payNFT(tokenContract, nftTokenId, methodType) {
+        const contractJSON = require("./NftTrader.json");
+        const userAccount = await this.selectedAccount();
+        await window.web3.currentProvider.enable();
+        console.log(userAccount);
+        console.log(window.web3.currentProvider);
+        const contract = new this.web3.eth.Contract(
+          contractJSON.abi,
+          process.env.TRADE_CONTRACT_ADDRESS
+        );
+        contract.defaultChain = "goerli";
+        console.log(contract.defaultChain);
+        // console.log(contract.getProvider);
+        if (methodType === "timed") {
+          const result = await contract.methods
+            .timedPurchase(tokenContract, nftTokenId)
+            .call({ from: userAccount });
+          console.log(result);
+        }
+        if (methodType === "constant") {
+        }
+        // const contractInstance = this.web3.eth
+        //   .Contract(contractJSON.abi)
+        //   .at(tokenContract);
+        console.log(methodType);
+        console.log(contract);
+        console.log(contractJSON);
         // https://ethereum.stackexchange.com/questions/25431/metamask-how-to-access-call-deployed-contracts-functions-using-metamask
-        /**
-         * Abi
-         * @type {*}
-         */
-        const selectedAccount = await this.connect();
-        const transactionParameters = {
-          to: process.env.TRADE_CONTRACT_ADDRESS,
-          from: selectedAccount[0],
-          data: [tokenContract, nftTokenId],
-        };
-        await this.ethereum.request({
-          method,
-          params: [transactionParameters],
-        });
       },
     };
   });
