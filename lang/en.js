@@ -192,6 +192,8 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     },
     payments: {
       loginRequired: "Before buying an NFT you must be logged in",
+      notAbleToInitPayment:
+        "Sorry, we are not able to init payment, please try again later",
     },
   },
   nft_modal: {

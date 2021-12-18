@@ -8,6 +8,10 @@
           v-if="modal.type === 'verification-required'"
           @close="close"
         />
+        <CheckoutModal
+          v-if="modal.type === 'checkout'"
+          @close="close"
+        ></CheckoutModal>
       </div>
     </div>
   </transition>
@@ -17,12 +21,14 @@
 import DeleteAccount from "./DeleteAccount";
 import StarInfo from "./StarInfo";
 import VerifyIdentityModal from "./nft/VerifyIdentity";
+import CheckoutModal from "./nft/CheckoutModal";
 export default {
   name: "Modals",
   components: {
     DeleteAccount,
     StarInfo,
     VerifyIdentityModal,
+    CheckoutModal,
   },
   computed: {
     modal() {

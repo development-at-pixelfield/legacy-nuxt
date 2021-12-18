@@ -42,30 +42,32 @@ export default ({ app }, inject) => {
       },
       /**
        * Convert to wei from eth
-       * @param eth
+       * @param wei
        * @returns {string}
        */
-      fromWeiToEth(eth) {
-        return this.web3.utils.fromWei(eth);
+      fromWeiToEth(wei) {
+        return this.web3.utils.fromWei(wei);
       },
       /**
        * Convert to ether
-       * @param wei
+       * @param eth
        * @returns {BN}
        */
-      fromEthToWei(wei) {
-        return this.web3.utils.toWei(wei, "ether");
+      fromEthToWei(eth) {
+        return this.web3.utils.toWei(eth, "ether");
       },
       /**
        * Execute payment
        * @param tokenContract
        * @param nftTokenId
        * @param methodType
+       * @param currentPriceEther
        * @returns {Promise<void>}
        */
-      async payNFT(tokenContract, nftTokenId, methodType) {
+      async payNFT(tokenContract, nftTokenId, methodType, currentPriceEther) {
         const contractJSON = require("./NftTrader.json");
         const userAccount = await this.selectedAccount();
+        const currentPriceWei = this.fromEthToWei(currentPriceEther);
         await window.web3.currentProvider.enable();
         console.log(userAccount);
         console.log(window.web3.currentProvider);
@@ -79,10 +81,14 @@ export default ({ app }, inject) => {
         if (methodType === "timed") {
           const result = await contract.methods
             .timedPurchase(tokenContract, nftTokenId)
-            .call({ from: userAccount });
+            .send({ from: userAccount, value: currentPriceWei });
           console.log(result);
         }
-        if (methodType === "constant") {
+        if (methodType === "fixed") {
+          const result = await contract.methods
+            .constantPurchase(tokenContract, nftTokenId)
+            .send({ from: userAccount, value: currentPriceWei });
+          console.log(result);
         }
         // const contractInstance = this.web3.eth
         //   .Contract(contractJSON.abi)

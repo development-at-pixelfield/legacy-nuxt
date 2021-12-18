@@ -7,17 +7,17 @@
     <div class="summary">
       <div>{{ $t("nft_modal.total") }}</div>
       <div>
-        <div class="summary_heading">{{ nft.price_eth }}</div>
-        <div class="summary_sub-heading">{{ nft.price_usd }}</div>
+        <div class="summary_heading">{{ nft.price_eth }}Ξ</div>
+        <div class="summary_sub-heading">${{ nft.price_usd }}</div>
       </div>
     </div>
     <div class="divider" />
     <Checkbox :name.sync="agree" class="mb-32 terms" :error="checkError">
       <label slot="label" class="text-m">
         {{ $t("auth.agreeWith") }} &nbsp;
-        <nuxt-link to="/" class="no-color-link">{{
-          $t("auth.termCond")
-        }}</nuxt-link>
+        <nuxt-link to="/" class="no-color-link"
+          >{{ $t("auth.termCond") }}
+        </nuxt-link>
       </label>
     </Checkbox>
     <div class="button-wrap">
@@ -42,6 +42,7 @@
       ></Button>
     </div>
     <div
+      v-if="balance !== false"
       class="current-balance"
       :class="
         userHasEnoughFunds
@@ -49,7 +50,9 @@
           : 'current-balance_negative'
       "
     >
-      {{ $t("nft_modal.availableBalance") }} {{ userBalance }}Ξ ($2.013.000)
+      {{ $t("nft_modal.availableBalance") }} {{ displayBalance }}Ξ (${{
+        balanceDollars
+      }})
     </div>
   </ScaffoldModal>
 </template>
@@ -57,6 +60,8 @@
 <script>
 import Checkbox from "../../../components/ui/Checkbox";
 import Button from "../../ui/Button";
+import converter from "../../../mixins/converter";
+import metamask from "../../../mixins/metamask";
 import ScaffoldModal from "~/components/modals/nft/ScaffoldModal.vue";
 
 export default {
@@ -66,49 +71,90 @@ export default {
     Checkbox,
     Button,
   },
-  props: {
-    nft: {
-      type: Object,
-      required: true,
-      default: () => ({
-        name: "Example NFT",
-        price_eth: "107.50Ξ",
-        price_usd: "($314.643)",
-      }),
-    },
-  },
+  mixins: [converter, metamask],
   data() {
     return {
       agree: false,
       checkError: "",
-      // TODO here add the balance of the user, currenlty not implemented yet
-      userBalance: 500.41,
+      nftData: this.$store.getters.modal.data,
     };
   },
   computed: {
+    nft() {
+      const data = this.nftData;
+      const priceEth = +data.last_offer.eth_current_price;
+      const priceUsd = +this.ethToUsd(priceEth);
+      return {
+        name: data.name,
+        price_eth: priceEth.toFixed(4),
+        price_usd: priceUsd.toFixed(4),
+      };
+    },
     canPurchaseText() {
       return this.userHasEnoughFunds
         ? `${this.$t("nft_modal.pay")} ${this.nft.price_eth}`
         : this.$t("nft_modal.noFunds");
     },
     userHasEnoughFunds() {
-      // TODO implement user hvaing enough funds
-      return false;
+      return this.balance >= +this.nft.price_eth;
     },
+    balanceDollars() {
+      const balance = +this.ethToUsd(this.balance);
+      return balance.toFixed(4);
+    },
+  },
+  async mounted() {
+    await this.connectMetamask();
+    await this.getBalance();
   },
   methods: {
     addFunds() {
       this.$emit("addFunds");
     },
-    purchaseNft() {
+    async purchaseNft() {
       if (!this.agree) {
         this.checkError = this.$t("validations.termAgree");
         return false;
       }
-      this.$emit("purchaseNFT", this.nft);
+      await this.processPayment();
     },
     close() {
       this.$emit("close");
+    },
+    async prePayment() {
+      this.nftData = await this.$store.dispatch("nfts/getNftsById", {
+        uid: this.nftData.uid,
+      });
+      const payload = {
+        offer_uid: this.nftData.last_offer.uid,
+        account_address: this.metamaskAccount,
+      };
+      return await this.$store.dispatch("nfts/initPayment", payload);
+    },
+    async processPayment() {
+      let paymentsInit = {};
+      try {
+        paymentsInit = await this.prePayment();
+      } catch (e) {
+        await this.$store.commit("setSnackbar", {
+          show: true,
+          message: this.$t("snackbar.payments.notAbleToInitPayment"),
+          color: "error",
+        });
+        this.$emit("close");
+        return false;
+      }
+      console.log(paymentsInit);
+      const lastOfferPrice = this.nftData.last_offer.eth_current_price;
+      const method = this.nftData.last_offer.category;
+      const tokenContract = this.nftData.nft_token.contract_address;
+      const tokenId = this.nftData.nft_token.token_id;
+      return await this.metamask.payNFT(
+        tokenContract,
+        tokenId,
+        method,
+        lastOfferPrice
+      );
     },
   },
 };

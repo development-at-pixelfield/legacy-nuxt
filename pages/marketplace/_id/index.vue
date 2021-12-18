@@ -20,11 +20,10 @@
           <div class="left-side">
             <h1 class="mb-8 mt-0 detail-title">{{ nft.name }}</h1>
             <span class="header-title1"
-              >Current price:
-              {{ (+nft.last_offer.eth_current_price).toFixed(2) }}Ξ</span
+              >Current price: {{ (+currentPriceOrSoldPrice).toFixed(2) }}Ξ</span
             >
             <span class="header-title1 ml-16">{{
-              convertEthereum(nft.last_offer.eth_current_price)
+              convertEthereum(currentPriceOrSoldPrice)
             }}</span>
           </div>
 
@@ -34,8 +33,8 @@
                 <span class="img-block-s">
                   <img
                     :src="
-                      nft.owner.avatar
-                        ? nft.owner
+                      nft.owner
+                        ? nft.owner.avatar
                         : require('assets/img/auction.png')
                     "
                     alt="auction"
@@ -45,7 +44,7 @@
 
                 <div>
                   <p class="mtb text-m-bold">Current owner</p>
-                  <p class="mtb text-m-bold">{{ nft.owner.display_name }}</p>
+                  <p class="mtb text-m-bold">{{ nft.owner.username }}</p>
                 </div>
               </div>
 
@@ -234,20 +233,25 @@ export default {
   async asyncData({ app, store, params }) {
     try {
       const nft = await store.dispatch("nfts/getNftsById", { uid: params.id });
+      console.log(nft);
       const ethPrice = (await store.dispatch("fetchEthPrice")).rate;
 
       let showAuction = false;
-      if (nft.last_offer.category === "timed") showAuction = true;
+      if (nft.last_offer && nft.last_offer.category === "timed") {
+        showAuction = true;
+      }
 
       return { nft, ethPrice, showAuction };
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   },
   data() {
     return {
       showCard: false,
       showAuction: false,
       ethPrice: null,
-      nft: null,
+      nft: {},
     };
   },
   computed: {
@@ -269,6 +273,14 @@ export default {
     isUserVerified() {
       return this.user && this.user.is_verified;
     },
+    currentPriceOrSoldPrice() {
+      const lastOffer = this.nft.last_offer;
+      return this.nft.is_sold
+        ? +this.nft.eth_sold_for
+        : lastOffer
+        ? lastOffer.eth_current_price
+        : 0;
+    },
   },
   methods: {
     payCard() {},
@@ -278,10 +290,7 @@ export default {
       if (availToPayOrState !== true) {
         await this[availToPayOrState.action]();
       }
-      const method = this.nft.last_offer.category;
-      const tokenContract = this.nft.nft_token.contract_address;
-      const tokenId = this.nft.nft_token.token_id;
-      await this.metamask.payNFT(tokenContract, tokenId, method);
+      return await this.checkout();
     },
 
     availToPay() {
@@ -335,6 +344,13 @@ export default {
 
     timerFinished() {
       this.$router.app.refresh();
+    },
+    async checkout() {
+      await this.$store.commit("setModal", {
+        show: true,
+        type: "checkout",
+        data: this.nft,
+      });
     },
   },
 };
