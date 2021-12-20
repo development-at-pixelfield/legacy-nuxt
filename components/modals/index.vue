@@ -4,6 +4,14 @@
       <div class="modal-wrapper">
         <DeleteAccount v-if="modal.type === 'delete-account'" @close="close" />
         <StarInfo v-if="modal.type === 'star-info'" @close="close" />
+        <VerifyIdentityModal
+          v-if="modal.type === 'verification-required'"
+          @close="close"
+        />
+        <CheckoutModal
+          v-if="modal.type === 'checkout'"
+          @close="close"
+        ></CheckoutModal>
       </div>
     </div>
   </transition>
@@ -12,11 +20,15 @@
 <script>
 import DeleteAccount from "./DeleteAccount";
 import StarInfo from "./StarInfo";
+import VerifyIdentityModal from "./nft/VerifyIdentity";
+import CheckoutModal from "./nft/CheckoutModal";
 export default {
   name: "Modals",
   components: {
     DeleteAccount,
     StarInfo,
+    VerifyIdentityModal,
+    CheckoutModal,
   },
   computed: {
     modal() {
@@ -26,6 +38,7 @@ export default {
 
   methods: {
     close(name) {
+      console.log("name", name, "close modal");
       this.$store.commit("setModal", {
         show: false,
         type: null,

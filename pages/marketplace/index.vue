@@ -12,7 +12,7 @@
         :form-options="formOptions"
       />
     </div>
-    <div class="main-container" :class="{ 'panel-open': isOpenPanel }">
+    <div class="main-list-container" :class="{ 'panel-open': isOpenPanel }">
       <div class="header mb-16">
         <h2 class="header-big mtb">
           {{ $t("marketplace.marketplace") }}
@@ -100,6 +100,7 @@
           :current-page="nfts.current"
           :pages-count="nfts.pages_count"
           :limit="filter.page_size || nfts.page_size"
+          @update:page="updatePage"
         />
       </div>
     </div>
@@ -230,6 +231,12 @@ export default {
   },
 
   methods: {
+    updatePage(val) {
+      const cleanObject = functions.cleanObject(this.$route.query);
+      this.filter.page = val;
+      cleanObject.page = val;
+      this.fetchNfts(cleanObject);
+    },
     openFilter() {
       this.isOpenPanel = true;
     },

@@ -32,7 +32,7 @@
 
       <div class="action">
         <Button
-          :label="$t('landing.becomeTester')"
+          :label="$t('landing.joinTheCommunity')"
           :background="'primary'"
           :size="'small'"
           :color="'c-white'"
@@ -49,7 +49,7 @@
       </div>
       <div class="action">
         <Button
-          :label="$t('landing.becomeTester')"
+          :label="$t('landing.joinTheCommunity')"
           :background="'primary'"
           :size="'small'"
           :color="'c-white'"

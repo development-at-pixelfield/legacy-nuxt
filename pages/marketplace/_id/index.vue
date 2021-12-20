@@ -20,11 +20,10 @@
           <div class="left-side">
             <h1 class="mb-8 mt-0 detail-title">{{ nft.name }}</h1>
             <span class="header-title1"
-              >Current price:
-              {{ (+nft.last_offer.eth_current_price).toFixed(2) }}Ξ</span
+              >Current price: {{ (+currentPriceOrSoldPrice).toFixed(2) }}Ξ</span
             >
             <span class="header-title1 ml-16">{{
-              convertEthereum(nft.last_offer.eth_current_price)
+              convertEthereum(currentPriceOrSoldPrice)
             }}</span>
           </div>
 
@@ -34,8 +33,8 @@
                 <span class="img-block-s">
                   <img
                     :src="
-                      nft.owner.avatar
-                        ? nft.owner
+                      nft.owner
+                        ? nft.owner.avatar
                         : require('assets/img/auction.png')
                     "
                     alt="auction"
@@ -45,7 +44,7 @@
 
                 <div>
                   <p class="mtb text-m-bold">Current owner</p>
-                  <p class="mtb text-m-bold">{{ nft.owner.display_name }}</p>
+                  <p class="mtb text-m-bold">{{ nft.owner.username }}</p>
                 </div>
               </div>
 
@@ -234,20 +233,25 @@ export default {
   async asyncData({ app, store, params }) {
     try {
       const nft = await store.dispatch("nfts/getNftsById", { uid: params.id });
+      console.log(nft);
       const ethPrice = (await store.dispatch("fetchEthPrice")).rate;
 
       let showAuction = false;
-      if (nft.last_offer.category === "timed") showAuction = true;
+      if (nft.last_offer && nft.last_offer.category === "timed") {
+        showAuction = true;
+      }
 
       return { nft, ethPrice, showAuction };
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   },
   data() {
     return {
       showCard: false,
       showAuction: false,
       ethPrice: null,
-      nft: null,
+      nft: {},
     };
   },
   computed: {
@@ -264,20 +268,29 @@ export default {
       return this.$auth.user;
     },
     isEmailVerified() {
-      return this.user.is_email_verified;
+      return this.user && this.user.is_email_verified;
     },
     isUserVerified() {
-      return this.user.is_verified;
+      return this.user && this.user.is_verified;
+    },
+    currentPriceOrSoldPrice() {
+      const lastOffer = this.nft.last_offer;
+      return this.nft.is_sold
+        ? +this.nft.eth_sold_for
+        : lastOffer
+        ? lastOffer.eth_current_price
+        : 0;
     },
   },
   methods: {
     payCard() {},
 
-    buyNow() {
-      const states = this.availToPay();
-      console.log(states);
-      console.log(this.isEmailVerified, "email");
-      console.log(this.isUserVerified, "user verified");
+    async buyNow() {
+      const availToPayOrState = this.availToPay();
+      if (availToPayOrState !== true) {
+        await this[availToPayOrState.action]();
+      }
+      return await this.checkout();
     },
 
     availToPay() {
@@ -292,11 +305,6 @@ export default {
       const state = Object.keys(states)
         .filter((item) => states[item] === false)
         .shift();
-      const errors = {
-        not_auth: this.$t("snackbar.profile.is_not_logged"),
-        email_not_verified: this.$t("snackbar.profile.email_is_not_verified"),
-        user_not_verified: this.$t("snackbar.profile.user_not_verified"),
-      };
       const actions = {
         not_auth: "guestTryToPay",
         email_not_verified: "emailNotVerifiedTryToPay",
@@ -304,15 +312,45 @@ export default {
       };
       return {
         state,
-        method: actions[state],
-        error: errors[state],
+        action: actions[state],
       };
     },
-
+    async guestTryToPay() {
+      await this.$store.commit("setSnackbar", {
+        show: true,
+        message: this.$t("snackbar.payments.loginRequired"),
+        color: "error",
+      });
+      const link = `/login?back=${this.$route.path}`;
+      await this.$router.push(link);
+    },
+    async emailNotVerifiedTryToPay() {
+      await this.$store.commit("setModal", {
+        show: true,
+        type: "verification-required",
+        data: {
+          title: this.$t("nft_modal.emailVerificationTitle"),
+          description: this.$t("nft_modal.emailVerificationDescription"),
+        },
+      });
+    },
+    async userNotVerifiedTryToPay() {
+      await this.$store.commit("setModal", {
+        show: true,
+        type: "verification-required",
+      });
+    },
     exchangeToken() {},
 
     timerFinished() {
       this.$router.app.refresh();
+    },
+    async checkout() {
+      await this.$store.commit("setModal", {
+        show: true,
+        type: "checkout",
+        data: this.nft,
+      });
     },
   },
 };

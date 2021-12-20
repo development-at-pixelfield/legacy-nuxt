@@ -98,7 +98,6 @@
                 current:
                   selectedItems.includes(item.value.toString()) ||
                   selectedItems.includes(item.value),
-                'hover-key': keyIndex === index,
               }"
               class="text-m"
               @click.stop="select(item, index)"
@@ -283,7 +282,6 @@ export default {
   },
   watch: {
     value(val) {
-      console.log(val, "val");
       if (val && val.length) {
         this.listNew = this.list.filter((item) => {
           const label = this.itemLabel ? this.itemLabel : "label";
@@ -323,8 +321,6 @@ export default {
   mounted() {
     document.addEventListener("click", this.close);
     let val = this.name;
-    console.log(this.itemValue, "this.itemValue");
-    console.log(this.itemLabel, "this.itemLabel");
     if (this.itemValue && this.itemLabel) {
       const list = this.list?.length ? [...this.list] : [];
 
@@ -463,7 +459,11 @@ export default {
       this.value = "";
     },
     close(e) {
-      if (!this.$el.contains(e.target)) {
+      if (
+        !this.$el.contains(e.target) ||
+        e.target.classList.contains("text-s-bold") ||
+        e.target.classList.contains("label-float")
+      ) {
         if (this.visible) {
           this.$emit("touched");
         }

@@ -10,12 +10,15 @@ export default {
     metamask() {
       return this.$metamask();
     },
+    displayBalance() {
+      return this.balance.toFixed(4);
+    },
   },
   methods: {
     async getBalance() {
       if (this.metamaskAccount) {
         const balanceWei = await this.metamask.getBalance(this.metamaskAccount);
-        this.balance = this.metamask.fromWeiToEth(balanceWei);
+        this.balance = +this.metamask.fromWeiToEth(balanceWei);
         this.balanceLoaded = true;
       }
       return false;

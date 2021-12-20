@@ -1,19 +1,22 @@
 <template>
-  <ScaffoldModal :heading="data.title" @close="close('close')">
+  <ScaffoldModal
+    :heading="$t('nft_modal.installMetamask')"
+    @close="handle('close')"
+  >
     <div class="verification-container">
-      <img src="~/assets/img/icons/verification-symbol.svg" />
+      <img src="~/assets/img/icons/large-metamask-wallet-image.svg" />
       <div class="verification-container_textbox">
         <div class="verification-container_textbox_title">
-          {{ data.title }}
+          {{ $t("nft_modal.installMetamaskUnsure") }}
         </div>
         <div class="verification-container_textbox_desc">
-          {{ data.description }}
+          {{ $t("nft_modal.installMetamaskText") }}
         </div>
         <Button
           :size="'full'"
           :color="'c-white'"
-          :label="$t('nft_modal.startVerification')"
-          @on-click="verify()"
+          :label="$t('nft_modal.learnMore')"
+          @on-click="handle('learn-more')"
         />
       </div>
     </div>
@@ -30,22 +33,9 @@ export default {
     Button,
     ScaffoldModal,
   },
-  computed: {
-    data() {
-      const data = this.$store.getters.modal.data;
-      return {
-        title: data?.title ?? this.$t("nft_modal.verifyIdentity"),
-        description: data?.description ?? this.$t("nft_modal.verificationText"),
-      };
-    },
-  },
   methods: {
-    close() {
-      this.$emit("close");
-    },
-    async verify() {
-      this.close();
-      await this.$router.push("/settings");
+    handle(emit) {
+      this.$emit(emit);
     },
   },
 };

@@ -2,6 +2,7 @@
   <div class="market-item" @click="$emit('on-click')">
     <div class="img-block">
       <slot name="image"></slot>
+      <span class="effect"></span>
     </div>
     <slot name="title"></slot>
     <slot name="profit"></slot>

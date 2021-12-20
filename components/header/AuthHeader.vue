@@ -1,5 +1,9 @@
 <template>
-  <div class="auth-header">
+  <div
+    id="header"
+    class="auth-header"
+    :class="{ fixed: $route.name === 'marketplace' }"
+  >
     <nuxt-link to="/"><img :src="userAvatar" alt="logo" /></nuxt-link>
   </div>
 </template>
