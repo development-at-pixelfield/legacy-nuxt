@@ -268,11 +268,15 @@ export default {
 
     removeFixed() {
       const header = document.getElementById("header");
+      const html = document.getElementsByTagName("html")[0];
       header.style.position = "static";
+      html.style.position = "static";
     },
     addFixed() {
       const header = document.getElementById("header");
+      const html = document.getElementsByTagName("html")[0];
       header.style.position = "fixed";
+      html.style.position = "fixed";
     },
     reportWindowSize() {
       if (window.innerWidth < 770) this.type = "mobile";

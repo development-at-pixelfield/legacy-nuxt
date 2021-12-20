@@ -98,7 +98,6 @@
                 current:
                   selectedItems.includes(item.value.toString()) ||
                   selectedItems.includes(item.value),
-                'hover-key': keyIndex === index,
               }"
               class="text-m"
               @click.stop="select(item, index)"
@@ -460,7 +459,11 @@ export default {
       this.value = "";
     },
     close(e) {
-      if (!this.$el.contains(e.target)) {
+      if (
+        !this.$el.contains(e.target) ||
+        e.target.classList.contains("text-s-bold") ||
+        e.target.classList.contains("label-float")
+      ) {
         if (this.visible) {
           this.$emit("touched");
         }

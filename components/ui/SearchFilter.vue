@@ -385,7 +385,11 @@ export default {
       this.$emit("update:name", data);
     },
     close(e) {
-      if (!this.$el.contains(e.target)) {
+      if (
+        !this.$el.contains(e.target) ||
+        e.target.classList.contains("text-s-bold") ||
+        e.target.classList.contains("label-float")
+      ) {
         if (this.visible) {
           this.$emit("touched");
         }

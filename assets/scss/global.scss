@@ -279,23 +279,6 @@ ul{
   display: flex;
 }
 
-.main-container{
-  width: 944px;
-  margin: 0 auto;
-
-  @media (max-width: $break-md) {
-    width: 100%;
-    padding-left: 32px;
-    padding-right: 32px;
-  }
-
-  @media (max-width: $break-sms) {
-    width: 100%;
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-}
-
 input{
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -343,6 +326,28 @@ input{
     input{
       order: 2;
     }
+  }
+}
+
+.main-container{
+  width: 944px;
+  margin: 0 auto;
+
+  @media (max-width: $break-lgs) {
+    width: 100%;
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
+  @media (max-width: $break-md) {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  @media (max-width: $break-sms) {
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }
 

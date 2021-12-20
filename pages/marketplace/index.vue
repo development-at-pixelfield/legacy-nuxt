@@ -12,13 +12,12 @@
         :form-options="formOptions"
       />
     </div>
-    <div class="main-container" :class="{ 'panel-open': isOpenPanel }">
+    <div class="main-list-container" :class="{ 'panel-open': isOpenPanel }">
       <div class="header mb-16">
         <h2 class="header-big mtb">
           {{ $t("marketplace.marketplace") }}
         </h2>
         <div class="filter-block">
-          {{ filter.ordering }}
           <FilterDropdown
             :list="filterItems"
             :return-object="false"
