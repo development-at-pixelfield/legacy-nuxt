@@ -184,8 +184,8 @@ export default {
       formOptions: {},
       filterItems: [
         { label: "Recently listed", value: "created_at" },
-        { label: "Price (ETH): Highest first", value: "price_eth" },
-        { label: "Price (ETH): Lowest first", value: "-price_eth" },
+        { label: "Price (ETH): Highest first", value: "-price_eth" },
+        { label: "Price (ETH): Lowest first", value: "price_eth" },
       ],
     };
   },
