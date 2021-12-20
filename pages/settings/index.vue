@@ -187,7 +187,6 @@ export default {
   },
 
   created() {
-    console.log(this.$auth.user, "this.$auth.user");
     this.email = this.$auth.user.email;
     this.username = this.$auth.user.username || "";
     this.showAlerts = this.$auth.user.nft_notifications;
