@@ -202,10 +202,15 @@ export default {
     async updateChanges() {
       await this.beforeUpdate();
       const isEmailChanged = this.email !== this.$auth.user.email;
+      const isUsernameChanged = this.username !== this.$auth.user.username;
       const isNftNotififcationsChanged =
         this.showAlerts !== this.$auth.user.nft_notifications;
 
-      if (!isEmailChanged && !isNftNotififcationsChanged) {
+      if (
+        !isEmailChanged &&
+        !isNftNotififcationsChanged &&
+        !isUsernameChanged
+      ) {
         await this.$store.commit("setSnackbar", {
           show: true,
           message: this.$t("snackbar.noSettingsChanged"),
