@@ -7,11 +7,19 @@ header{
   background: #08010E;
   border-bottom: 1px solid #301C3F;
 
-  .full-container {
+  .header-full-container {
+    width: 944px;
+    margin: 0 auto;
+
     @media (max-width: 1716px){
       margin: 0 auto !important;
     }
+    @media (max-width: $break-lgs){
+      padding-left: 60px;
+      padding-right: 60px;
+    }
     @media (max-width: $break-md) {
+      width: 100%;
       padding-left: 100px;
       padding-right: 100px;
     }
