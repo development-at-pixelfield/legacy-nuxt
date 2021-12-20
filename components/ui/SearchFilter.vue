@@ -9,7 +9,7 @@
       :style="selectorStyles"
     >
       <p v-if="subHeader.length" class="text-small">{{ subHeader }}</p>
-      <div class="selector" @click="!disabled ? toggle($event) : null">
+      <div class="selector">
         <div class="label">
           <input
             ref="inputFilter"
@@ -19,8 +19,6 @@
             :disabled="disabled"
             :class="{ 'no-image-label': !src, 'disabled-input': disabled }"
             :style="{ cursor: disabled ? 'not-allowed' : 'pointer' }"
-            @input="showList"
-            @keydown="onKeyDown"
           />
           <img
             v-if="value"
@@ -32,58 +30,6 @@
             <Icon src="search.svg" size="big" />
           </div>
         </div>
-        <div
-          v-if="!disabled"
-          :class="{
-            hidden: !visible,
-            visible,
-          }"
-        >
-          <ul
-            v-show="visible"
-            ref="scrollContainer"
-            :class="{
-              'custom-height': filterByAlphaList.length > 10,
-              'moz-height': mozHeight,
-            }"
-            :style="styles"
-          >
-            <li v-if="visible && !value" class="text-m text-jcenter">
-              {{ $t("settings.startTyping") }}
-            </li>
-            <li
-              v-else-if="!filterByAlphaList.length"
-              class="text-m text-jcenter"
-            >
-              {{ $t("settings.noResults") }}
-            </li>
-            <li
-              v-for="(item, index) in filterByAlphaList"
-              v-else
-              ref="options"
-              :key="index"
-              :class="{
-                current: selectedIndex === index,
-                'hover-key': keyIndex === index,
-              }"
-              class="text-m"
-              @click="select(item, index)"
-            >
-              <span class="label-text">{{
-                itemLabel ? item[itemLabel] : item.label
-              }}</span>
-              <span v-if="selectedIndex === index">
-                <img src="~/assets/img/icons/checkbox-mark.svg" alt="icon" />
-              </span>
-            </li>
-            <li
-              v-if="visible && value && filterByAlphaList.length"
-              class="text-btn no-hover"
-            >
-              {{ $t("settings.findItems") }} “{{ value }}”
-            </li>
-          </ul>
-        </div>
       </div>
       <span v-if="error" class="error-wrapper"
         >{{ label ? label : placeholder }}
@@ -94,19 +40,13 @@
 </template>
 
 <script>
-// import SvgSelectedOption from "~/assets/img/selected-option.svg?inline";
 import Icon from "./Icon";
 export default {
   name: "SearchFilter",
   components: {
     Icon,
-    // SvgSelectedOption,
   },
   props: {
-    list: {
-      type: Array,
-      required: true,
-    },
     name: {
       type: [String, Number, Object],
       required: true,
@@ -178,7 +118,6 @@ export default {
     return {
       value: "",
       visible: false,
-      listNew: [],
       scrollCountArr: [],
       isFocus: false,
       selectedIndex: -1,
@@ -186,30 +125,9 @@ export default {
     };
   },
   computed: {
-    filterByAlphaList() {
-      const list = [...this.listNew];
-      if (list.length && list[0].label && !this.notFilter) {
-        if (this.showDefaultOrder) {
-          return list;
-        } else {
-          return list.sort((a, b) => a.label.localeCompare(b.label));
-        }
-      }
-      // if (list.length && list[0].value && !this.notFilter) {
-      //   return list.sort((a, b) => a.value.localeCompare(b.value));
-      // }
-      return list;
-    },
-    mozHeight() {
-      return this.listNew.length <= 6;
-    },
     styles() {
       return {
-        height: this.height
-          ? this.height
-          : this.listNew.length <= 6
-          ? "fit-content"
-          : "280px",
+        height: this.height ? this.height : "280px",
       };
     },
     selectorStyles() {
@@ -227,59 +145,10 @@ export default {
   watch: {
     value(val) {
       this.$emit("update:name", val);
-      if (val) {
-        this.listNew = this.list.filter((item) => {
-          const label = this.itemLabel ? this.itemLabel : "label";
-          if (
-            item[label] &&
-            (item[label].includes(val) ||
-              item[label].toUpperCase().includes(val) ||
-              item[label].toLowerCase().includes(val))
-          ) {
-            return item;
-          } else if (item.value === val) {
-            // this.value = val;
-            return item;
-          }
-        });
-      } else {
-        this.selectedIndex = -1;
-        this.$emit("update:name", "");
-      }
-    },
-    name(val) {
-      if (!val) this.value = "";
-    },
-    visible(val) {
-      if (val) {
-        this.keyIndex = this.selectedIndex > 0 ? this.selectedIndex : 0;
-        this.getCountsArr();
-        this.fixScrolling();
-      }
-
-      // if (!val && !this.listNew.length) {
-      //   console.log("11111");
-      //   this.value = "";
-      // }
     },
   },
   mounted() {
     document.addEventListener("click", this.close);
-    let val = this.name;
-    if (this.itemValue && this.itemLabel) {
-      let list = [...this.list];
-      if (list.length && list[0].label && !this.notFilter) {
-        list = list.sort((a, b) => a.label && a.label.localeCompare(b.label));
-      }
-
-      const objIndex = list.findIndex((v) => v[this.itemValue] === this.name);
-      if (objIndex > -1) {
-        this.selectedIndex = objIndex;
-        const obj = list[objIndex];
-        val = obj[this.itemLabel];
-      }
-    }
-    this.value = val;
   },
   beforeDestroy() {
     document.removeEventListener("click", this.close);
@@ -290,15 +159,6 @@ export default {
     },
     mouseHover(index) {
       this.keyIndex = index;
-    },
-    getCountsArr() {
-      let arr = [];
-      const count = Math.round(this.listNew.length / 7);
-      [...Array(count).keys()].forEach((item) => {
-        arr = [...arr, (item + 1) * 7];
-      });
-
-      this.scrollCountArr = arr;
     },
     fixScrolling(type) {
       if (this.keyIndex > 0 && this.$refs.options[this.keyIndex]) {
@@ -314,65 +174,6 @@ export default {
 
         this.$refs.scrollContainer.scrollTop = h;
       } else this.$refs.scrollContainer.scrollTop = 0;
-    },
-    onKeyDown(e) {
-      if (e.keyCode === 40 && this.keyIndex !== this.listNew.length - 1) {
-        this.keyIndex = this.keyIndex + 1;
-        if (this.listNew.length > 7) this.fixScrolling("down");
-      }
-      if (e.keyCode === 38 && this.keyIndex > 0) {
-        this.keyIndex = this.keyIndex - 1;
-        if (this.listNew.length > 7) this.fixScrolling();
-      }
-      if (e.keyCode === 13) {
-        this.selectByKey(this.keyIndex);
-      }
-    },
-    toggle() {
-      this.isFocus = this.$refs.inputFilter === document.activeElement;
-
-      this.visible = !this.visible;
-      if (this.visible) {
-        this.$refs.inputFilter.focus();
-
-        if (this.value) {
-          this.listNew = this.list.filter((item) => {
-            const label = this.itemLabel ? this.itemLabel : "label";
-            if (
-              item[label] &&
-              (item[label].includes(this.value) ||
-                item[label].toUpperCase().includes(this.value) ||
-                item[label].toLowerCase().includes(this.value))
-            ) {
-              return item;
-            } else if (item.value === this.value) {
-              this.value = item.label;
-              return item;
-            }
-          });
-        } else this.listNew = this.list;
-      } else {
-        this.$emit("touched");
-      }
-    },
-    showList() {
-      this.visible = true;
-    },
-    selectByKey(keyIndex) {
-      const item = this.listNew.filter((item, index) => index === keyIndex);
-      const option = item[0];
-
-      if (option) {
-        this.value = this.itemLabel ? option[this.itemLabel] : option.label;
-        this.selectedIndex = keyIndex;
-
-        let data = this.itemValue ? option[this.itemValue] : option.id;
-
-        if (this.returnObject) data = option;
-
-        this.$emit("update:name", data);
-        this.visible = false;
-      }
     },
     select(option, index) {
       this.value = this.itemLabel ? option[this.itemLabel] : option.label;
