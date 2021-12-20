@@ -12,3 +12,10 @@
     cursor: pointer;
   }
 }
+
+.fixed{
+  width: 100%;
+  z-index: 2;
+  background: #08010E;
+  border-bottom: 1px solid #301C3F;
+}
