@@ -18,7 +18,6 @@
           {{ $t("marketplace.marketplace") }}
         </h2>
         <div class="filter-block">
-          {{ filter.ordering }}
           <FilterDropdown
             :list="filterItems"
             :return-object="false"
