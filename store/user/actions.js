@@ -111,7 +111,6 @@ export const actions = {
    * @returns {Promise<AxiosResponse<any>>}
    */
   saveWallet(context, payload) {
-    console.log("SAVEWALLER ", payload);
     return this.$axios.$patch("/users/update/", payload);
   },
 

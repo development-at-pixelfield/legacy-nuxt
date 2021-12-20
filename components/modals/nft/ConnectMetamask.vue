@@ -28,7 +28,7 @@ import Button from "../../ui/Button";
 import ScaffoldModal from "~/components/modals/nft/ScaffoldModal.vue";
 
 export default {
-  name: "VerifyIdentityModal",
+  name: "ConnectMetamaskModal",
   components: {
     Button,
     ScaffoldModal,

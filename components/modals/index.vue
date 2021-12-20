@@ -3,6 +3,10 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <DeleteAccount v-if="modal.type === 'delete-account'" @close="close" />
+        <ConnectMetamask
+          v-if="modal.type === 'connect-metamask'"
+          @close="close"
+        />
         <StarInfo v-if="modal.type === 'star-info'" @close="close" />
       </div>
     </div>
@@ -11,12 +15,14 @@
 
 <script>
 import DeleteAccount from "./DeleteAccount";
+import ConnectMetamask from "./nft/ConnectMetamask";
 import StarInfo from "./StarInfo";
 export default {
   name: "Modals",
   components: {
     DeleteAccount,
     StarInfo,
+    ConnectMetamask,
   },
   computed: {
     modal() {

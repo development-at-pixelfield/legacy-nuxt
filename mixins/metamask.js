@@ -23,10 +23,21 @@ export default {
     },
     async connectMetamask() {
       if (!this.metamask.isEnabled) {
-        await this.$store.commit("setSnackbar", {
+        // await this.$store.commit("setSnackbar", {
+        //   show: true,
+        //   message: this.$t("snackbar.metaMask.extensionNotInstalled"),
+        //   color: "error",
+        // });
+        this.$store.commit("setModal", {
           show: true,
-          message: this.$t("snackbar.metaMask.extensionNotInstalled"),
-          color: "error",
+          type: "connect-metamask",
+          data: {
+            confirm: {
+              function: () => {
+                // this.deleteAccount();
+              },
+            },
+          },
         });
         this.$store.commit("setWallet", false);
         this.$store.commit("setWalletAccount", null);
