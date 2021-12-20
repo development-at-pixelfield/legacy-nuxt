@@ -50,7 +50,7 @@
     @media (max-width: $break-sms) {
       overflow-y: scroll;
       height: 100vh;
-      padding-bottom: 150px;
+      padding-bottom: 180px;
     }
 
     .header{
@@ -77,9 +77,9 @@
       height: 48px;
       border-left: 2px solid $c-white;
 
-      @media (max-width: $break-smsm) {
-        display: none !important;
-      }
+      //@media (max-width: $break-smsm) {
+      //  display: none !important;
+      //}
 
       .left-side{
         margin-left: 12px;
