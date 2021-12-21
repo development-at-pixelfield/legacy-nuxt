@@ -32,6 +32,7 @@
               text-btn
               pointer
             "
+            @click="disconnectMetamask()"
           >
             {{ $t("modals.disconnect") }}
           </div>
@@ -135,10 +136,10 @@ export default {
   },
   computed: {
     connectedWallet() {
-      return this.$store.getters.hasWallet;
+      return this.$auth.user.wallet_address;
     },
     myWallet() {
-      const account = this.$store.getters.walletAccount;
+      const account = this.$auth.user.wallet_address;
       if (account != null && account !== "") {
         const firstPart = account.substr(0, 7);
         const lastPart = account.substr(account.length - 7, account.length - 1);

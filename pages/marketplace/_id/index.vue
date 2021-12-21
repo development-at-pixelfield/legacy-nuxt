@@ -291,7 +291,12 @@ export default {
     },
   },
   methods: {
-    payCard() {},
+    async payCard() {
+      await this.$store.commit("setModal", {
+        show: true,
+        type: "pay-card",
+      });
+    },
 
     async buyNow() {
       const availToPayOrState = this.availToPay();

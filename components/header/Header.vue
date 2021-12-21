@@ -83,20 +83,14 @@ export default {
       ];
     },
   },
-  created() {
+  mounted() {
     if (this.$auth.user) {
       if (
         this.$auth.user.wallet_address != null &&
         this.$auth.user.wallet_address !== ""
       ) {
         this.connectMetamask();
-      } else {
-        this.$store.commit("setWallet", false);
-        this.$store.commit("setWalletAccount", null);
       }
-    } else {
-      this.$store.commit("setWallet", false);
-      this.$store.commit("setWalletAccount", null);
     }
   },
   methods: {

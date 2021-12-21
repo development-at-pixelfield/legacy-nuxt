@@ -2,7 +2,7 @@
   <ScaffoldModal
     :heading="$t('nft_modal.buyCardHeader')"
     :desc="$t('nft_modal.buyCardDesc')"
-    @close="handle('close')"
+    @close="close()"
   >
     <div class="verification-container">
       <img class="image" src="~/assets/img/icons/pay-card.png" />
@@ -34,9 +34,27 @@ export default {
     Button,
     ScaffoldModal,
   },
+  data() {
+    return {
+      nft: this.$store.getters.modal.data,
+    };
+  },
   methods: {
     handle(emit) {
-      this.$emit(emit);
+      this.$router.push("/help");
+      this.$emit("close");
+    },
+    async close() {
+      const nft = this.nft;
+      this.$emit("close");
+      if (nft) {
+        console.log(nft);
+        await this.$store.commit("setModal", {
+          show: true,
+          type: "checkout",
+          data: nft,
+        });
+      }
     },
   },
 };

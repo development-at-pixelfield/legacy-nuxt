@@ -47,12 +47,8 @@ export default {
   methods: {
     async addWallet(wallet) {
       this.loading = true;
-      const connected = await this.connectMetamask();
+      await this.connectMetamask();
       this.loading = false;
-      console.log(connected);
-      // if(connected){
-      //   this.$store.dispatch()
-      // }
     },
 
     close() {
