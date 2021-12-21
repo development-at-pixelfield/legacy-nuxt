@@ -208,13 +208,13 @@ export default {
   async mounted() {
     this.$nuxt.$on("applyFilters", async (values) => {
       if (Object.keys(values).length) {
-        values.page = this.filter.page;
+        values.page = 1;
         values.ordering = this.filter.ordering;
 
         await this.setQuery(values);
       } else {
         const filters = { ...filterDefaultVars };
-        filters.page = this.filter.page;
+        filters.page = 1;
         filters.ordering = this.filter.ordering;
 
         await this.setQuery(filters);
