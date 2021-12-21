@@ -150,7 +150,15 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     verificationInProgress: "Verification in progress...",
     checkInbox: "Check your inbox for the verification email",
     verifyIdentity: "Verify your identity",
+    verifyOnProgress: "Verification in progress...",
+    verifyWarning: "We couldn’t verify your identity!",
     verifyIdentityDesc: `Before buying or making an offer you must fully verify your email and identity. Complete two steps below!`,
+    firstName: "Legal first name",
+    lastName: "Legal last name",
+    saveContinue: "Save and Continue",
+    countryRes: "Country of residence",
+    selectCountry: "Select country",
+    selectId: "Select your ID type",
   },
 
   marketplace: {
@@ -188,6 +196,7 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     addEmail: "Please include an ‘@’ in the email address.",
     validEmail: "Please enter valid email address",
     emailUsed: "This email has already been registered",
+    selectOption: "You must select one of the options",
   },
 
   snackbar: {

@@ -83,7 +83,7 @@
             class="text-m-bold mtb"
             :class="{ [`${status}-text`]: true }"
           >
-            {{ $t("settings.verifyEmail") }}
+            {{ label }}
           </p>
           <template slot="action">
             <span v-if="status === 'success'">
@@ -214,6 +214,15 @@ export default {
       return !this.$auth.user.is_email_verified;
     },
 
+    label() {
+      if (this.status === "progress")
+        return this.$t("settings.verifyOnProgress");
+
+      if (this.status === "warning") return this.$t("settings.verifyWarning");
+
+      return this.$t("settings.verify");
+    },
+
     showVerificationInProgress() {
       return (
         this.$auth.user.verification_in_progress &&
@@ -281,7 +290,9 @@ export default {
       }
     },
 
-    verifyIdentity() {},
+    verifyIdentity() {
+      this.$router.push("/settings/advanced-verification");
+    },
 
     async resendEmail() {
       try {
