@@ -130,13 +130,16 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     NFTAlerts: "NFT alerts",
     alertToEmail: "I want to receive NFT alerts to my email.",
     basicVerification: "Basic verification",
+    advancedVerification: "Advanced verification",
+    verifyDesc: `Get your ID ready and make a small deposit ($0.1) using your bank account to verify your identity and start collecting Galaxy NFTs.`,
     updateChanges: "Update changes",
     deleteAccount: "Delete account",
     changeDesc:
       "Change your password by confirming your current password and choosing a new one.",
     currentPassword: "Current password",
     profile: "Profile",
-    resend: "Resend",
+    resend: "Re-send",
+    verify: "Verify",
     verifyEmail: "Verify your email",
     minutes: "minutes",
     hours: "hours",
@@ -147,6 +150,17 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     emailVerified: "Email verified",
     verificationInProgress: "Verification in progress...",
     checkInbox: "Check your inbox for the verification email",
+    verifyIdentity: "Verify your identity",
+    verifyOnProgress: "Verification in progress...",
+    verifyWarning: "We couldn’t verify your identity!",
+    verifyIdentityDesc: `Before buying or making an offer you must fully verify your email and identity. Complete two steps below!`,
+    firstName: "Legal first name",
+    lastName: "Legal last name",
+    saveContinue: "Save and Continue",
+    countryRes: "Country of residence",
+    selectCountry: "Select country",
+    selectId: "Select your ID type",
+    warningText: "Click here to find out more",
   },
 
   marketplace: {
@@ -184,6 +198,7 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     addEmail: "Please include an ‘@’ in the email address.",
     validEmail: "Please enter valid email address",
     emailUsed: "This email has already been registered",
+    selectOption: "You must select one of the options",
   },
 
   snackbar: {
@@ -231,6 +246,7 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     verificationText: `Before buying an NFT you must verify your identity.
     You will need your valid ID card, passport or driving licence `,
     startVerification: "Start verification (5min)",
+    continue: "Continue",
     confirmFromMetaMask:
       "Please confirm the transaction in your MetaMask wallet.",
     approveForTrading: "Approve ETH for trading",
@@ -239,8 +255,14 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     you_are_buying: "You are buying",
     availableBalance: "Available balance",
     addFunds: "Add funds",
+    tryAgain: "Try again",
+    verificationTitle: "Verification error!",
+    verifyHeader: "Unsuccessful verification attempt for the following reason:",
+    doAgain: "Please try to verify your ID again.",
     total: "Total",
     copiedToClip: "Successfully copied hash to clipboard",
+    completeIdentity: "Complete verification process",
+    continueIdentity: "Continue to Veriff.com to fully verify your account.",
     emailVerificationTitle: "Verify your email",
     emailVerificationDescription:
       "Before buying an NFT you must verify your email and identity.",

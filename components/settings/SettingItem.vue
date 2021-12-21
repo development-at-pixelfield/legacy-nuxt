@@ -1,7 +1,10 @@
 <template>
   <div
     class="setting-item"
-    :class="{ 'no-margin': noMargin, cursor: type === 'link' }"
+    :class="{
+      'no-margin': noMargin,
+      cursor: type === 'link',
+    }"
     @click="toLink"
   >
     <div class="left-side">
@@ -29,6 +32,10 @@ export default {
     noMargin: {
       type: Boolean,
       default: false,
+    },
+    status: {
+      type: [String, Boolean],
+      default: "normal",
     },
     type: {
       type: String,

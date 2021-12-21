@@ -43,6 +43,10 @@ export default {
     },
 
     close() {
+      this.$store.commit("setModal", {
+        show: false,
+        type: null,
+      });
       this.$emit("close");
     },
   },

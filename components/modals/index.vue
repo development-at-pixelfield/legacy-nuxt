@@ -2,6 +2,11 @@
   <transition v-if="modal.show" name="modal" :duration="333" mode="out-in">
     <div class="modal-mask">
       <div class="modal-wrapper">
+        <InfoVerification
+          v-if="modal.type === 'info-verification'"
+          @close="close"
+        />
+        <VerifyId v-if="modal.type === 'verify-id'" @close="close" />
         <DeleteAccount v-if="modal.type === 'delete-account'" @close="close" />
         <StarInfo v-if="modal.type === 'star-info'" @close="close" />
         <VerifyIdentityModal
@@ -39,11 +44,15 @@ import ConnectMetamask from "./nft/ConnectMetamask";
 import ConnectWallet from "./nft/ConnectWallet";
 import PurchaseModal from "./nft/PurchaseModal";
 import PayCard from "./nft/PayCard";
+import VerifyId from "./nft/VerifyId";
+import InfoVerification from "./nft/InfoVerification";
 export default {
   name: "Modals",
   components: {
     DeleteAccount,
     StarInfo,
+    VerifyId,
+    InfoVerification,
     VerifyIdentityModal,
     CheckoutModal,
     ConnectMetamask,

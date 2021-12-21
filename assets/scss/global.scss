@@ -210,6 +210,9 @@ ul{
   margin-bottom: 32px;
 }
 
+.ml-24{
+  margin-left: 24px;
+}
 .ml-16{
   margin-left: 16px;
 }
@@ -277,6 +280,7 @@ ul{
 .form-container{
   max-width: 464px;
   margin: 0 auto;
+  padding-bottom: 80px;
 
   @media (max-width: $break-sms) {
     max-width: 100%;
