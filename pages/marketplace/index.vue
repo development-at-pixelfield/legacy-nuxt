@@ -208,17 +208,14 @@ export default {
   async mounted() {
     this.$nuxt.$on("applyFilters", async (values) => {
       if (Object.keys(values).length) {
-        values.page = this.filter.page;
+        values.page = 1;
         values.ordering = this.filter.ordering;
 
         await this.setQuery(values);
       } else {
         const filters = { ...filterDefaultVars };
-        filters.page = this.filter.page;
+        filters.page = 1;
         filters.ordering = this.filter.ordering;
-
-        delete filters.eth_price__gte;
-        delete filters.eth_price__lte;
 
         await this.setQuery(filters);
       }
@@ -235,21 +232,17 @@ export default {
       const cleanObject = functions.cleanObject(this.$route.query);
       this.filter.page = val;
       cleanObject.page = val;
-      this.fetchNfts(cleanObject);
+      this.setQuery(cleanObject);
     },
     openFilter() {
       this.isOpenPanel = true;
     },
     setDefaultWatch() {
-      this.$watch("filter.page", (val) => {
-        const cleanObject = functions.cleanObject(this.$route.query);
-        cleanObject.page = val;
-        this.fetchNfts(cleanObject);
-      });
-
-      this.$watch("filter.ordering", (val) => {
-        const query = { ...this.filter };
-        this.setQuery(query);
+      this.$watch("filter.ordering", (val, newVal) => {
+        if (val && val !== newVal) {
+          const query = { ...this.filter };
+          this.setQuery(query);
+        }
       });
     },
 
@@ -257,7 +250,6 @@ export default {
       const cleanObject = await functions.cleanObject(query);
       await this.fetchNfts(cleanObject);
 
-      delete cleanObject.page;
       delete cleanObject.page_size;
 
       await this.$router.push({ query: cleanObject });
