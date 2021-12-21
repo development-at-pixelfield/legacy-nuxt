@@ -36,7 +36,7 @@
           :item-label="'label'"
           :label="$t('marketplace.name')"
           :placeholder="$t('marketplace.search')"
-          :name.sync="filter.name"
+          :name.sync="filter.search"
           class="mb-0"
         />
 
@@ -125,7 +125,7 @@ import SearchFilter from "../../ui/SearchFilter";
 import Icon from "../../ui/Icon";
 import Button from "../../ui/Button";
 const filterDefaultVars = {
-  name: "",
+  search: "",
   luminosity__in: [],
   quality_level__in: [],
   age__in: [],
@@ -165,7 +165,7 @@ export default {
       canShow: false,
       type: "desktop",
       filter: {
-        name: "",
+        search: "",
         luminosity__in: [],
         quality_level__in: [],
         age__in: [],
