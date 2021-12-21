@@ -42,21 +42,62 @@ export default ({ app }, inject) => {
       },
       /**
        * Convert to wei from eth
-       * @param eth
+       * @param wei
        * @returns {string}
        */
-      fromWeiToEth(eth) {
-        return this.web3.utils.fromWei(eth);
+      fromWeiToEth(wei) {
+        return this.web3.utils.fromWei(wei);
       },
       /**
        * Convert to ether
-       * @param wei
+       * @param eth
        * @returns {BN}
        */
-      fromEthToWei(wei) {
-        return this.web3.utils.toWei(wei, "ether");
+      fromEthToWei(eth) {
+        return this.web3.utils.toWei(eth, "ether");
       },
-      requestTransaction(fromAccount, toAccount, priceValue, data) {},
+      /**
+       * Execute payment
+       * @param tokenContract
+       * @param nftTokenId
+       * @param methodType
+       * @param currentPriceEther
+       * @returns {Promise<void>}
+       */
+      async payNFT(tokenContract, nftTokenId, methodType, currentPriceEther) {
+        const contractJSON = require("./NftTrader.json");
+        const userAccount = await this.selectedAccount();
+        const currentPriceWei = this.fromEthToWei(currentPriceEther);
+        await window.web3.currentProvider.enable();
+        console.log(userAccount);
+        console.log(window.web3.currentProvider);
+        const contract = new this.web3.eth.Contract(
+          contractJSON.abi,
+          process.env.TRADE_CONTRACT_ADDRESS
+        );
+        contract.defaultChain = "goerli";
+        console.log(contract.defaultChain);
+        // console.log(contract.getProvider);
+        if (methodType === "timed") {
+          const result = await contract.methods
+            .timedPurchase(tokenContract, nftTokenId)
+            .send({ from: userAccount, value: currentPriceWei });
+          console.log(result);
+        }
+        if (methodType === "fixed") {
+          const result = await contract.methods
+            .constantPurchase(tokenContract, nftTokenId)
+            .send({ from: userAccount, value: currentPriceWei });
+          console.log(result);
+        }
+        // const contractInstance = this.web3.eth
+        //   .Contract(contractJSON.abi)
+        //   .at(tokenContract);
+        console.log(methodType);
+        console.log(contract);
+        console.log(contractJSON);
+        // https://ethereum.stackexchange.com/questions/25431/metamask-how-to-access-call-deployed-contracts-functions-using-metamask
+      },
     };
   });
 };

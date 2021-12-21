@@ -6,9 +6,12 @@
   width: 360px;
 
   @media (max-width: $break-sms) {
-    width: 100%;
     justify-content: space-between;
     padding: 0 8px;
+    display: flex;
+    width: 87%;
+    text-align: center;
+    margin: 0 auto;
   }
   @media (max-height: 800px) {
     position: static;

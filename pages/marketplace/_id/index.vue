@@ -9,7 +9,7 @@
           class="nav"
         />
         <div class="img-block">
-          <WebGl :src="nft.model_file" />
+          <WebGl v-if="nft.model_file" :src="nft.model_file" />
         </div>
       </div>
     </div>
@@ -20,11 +20,10 @@
           <div class="left-side">
             <h1 class="mb-8 mt-0 detail-title">{{ nft.name }}</h1>
             <span class="header-title1"
-              >Current price:
-              {{ (+nft.last_offer.eth_current_price).toFixed(2) }}Ξ</span
+              >Current price: {{ (+currentPriceOrSoldPrice).toFixed(3) }}Ξ</span
             >
             <span class="header-title1 ml-16">{{
-              convertEthereum(nft.last_offer.eth_current_price)
+              convertEthereum(currentPriceOrSoldPrice)
             }}</span>
           </div>
 
@@ -34,8 +33,8 @@
                 <span class="img-block-s">
                   <img
                     :src="
-                      nft.owner.avatar
-                        ? nft.owner
+                      nft.owner
+                        ? nft.owner.avatar
                         : require('assets/img/auction.png')
                     "
                     alt="auction"
@@ -45,7 +44,7 @@
 
                 <div>
                   <p class="mtb text-m-bold">Current owner</p>
-                  <p class="mtb text-m-bold">{{ nft.owner.display_name }}</p>
+                  <p class="mtb text-m-bold">{{ nft.owner.username }}</p>
                 </div>
               </div>
 
@@ -195,9 +194,10 @@
             <Button
               class="second-btn"
               :label="$t('marketplace.exchangeToken')"
-              :background="'grey'"
+              :background="isOwner ? 'primary' : 'grey'"
               :size="'medium'"
-              :color="'c-grey'"
+              :disabled="!isOwner"
+              :color="isOwner ? 'c-white' : 'c-grey'"
               @on-click="exchangeToken"
             />
           </div>
@@ -234,21 +234,25 @@ export default {
   async asyncData({ app, store, params }) {
     try {
       const nft = await store.dispatch("nfts/getNftsById", { uid: params.id });
+      // console.log(nft);
       const ethPrice = (await store.dispatch("fetchEthPrice")).rate;
 
       let showAuction = false;
-      if (nft.last_offer.category === "timed") showAuction = true;
+      if (nft.last_offer && nft.last_offer.category === "timed") {
+        showAuction = true;
+      }
 
-      console.log(nft, "nft");
       return { nft, ethPrice, showAuction };
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   },
   data() {
     return {
       showCard: false,
       showAuction: false,
       ethPrice: null,
-      nft: null,
+      nft: {},
     };
   },
   computed: {
@@ -264,21 +268,117 @@ export default {
     user() {
       return this.$auth.user;
     },
-    isVerified() {
-      return this.user;
+    isEmailVerified() {
+      return this.user && this.user.is_email_verified;
+    },
+    isOwner() {
+      return (
+        this.nft &&
+        this.nft.owner &&
+        this.nft.owner.username === this.user.username
+      );
+    },
+    isUserVerified() {
+      return this.user && this.user.is_verified;
+    },
+    currentPriceOrSoldPrice() {
+      const lastOffer = this.nft.last_offer;
+      return this.nft.is_sold
+        ? +this.nft.eth_sold_for
+        : lastOffer
+        ? lastOffer.eth_current_price
+        : 0;
     },
   },
   methods: {
     payCard() {},
 
-    buyNow() {
-      console.log(this.user);
+    async buyNow() {
+      const availToPayOrState = this.availToPay();
+      if (availToPayOrState !== true) {
+        return await this[availToPayOrState.action]();
+      }
+      return await this.checkout();
     },
 
-    exchangeToken() {},
+    availToPay() {
+      console.log(this.user);
+      const states = {
+        metamask_not_installed: this.metamask.isEnabled,
+        not_auth: !!this.user,
+        email_not_verified: this.isEmailVerified,
+        user_not_verified: this.isUserVerified,
+        wallet_is_not_connected: !!this.user.wallet_address,
+      };
+      if (Object.values(states).every((item) => item === true)) {
+        return true;
+      }
+      const state = Object.keys(states)
+        .filter((item) => states[item] === false)
+        .shift();
+      const actions = {
+        metamask_not_installed: "metamaskNotInstalled",
+        not_auth: "guestTryToPay",
+        email_not_verified: "emailNotVerifiedTryToPay",
+        user_not_verified: "userNotVerifiedTryToPay",
+        wallet_is_not_connected: "walletNotConnected",
+      };
+      return {
+        state,
+        action: actions[state],
+      };
+    },
+    async guestTryToPay() {
+      await this.$store.commit("setSnackbar", {
+        show: true,
+        message: this.$t("snackbar.payments.loginRequired"),
+        color: "error",
+      });
+      const link = `/login?back=${this.$route.path}`;
+      await this.$router.push(link);
+    },
+    async emailNotVerifiedTryToPay() {
+      await this.$store.commit("setModal", {
+        show: true,
+        type: "verification-required",
+        data: {
+          title: this.$t("nft_modal.emailVerificationTitle"),
+          description: this.$t("nft_modal.emailVerificationDescription"),
+        },
+      });
+    },
+    async userNotVerifiedTryToPay() {
+      await this.$store.commit("setModal", {
+        show: true,
+        type: "verification-required",
+      });
+    },
+    async metamaskNotInstalled() {
+      await this.$store.commit("setModal", {
+        show: true,
+        type: "checkout-metamask",
+      });
+    },
+    async exchangeToken() {
+      await this.$router.push("/exchange");
+    },
 
     timerFinished() {
       this.$router.app.refresh();
+    },
+    async checkout() {
+      await this.$store.commit("setModal", {
+        show: true,
+        type: "checkout",
+        data: this.nft,
+      });
+    },
+    async walletNotConnected() {
+      await this.$store.commit("setModal", {
+        show: true,
+        type: "checkout-wallet",
+        data: this.nft,
+      });
     },
   },
 };

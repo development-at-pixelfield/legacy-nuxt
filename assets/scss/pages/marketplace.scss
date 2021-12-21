@@ -1,7 +1,9 @@
 .marketplace-wrapper{
-  background: $c-background;
+  //background: $c-background;
   display: flex;
-  height: 100vh;
+  //height: 100vh;
+  //height: 100%;
+  min-height: 100%;
 
   .filter{
     @media (max-width: $break-smsm) {
@@ -10,9 +12,24 @@
   }
 
 
-  .main-container{
-    margin-top: 20px;
+  .main-list-container{
     padding-bottom: 80px;
+    width: 944px;
+    margin: 20px auto 0 auto;
+
+    @media (max-width: $break-lgs){
+      padding-left: 60px;
+      padding-right: 60px;
+    }
+    @media (max-width: $break-md) {
+      width: 100%;
+      padding-left: 100px;
+      padding-right: 100px;
+    }
+    @media (max-width: $break-smsm) {
+      padding-left: 32px;
+      padding-right: 32px;
+    }
 
     .header{
       display: flex;
@@ -48,14 +65,14 @@
 
         .custom-filter-dropdown{
           margin-bottom: 0;
-          width: 224px;
+          width: 236px;
 
           @media (max-width: $break-md) {
             width: auto;
           }
 
           @media (max-width: $break-smsm) {
-            width: 100%;
+            width: calc(100% - 63px);
           }
         }
 
@@ -71,16 +88,22 @@
     }
 
     .content{
-      display: flex;
-      flex-wrap: wrap;
+      //display: flex;
+      //flex-wrap: wrap;
       //justify-content: space-between;
       padding-bottom: 32px;
+      display: grid;
+      grid-gap: 16px 16px;
+      grid-template-columns: repeat(auto-fill, 224px);
+      justify-content: center;
 
-      @media (max-width: $break-md) {
-        justify-content: flex-start;
-      }
-
+      //@media (max-width: $break-md) {
+      //  justify-content: flex-start;
+      //}
+      //
       @media (max-width: 530px) {
+        display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
       }
 
@@ -104,6 +127,7 @@
       display: flex;
       width: 100%;
       justify-content: center;
+      padding-bottom: 40px;
     }
   }
 

@@ -1,6 +1,6 @@
 <template>
-  <header :class="{ fixed: $route.name === 'marketplace' }">
-    <div class="content">
+  <header id="header" :class="{ fixed: $route.name === 'marketplace' }">
+    <div class="content header-full-container">
       <div class="content-wrapper">
         <nuxt-link to="/marketplace"
           ><span class="text-m marketplace-link">Marketplace</span></nuxt-link

@@ -1,0 +1,33 @@
+.verification-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  img {
+    margin: 46px 0;
+  }
+
+  .image{
+    width: 100%;
+    margin: 16px 0;
+  }
+
+  &_textbox {
+    background: #301C3F;
+    padding: 24px;
+    width: 100%;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+
+    &_title {
+      font-size: 25px;
+      margin-bottom: 4px;
+    }
+
+    &_desc {
+      margin-bottom: 24px;
+    }
+  }
+}

@@ -37,4 +37,13 @@ export const actions = {
   getNftsForm(context, payload) {
     return this.$axios.$get(`/nfts/form/data/`);
   },
+  /**
+   * Init payment
+   * @param context
+   * @param payload{Object<{offer_uid: string, account_address: string}>}
+   * @returns {Promise<any>}
+   */
+  initPayment(context, payload) {
+    return this.$axios.$post(`/nfts/sell_offers/payment/init/`, payload);
+  },
 };

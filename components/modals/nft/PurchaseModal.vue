@@ -42,7 +42,7 @@ import ScaffoldModal from "~/components/modals/nft/ScaffoldModal.vue";
 import Spinner from "~/components/ui/Spinner.vue";
 
 export default {
-  name: "NftWalletModal",
+  name: "Purchase",
   components: {
     ScaffoldModal,
     Spinner,

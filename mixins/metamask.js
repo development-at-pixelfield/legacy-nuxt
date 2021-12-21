@@ -10,12 +10,15 @@ export default {
     metamask() {
       return this.$metamask();
     },
+    displayBalance() {
+      return this.balance.toFixed(4);
+    },
   },
   methods: {
     async getBalance() {
       if (this.metamaskAccount) {
         const balanceWei = await this.metamask.getBalance(this.metamaskAccount);
-        this.balance = this.metamask.fromWeiToEth(balanceWei);
+        this.balance = +this.metamask.fromWeiToEth(balanceWei);
         this.balanceLoaded = true;
       }
       return false;
@@ -27,7 +30,7 @@ export default {
           message: this.$t("snackbar.metaMask.extensionNotInstalled"),
           color: "error",
         });
-        return;
+        return false;
       }
       console.log("get accounts");
       try {
@@ -38,15 +41,17 @@ export default {
             message: this.$t("snackbar.metaMask.accountsIsNotConnected"),
             color: "error",
           });
-          return;
+          return false;
         }
         this.metamaskAccount = accounts.shift();
+        return true;
       } catch (e) {
         await this.$store.commit("setSnackbar", {
           show: true,
           message: this.$t("snackbar.metaMask.accountsIsNotConnected"),
           color: "error",
         });
+        return false;
       }
     },
   },

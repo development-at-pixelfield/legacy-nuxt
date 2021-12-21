@@ -25,7 +25,7 @@
         class="floating-input"
         :class="inputClasses"
         :max-length="maxLength"
-        :disabled="disabled"
+        :disabled="disabled || disabledState"
         autocomplete="on"
         :placeholder="placeholder"
         @keypress="keyPressHandler"
@@ -110,6 +110,11 @@ export default {
     disabled: {
       type: Boolean,
       required: false,
+    },
+    disabledState: {
+      type: Boolean,
+      required: false,
+      default: false,
     },
     model: {
       type: [String, Number, Array],
@@ -274,10 +279,6 @@ export default {
       }
     },
   },
-  mounted() {
-    // this.$refs.customInput.focus();
-  },
-
   methods: {
     handleBlur() {
       this.$emit("handle-blur");
