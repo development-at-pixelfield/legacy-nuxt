@@ -217,9 +217,6 @@ export default {
         filters.page = this.filter.page;
         filters.ordering = this.filter.ordering;
 
-        delete filters.eth_price__gte;
-        delete filters.eth_price__lte;
-
         await this.setQuery(filters);
       }
     });
@@ -232,26 +229,31 @@ export default {
 
   methods: {
     updatePage(val) {
+      console.log("update");
       const cleanObject = functions.cleanObject(this.$route.query);
       this.filter.page = val;
       cleanObject.page = val;
-      this.fetchNfts(cleanObject);
+      // this.fetchNfts(cleanObject);
+      this.setQuery(cleanObject);
     },
     openFilter() {
       this.isOpenPanel = true;
     },
     setDefaultWatch() {
-      this.$watch("filter.ordering", (val) => {
-        const query = { ...this.filter };
-        this.setQuery(query);
+      this.$watch("filter.ordering", (val, newVal) => {
+        if (val && val !== newVal) {
+          console.log(val, "watch");
+          const query = { ...this.filter };
+          this.setQuery(query);
+        }
       });
     },
 
     async setQuery(query) {
+      console.log("query");
       const cleanObject = await functions.cleanObject(query);
       await this.fetchNfts(cleanObject);
 
-      delete cleanObject.page;
       delete cleanObject.page_size;
 
       await this.$router.push({ query: cleanObject });
