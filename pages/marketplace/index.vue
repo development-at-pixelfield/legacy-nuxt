@@ -149,7 +149,7 @@ export default {
     try {
       const formOptions = await store.dispatch("nfts/getNftsForm");
 
-      // console.log(formOptions, "formOptions");
+      console.log(formOptions, "formOptions");
 
       const query = route.query;
       const filter = { ...filterDefaultVars };
@@ -241,12 +241,6 @@ export default {
       this.isOpenPanel = true;
     },
     setDefaultWatch() {
-      this.$watch("filter.page", (val) => {
-        const cleanObject = functions.cleanObject(this.$route.query);
-        cleanObject.page = val;
-        this.fetchNfts(cleanObject);
-      });
-
       this.$watch("filter.ordering", (val) => {
         const query = { ...this.filter };
         this.setQuery(query);
