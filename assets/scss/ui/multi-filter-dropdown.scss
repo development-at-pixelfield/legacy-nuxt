@@ -5,6 +5,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
+    padding-left: 1px;
   }
 
   .aselect {
@@ -36,7 +37,7 @@
       width: 100%;
 
       .arrow {
-        display: flex;
+        display: inline-flex;
         transform: rotateZ(0deg) translateY(0);
         transition-duration: 0.3s;
         transition-timing-function: cubic-bezier(.59,1.39,.37,1.01);
@@ -81,7 +82,8 @@
         }
 
         .icons-block{
-          display: flex;
+          display: inline-flex !important;
+          justify-content: flex-end;
         }
         .chip-list{
           width: 100%;
@@ -181,8 +183,9 @@
     .visible {
       visibility: visible;
       position: absolute;
-      width: 100%;
-      top: 56px;
+      width: 101%;
+      left: -1px;
+      //top: 92px;
     }
   }
 
@@ -219,3 +222,4 @@
   align-items: center;
   display: flex;
 }
+

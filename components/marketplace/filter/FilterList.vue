@@ -29,36 +29,14 @@
         </div>
       </div>
 
-      <div class="mobile-header header">
-        <div class="left-side">
-          <span class="text-m-bold">{{ $t("marketplace.clearAll") }}</span>
-          <Icon
-            src="close-modal.svg"
-            size="big"
-            class="pointer"
-            @on-click="clearFilter"
-          />
-        </div>
-        <div class="right-side">
-          <Button
-            :label="$t('marketplace.apply')"
-            :background="'primary'"
-            :size="'custom-medium'"
-            :color="'c-white'"
-            @on-click="applyFilters"
-          />
-        </div>
-      </div>
-
       <div v-if="canShow" class="filters mt-24">
         <SearchFilter
-          :list="searchItems"
           :return-object="false"
           :item-value="'value'"
           :item-label="'label'"
           :label="$t('marketplace.name')"
           :placeholder="$t('marketplace.search')"
-          :name.sync="filter.name"
+          :name.sync="filter.search"
           class="mb-0"
         />
 
@@ -126,13 +104,13 @@
           />
         </div>
         <div class="apply-clear">
-          <div class="apply-clear_item text-m-bold" @click="clearFilter(false)">
+          <div class="apply-clear_item text-m-bold" @click="clearFilter()">
             {{ $t("marketplace.clearAll") }}
           </div>
           <img
             class="apply-clear_item"
             src="~/assets/img/icons/close-modal.svg"
-            @click="clearFilter(false)"
+            @click="clearFilter()"
           />
         </div>
       </div>
@@ -147,7 +125,7 @@ import SearchFilter from "../../ui/SearchFilter";
 import Icon from "../../ui/Icon";
 import Button from "../../ui/Button";
 const filterDefaultVars = {
-  name: "",
+  search: "",
   luminosity__in: [],
   quality_level__in: [],
   age__in: [],
@@ -187,7 +165,7 @@ export default {
       canShow: false,
       type: "desktop",
       filter: {
-        name: "",
+        search: "",
         luminosity__in: [],
         quality_level__in: [],
         age__in: [],
@@ -227,8 +205,8 @@ export default {
       }
     },
     type(val) {
-      if (val === "mobile") this.removeScroll();
-      else this.addScroll();
+      if (val === "mobile" && this.showPanel) this.addFixed();
+      else this.removeFixed();
     },
     queryFilter(val) {
       this.setFilters(val);
@@ -237,6 +215,9 @@ export default {
       this.showPanel = val;
     },
     showPanel(val) {
+      if (this.type === "mobile" && val) this.addFixed();
+      else this.removeFixed();
+
       this.$emit("update:is-open-panel", val);
       if (val) {
         setTimeout(() => {
@@ -284,13 +265,17 @@ export default {
       this.filter = filter;
     },
 
-    removeScroll() {
+    removeFixed() {
+      const header = document.getElementById("header");
       const html = document.getElementsByTagName("html")[0];
-      html.style.overflowY = "hidden";
+      header.style.position = "static";
+      html.style.position = "static";
     },
-    addScroll() {
+    addFixed() {
+      const header = document.getElementById("header");
       const html = document.getElementsByTagName("html")[0];
-      html.style.overflowY = "scroll";
+      header.style.position = "fixed";
+      html.style.position = "fixed";
     },
     reportWindowSize() {
       if (window.innerWidth < 770) this.type = "mobile";

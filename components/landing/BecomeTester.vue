@@ -35,7 +35,7 @@
             :color="'c-white'"
             @on-click="submitTester"
           >
-            <span slot="icon" class="ml-4 emoji">😎</span>
+            <span slot="icon" class="ml-4 emoji">✨</span>
           </Button>
         </div>
       </div>

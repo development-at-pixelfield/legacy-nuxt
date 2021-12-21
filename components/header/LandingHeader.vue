@@ -13,9 +13,9 @@
           }}</a>
         </li>
         <li>
-          <a href="#become-tester" class="no-color-dec-link text-m">{{
-            $t("landing.becomeTester")
-          }}</a>
+          <a href="#become-tester" class="no-color-dec-link text-m">
+            Galaxy Community
+          </a>
         </li>
         <li>
           <a href="#our-team" class="no-color-dec-link text-m">{{
@@ -32,7 +32,7 @@
 
       <div class="action">
         <Button
-          :label="$t('landing.becomeTester')"
+          :label="$t('landing.joinTheCommunity')"
           :background="'primary'"
           :size="'small'"
           :color="'c-white'"
@@ -49,7 +49,7 @@
       </div>
       <div class="action">
         <Button
-          :label="$t('landing.becomeTester')"
+          :label="$t('landing.joinTheCommunity')"
           :background="'primary'"
           :size="'small'"
           :color="'c-white'"

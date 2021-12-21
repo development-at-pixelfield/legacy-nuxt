@@ -95,15 +95,18 @@
               ref="options"
               :key="uniqueId(index)"
               :class="{
-                current: selectedItems.includes(item.value),
-                'hover-key': keyIndex === index,
+                current:
+                  selectedItems.includes(item.value.toString()) ||
+                  selectedItems.includes(item.value),
               }"
               class="text-m"
               @click.stop="select(item, index)"
-              @mouseover="mouseHover(index)"
             >
               <span
-                v-if="selectedItems.includes(item.value)"
+                v-if="
+                  selectedItems.includes(item.value.toString()) ||
+                  selectedItems.includes(item.value)
+                "
                 class="checkmark-box"
                 style="margin-right: 8px"
               >
@@ -250,18 +253,7 @@ export default {
       };
     },
     filterByAlphaList() {
-      const list = [...this.listNew];
-      if (list.length && list[0].label && !this.notFilter) {
-        if (this.showDefaultOrder) {
-          return list;
-        } else {
-          return list.sort((a, b) => a.label.localeCompare(b.label));
-        }
-      }
-      if (list.length && list[0].value && !this.notFilter) {
-        return list.sort((a, b) => a.value.localeCompare(b.value));
-      }
-      return list;
+      return [...this.listNew];
     },
     mozHeight() {
       return this.listNew.length <= 6;
@@ -273,6 +265,7 @@ export default {
           : this.listNew.length <= 6
           ? "fit-content"
           : "280px",
+        top: this.chips.length ? "8px" : "8px",
       };
     },
     selectorStyles() {
@@ -289,7 +282,7 @@ export default {
   },
   watch: {
     value(val) {
-      if (val) {
+      if (val && val.length) {
         this.listNew = this.list.filter((item) => {
           const label = this.itemLabel ? this.itemLabel : "label";
           if (
@@ -329,10 +322,7 @@ export default {
     document.addEventListener("click", this.close);
     let val = this.name;
     if (this.itemValue && this.itemLabel) {
-      let list = this.list?.length ? [...this.list] : [];
-      if (list.length && list[0].label && !this.notFilter) {
-        list = list.sort((a, b) => a.label.localeCompare(b.label));
-      }
+      const list = this.list?.length ? [...this.list] : [];
 
       const objIndex = list.findIndex((v) => v[this.itemValue] === this.name);
       if (objIndex > -1) {
@@ -341,7 +331,7 @@ export default {
         val = obj[this.itemLabel];
       }
     }
-    this.value = val;
+    if (val) this.value = val;
   },
   beforeDestroy() {
     document.removeEventListener("click", this.close);
@@ -469,7 +459,11 @@ export default {
       this.value = "";
     },
     close(e) {
-      if (!this.$el.contains(e.target)) {
+      if (
+        !this.$el.contains(e.target) ||
+        e.target.classList.contains("text-s-bold") ||
+        e.target.classList.contains("label-float")
+      ) {
         if (this.visible) {
           this.$emit("touched");
         }

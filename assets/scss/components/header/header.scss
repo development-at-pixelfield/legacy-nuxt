@@ -7,25 +7,52 @@ header{
   background: #08010E;
   border-bottom: 1px solid #301C3F;
 
+  .header-full-container {
+    width: 944px;
+    margin: 0 auto;
+
+    @media (max-width: 1716px){
+      margin: 0 auto !important;
+    }
+    @media (max-width: $break-lgs){
+      padding-left: 60px;
+      padding-right: 60px;
+    }
+    @media (max-width: $break-md) {
+      width: 100%;
+      padding-left: 100px;
+      padding-right: 100px;
+    }
+    @media (max-width: $break-smsm) {
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+
+    //@media (max-width: 1280px){
+    //  padding-left: 24px !important;
+    //  padding-right: 24px !important;
+    //}
+  }
+
   .content{
     height: 100%;
-    padding-right: 168px;
-    padding-left: 168px;
-
-    @media (max-width: $break-md) {
-      padding-right: 60px;
-      padding-left: 60px;
-    }
-
-    @media (max-width: $break-smsm) {
-      padding-right: 32px;
-      padding-left: 32px;
-    }
-
-    @media (max-width: $break-sms) {
-      padding-right: 16px;
-      padding-left: 16px;
-    }
+    //padding-right: 168px;
+    //padding-left: 168px;
+    //
+    //@media (max-width: $break-md) {
+    //  padding-right: 60px;
+    //  padding-left: 60px;
+    //}
+    //
+    //@media (max-width: $break-smsm) {
+    //  padding-right: 32px;
+    //  padding-left: 32px;
+    //}
+    //
+    //@media (max-width: $break-sms) {
+    //  padding-right: 16px;
+    //  padding-left: 16px;
+    //}
 
     .text-m{
       @media (max-width: $break-sms) {
@@ -76,6 +103,11 @@ header{
   &:hover {
     cursor: pointer;
   }
+}
+
+.fixed{
+  width: 100%;
+  z-index: 2;
 }
 
 

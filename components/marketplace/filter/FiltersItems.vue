@@ -8,7 +8,11 @@
         <img src="~/assets/img/icons/chip-remove.svg" alt="" />
       </span>
     </div>
-    <span v-if="filters.length" class="text-m-bold display-f">
+    <span
+      v-if="filters.length"
+      class="text-m-bold display-f"
+      @click="clearFilter"
+    >
       {{ $t("marketplace.clearAll") }}
       <Icon
         src="close-modal.svg"
@@ -29,10 +33,6 @@ const filterDefaultVars = {
   luminosity__in: [],
   quality_level__in: [],
   age__in: [],
-  is_constellation: false,
-  nft_type: "",
-  eth_price__gte: 0.43,
-  eth_price__lte: 5.41,
   constellation: "",
 };
 export default {
@@ -57,8 +57,6 @@ export default {
         { key: "luminosity__in", value: "Luminosity", form: "luminosity" },
         { key: "quality_level__in", value: "Quality", form: "quality" },
         { key: "age__in", value: "Age", form: "age" },
-        { key: "is_constellation", value: "Part of constellation" },
-        { key: "nft_type", value: "Type" },
         {
           key: "constellation",
           value: "Constellation",
@@ -73,7 +71,6 @@ export default {
       delete this.filter.page_size;
 
       let arr = [];
-      const query = this.$route.query;
       const cleanObject = functions.cleanObject(this.filter);
 
       Object.keys(cleanObject).forEach((key) => {
@@ -82,9 +79,7 @@ export default {
         if (item && item.value) {
           let value = "";
 
-          if (typeof cleanObject[key] === "boolean") {
-            value = cleanObject[key] ? "Yes" : "No";
-          } else if (this.formOptions[item.form]) {
+          if (this.formOptions[item.form]) {
             let valueArr = [];
             const formOptions = this.formOptions[item.form];
             const splitString = cleanObject[key].toString().split(",");
@@ -97,7 +92,6 @@ export default {
             });
 
             value = valueArr.length ? valueArr.join(",") : cleanObject[key];
-            value = cleanObject[key];
           } else value = cleanObject[key];
 
           const obj = {
@@ -109,17 +103,6 @@ export default {
           arr = [...arr, obj];
         }
       });
-
-      if (query.eth_price__gte || query.eth_price__lte) {
-        const newObj = {
-          id: "eth_price__gte",
-          label: "Price range",
-          value: `Ξ${(+cleanObject.eth_price__gte).toFixed(
-            2
-          )} - ${(+cleanObject.eth_price__lte).toFixed(2)}`,
-        };
-        arr.push(newObj);
-      }
 
       this.$emit("update:count", arr.length);
       return arr;

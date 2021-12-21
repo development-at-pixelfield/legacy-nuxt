@@ -22,6 +22,7 @@
       display: flex;
       justify-content: space-between;
       margin-bottom: 8px;
+      padding-left: 1px;
     }
 
     .label-icon {
@@ -37,7 +38,7 @@
       width: 100%;
 
       .arrow {
-        display: flex;
+        display: inline-flex;
         transform: rotateZ(0deg) translateY(0);
         transition-duration: 0.3s;
         transition-timing-function: cubic-bezier(.59, 1.39, .37, 1.01);
@@ -147,8 +148,9 @@
     .visible {
       visibility: visible;
       position: absolute;
-      width: 100%;
+      width: 101%;
       top: 56px;
+      left: -1px;
     }
 
     .must-scroll{
@@ -185,4 +187,9 @@
 
 .selected-check {
   margin-bottom: -3px;
+}
+
+.icons-block{
+  display: inline-flex !important;
+  justify-content: flex-end;
 }
