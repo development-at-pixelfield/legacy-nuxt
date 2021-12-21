@@ -227,6 +227,11 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     emailVerificationTitle: "Verify your email",
     emailVerificationDescription:
       "Before buying an NFT you must verify your email and identity.",
+    buyCardHeader: "Buy with card",
+    buyCardDesc: "Sorry! We are still building this feature...",
+    howFund: "Learn how to fund your wallet",
+    howFundDesc: `We created a small guide that will help you to fund
+your MetaMask wallet with ethereum. `,
   },
   modals: {
     modalClose: "No, go back :)",

@@ -12,6 +12,19 @@
           v-if="modal.type === 'checkout'"
           @close="close"
         ></CheckoutModal>
+        <ConnectMetamask
+          v-if="modal.type === 'checkout-metamask'"
+          @close="close"
+        ></ConnectMetamask>
+        <ConnectWallet
+          v-if="modal.type === 'checkout-wallet'"
+          @close="close"
+        ></ConnectWallet>
+        <PurchaseModal
+          v-if="modal.type === 'purchase'"
+          @close="close"
+        ></PurchaseModal>
+        <PayCard v-if="modal.type === 'pay-card'" @close="close"></PayCard>
       </div>
     </div>
   </transition>
@@ -22,6 +35,10 @@ import DeleteAccount from "./DeleteAccount";
 import StarInfo from "./StarInfo";
 import VerifyIdentityModal from "./nft/VerifyIdentity";
 import CheckoutModal from "./nft/CheckoutModal";
+import ConnectMetamask from "./nft/ConnectMetamask";
+import ConnectWallet from "./nft/ConnectWallet";
+import PurchaseModal from "./nft/PurchaseModal";
+import PayCard from "./nft/PayCard";
 export default {
   name: "Modals",
   components: {
@@ -29,6 +46,10 @@ export default {
     StarInfo,
     VerifyIdentityModal,
     CheckoutModal,
+    ConnectMetamask,
+    ConnectWallet,
+    PurchaseModal,
+    PayCard,
   },
   computed: {
     modal() {

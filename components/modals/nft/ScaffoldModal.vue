@@ -4,6 +4,7 @@
       <div class="modal-wrapper">
         <div class="modal-container">
           <HeadingRow :title="heading" @close="close" />
+          <p v-if="desc" class="text-m text-center">{{ desc }}</p>
           <slot></slot>
         </div>
       </div>
@@ -28,6 +29,11 @@ export default {
     heading: {
       type: String,
       required: true,
+      default: "",
+    },
+    desc: {
+      type: String,
+      required: false,
       default: "",
     },
   },

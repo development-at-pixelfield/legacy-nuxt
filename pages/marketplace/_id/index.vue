@@ -233,7 +233,7 @@ export default {
   async asyncData({ app, store, params }) {
     try {
       const nft = await store.dispatch("nfts/getNftsById", { uid: params.id });
-      console.log(nft);
+      // console.log(nft);
       const ethPrice = (await store.dispatch("fetchEthPrice")).rate;
 
       let showAuction = false;

@@ -1,16 +1,17 @@
 <template>
   <ScaffoldModal
-    :heading="$t('nft_modal.installMetamask')"
+    :heading="$t('nft_modal.buyCardHeader')"
+    :desc="$t('nft_modal.buyCardDesc')"
     @close="handle('close')"
   >
     <div class="verification-container">
-      <img src="~/assets/img/icons/large-metamask-wallet-image.svg" />
+      <img class="image" src="~/assets/img/icons/pay-card.png" />
       <div class="verification-container_textbox">
         <div class="verification-container_textbox_title">
-          {{ $t("nft_modal.installMetamaskUnsure") }}
+          {{ $t("nft_modal.howFund") }}
         </div>
         <div class="verification-container_textbox_desc text-m-bold">
-          {{ $t("nft_modal.installMetamaskText") }}
+          {{ $t("nft_modal.howFundDesc") }}
         </div>
         <Button
           :size="'full'"
@@ -28,7 +29,7 @@ import Button from "../../ui/Button";
 import ScaffoldModal from "~/components/modals/nft/ScaffoldModal.vue";
 
 export default {
-  name: "ConnectMetamask",
+  name: "PayCard",
   components: {
     Button,
     ScaffoldModal,

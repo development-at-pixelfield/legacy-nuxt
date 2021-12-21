@@ -1,6 +1,6 @@
 <template>
   <ScaffoldModal :heading="$t('nft_modal.checkout')" @close="close">
-    <div class="buying-header">
+    <div class="buying-header text-m">
       {{ $t("nft_modal.you_are_buying") }} <strong>{{ nft.name }}</strong>
     </div>
     <div class="divider" />
@@ -8,7 +8,7 @@
       <div>{{ $t("nft_modal.total") }}</div>
       <div>
         <div class="summary_heading">{{ nft.price_eth }}Ξ</div>
-        <div class="summary_sub-heading">${{ nft.price_usd }}</div>
+        <div class="summary_sub-heading">(${{ nft.price_usd }})</div>
       </div>
     </div>
     <div class="divider" />
@@ -22,6 +22,7 @@
     </Checkbox>
     <div class="button-wrap">
       <Button
+        class="first-btn"
         :background="'ghost'"
         :size="'medium'"
         :color="'c-white'"
