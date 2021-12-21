@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     handle(emit) {
-      this.$emit(emit);
+      this.$router.push("/help");
     },
   },
 };

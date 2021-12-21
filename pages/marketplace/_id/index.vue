@@ -9,7 +9,7 @@
           class="nav"
         />
         <div class="img-block">
-          <WebGl :src="nft.model_file" />
+          <WebGl v-if="nft.model_file" :src="nft.model_file" />
         </div>
       </div>
     </div>
@@ -20,7 +20,7 @@
           <div class="left-side">
             <h1 class="mb-8 mt-0 detail-title">{{ nft.name }}</h1>
             <span class="header-title1"
-              >Current price: {{ (+currentPriceOrSoldPrice).toFixed(2) }}Ξ</span
+              >Current price: {{ (+currentPriceOrSoldPrice).toFixed(3) }}Ξ</span
             >
             <span class="header-title1 ml-16">{{
               convertEthereum(currentPriceOrSoldPrice)
@@ -194,9 +194,9 @@
             <Button
               class="second-btn"
               :label="$t('marketplace.exchangeToken')"
-              :background="'grey'"
+              :background="isOwner ? 'primary' : 'c-grey'"
               :size="'medium'"
-              :color="'c-grey'"
+              :color="isOwner ? 'c-white' : 'c-grey'"
               @on-click="exchangeToken"
             />
           </div>
@@ -270,6 +270,11 @@ export default {
     isEmailVerified() {
       return this.user && this.user.is_email_verified;
     },
+    isOwner() {
+      console.log(this.nft.owner.username);
+      console.log(this.user.username);
+      return this.nft.owner && this.nft.owner.username === this.user.username;
+    },
     isUserVerified() {
       return this.user && this.user.is_verified;
     },
@@ -288,13 +293,14 @@ export default {
     async buyNow() {
       const availToPayOrState = this.availToPay();
       if (availToPayOrState !== true) {
-        await this[availToPayOrState.action]();
+        return await this[availToPayOrState.action]();
       }
       return await this.checkout();
     },
 
     availToPay() {
       const states = {
+        metamask_not_installed: this.metamask.isEnabled,
         not_auth: !!this.user,
         email_not_verified: this.isEmailVerified,
         user_not_verified: this.isUserVerified,
@@ -306,6 +312,7 @@ export default {
         .filter((item) => states[item] === false)
         .shift();
       const actions = {
+        metamask_not_installed: "metamaskNotInstalled",
         not_auth: "guestTryToPay",
         email_not_verified: "emailNotVerifiedTryToPay",
         user_not_verified: "userNotVerifiedTryToPay",
@@ -340,7 +347,15 @@ export default {
         type: "verification-required",
       });
     },
-    exchangeToken() {},
+    async metamaskNotInstalled() {
+      await this.$store.commit("setModal", {
+        show: true,
+        type: "checkout-metamask",
+      });
+    },
+    async exchangeToken() {
+      await this.$router.push("/exchange");
+    },
 
     timerFinished() {
       this.$router.app.refresh();
