@@ -25,7 +25,13 @@
             <template slot="title">
               <div>Title</div>
             </template>
-            <div>Lorem, ipsum dolor.</div>
+            <div>
+              <ImageWithTitle
+                :img-src="require('assets/img/help/wallet-2.svg')"
+                img-alt=""
+                title="lorem ipsum"
+              />
+            </div>
           </GuideLineElement>
         </div>
       </SimpleDropdown>
@@ -36,10 +42,12 @@
 <script>
 import SimpleDropdown from "../../../components/ui/SimpleDropdown.vue";
 import GuideLineElement from "../../../components/help/GuideLineElement.vue";
+import ImageWithTitle from "../../../components/help/ImageWithTitle.vue";
+
 export default {
   name: "BuyETH",
   layout: "default",
-  components: { SimpleDropdown, GuideLineElement },
+  components: { SimpleDropdown, GuideLineElement, ImageWithTitle },
 };
 </script>
 
