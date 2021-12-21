@@ -229,11 +229,9 @@ export default {
 
   methods: {
     updatePage(val) {
-      console.log("update");
       const cleanObject = functions.cleanObject(this.$route.query);
       this.filter.page = val;
       cleanObject.page = val;
-      // this.fetchNfts(cleanObject);
       this.setQuery(cleanObject);
     },
     openFilter() {
@@ -242,7 +240,6 @@ export default {
     setDefaultWatch() {
       this.$watch("filter.ordering", (val, newVal) => {
         if (val && val !== newVal) {
-          console.log(val, "watch");
           const query = { ...this.filter };
           this.setQuery(query);
         }
@@ -250,7 +247,6 @@ export default {
     },
 
     async setQuery(query) {
-      console.log("query");
       const cleanObject = await functions.cleanObject(query);
       await this.fetchNfts(cleanObject);
 
