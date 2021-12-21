@@ -1,5 +1,6 @@
 <template>
   <div class="auth-wrapper">
+    <Leaderboard />
     <Header />
     <nuxt />
     <Modals />
@@ -16,6 +17,7 @@
   </div>
 </template>
 <script>
+import Leaderboard from "../components/header/Leaderboard";
 import Snackbar from "../components/ui/Snackbar";
 import Header from "../components/header/Header";
 import Modals from "../components/modals/index";
@@ -24,6 +26,7 @@ export default {
     Snackbar,
     Header,
     Modals,
+    Leaderboard,
   },
   data() {
     return {};

@@ -122,7 +122,6 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     collectionDesc2: "For now, why don’t you look around our marketplace?",
     collectionBtn: "Visit marketplace",
   },
-
   settings: {
     settings: "Settings",
     accountSettings: "Account settings",
