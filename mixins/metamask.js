@@ -4,6 +4,7 @@ export default {
       metamaskAccount: "",
       balance: 0,
       balanceLoaded: false,
+      hasWallet: false,
     };
   },
   computed: {

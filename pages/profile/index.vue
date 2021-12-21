@@ -10,16 +10,26 @@
 
           <div class="user-block">
             <p class="mt-0 mb-8 header-title">
-              { Username }
+              {{ username }}
               <img
+                v-if="isVerified"
                 :src="require(`assets/img/icons/verified-account.svg`)"
                 alt="icon"
               />
             </p>
             <ul class="user-states mt-0 mb-0">
-              <li class="user-tag view-offline">
+              <li
+                class="user-tag pointer"
+                :class="{ 'view-offline': !connectedWallet }"
+                @click="openWallet()"
+              >
                 <span class="user-tag-state"></span>
-                <span class="text-m-bold user-tag-text">{{
+                <span
+                  v-if="connectedWallet"
+                  class="text-m-bold user-tag-text"
+                  >{{ myWallet }}</span
+                >
+                <span v-else class="text-m-bold user-tag-text">{{
                   $t("nft_modal.connect_wallet")
                 }}</span>
                 <img
@@ -35,7 +45,7 @@
                   alt="icon"
                 />
                 <span class="text-m-bold user-tag-text"
-                  >0 {{ $t("profile.miles") }}</span
+                  >{{ balance }} {{ $t("profile.miles") }}</span
                 >
                 <img
                   :src="require(`assets/img/icons/caret-right.svg`)"
@@ -46,23 +56,12 @@
             </ul>
           </div>
         </div>
-
-        <!-- <div class="right-side">
-          <Button
-            class="first-btn"
-            :label="$t('profile.verifyAccount')"
-            :background="'ghost'"
-            :size="'medium'"
-            :color="'c-white'"
-            @on-click="$router.push('/settings')"
-          />
-        </div> -->
       </div>
     </div>
 
     <div class="main-container">
       <div class="user-content">
-        <div class="user-action-block">
+        <div v-if="!isVerified" class="user-action-block">
           <div class="user-action-block-icon">
             <img :src="require(`assets/img/verify-profile.svg`)" alt="icon" />
           </div>
@@ -84,7 +83,7 @@
             />
           </div>
         </div>
-        <div class="user-action-block view-wallet">
+        <div v-if="!connectedWallet" class="user-action-block view-wallet">
           <div class="user-action-block-icon">
             <img :src="require(`assets/img/wallet-profile.svg`)" alt="icon" />
           </div>
@@ -102,11 +101,11 @@
               :size="'medium'"
               :color="'c-white'"
               :label="$t('profile.walletBtn')"
-              @on-click="$router.push('/settings')"
+              @on-click="openWallet"
             />
           </div>
         </div>
-        <div class="user-action-block view-wallet">
+        <div v-if="connectedWallet" class="user-action-block view-wallet">
           <div class="user-action-block-icon">
             <img
               :src="require(`assets/img/collection-profile.svg`)"
@@ -155,17 +154,48 @@ export default {
   data() {
     return {
       imgSrc: "",
-      metamaskAccount: "",
+      username: "",
       balance: 0,
       balanceLoaded: false,
+      isVerified: false,
     };
+  },
+  computed: {
+    connectedWallet() {
+      return this.$store.getters.hasWallet;
+    },
+    myWallet() {
+      const account = this.$store.getters.walletAccount;
+      if (account != null && account !== "") {
+        const firstPart = account.substr(0, 7);
+        const lastPart = account.substr(account.length - 7, account.length - 1);
+
+        return `${firstPart}...${lastPart}`;
+      }
+      return account;
+    },
   },
   created() {
     if (this.$auth.user.avatar) {
       this.imgSrc = this.$auth.user.avatar;
     }
+    if (this.$auth.user.miles_amount) {
+      this.balance = this.$auth.user.miles_amount;
+    }
+    if (this.$auth.user.username) {
+      this.username = this.$auth.user.username;
+    } else {
+      this.username = this.$auth.user.email;
+    }
+    if (this.$auth.user.is_verified && this.$auth.user.is_email_verified) {
+      this.isVerified = true;
+    }
   },
   methods: {
+    openWallet() {
+      this.$nuxt.$emit("openWallet");
+      window.scrollTo(0, 0);
+    },
     async fileUpload(e) {
       const files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;

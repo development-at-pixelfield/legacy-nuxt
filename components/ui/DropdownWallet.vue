@@ -3,14 +3,17 @@
     <div class="label-block" @click="openDropdown">
       <span class="drop-img-block view-wallet">
         <img src="~/assets/img/icons/wallet.svg" alt="wallet" />
-        <span class="drop-img-block-state view-offline"></span>
+        <span
+          class="drop-img-block-state"
+          :style="{ backgroundColor: connectedWallet ? '#1DD1A1' : '#FF7051' }"
+        ></span>
       </span>
     </div>
     <div v-if="show">
-      <div v-if="hasWallet" class="dropdown-wallet">
+      <div v-if="connectedWallet" class="dropdown-wallet">
         <p class="text-s-bold mb-16 mt-0">
           {{ $t("modals.wallet") }}
-          <span class="dropdown-wallet-close" @click="openDropdown">
+          <span class="dropdown-wallet-close pointer" @click="openDropdown">
             <img src="~/assets/img/icons/close-modal.svg" alt="close" />
           </span>
         </p>
@@ -22,21 +25,31 @@
           <div class="dropdown-wallet-connect-text">
             <p class="text-m-bold mb-0 mt-0">{{ $t("modals.walletActive") }}</p>
           </div>
-          <div class="dropdown-wallet-connect-button view-disconnect text-btn">
+          <div
+            class="
+              dropdown-wallet-connect-button
+              view-disconnect
+              text-btn
+              pointer
+            "
+          >
             {{ $t("modals.disconnect") }}
           </div>
         </div>
         <p class="text-m-bold mb-16 mt-0">{{ $t("modals.walletId") }}</p>
         <div class="dropdown-wallet-connect mb-24 view-active">
           <div class="dropdown-wallet-connect-text view-link">
-            <p class="text-m mb-0 mt-0">0xc55ba...d1f6c77</p>
+            <p class="text-m mb-0 mt-0">{{ myWallet }}</p>
           </div>
-          <div class="dropdown-wallet-connect-button view-icon text-btn">
+          <div
+            class="dropdown-wallet-connect-button view-icon text-btn pointer"
+            @click="copyToClip"
+          >
             <img src="~/assets/img/icons/clipboard.svg" alt="clipboard" />
           </div>
         </div>
         <p class="text-m-bold mb-16 mt-0">{{ $t("modals.walletLinks") }}</p>
-        <div class="dropdown-wallet-connect mb-16 view-active">
+        <div class="dropdown-wallet-connect mb-16 view-active pointer">
           <div class="dropdown-wallet-connect-text view-nopadding">
             <p class="text-m-bold mb-0 mt-0">How to connect wallet</p>
           </div>
@@ -44,7 +57,7 @@
             <img src="~/assets/img/icons/caret-right.svg" alt="link" />
           </div>
         </div>
-        <div class="dropdown-wallet-connect view-active">
+        <div class="dropdown-wallet-connect view-active pointer">
           <div class="dropdown-wallet-connect-text view-nopadding">
             <p class="text-m-bold mb-0 mt-0">How to buy ETH</p>
           </div>
@@ -56,7 +69,7 @@
       <div v-else class="dropdown-wallet">
         <p class="text-s-bold mb-16 mt-0">
           {{ $t("modals.walletNot") }}
-          <span class="dropdown-wallet-close" @click="openDropdown">
+          <span class="dropdown-wallet-close pointer" @click="openDropdown">
             <img src="~/assets/img/icons/close-modal.svg" alt="close" />
           </span>
         </p>
@@ -70,7 +83,10 @@
           <div class="dropdown-wallet-connect-text">
             <p class="text-m-bold mb-0 mt-0">MetaMask</p>
           </div>
-          <div class="dropdown-wallet-connect-button text-btn">
+          <div
+            class="dropdown-wallet-connect-button text-btn pointer"
+            @click="connectWaller"
+          >
             {{ $t("modals.connect") }}
           </div>
         </div>
@@ -97,11 +113,13 @@
 
 <script>
 import Button from "../../components/ui/Button";
+import metamask from "../../mixins/metamask";
 export default {
   name: "DropdownWallet",
   components: {
     Button,
   },
+  mixins: [metamask],
   props: {
     indexNumber: {
       type: Number,
@@ -115,6 +133,21 @@ export default {
       hasWallet: true,
     };
   },
+  computed: {
+    connectedWallet() {
+      return this.$store.getters.hasWallet;
+    },
+    myWallet() {
+      const account = this.$store.getters.walletAccount;
+      if (account != null && account !== "") {
+        const firstPart = account.substr(0, 7);
+        const lastPart = account.substr(account.length - 7, account.length - 1);
+
+        return `${firstPart}...${lastPart}`;
+      }
+      return account;
+    },
+  },
   watch: {
     $route(val) {
       this.show = false;
@@ -122,11 +155,18 @@ export default {
   },
   mounted() {
     document.addEventListener("click", this.close);
+    this.$nuxt.$on("openWallet", (values) => {
+      this.show = true;
+    });
   },
   beforeDestroy() {
     document.removeEventListener("click", this.close);
+    this.$nuxt.$off("openWallet");
   },
   methods: {
+    connectWaller() {
+      this.connectMetamask();
+    },
     openDropdown() {
       this.show = !this.show;
     },
@@ -142,6 +182,15 @@ export default {
     toLink(link) {
       this.$router.push(link);
       this.show = false;
+    },
+    async copyToClip() {
+      const copyText = this.$store.getters.walletAccount;
+      navigator.clipboard.writeText(copyText);
+      await this.$store.commit("setSnackbar", {
+        show: true,
+        message: this.$t("nft_modal.copiedToClip"),
+        color: "success",
+      });
     },
   },
 };
