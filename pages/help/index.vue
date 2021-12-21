@@ -10,7 +10,7 @@
         </template>
         <template slot="right">
           <nuxt-link
-            to="/"
+            to="/help/installation"
             target="_blank"
             class="
               custom-button
@@ -33,7 +33,7 @@
         </template>
         <template slot="right">
           <nuxt-link
-            to="/"
+            to="/help/buy-eth"
             target="_blank"
             class="
               custom-button

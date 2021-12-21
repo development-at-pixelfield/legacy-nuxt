@@ -27,8 +27,11 @@
   font-weight: bold;
 }
 
-a.custom-button {
+a {
   text-decoration: none;
+}
+.flex {
+  display: flex;
 }
 
 @media (max-width: $break-sms) {
