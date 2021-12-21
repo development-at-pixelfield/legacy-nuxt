@@ -3,6 +3,15 @@
     <h1 class="header-big mt-0 mb-24">{{ $t("auth.register") }}</h1>
     <div class="form-group mb-24">
       <Input
+        :type="'text'"
+        :model.sync="username"
+        :label="$t('auth.username')"
+        :error="$v.username"
+        :rules="rules.username"
+        :is-submit="isSubmit"
+      />
+
+      <Input
         :type="'email'"
         :model.sync="email"
         :label="$t('auth.email')"
@@ -71,7 +80,7 @@
 </template>
 
 <script>
-import { required, sameAs, email } from "vuelidate/lib/validators";
+import { required, sameAs, email, minLength } from "vuelidate/lib/validators";
 import Input from "../../components/ui/Input";
 import Checkbox from "../../components/ui/Checkbox";
 import Button from "../../components/ui/Button";
@@ -100,6 +109,10 @@ export default {
     password: {
       required,
     },
+    username: {
+      required,
+      minLength: minLength(5),
+    },
     repeatPassword: {
       required,
       sameAsPassword: sameAs("password"),
@@ -107,6 +120,7 @@ export default {
   },
   data() {
     return {
+      username: "",
       email: "",
       password: "",
       repeatPassword: "",
@@ -124,6 +138,13 @@ export default {
           {
             name: "checkEmailSymbol",
             text: this.$t("validations.addEmail"),
+          },
+        ],
+        username: [
+          { name: "required", text: this.$t("validations.notEmpty") },
+          {
+            name: "minLength",
+            text: "Must have more 5 characters",
           },
         ],
         password: [{ name: "required", text: this.$t("validations.notEmpty") }],
@@ -176,6 +197,7 @@ export default {
           const data = {
             email: this.email,
             password: this.password,
+            username: this.username,
           };
           await this.$store.dispatch("user/registerUser", data);
           await this.$auth.loginWith("local", {

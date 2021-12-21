@@ -2,6 +2,7 @@ export default {
   auth: {
     register: "Register",
     email: "Email",
+    username: "Username",
     passwordRule:
       "Create a strong password using at least 8 characters, include at least one number and at least one special character (e.g. ! @ # ?), a mixture of uppercase and lowercase letters.",
     password: "Password",
