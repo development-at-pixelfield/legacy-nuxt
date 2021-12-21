@@ -31,7 +31,6 @@
 
       <div v-if="canShow" class="filters mt-24">
         <SearchFilter
-          :list="searchItems"
           :return-object="false"
           :item-value="'value'"
           :item-label="'label'"
