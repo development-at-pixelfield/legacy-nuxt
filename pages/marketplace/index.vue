@@ -122,7 +122,7 @@ const filterDefaultVars = {
   page: 1,
   page_size: 12,
   ordering: "",
-  name: "",
+  search: "",
   luminosity__in: [],
   quality_level__in: [],
   age__in: [],
@@ -162,7 +162,7 @@ export default {
         }
       });
 
-      if (!query.ordering) filter.ordering = "created_at";
+      if (!query.ordering) filter.ordering = "-created_at";
 
       const nfts = await store.dispatch("nfts/getNfts", filter);
       return { nfts, filter, formOptions };
@@ -183,7 +183,7 @@ export default {
       filterHeader: {},
       formOptions: {},
       filterItems: [
-        { label: "Recently listed", value: "created_at" },
+        { label: "Recently listed", value: "-created_at" },
         { label: "Price (ETH): Highest first", value: "-price_eth" },
         { label: "Price (ETH): Lowest first", value: "price_eth" },
       ],
@@ -196,7 +196,11 @@ export default {
     },
     convertEthereum() {
       return (price) => {
-        return "est. $" + Number(this.ethPrice).toFixed(3) * price + "K";
+        return this.ethPrice
+          ? "est. $" +
+              Number((this.ethPrice * 100 * price) / 100).toFixed(2) +
+              "K"
+          : "...";
       };
     },
   },
@@ -251,7 +255,6 @@ export default {
       await this.fetchNfts(cleanObject);
 
       delete cleanObject.page_size;
-
       await this.$router.push({ query: cleanObject });
 
       setTimeout(() => {
