@@ -159,6 +159,7 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     countryRes: "Country of residence",
     selectCountry: "Select country",
     selectId: "Select your ID type",
+    warningText: "Click here to find out more",
   },
 
   marketplace: {
@@ -239,6 +240,7 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     verificationText: `Before buying an NFT you must verify your identity.
     You will need your valid ID card, passport or driving licence `,
     startVerification: "Start verification (5min)",
+    continue: "Continue",
     confirmFromMetaMask:
       "Please confirm the transaction in your MetaMask wallet.",
     approveForTrading: "Approve ETH for trading",
@@ -247,8 +249,14 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     you_are_buying: "You are buying",
     availableBalance: "Available balance",
     addFunds: "Add funds",
+    tryAgain: "Try again",
+    verificationTitle: "Verification error!",
+    verifyHeader: "Unsuccessful verification attempt for the following reason:",
+    doAgain: "Please try to verify your ID again.",
     total: "Total",
     copiedToClip: "Successfully copied hash to clipboard",
+    completeIdentity: "Complete verification process",
+    continueIdentity: "Continue to Veriff.com to fully verify your account.",
   },
   modals: {
     modalClose: "No, go back :)",

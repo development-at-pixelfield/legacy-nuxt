@@ -15,6 +15,12 @@
       display: flex;
     }
 
+    .warning-info{
+      text-decoration: underline;
+      cursor: pointer;
+      display: inline-block;
+    }
+
     .success-text{
       text-decoration: line-through;
       color: $c-connected;
@@ -24,4 +30,8 @@
       color: $c-connected;
     }
   }
+}
+
+.red{
+  color: #C12300;
 }

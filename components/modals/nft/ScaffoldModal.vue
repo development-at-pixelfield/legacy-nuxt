@@ -3,7 +3,7 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-          <HeadingRow :title="heading" />
+          <HeadingRow :title="heading" @close="close" />
           <slot></slot>
         </div>
       </div>
@@ -37,6 +37,10 @@ export default {
     },
 
     close() {
+      this.$store.commit("setModal", {
+        show: false,
+        type: null,
+      });
       this.$emit("close");
     },
   },

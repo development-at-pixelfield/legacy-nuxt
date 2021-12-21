@@ -2,10 +2,46 @@
   display: flex;
   align-items: center;
   position: relative;
+  border: 1px solid #261632;
+  box-sizing: border-box;
+  padding: 16px 15px;
+  cursor: pointer;
+  justify-content: space-between;
 
   label{
     vertical-align: text-bottom;
+    display: flex;
+
+    .bold{
+      font-weight: 700;
+    }
   }
+
+  .circle{
+    width: 24px;
+    height: 24px;
+    border: 1px solid #D6D2D9;
+    box-sizing: border-box;
+    border-radius: 80px
+  }
+
+  .current{
+    background: $c-primary;
+    border: none;
+    position: relative;
+
+    &::after{
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: $c-white;
+    }
+  }
+
 
   a{
     text-decoration: underline;

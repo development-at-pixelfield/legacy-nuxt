@@ -280,6 +280,7 @@ ul{
 .form-container{
   max-width: 464px;
   margin: 0 auto;
+  padding-bottom: 80px;
 
   @media (max-width: $break-sms) {
     max-width: 100%;

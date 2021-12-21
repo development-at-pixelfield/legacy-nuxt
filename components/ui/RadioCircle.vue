@@ -1,14 +1,20 @@
 <template>
   <div class="checkbox-class">
-    <div class="custom-checkbox">
-      <input
-        v-model="propModel"
-        type="radio"
-        :value="value"
-        :class="classes"
-        :name="radioName"
-      />
-      <slot name="label"></slot>
+    <div class="custom-checkbox" @click="setValue">
+      <label slot="label" class="text-m">
+        <img src="~/assets/img/icons/id-card.svg" alt="icon" />
+        <span class="ml-8 text-m" :class="{ bold: checked }">{{ label }}</span>
+      </label>
+
+      <span class="circle" :class="{ current: checked }"> </span>
+
+      <!--      <input-->
+      <!--        v-model="propModel"-->
+      <!--        type="radio"-->
+      <!--        :value="value"-->
+      <!--        :class="classes"-->
+      <!--        :name="radioName"-->
+      <!--      />-->
     </div>
     <div v-if="error" class="errors-list">
       <p class="text-s">{{ error }}</p>
@@ -28,13 +34,14 @@ export default {
       type: [String, Boolean],
       required: true,
     },
-    radioName: {
-      type: [String],
-      required: true,
-    },
     value: {
       type: String,
       required: true,
+    },
+    label: {
+      type: String,
+      required: false,
+      default: "",
     },
     error: {
       type: String,
@@ -43,18 +50,20 @@ export default {
     },
   },
   computed: {
-    propModel: {
-      get() {
-        return this.name;
-      },
-      set(value) {
-        this.$emit("update:name", value);
-      },
-    },
     classes() {
       return {
         "custom-checkbox__disabled": this.disabled,
       };
+    },
+
+    checked() {
+      return this.value === this.name;
+    },
+  },
+
+  methods: {
+    setValue() {
+      this.$emit("update:name", this.value);
     },
   },
 };

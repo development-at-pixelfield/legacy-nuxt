@@ -84,6 +84,12 @@
             :class="{ [`${status}-text`]: true }"
           >
             {{ label }}
+            <span
+              v-if="status === 'warning'"
+              class="text-m warning-info"
+              @click="showInfoModal"
+              >{{ $t("settings.warningText") }}</span
+            >
           </p>
           <template slot="action">
             <span v-if="status === 'success'">
@@ -310,6 +316,16 @@ export default {
           color: "error",
         });
       }
+    },
+
+    showInfoModal() {
+      this.$store.commit("setModal", {
+        show: true,
+        type: "info-verification",
+        data: {
+          reason: "Reason",
+        },
+      });
     },
 
     openModal() {

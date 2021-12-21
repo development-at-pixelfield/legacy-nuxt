@@ -36,6 +36,10 @@
           {{ $t("settings.countryRes") }}
         </p>
 
+        <p v-if="countryError" class="text-s mt-0 mb-16 red">
+          {{ $t("validations.selectOption") }}
+        </p>
+
         <FilterDropdown
           :list="[
             { label: 'Option1', value: 1 },
@@ -53,34 +57,34 @@
         />
       </div>
 
-      <div v-if="!country" class="form-group mb-24">
+      <div v-if="country" class="form-group mb-24">
         <p class="mt-0 mb-16 text-m-bold">
           {{ $t("settings.selectId") }}
         </p>
 
-        <RadioCircle
-          :name.sync="idType"
-          :radio-name="'id-type'"
-          :value="'id_cart'"
-        >
-          <label slot="label" class="text-semi-l"> Test1 </label>
-        </RadioCircle>
+        <p v-if="idError" class="text-s mt-0 mb-16 red">
+          {{ $t("validations.selectOption") }}
+        </p>
 
         <RadioCircle
+          class="mb-16"
           :name.sync="idType"
-          :radio-name="'id-type'"
+          :value="'id_card'"
+          :label="'ID card'"
+        />
+
+        <RadioCircle
+          class="mb-16"
+          :name.sync="idType"
           :value="'driver_license'"
-        >
-          <label slot="label" class="text-semi-l"> Test2 </label>
-        </RadioCircle>
+          :label="'Driver license'"
+        />
 
         <RadioCircle
           :name.sync="idType"
-          :radio-name="'id-type'"
           :value="'passport'"
-        >
-          <label slot="label" class="text-semi-l"> Test3 </label>
-        </RadioCircle>
+          :label="'Passport'"
+        />
       </div>
 
       <div class="form-group">
@@ -101,6 +105,7 @@
 import { required } from "vuelidate/lib/validators";
 import FilterDropdown from "../../../components/ui/FilterDropdown";
 import RadioCircle from "../../../components/ui/RadioCircle";
+import { catchErrors } from "../../../utils/catchErrors";
 import Input from "./../../../components/ui/Input";
 import Button from "./../../../components/ui/Button";
 export default {
@@ -118,9 +123,6 @@ export default {
     lastName: {
       required,
     },
-    country: {
-      required,
-    },
   },
   layout: "auth",
   middleware: "auth",
@@ -131,34 +133,68 @@ export default {
       country: "",
       idType: "",
       isSubmit: false,
+      countryError: false,
       rules: {
         firstName: [
           { name: "required", text: this.$t("validations.notEmpty") },
         ],
         lastName: [{ name: "required", text: this.$t("validations.notEmpty") }],
-        country: [
-          { name: "required", text: this.$t("validations.selectOption") },
-        ],
       },
     };
   },
 
+  computed: {
+    isValid() {
+      return !this.$v.$invalid && !this.countryError && !this.idError;
+    },
+  },
+
+  watch: {
+    country(val) {
+      if (val) this.countryError = false;
+    },
+    idType(val) {
+      if (val) this.idError = false;
+    },
+  },
+
   methods: {
-    openModal() {
-      this.$store.commit("setModal", {
-        show: true,
-        type: "delete-account",
-        data: {
-          confirm: {
-            function: () => {
-              this.deleteAccount();
-            },
-          },
-        },
-      });
+    beforeUpdate() {
+      this.isSubmit = true;
+
+      if (!this.country) this.countryError = true;
+      if (!this.idType) this.idError = true;
     },
 
-    saveContinue() {},
+    async openModal() {
+      await this.beforeUpdate();
+
+      if (this.isValid) {
+        this.$store.commit("setModal", {
+          show: true,
+          type: "verify-id",
+          data: {
+            confirm: {
+              function: () => {
+                this.saveContinue();
+              },
+            },
+          },
+        });
+      }
+    },
+
+    async saveContinue() {
+      try {
+        await this.$router.push("/settings");
+      } catch (e) {
+        await this.$store.commit("setSnackbar", {
+          show: true,
+          message: catchErrors(e),
+          color: "error",
+        });
+      }
+    },
   },
 };
 </script>
