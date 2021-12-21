@@ -183,7 +183,8 @@
     .visible {
       visibility: visible;
       position: absolute;
-      width: 100%;
+      width: 101%;
+      left: -1px;
       //top: 92px;
     }
   }
