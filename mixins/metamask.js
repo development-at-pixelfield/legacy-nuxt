@@ -30,7 +30,7 @@ export default {
           message: this.$t("snackbar.metaMask.extensionNotInstalled"),
           color: "error",
         });
-        return;
+        return false;
       }
       console.log("get accounts");
       try {
@@ -41,15 +41,17 @@ export default {
             message: this.$t("snackbar.metaMask.accountsIsNotConnected"),
             color: "error",
           });
-          return;
+          return false;
         }
         this.metamaskAccount = accounts.shift();
+        return true;
       } catch (e) {
         await this.$store.commit("setSnackbar", {
           show: true,
           message: this.$t("snackbar.metaMask.accountsIsNotConnected"),
           color: "error",
         });
+        return false;
       }
     },
   },

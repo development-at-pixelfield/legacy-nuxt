@@ -8,17 +8,24 @@
     >
       <img :src="wallet.image" />
       <div>{{ wallet.name }}</div>
+      <div v-if="loading" class="loading-block">
+        <Spinner></Spinner>
+      </div>
     </div>
   </ScaffoldModal>
 </template>
 
 <script>
 import ScaffoldModal from "~/components/modals/nft/ScaffoldModal.vue";
+import Spinner from "~/components/ui/Spinner.vue";
+import metamask from "~/mixins/metamask";
 export default {
   name: "NftWalletModal",
   components: {
     ScaffoldModal,
+    Spinner,
   },
+  mixins: [metamask],
   props: {
     wallets: {
       type: Array,
@@ -31,9 +38,21 @@ export default {
       ],
     },
   },
+  data() {
+    return {
+      loading: false,
+      nftData: this.$store.getters.modal.data,
+    };
+  },
   methods: {
-    addWallet(wallet) {
-      this.$emit("addWallet", wallet);
+    async addWallet(wallet) {
+      this.loading = true;
+      const connected = await this.connectMetamask();
+      this.loading = false;
+      console.log(connected);
+      // if(connected){
+      //   this.$store.dispatch()
+      // }
     },
 
     close() {

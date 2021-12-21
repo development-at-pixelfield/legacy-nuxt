@@ -194,8 +194,9 @@
             <Button
               class="second-btn"
               :label="$t('marketplace.exchangeToken')"
-              :background="isOwner ? 'primary' : 'c-grey'"
+              :background="isOwner ? 'primary' : 'grey'"
               :size="'medium'"
+              :disabled="!isOwner"
               :color="isOwner ? 'c-white' : 'c-grey'"
               @on-click="exchangeToken"
             />
@@ -271,9 +272,11 @@ export default {
       return this.user && this.user.is_email_verified;
     },
     isOwner() {
-      console.log(this.nft.owner.username);
-      console.log(this.user.username);
-      return this.nft.owner && this.nft.owner.username === this.user.username;
+      return (
+        this.nft &&
+        this.nft.owner &&
+        this.nft.owner.username === this.user.username
+      );
     },
     isUserVerified() {
       return this.user && this.user.is_verified;
@@ -299,11 +302,13 @@ export default {
     },
 
     availToPay() {
+      console.log(this.user);
       const states = {
         metamask_not_installed: this.metamask.isEnabled,
         not_auth: !!this.user,
         email_not_verified: this.isEmailVerified,
         user_not_verified: this.isUserVerified,
+        wallet_is_not_connected: !!this.user.wallet_address,
       };
       if (Object.values(states).every((item) => item === true)) {
         return true;
@@ -316,6 +321,7 @@ export default {
         not_auth: "guestTryToPay",
         email_not_verified: "emailNotVerifiedTryToPay",
         user_not_verified: "userNotVerifiedTryToPay",
+        wallet_is_not_connected: "walletNotConnected",
       };
       return {
         state,
@@ -364,6 +370,13 @@ export default {
       await this.$store.commit("setModal", {
         show: true,
         type: "checkout",
+        data: this.nft,
+      });
+    },
+    async walletNotConnected() {
+      await this.$store.commit("setModal", {
+        show: true,
+        type: "checkout-wallet",
         data: this.nft,
       });
     },
