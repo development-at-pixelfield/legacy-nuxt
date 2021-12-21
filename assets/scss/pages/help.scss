@@ -1,0 +1,45 @@
+.main-container {
+  color: white;
+  text-align: center;
+  padding: 10px;
+
+  main {
+    max-width: 944px;
+    text-align: left;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 150%;
+  }
+
+  .in-panel-div {
+    * {
+      margin: 0;
+    }
+    h2 {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.bold {
+  font-weight: bold;
+}
+
+a.custom-button {
+  text-decoration: none;
+}
+
+@media (max-width: $break-sms) {
+  .main-container {
+    padding: 20px;
+
+    main {
+      width: 100%;
+      a.custom-button {
+        width: 100%;
+      }
+    }
+  }
+}

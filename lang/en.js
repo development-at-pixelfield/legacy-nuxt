@@ -231,4 +231,20 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     modalClose: "No, go back :)",
     deleteAccount: "Delete account",
   },
+  helpPage: {
+    title: "Help",
+    p1: "Follow the below instructions to learn how to install and start using your MetaMask wallet.",
+    p2: "MetaMask is one of the most popular software cryptocurrency wallets used for interacting with the Ethereum blockchain. It’s safe, reliable and easy to use. All you need before starting your Galaxy collection is to download a Google Chrome extension or mobile app to create a wallet and add funds to it.",
+    panel1: {
+      header: "How to install MetaMask wallet?",
+      content:
+        "We created a guide that will help you to install MetaMask extension and create a wallet.",
+    },
+    panel2: {
+      header: "How to buy ETH using MetaMask wallet?",
+      content:
+        "We created a guide that will help you to fund your MetaMask wallet with Ethereum.",
+    },
+    learnMore: "Learn more",
+  },
 };
