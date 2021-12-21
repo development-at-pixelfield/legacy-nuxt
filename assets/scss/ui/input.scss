@@ -145,3 +145,6 @@
   color: $c-greyscale-20;
   margin-bottom: 12px;
 }
+input:-webkit-autofill {
+  border: 3px solid blue;
+}
