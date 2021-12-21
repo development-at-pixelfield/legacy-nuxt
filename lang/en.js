@@ -129,13 +129,16 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     NFTAlerts: "NFT alerts",
     alertToEmail: "I want to receive NFT alerts to my email.",
     basicVerification: "Basic verification",
+    advancedVerification: "Advanced verification",
+    verifyDesc: `Get your ID ready and make a small deposit ($0.1) using your bank account to verify your identity and start collecting Galaxy NFTs.`,
     updateChanges: "Update changes",
     deleteAccount: "Delete account",
     changeDesc:
       "Change your password by confirming your current password and choosing a new one.",
     currentPassword: "Current password",
     profile: "Profile",
-    resend: "Resend",
+    resend: "Re-send",
+    verify: "Verify",
     verifyEmail: "Verify your email",
     minutes: "minutes",
     hours: "hours",
@@ -146,6 +149,8 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     emailVerified: "Email verified",
     verificationInProgress: "Verification in progress...",
     checkInbox: "Check your inbox for the verification email",
+    verifyIdentity: "Verify your identity",
+    verifyIdentityDesc: `Before buying or making an offer you must fully verify your email and identity. Complete two steps below!`,
   },
 
   marketplace: {
