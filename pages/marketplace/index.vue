@@ -149,7 +149,7 @@ export default {
     try {
       const formOptions = await store.dispatch("nfts/getNftsForm");
 
-      console.log(formOptions, "formOptions");
+      // console.log(formOptions, "formOptions");
 
       const query = route.query;
       const filter = { ...filterDefaultVars };
