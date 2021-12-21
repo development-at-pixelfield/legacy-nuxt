@@ -163,7 +163,7 @@ export default {
         }
       });
 
-      if (!query.ordering) filter.ordering = "created_at";
+      if (!query.ordering) filter.ordering = "deployed_at";
 
       const nfts = await store.dispatch("nfts/getNfts", filter);
       return { nfts, filter, formOptions };
@@ -184,7 +184,7 @@ export default {
       filterHeader: {},
       formOptions: {},
       filterItems: [
-        { label: "Recently listed", value: "created_at" },
+        { label: "Recently listed", value: "-deployed_at" },
         { label: "Price (ETH): Highest first", value: "price_eth" },
         { label: "Price (ETH): Lowest first", value: "-price_eth" },
       ],
