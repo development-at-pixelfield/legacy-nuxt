@@ -244,6 +244,7 @@ export default {
     setDefaultWatch() {
       this.$watch("filter.ordering", (val, newVal) => {
         if (val && val !== newVal) {
+          this.filter.page = 1;
           const query = { ...this.filter };
           this.setQuery(query);
         }
