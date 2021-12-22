@@ -273,6 +273,7 @@ export default {
     },
     isOwner() {
       return (
+        this.user &&
         this.nft &&
         this.nft.owner &&
         this.nft.owner.username === this.user.username
@@ -309,11 +310,11 @@ export default {
     availToPay() {
       console.log(this.user);
       const states = {
-        metamask_not_installed: this.metamask.isEnabled,
         not_auth: !!this.user,
+        metamask_not_installed: this.metamask.isEnabled,
         email_not_verified: this.isEmailVerified,
         user_not_verified: this.isUserVerified,
-        wallet_is_not_connected: !!this.user.wallet_address,
+        wallet_is_not_connected: this.user && !!this.user.wallet_address,
       };
       if (Object.values(states).every((item) => item === true)) {
         return true;
@@ -322,8 +323,8 @@ export default {
         .filter((item) => states[item] === false)
         .shift();
       const actions = {
-        metamask_not_installed: "metamaskNotInstalled",
         not_auth: "guestTryToPay",
+        metamask_not_installed: "metamaskNotInstalled",
         email_not_verified: "emailNotVerifiedTryToPay",
         user_not_verified: "userNotVerifiedTryToPay",
         wallet_is_not_connected: "walletNotConnected",
