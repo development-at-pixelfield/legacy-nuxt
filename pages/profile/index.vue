@@ -9,39 +9,158 @@
           </div>
 
           <div class="user-block">
-            <p class="mt-0 mb-8 text-m">{{ $auth.user.email }}</p>
+            <p class="mt-0 mb-8 header-title">
+              {{ username }}
+              <img
+                v-if="isVerified"
+                :src="require(`assets/img/icons/verified-account.svg`)"
+                alt="icon"
+              />
+            </p>
             <ul class="user-states mt-0 mb-0">
-              <li>
-                <p class="header-title mt-0 mb-0">3</p>
-                <p class="text-m mt-0 mb-0">{{ $t("profile.stars") }}</p>
+              <li
+                class="user-tag pointer"
+                :class="{ 'view-offline': !connectedWallet }"
+                @click="openWallet()"
+              >
+                <span class="user-tag-state"></span>
+                <span
+                  v-if="connectedWallet"
+                  class="text-m-bold user-tag-text"
+                  >{{ myWallet }}</span
+                >
+                <span v-else class="text-m-bold user-tag-text">{{
+                  $t("nft_modal.connect_wallet")
+                }}</span>
+                <img
+                  :src="require(`assets/img/icons/caret-right.svg`)"
+                  class="user-tag-icon"
+                  alt="icon"
+                />
               </li>
-              <li>
-                <p class="header-title mt-0 mb-0">5</p>
-                <p class="text-m mt-0 mb-0">{{ $t("profile.planets") }}</p>
-              </li>
-              <li>
-                <p class="header-title mt-0 mb-0">200</p>
-                <p class="text-m mt-0 mb-0">{{ $t("profile.points") }}</p>
+              <li class="user-tag" @click="$router.push('/galactic-miles')">
+                <img
+                  :src="require(`assets/img/gift.svg`)"
+                  class="user-tag-gift"
+                  alt="icon"
+                />
+                <span class="text-m-bold user-tag-text"
+                  >{{ balance }} {{ $t("profile.miles") }}</span
+                >
+                <img
+                  :src="require(`assets/img/icons/caret-right.svg`)"
+                  class="user-tag-icon"
+                  alt="icon"
+                />
               </li>
             </ul>
           </div>
-        </div>
-
-        <div class="right-side">
-          <Button
-            class="first-btn"
-            :label="$t('profile.verifyAccount')"
-            :background="'ghost'"
-            :size="'medium'"
-            :color="'c-white'"
-            @on-click="$router.push('/settings')"
-          />
         </div>
       </div>
     </div>
 
     <div class="main-container">
-      <div class="user-content"></div>
+      <div class="user-content">
+        <div v-if="!isVerified" class="user-action-block">
+          <div class="user-action-block-icon">
+            <img :src="require(`assets/img/verify-profile.svg`)" alt="icon" />
+          </div>
+          <div class="user-action-block-text">
+            <p class="mt-0 mb-4 header-title">
+              {{ $t("profile.verifyTitle") }}
+            </p>
+            <p class="mt-0 mb-0 text-m-bold">{{ $t("profile.verifyDesc1") }}</p>
+            <p class="mt-0 mb-0 text-m-bold">{{ $t("profile.verifyDesc2") }}</p>
+          </div>
+          <div class="user-action-block-button">
+            <Button
+              class="primary-btn"
+              :background="'primary'"
+              :size="'medium'"
+              :color="'c-white'"
+              :label="$t('profile.verifyBtn')"
+              @on-click="$router.push('/settings')"
+            />
+          </div>
+        </div>
+        <div v-if="!connectedWallet" class="user-action-block view-wallet">
+          <div class="user-action-block-icon">
+            <img :src="require(`assets/img/wallet-profile.svg`)" alt="icon" />
+          </div>
+          <div class="user-action-block-text">
+            <p class="mt-0 mb-4 header-title">
+              {{ $t("profile.walletTitle") }}
+            </p>
+            <p class="mt-0 mb-0 text-m-bold">{{ $t("profile.walletDesc1") }}</p>
+            <p class="mt-0 mb-0 link">{{ $t("profile.walletDesc2") }}</p>
+          </div>
+          <div class="user-action-block-button">
+            <Button
+              class="primary-btn"
+              :background="'primary'"
+              :size="'medium'"
+              :color="'c-white'"
+              :label="$t('profile.walletBtn')"
+              @on-click="openWallet"
+            />
+          </div>
+        </div>
+        <div v-if="connectedWallet" class="user-action-block view-wallet">
+          <div class="user-action-block-icon">
+            <img
+              :src="require(`assets/img/collection-profile.svg`)"
+              alt="icon"
+            />
+          </div>
+          <div class="user-action-block-text">
+            <p class="mt-0 mb-4 header-title">
+              {{ $t("profile.collectionTitle") }}
+            </p>
+            <p class="mt-0 mb-0 text-m-bold">
+              {{ $t("profile.collectionDesc1") }}
+            </p>
+            <p class="mt-0 mb-0 text-m-bold">
+              {{ $t("profile.collectionDesc2") }}
+            </p>
+          </div>
+          <div class="user-action-block-button">
+            <Button
+              class="primary-btn"
+              :background="'primary'"
+              :size="'medium'"
+              :color="'c-white'"
+              :label="$t('profile.collectionBtn')"
+              @on-click="$router.push('/marketplace')"
+            />
+          </div>
+        </div>
+        <div class="user-action-block view-wallet">
+          <div class="user-action-block-icon">
+            <img :src="require(`assets/img/gift.png`)" alt="icon" />
+          </div>
+          <div class="user-action-block-text">
+            <p class="mt-0 mb-4 header-title">
+              {{ $t("profile.giftTitle") }}
+            </p>
+            <p class="mtb text-m-bold">
+              {{ $t("profile.giftDesc1") }}
+            </p>
+            <p class="mtb text-m-bold">
+              {{ $t("profile.giftDesc2") }}
+            </p>
+          </div>
+          <div class="user-action-block-button">
+            <Button
+              class="primary-btn"
+              :background="'primary'"
+              :size="'medium'"
+              :color="'c-white'"
+              :label="$t('nft_modal.learnMore')"
+              @on-click="openModal"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -61,17 +180,55 @@ export default {
   data() {
     return {
       imgSrc: "",
-      metamaskAccount: "",
+      username: "",
       balance: 0,
       balanceLoaded: false,
+      isVerified: false,
     };
+  },
+  computed: {
+    connectedWallet() {
+      return this.$auth.user.wallet_address;
+    },
+    myWallet() {
+      const account = this.$auth.user.wallet_address;
+      if (account != null && account !== "") {
+        const firstPart = account.substr(0, 7);
+        const lastPart = account.substr(account.length - 7, account.length - 1);
+
+        return `${firstPart}...${lastPart}`;
+      }
+      return account;
+    },
   },
   created() {
     if (this.$auth.user.avatar) {
       this.imgSrc = this.$auth.user.avatar;
     }
+    if (this.$auth.user.miles_amount) {
+      this.balance = this.$auth.user.miles_amount;
+    }
+    if (this.$auth.user.username) {
+      this.username = this.$auth.user.username;
+    } else {
+      this.username = this.$auth.user.email;
+    }
+    if (this.$auth.user.is_verified && this.$auth.user.is_email_verified) {
+      this.isVerified = true;
+    }
   },
   methods: {
+    openModal() {
+      this.$store.commit("setModal", {
+        show: true,
+        type: "unlocked-features",
+      });
+    },
+
+    openWallet() {
+      this.$nuxt.$emit("openWallet");
+      window.scrollTo(0, 0);
+    },
     async fileUpload(e) {
       const files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;

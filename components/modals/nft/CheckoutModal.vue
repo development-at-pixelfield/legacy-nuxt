@@ -1,6 +1,6 @@
 <template>
   <ScaffoldModal :heading="$t('nft_modal.checkout')" @close="close">
-    <div class="buying-header">
+    <div class="buying-header text-m">
       {{ $t("nft_modal.you_are_buying") }} <strong>{{ nft.name }}</strong>
     </div>
     <div class="divider" />
@@ -8,52 +8,60 @@
       <div>{{ $t("nft_modal.total") }}</div>
       <div>
         <div class="summary_heading">{{ nft.price_eth }}Ξ</div>
-        <div class="summary_sub-heading">${{ nft.price_usd }}</div>
+        <div class="summary_sub-heading">(${{ nft.price_usd }})</div>
       </div>
     </div>
     <div class="divider" />
-    <Checkbox :name.sync="agree" class="mb-32 terms" :error="checkError">
-      <label slot="label" class="text-m">
-        {{ $t("auth.agreeWith") }} &nbsp;
-        <nuxt-link to="/" class="no-color-link"
-          >{{ $t("auth.termCond") }}
-        </nuxt-link>
-      </label>
-    </Checkbox>
-    <div class="button-wrap">
-      <Button
-        :background="'ghost'"
-        :size="'medium'"
-        :color="'c-white'"
-        :label="$t('nft_modal.addFunds')"
-        @on-click="addFunds"
-        ><span slot="left_icon" class="icon-button"
-          ><img src="~/assets/img/icons/credit-card.svg" /></span
-      ></Button>
-      <Button
-        :background="userHasEnoughFunds ? 'primary' : 'default'"
-        :size="'medium'"
-        :color="'c-white'"
-        :disabled="!userHasEnoughFunds"
-        :label="canPurchaseText"
-        @on-click="purchaseNft"
-        ><span v-if="userHasEnoughFunds" slot="left_icon" class="icon-button"
-          ><img src="~/assets/img/icons/wallet.svg" /></span
-      ></Button>
-    </div>
-    <div
-      v-if="balance !== false"
-      class="current-balance"
-      :class="
-        userHasEnoughFunds
-          ? 'current-balance_positive'
-          : 'current-balance_negative'
-      "
-    >
-      {{ $t("nft_modal.availableBalance") }} {{ displayBalance }}Ξ (${{
-        balanceDollars
-      }})
-    </div>
+    <template v-if="loading">
+      <div class="loading-container">
+        <Spinner></Spinner>
+      </div>
+    </template>
+    <template v-if="!loading">
+      <Checkbox :name.sync="agree" class="mb-32 terms" :error="checkError">
+        <label slot="label" class="text-m">
+          {{ $t("auth.agreeWith") }} &nbsp;
+          <nuxt-link to="/" class="no-color-link"
+            >{{ $t("auth.termCond") }}
+          </nuxt-link>
+        </label>
+      </Checkbox>
+      <div class="button-wrap">
+        <Button
+          class="first-btn"
+          :background="'ghost'"
+          :size="'medium'"
+          :color="'c-white'"
+          :label="$t('nft_modal.addFunds')"
+          @on-click="addFunds"
+          ><span slot="left_icon" class="icon-button"
+            ><img src="~/assets/img/icons/credit-card.svg" /></span
+        ></Button>
+        <Button
+          :background="userHasEnoughFunds ? 'primary' : 'default'"
+          :size="'medium'"
+          :color="'c-white'"
+          :disabled="!userHasEnoughFunds"
+          :label="canPurchaseText"
+          @on-click="purchaseNft"
+          ><span v-if="userHasEnoughFunds" slot="left_icon" class="icon-button"
+            ><img src="~/assets/img/icons/wallet.svg" /></span
+        ></Button>
+      </div>
+      <div
+        v-if="balance !== false"
+        class="current-balance"
+        :class="
+          userHasEnoughFunds
+            ? 'current-balance_positive'
+            : 'current-balance_negative'
+        "
+      >
+        {{ $t("nft_modal.availableBalance") }} {{ displayBalance }}Ξ (${{
+          balanceDollars
+        }})
+      </div>
+    </template>
   </ScaffoldModal>
 </template>
 
@@ -63,6 +71,7 @@ import Button from "../../ui/Button";
 import converter from "../../../mixins/converter";
 import metamask from "../../../mixins/metamask";
 import ScaffoldModal from "~/components/modals/nft/ScaffoldModal.vue";
+import Spinner from "~/components/ui/Spinner.vue";
 
 export default {
   name: "NftCheckoutModal",
@@ -70,6 +79,7 @@ export default {
     ScaffoldModal,
     Checkbox,
     Button,
+    Spinner,
   },
   mixins: [converter, metamask],
   data() {
@@ -77,6 +87,7 @@ export default {
       agree: false,
       checkError: "",
       nftData: this.$store.getters.modal.data,
+      loading: true,
     };
   },
   computed: {
@@ -104,12 +115,21 @@ export default {
     },
   },
   async mounted() {
+    this.$nuxt.$on("metamask:disconnected", () => {
+      this.$emit("close");
+    });
     await this.connectMetamask();
     await this.getBalance();
+    this.loading = false;
   },
   methods: {
-    addFunds() {
-      this.$emit("addFunds");
+    async addFunds() {
+      this.$emit("close");
+      await this.$store.commit("setModal", {
+        show: true,
+        type: "pay-card",
+        data: this.nftData,
+      });
     },
     async purchaseNft() {
       if (!this.agree) {

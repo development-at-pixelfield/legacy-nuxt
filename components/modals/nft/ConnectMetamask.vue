@@ -9,7 +9,7 @@
         <div class="verification-container_textbox_title">
           {{ $t("nft_modal.installMetamaskUnsure") }}
         </div>
-        <div class="verification-container_textbox_desc">
+        <div class="verification-container_textbox_desc text-m-bold">
           {{ $t("nft_modal.installMetamaskText") }}
         </div>
         <Button
@@ -28,14 +28,14 @@ import Button from "../../ui/Button";
 import ScaffoldModal from "~/components/modals/nft/ScaffoldModal.vue";
 
 export default {
-  name: "VerifyIdentityModal",
+  name: "ConnectMetamask",
   components: {
     Button,
     ScaffoldModal,
   },
   methods: {
     handle(emit) {
-      this.$emit(emit);
+      this.$router.push("/help");
     },
   },
 };

@@ -4,6 +4,7 @@
       <div class="modal-wrapper">
         <div class="modal-container">
           <HeadingRow :title="heading" @close="close" />
+          <p v-if="desc" class="text-m text-center">{{ desc }}</p>
           <slot></slot>
         </div>
       </div>
@@ -30,6 +31,11 @@ export default {
       required: true,
       default: "",
     },
+    desc: {
+      type: String,
+      required: false,
+      default: "",
+    },
   },
   methods: {
     addWallet(wallet) {
@@ -37,6 +43,10 @@ export default {
     },
 
     close() {
+      this.$store.commit("setModal", {
+        show: false,
+        type: null,
+      });
       this.$emit("close");
     },
   },

@@ -31,13 +31,12 @@
 
       <div v-if="canShow" class="filters mt-24">
         <SearchFilter
-          :list="searchItems"
           :return-object="false"
           :item-value="'value'"
           :item-label="'label'"
           :label="$t('marketplace.name')"
           :placeholder="$t('marketplace.search')"
-          :name.sync="filter.name"
+          :name.sync="filter.search"
           class="mb-0"
         />
 
@@ -126,7 +125,7 @@ import SearchFilter from "../../ui/SearchFilter";
 import Icon from "../../ui/Icon";
 import Button from "../../ui/Button";
 const filterDefaultVars = {
-  name: "",
+  search: "",
   luminosity__in: [],
   quality_level__in: [],
   age__in: [],
@@ -166,7 +165,7 @@ export default {
       canShow: false,
       type: "desktop",
       filter: {
-        name: "",
+        search: "",
         luminosity__in: [],
         quality_level__in: [],
         age__in: [],
@@ -268,11 +267,15 @@ export default {
 
     removeFixed() {
       const header = document.getElementById("header");
+      const html = document.getElementsByTagName("html")[0];
       header.style.position = "static";
+      html.style.position = "static";
     },
     addFixed() {
       const header = document.getElementById("header");
+      const html = document.getElementsByTagName("html")[0];
       header.style.position = "fixed";
+      html.style.position = "fixed";
     },
     reportWindowSize() {
       if (window.innerWidth < 770) this.type = "mobile";

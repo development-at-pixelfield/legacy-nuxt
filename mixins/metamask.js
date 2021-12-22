@@ -4,6 +4,7 @@ export default {
       metamaskAccount: "",
       balance: 0,
       balanceLoaded: false,
+      hasWallet: false,
     };
   },
   computed: {
@@ -23,6 +24,21 @@ export default {
       }
       return false;
     },
+    async setConnected() {
+      const payload = { wallet_address: this.metamaskAccount };
+      await this.$store.dispatch("user/saveWallet", payload);
+      await this.$auth.fetchUser();
+      this.$nuxt.$emit("metamask:connected");
+    },
+    async setDisconnected() {
+      const payload = { wallet_address: null };
+      await this.$store.dispatch("user/saveWallet", payload);
+      await this.$auth.fetchUser();
+      this.$nuxt.$emit("metamask:disconnected");
+    },
+    async disconnectMetamask() {
+      await this.setDisconnected();
+    },
     async connectMetamask() {
       if (!this.metamask.isEnabled) {
         await this.$store.commit("setSnackbar", {
@@ -30,9 +46,9 @@ export default {
           message: this.$t("snackbar.metaMask.extensionNotInstalled"),
           color: "error",
         });
-        return;
+        await this.setDisconnected();
+        return false;
       }
-      console.log("get accounts");
       try {
         const accounts = await this.metamask.getAccounts();
         if (!accounts.length) {
@@ -41,15 +57,20 @@ export default {
             message: this.$t("snackbar.metaMask.accountsIsNotConnected"),
             color: "error",
           });
-          return;
+          await this.setDisconnected();
+          return false;
         }
         this.metamaskAccount = accounts.shift();
+        await this.setConnected();
+        return true;
       } catch (e) {
         await this.$store.commit("setSnackbar", {
           show: true,
           message: this.$t("snackbar.metaMask.accountsIsNotConnected"),
           color: "error",
         });
+        await this.setDisconnected();
+        return false;
       }
     },
   },

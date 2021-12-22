@@ -12,13 +12,12 @@
         :form-options="formOptions"
       />
     </div>
-    <div class="main-container" :class="{ 'panel-open': isOpenPanel }">
+    <div class="main-list-container" :class="{ 'panel-open': isOpenPanel }">
       <div class="header mb-16">
         <h2 class="header-big mtb">
           {{ $t("marketplace.marketplace") }}
         </h2>
         <div class="filter-block">
-          {{ filter.ordering }}
           <FilterDropdown
             :list="filterItems"
             :return-object="false"
@@ -123,7 +122,7 @@ const filterDefaultVars = {
   page: 1,
   page_size: 12,
   ordering: "",
-  name: "",
+  search: "",
   luminosity__in: [],
   quality_level__in: [],
   age__in: [],
@@ -163,7 +162,7 @@ export default {
         }
       });
 
-      if (!query.ordering) filter.ordering = "created_at";
+      if (!query.ordering) filter.ordering = "-deployed_at";
 
       const nfts = await store.dispatch("nfts/getNfts", filter);
       return { nfts, filter, formOptions };
@@ -184,9 +183,9 @@ export default {
       filterHeader: {},
       formOptions: {},
       filterItems: [
-        { label: "Recently listed", value: "created_at" },
-        { label: "Price (ETH): Highest first", value: "price_eth" },
-        { label: "Price (ETH): Lowest first", value: "-price_eth" },
+        { label: "Recently listed", value: "-deployed_at" },
+        { label: "Price (ETH): Highest first", value: "-price_eth" },
+        { label: "Price (ETH): Lowest first", value: "price_eth" },
       ],
     };
   },
@@ -197,7 +196,9 @@ export default {
     },
     convertEthereum() {
       return (price) => {
-        return "est. $" + Number(this.ethPrice * price).toFixed(3) + "K";
+        return this.ethPrice
+          ? "est. $" + Number((this.ethPrice * 100 * price) / 100).toFixed(2)
+          : "...";
       };
     },
   },
@@ -209,17 +210,14 @@ export default {
   async mounted() {
     this.$nuxt.$on("applyFilters", async (values) => {
       if (Object.keys(values).length) {
-        values.page = this.filter.page;
+        values.page = 1;
         values.ordering = this.filter.ordering;
 
         await this.setQuery(values);
       } else {
         const filters = { ...filterDefaultVars };
-        filters.page = this.filter.page;
+        filters.page = 1;
         filters.ordering = this.filter.ordering;
-
-        delete filters.eth_price__gte;
-        delete filters.eth_price__lte;
 
         await this.setQuery(filters);
       }
@@ -236,21 +234,18 @@ export default {
       const cleanObject = functions.cleanObject(this.$route.query);
       this.filter.page = val;
       cleanObject.page = val;
-      this.fetchNfts(cleanObject);
+      this.setQuery(cleanObject);
     },
     openFilter() {
       this.isOpenPanel = true;
     },
     setDefaultWatch() {
-      this.$watch("filter.page", (val) => {
-        const cleanObject = functions.cleanObject(this.$route.query);
-        cleanObject.page = val;
-        this.fetchNfts(cleanObject);
-      });
-
-      this.$watch("filter.ordering", (val) => {
-        const query = { ...this.filter };
-        this.setQuery(query);
+      this.$watch("filter.ordering", (val, newVal) => {
+        if (val && val !== newVal) {
+          this.filter.page = 1;
+          const query = { ...this.filter };
+          this.setQuery(query);
+        }
       });
     },
 
@@ -258,9 +253,7 @@ export default {
       const cleanObject = await functions.cleanObject(query);
       await this.fetchNfts(cleanObject);
 
-      delete cleanObject.page;
       delete cleanObject.page_size;
-
       await this.$router.push({ query: cleanObject });
 
       setTimeout(() => {

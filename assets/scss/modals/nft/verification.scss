@@ -4,8 +4,22 @@
   justify-content: center;
   flex-direction: column;
 
+  .small-margin{
+    margin: 16px 0;
+    width: 100%;
+  }
+
   img {
     margin: 46px 0;
+  }
+
+  .image{
+    width: 100%;
+    margin: 16px 0;
+  }
+
+  .img-width{
+    width: 287px;
   }
 
   &_textbox {

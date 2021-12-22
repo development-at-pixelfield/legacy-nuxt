@@ -2,6 +2,7 @@ export default {
   auth: {
     register: "Register",
     email: "Email",
+    username: "Username",
     passwordRule:
       "Create a strong password using at least 8 characters, include at least one number and at least one special character (e.g. ! @ # ?), a mixture of uppercase and lowercase letters.",
     password: "Password",
@@ -102,8 +103,28 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     email_is_not_verified: "Please, verify your email to be able to buy nft",
     is_not_logged: "Please, log in to be able to buy nft",
     user_not_verified: "Please, verify your person to be able to buy nft",
+    miles: "Galaxy Miles",
+    verifyTitle: "Verify your identity",
+    verifyDesc1:
+      "Before buying or making an offer you must verify your identity.",
+    verifyDesc2:
+      "You will need your valid ID card, passport or driving licence",
+    verifyBtn: "Start verification (5min)",
+    walletTitle: "We can’t detect your wallet",
+    walletDesc1:
+      "Connect your wallet to view your collection and transactions history!",
+    walletDesc2:
+      "Follow our step by step guide if you are not sure what to do next :)",
+    walletBtn: "Connect wallet",
+    collectionTitle: "Start collecting today!",
+    collectionDesc1:
+      "Once you collect your first Galaxy NFT you will see it displayed right here.",
+    collectionDesc2: "For now, why don’t you look around our marketplace?",
+    collectionBtn: "Visit marketplace",
+    giftTitle: "Exclusive features awaiting!",
+    giftDesc1: `Collect Galactic Miles by buying NFTs through our platform.`,
+    giftDesc2: `Use earned points to access VIP features, such as community voting!`,
   },
-
   settings: {
     settings: "Settings",
     accountSettings: "Account settings",
@@ -112,13 +133,16 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     NFTAlerts: "NFT alerts",
     alertToEmail: "I want to receive NFT alerts to my email.",
     basicVerification: "Basic verification",
+    advancedVerification: "Advanced verification",
+    verifyDesc: `Get your ID ready and make a small deposit ($0.1) using your bank account to verify your identity and start collecting Galaxy NFTs.`,
     updateChanges: "Update changes",
     deleteAccount: "Delete account",
     changeDesc:
       "Change your password by confirming your current password and choosing a new one.",
     currentPassword: "Current password",
     profile: "Profile",
-    resend: "Resend",
+    resend: "Re-send",
+    verify: "Verify",
     verifyEmail: "Verify your email",
     minutes: "minutes",
     hours: "hours",
@@ -129,10 +153,22 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     emailVerified: "Email verified",
     verificationInProgress: "Verification in progress...",
     checkInbox: "Check your inbox for the verification email",
+    verifyIdentity: "Verify your identity",
+    verifyOnProgress: "Verification in progress...",
+    verifyWarning: "We couldn’t verify your identity!",
+    verifyIdentityDesc: `Before buying or making an offer you must fully verify your email and identity. Complete two steps below!`,
+    firstName: "Legal first name",
+    lastName: "Legal last name",
+    saveContinue: "Save and Continue",
+    countryRes: "Country of residence",
+    selectCountry: "Select country",
+    selectId: "Select your ID type",
+    warningText: "Click here to find out more",
   },
 
   marketplace: {
     marketplace: "Marketplace",
+    galacticMiles: "Galactic Miles",
     luminosity: "Luminosity",
     story: "Story",
     filter: "Filter",
@@ -157,6 +193,11 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     payCard: "Pay with card",
     buyNow: "Buy now",
     exchangeToken: "Exchange token",
+    galacticMilesSubTitle: `Collect Galactic Miles by buying NFTs through our platform. We will gift you 1 Galactic Mile when you buy a new NFT through our Marketplace. Use earned points to interact with VIP features. More coming soon!`,
+    openMap: "Open roadmap",
+    voteTitle: "Vote for next features!",
+    voteDesc:
+      "Vote for your favourite features with your Galactic Miles points. We regularly update the roadmap and add new suggestions.",
   },
 
   validations: {
@@ -166,6 +207,8 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     addEmail: "Please include an ‘@’ in the email address.",
     validEmail: "Please enter valid email address",
     emailUsed: "This email has already been registered",
+    selectOption: "You must select one of the options",
+    usernameLength: "Please enter at least 5 characters",
   },
 
   snackbar: {
@@ -213,6 +256,7 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     verificationText: `Before buying an NFT you must verify your identity.
     You will need your valid ID card, passport or driving licence `,
     startVerification: "Start verification (5min)",
+    continue: "Continue",
     confirmFromMetaMask:
       "Please confirm the transaction in your MetaMask wallet.",
     approveForTrading: "Approve ETH for trading",
@@ -221,15 +265,56 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     you_are_buying: "You are buying",
     availableBalance: "Available balance",
     addFunds: "Add funds",
+    tryAgain: "Try again",
+    verificationTitle: "Verification error!",
+    verifyHeader: "Unsuccessful verification attempt for the following reason:",
+    doAgain: "Please try to verify your ID again.",
     total: "Total",
     copiedToClip: "Successfully copied hash to clipboard",
+    completeIdentity: "Complete verification process",
+    continueIdentity: "Continue to Veriff.com to fully verify your account.",
     emailVerificationTitle: "Verify your email",
     emailVerificationDescription:
       "Before buying an NFT you must verify your email and identity.",
+    buyCardHeader: "Buy with card",
+    buyCardDesc: "Sorry! We are still building this feature...",
+    howFund: "Learn how to fund your wallet",
+    howFundDesc: `We created a small guide that will help you to fund
+your MetaMask wallet with ethereum. `,
+    featuresHeader: "Features unlocked!",
+    collectTitle: "You collected new Galactic Miles!",
+    collectDesc: `We want to gift you some sweet Galactic Miles for buying a  new NFT collectable through our platform.
+Use earned points to access VIP features, such as community voting! More features coming up ;)`,
+    collectBtn: "Access exclusive features",
+    galacticHeader: "Collect Galactic Miles",
+    galacticTitle: "Exclusive features awaiting!",
+    galacticDesc: `Collect Galactic Miles by buying NFTs through our marketplace.
+Use earned points to access VIP features!`,
+    galacticBtn: "Visit marketplace",
   },
+
+  roadmap: {
+    roadmap: "Roadmap",
+    roadmapDesc:
+      "Vote for your favourite features with your Galactic Miles (GM) points. We regularly update the roadmap and add new suggestions.",
+    votes: "Votes",
+  },
+
   modals: {
     modalClose: "No, go back :)",
     deleteAccount: "Delete account",
+    connect: "Connect",
+    disconnect: "Disconnect",
+    wallet: "Galaxy wallet",
+    walletStatus: "Wallet Status",
+    walletId: "Wallet ID",
+    walletLinks: "Useful links",
+    walletActive: "Active",
+    walletNot: "You need a MetaMask wallet to buy Galaxy NFTs",
+    walletMore: "Learn more",
+    walletInfoTitle: "Unsure how to set up the wallet?",
+    walletInfo:
+      "We created easy to follow guides that will help you to set up a MetaMask wallet and get it ready to buy your first Galaxy NFT!",
   },
   helpPage: {
     title: "Help",

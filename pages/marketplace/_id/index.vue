@@ -9,7 +9,7 @@
           class="nav"
         />
         <div class="img-block">
-          <WebGl :src="nft.model_file" />
+          <WebGl v-if="nft.model_file" :src="nft.model_file" />
         </div>
       </div>
     </div>
@@ -20,7 +20,7 @@
           <div class="left-side">
             <h1 class="mb-8 mt-0 detail-title">{{ nft.name }}</h1>
             <span class="header-title1"
-              >Current price: {{ (+currentPriceOrSoldPrice).toFixed(2) }}Ξ</span
+              >Current price: {{ (+currentPriceOrSoldPrice).toFixed(3) }}Ξ</span
             >
             <span class="header-title1 ml-16">{{
               convertEthereum(currentPriceOrSoldPrice)
@@ -194,9 +194,10 @@
             <Button
               class="second-btn"
               :label="$t('marketplace.exchangeToken')"
-              :background="'grey'"
+              :background="isOwner ? 'primary' : 'grey'"
               :size="'medium'"
-              :color="'c-grey'"
+              :disabled="!isOwner"
+              :color="isOwner ? 'c-white' : 'c-grey'"
               @on-click="exchangeToken"
             />
           </div>
@@ -233,7 +234,7 @@ export default {
   async asyncData({ app, store, params }) {
     try {
       const nft = await store.dispatch("nfts/getNftsById", { uid: params.id });
-      console.log(nft);
+      // console.log(nft);
       const ethPrice = (await store.dispatch("fetchEthPrice")).rate;
 
       let showAuction = false;
@@ -257,7 +258,7 @@ export default {
   computed: {
     convertEthereum() {
       return (price) => {
-        return "est. $" + Number(this.ethPrice * price).toFixed(3) + "K";
+        return "est. $" + Number(this.ethPrice * price).toFixed(2);
       };
     },
     transactionsListLink() {
@@ -269,6 +270,14 @@ export default {
     },
     isEmailVerified() {
       return this.user && this.user.is_email_verified;
+    },
+    isOwner() {
+      return (
+        this.user &&
+        this.nft &&
+        this.nft.owner &&
+        this.nft.owner.username === this.user.username
+      );
     },
     isUserVerified() {
       return this.user && this.user.is_verified;
@@ -283,21 +292,29 @@ export default {
     },
   },
   methods: {
-    payCard() {},
+    async payCard() {
+      await this.$store.commit("setModal", {
+        show: true,
+        type: "pay-card",
+      });
+    },
 
     async buyNow() {
       const availToPayOrState = this.availToPay();
       if (availToPayOrState !== true) {
-        await this[availToPayOrState.action]();
+        return await this[availToPayOrState.action]();
       }
       return await this.checkout();
     },
 
     availToPay() {
+      console.log(this.user);
       const states = {
         not_auth: !!this.user,
+        metamask_not_installed: this.metamask.isEnabled,
         email_not_verified: this.isEmailVerified,
         user_not_verified: this.isUserVerified,
+        wallet_is_not_connected: this.user && !!this.user.wallet_address,
       };
       if (Object.values(states).every((item) => item === true)) {
         return true;
@@ -307,8 +324,10 @@ export default {
         .shift();
       const actions = {
         not_auth: "guestTryToPay",
+        metamask_not_installed: "metamaskNotInstalled",
         email_not_verified: "emailNotVerifiedTryToPay",
         user_not_verified: "userNotVerifiedTryToPay",
+        wallet_is_not_connected: "walletNotConnected",
       };
       return {
         state,
@@ -340,7 +359,15 @@ export default {
         type: "verification-required",
       });
     },
-    exchangeToken() {},
+    async metamaskNotInstalled() {
+      await this.$store.commit("setModal", {
+        show: true,
+        type: "checkout-metamask",
+      });
+    },
+    async exchangeToken() {
+      await this.$router.push("/exchange");
+    },
 
     timerFinished() {
       this.$router.app.refresh();
@@ -349,6 +376,13 @@ export default {
       await this.$store.commit("setModal", {
         show: true,
         type: "checkout",
+        data: this.nft,
+      });
+    },
+    async walletNotConnected() {
+      await this.$store.commit("setModal", {
+        show: true,
+        type: "checkout-wallet",
         data: this.nft,
       });
     },

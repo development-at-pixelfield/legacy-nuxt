@@ -3,15 +3,19 @@
     <h1 class="header-big mt-0 mb-24">{{ $t("auth.login") }}</h1>
     <div class="form-group mb-24">
       <Input
+        :id="'user-email'"
+        ref="userEmail"
         :type="'email'"
         :model.sync="email"
         :label="$t('auth.email')"
         :error="$v.email"
         :rules="rules.email"
         :is-submit="isSubmit"
+        :disabled-state="disabled"
       />
 
       <Input
+        :id="'user-password'"
         :type="inputTypePassword"
         :model.sync="password"
         :label="$t('auth.password')"
@@ -20,6 +24,7 @@
         :error="$v.password"
         :rules="rules.password"
         :is-submit="isSubmit"
+        :disabled-state="disabled"
         @icon-click="iconClick('password')"
       />
 
@@ -82,6 +87,7 @@ export default {
       isSubmit: false,
       email: "",
       password: "",
+      disabled: true,
       rules: {
         email: [
           { name: "required", text: this.$t("validations.notEmpty") },
@@ -102,6 +108,11 @@ export default {
     redirectRoute() {
       return this.$route.query.back ?? "/profile";
     },
+  },
+  mounted() {
+    setTimeout(() => {
+      this.disabled = false;
+    }, 100);
   },
   methods: {
     async beforeUpdate() {

@@ -29,7 +29,7 @@
 }
 
 .buying-header {
-  font-size: 16px;
+  color: $c-white;
 }
 
 .icon-button {
@@ -43,6 +43,23 @@
   margin-bottom: 16px;
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: $break-xs) {
+    flex-direction: column;
+  }
+
+  button{
+    width: 100%;
+  }
+
+  .first-btn{
+    margin-right: 16px;
+
+    @media (max-width: $break-xs) {
+      margin-right: 0;
+      margin-bottom: 16px;
+    }
+  }
 }
 
 .current-balance {
@@ -59,3 +76,8 @@
     color: #1DD1A1;
   }
 }
+.loading-container {
+  display: flex;
+  justify-content: center;
+}
+

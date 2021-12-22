@@ -19,6 +19,10 @@
       overflow: hidden;
       display: flex;
       cursor: pointer;
+      &.view-wallet {
+        border: none;
+        border-radius: 0;
+      }
 
       img{
         width: 100%;
@@ -36,7 +40,23 @@
           background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), #301C3F;
         }
       }
+      &-state {
+        position: absolute;
+        left: -19px;
+        width: 8px;
+        height: 8px;
+        display: inline-flex;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        background:$c-connected;
+        border-radius: 50%;
+        &.view-offline {
+          background: $c-not-connected;
+        }
+      }
     }
+
 
     .red-circle{
       width: 8px;
@@ -126,6 +146,90 @@
           justify-content: center;
           border-radius: 50%;
         }
+      }
+
+      .custom-li{
+
+        .img-block{
+          width: auto;
+          display: inline-flex;
+        }
+      }
+    }
+  }
+  .dropdown-wallet{
+    position: absolute;
+    top: 30px;
+    left: -265px;
+    min-width: 296px;
+    background: #1D1126;
+    border-radius: 3px;
+    //padding: 8px 16px;
+    padding: 16px 16px 20px;
+    z-index: 2;
+    color: white;
+    @media (max-width: $break-sms) {
+      left: auto;
+      right: -63px;
+      top: 40px;
+      width: 100vw;
+      overflow-y: auto;
+      height: calc(100vh - 80px);
+    }
+    &-close {
+      display: none;
+      @media (max-width: $break-sms) {
+        right: 16px;
+        top: 12px;
+        font-size: 0;
+        position: absolute;
+        display: block;
+      }
+    }
+    &-connect {
+      border: 1px solid $c-greyscale-100;
+      padding: 20px 22px;
+      display: flex;
+      align-items: center;
+      &.view-active {
+        padding: 12px;
+      }
+      &-state {
+        &-circle {
+          width: 8px;
+          height: 8px;
+          display: inline-flex;
+          background:$c-connected;
+          border-radius: 50%;
+        }
+      }
+      &-text {
+        color: $c-greyscale-20;
+        padding-left: 13px;
+        flex: 1;
+        &.view-link {
+          padding-left: 0;
+          * {
+            color: $c-link-lighter;
+          }
+        }
+        &.view-nopadding {
+          padding-left: 0;
+        }
+      }
+      &-button {
+        color: $c-connected;
+        &.view-disconnect {
+          color: $c-not-connected;
+        }
+        &.view-icon {
+          font-size: 0;
+        }
+      }
+      &-info {
+        padding: 24px;
+        text-align: center;
+        background: $c-greyscale-100;
       }
     }
   }

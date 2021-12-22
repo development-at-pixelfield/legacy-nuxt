@@ -2,44 +2,107 @@
   <div class="form-container full-h">
     <h1 class="header-title">{{ $t("settings.settings") }}</h1>
     <div class="content">
-      <div v-if="showVerifyEmail" class="form-group mb-24">
+      <div v-if="showVerifyEmail" class="verification form-group mb-24">
+        <div class="info-block mb-24">
+          <div class="img-block">
+            <img src="~/assets/img/icons/shield.png" alt="verify-icon" />
+          </div>
+
+          <div class="ml-8">
+            <p class="mt-0 mb-8 text-m-bold">
+              {{ $t("settings.verifyIdentity") }}
+            </p>
+            <p class="mtb text-m">{{ $t("settings.verifyIdentityDesc") }}</p>
+          </div>
+        </div>
+
         <div class="header-row mb-16">
           <p class="mtb text-m-bold">
             {{ $t("settings.basicVerification") }}
           </p>
           <span class="text-s">2 {{ $t("settings.minutes") }}</span>
         </div>
-        <SettingItem :type="'action'">
+
+        <SettingItem
+          :type="'action'"
+          :status="isEmailVerified"
+          :class="{ 'status-success': isEmailVerified }"
+        >
           <img
             slot="icon"
-            src="~/assets/img/icons/warning-circle.svg"
+            :src="
+              isEmailVerified
+                ? require('assets/img/icons/overview-status-success.svg')
+                : require('assets/img/icons/overview-status-normal.svg')
+            "
             alt="icon"
           />
-          <p slot="sub-title" class="text-m-bold mtb">
+          <p
+            slot="sub-title"
+            class="text-m-bold mtb"
+            :class="{ 'success-text': isEmailVerified }"
+          >
             {{ $t("settings.verifyEmail") }}
           </p>
-          <p
-            slot="action"
-            class="action-text text-m mtb subtitle"
-            @click="resendEmail"
-          >
-            {{ $t("settings.resend") }}
-          </p>
+          <template slot="action">
+            <span v-if="isEmailVerified">
+              <img src="~/assets/img/icons/success-mark.svg" alt="mark" />
+            </span>
+            <p
+              v-else
+              class="action-text text-m mtb subtitle"
+              @click="resendEmail"
+            >
+              {{ $t("settings.resend") }}
+            </p>
+          </template>
         </SettingItem>
-      </div>
-      <div v-else-if="showVerificationInProgress">
-        <SettingVerificationItem />
-      </div>
-      <div v-else>
-        <SettingItem :type="'card'">
+
+        <div class="header-row mb-8 mt-24">
+          <p class="mtb text-m-bold">
+            {{ $t("settings.advancedVerification") }}
+          </p>
+          <span class="text-s">2 {{ $t("settings.minutes") }}</span>
+        </div>
+        <p class="mt-0 mb-16 text-m no-color-link">
+          {{ $t("settings.verifyDesc") }}
+        </p>
+
+        <SettingItem
+          :type="'action'"
+          :status="status"
+          :class="{ [`${status}-bg`]: true }"
+        >
           <img
             slot="icon"
-            src="~/assets/img/icons/green-checkbox-cirlce.svg"
+            :src="require(`assets/img/icons/status/${status}.svg`)"
             alt="icon"
           />
-          <p slot="sub-title" class="text-m mtb">
-            {{ $t("settings.emailVerified") }}
+          <p
+            slot="sub-title"
+            class="text-m-bold mtb"
+            :class="{ [`${status}-text`]: true }"
+          >
+            {{ label }}
+            <span
+              v-if="status === 'warning'"
+              class="text-m warning-info"
+              @click="showInfoModal"
+              >{{ $t("settings.warningText") }}</span
+            >
           </p>
+          <template slot="action">
+            <span v-if="status === 'success'">
+              <img src="~/assets/img/icons/success-mark.svg" alt="mark" />
+            </span>
+            <p
+              v-else-if="status === 'normal'"
+              class="action-text text-m mtb subtitle"
+              @click="verifyIdentity"
+            >
+              {{ $t("settings.verify") }}
+            </p>
+          </template>
         </SettingItem>
       </div>
 
@@ -55,6 +118,16 @@
           :label="$t('auth.email')"
           :error="$v.email"
           :rules="rules.email"
+          :is-submit="isSubmit"
+        />
+
+        <Input
+          class="mb-16"
+          :type="'text'"
+          :model.sync="username"
+          :label="$t('auth.username')"
+          :error="$v.username"
+          :rules="rules.username"
           :is-submit="isSubmit"
         />
 
@@ -103,13 +176,13 @@
 </template>
 
 <script>
-import { email, required } from "vuelidate/lib/validators";
+import { email, minLength, required } from "vuelidate/lib/validators";
 import Input from "../../components/ui/Input";
 import SettingItem from "../../components/settings/SettingItem";
 import Checkbox from "../../components/ui/Checkbox";
 import Button from "../../components/ui/Button";
 import { catchErrors } from "../../utils/catchErrors";
-import SettingVerificationItem from "~/components/settings/SettingVerificationItem.vue";
+// import SettingVerificationItem from "~/components/settings/SettingVerificationItem.vue";
 export default {
   name: "Index",
   components: {
@@ -117,7 +190,7 @@ export default {
     SettingItem,
     Checkbox,
     Button,
-    SettingVerificationItem,
+    // SettingVerificationItem,
   },
   layout: "auth",
   middleware: "auth",
@@ -129,11 +202,16 @@ export default {
         return email.includes("@");
       },
     },
+    username: {
+      minLength: minLength(5),
+    },
   },
   data() {
     return {
+      status: "normal",
       isSubmit: false,
       email: "",
+      username: "",
       showAlerts: false,
       rules: {
         email: [
@@ -147,11 +225,30 @@ export default {
             text: this.$t("validations.addEmail"),
           },
         ],
+        username: [
+          {
+            name: "minLength",
+            text: this.$t("validations.usernameLength"),
+          },
+        ],
       },
     };
   },
 
   computed: {
+    isEmailVerified() {
+      return !this.$auth.user.is_email_verified;
+    },
+
+    label() {
+      if (this.status === "progress")
+        return this.$t("settings.verifyOnProgress");
+
+      if (this.status === "warning") return this.$t("settings.verifyWarning");
+
+      return this.$t("settings.verify");
+    },
+
     showVerificationInProgress() {
       return (
         this.$auth.user.verification_in_progress &&
@@ -168,6 +265,7 @@ export default {
 
   created() {
     this.email = this.$auth.user.email;
+    this.username = this.$auth.user.username || "";
     this.showAlerts = this.$auth.user.nft_notifications;
   },
 
@@ -180,10 +278,15 @@ export default {
     async updateChanges() {
       await this.beforeUpdate();
       const isEmailChanged = this.email !== this.$auth.user.email;
+      const isUsernameChanged = this.username !== this.$auth.user.username;
       const isNftNotififcationsChanged =
         this.showAlerts !== this.$auth.user.nft_notifications;
 
-      if (!isEmailChanged && !isNftNotififcationsChanged) {
+      if (
+        !isEmailChanged &&
+        !isNftNotififcationsChanged &&
+        !isUsernameChanged
+      ) {
         await this.$store.commit("setSnackbar", {
           show: true,
           message: this.$t("snackbar.noSettingsChanged"),
@@ -196,6 +299,7 @@ export default {
           const data = {
             nft_notifications: this.showAlerts,
             email: this.email,
+            username: this.username,
           };
           if (this.email !== this.$auth.user.email) {
             data.email = this.email;
@@ -219,6 +323,10 @@ export default {
       }
     },
 
+    verifyIdentity() {
+      this.$router.push("/settings/advanced-verification");
+    },
+
     async resendEmail() {
       try {
         await this.$store.dispatch("user/resendVerificationEmail");
@@ -235,6 +343,16 @@ export default {
           color: "error",
         });
       }
+    },
+
+    showInfoModal() {
+      this.$store.commit("setModal", {
+        show: true,
+        type: "info-verification",
+        data: {
+          reason: "Reason",
+        },
+      });
     },
 
     openModal() {

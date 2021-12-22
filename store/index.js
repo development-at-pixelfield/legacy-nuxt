@@ -17,6 +17,8 @@ export const defaultValues = () => ({
   query: {},
   eth: null,
   ethPrice: null,
+  hasWallet: false,
+  walletAccount: null,
 });
 
 export const state = defaultValues;
@@ -30,6 +32,12 @@ export const mutations = {
   },
   setQuery(state, payload) {
     state.query = payload;
+  },
+  setWallet(state, payload) {
+    state.hasWallet = payload;
+  },
+  setWalletAccount(state, payload) {
+    state.walletAccount = payload;
   },
   setEthPrice(state, amount) {
     state.ethPrice = amount;
@@ -49,6 +57,8 @@ export const getters = {
   modal: (state) => state.modal,
   query: (state) => state.query,
   ethPrice: (state) => state.ethPrice,
+  hasWallet: (state) => state.hasWallet,
+  walletAccount: (state) => state.walletAccount,
 };
 
 const createStore = () =>
