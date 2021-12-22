@@ -1,22 +1,18 @@
 <template>
-  <ScaffoldModal
-    :heading="$t('nft_modal.buyCardHeader')"
-    :desc="$t('nft_modal.buyCardDesc')"
-    @close="close()"
-  >
+  <ScaffoldModal :heading="$t('nft_modal.featuresHeader')" @close="close()">
     <div class="verification-container">
-      <img class="image" src="~/assets/img/icons/pay-card.png" />
+      <img class="image img-width" src="~/assets/img/gift-list.png" />
       <div class="verification-container_textbox">
         <div class="verification-container_textbox_title">
-          {{ $t("nft_modal.howFund") }}
+          {{ $t("nft_modal.collectTitle") }}
         </div>
         <div class="verification-container_textbox_desc text-m-bold">
-          {{ $t("nft_modal.howFundDesc") }}
+          {{ $t("nft_modal.collectDesc") }}
         </div>
         <Button
           :size="'full'"
           :color="'c-white'"
-          :label="$t('nft_modal.learnMore')"
+          :label="$t('nft_modal.collectBtn')"
           @on-click="handle('learn-more')"
         />
       </div>
@@ -29,31 +25,17 @@ import Button from "../../ui/Button";
 import ScaffoldModal from "~/components/modals/nft/ScaffoldModal.vue";
 
 export default {
-  name: "PayCard",
+  name: "UnlockedFeatures",
   components: {
     Button,
     ScaffoldModal,
   },
-  data() {
-    return {
-      nft: this.$store.getters.modal.data,
-    };
-  },
   methods: {
     handle(emit) {
-      this.$router.push("/help");
       this.$emit("close");
     },
-    async close() {
-      const nft = this.nft;
+    close() {
       this.$emit("close");
-      if (nft) {
-        await this.$store.commit("setModal", {
-          show: true,
-          type: "checkout",
-          data: nft,
-        });
-      }
     },
   },
 };

@@ -38,7 +38,7 @@
                   alt="icon"
                 />
               </li>
-              <li class="user-tag">
+              <li class="user-tag" @click="$router.push('/galactic-miles')">
                 <img
                   :src="require(`assets/img/gift.svg`)"
                   class="user-tag-gift"
@@ -134,6 +134,32 @@
             />
           </div>
         </div>
+        <div class="user-action-block view-wallet">
+          <div class="user-action-block-icon">
+            <img :src="require(`assets/img/gift.png`)" alt="icon" />
+          </div>
+          <div class="user-action-block-text">
+            <p class="mt-0 mb-4 header-title">
+              {{ $t("profile.giftTitle") }}
+            </p>
+            <p class="mtb text-m-bold">
+              {{ $t("profile.giftDesc1") }}
+            </p>
+            <p class="mtb text-m-bold">
+              {{ $t("profile.giftDesc2") }}
+            </p>
+          </div>
+          <div class="user-action-block-button">
+            <Button
+              class="primary-btn"
+              :background="'primary'"
+              :size="'medium'"
+              :color="'c-white'"
+              :label="$t('nft_modal.learnMore')"
+              @on-click="openModal"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -192,6 +218,13 @@ export default {
     }
   },
   methods: {
+    openModal() {
+      this.$store.commit("setModal", {
+        show: true,
+        type: "unlocked-features",
+      });
+    },
+
     openWallet() {
       this.$nuxt.$emit("openWallet");
       window.scrollTo(0, 0);

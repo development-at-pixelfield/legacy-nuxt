@@ -30,6 +30,14 @@
           @close="close"
         ></PurchaseModal>
         <PayCard v-if="modal.type === 'pay-card'" @close="close"></PayCard>
+        <UnlockedFeatures
+          v-if="modal.type === 'unlocked-features'"
+          @close="close"
+        ></UnlockedFeatures>
+        <GalacticMiles
+          v-if="modal.type === 'galactic-miles'"
+          @close="close"
+        ></GalacticMiles>
       </div>
     </div>
   </transition>
@@ -46,9 +54,13 @@ import PurchaseModal from "./nft/PurchaseModal";
 import PayCard from "./nft/PayCard";
 import VerifyId from "./nft/VerifyId";
 import InfoVerification from "./nft/InfoVerification";
+import UnlockedFeatures from "./nft/UnlockedFeatures";
+import GalacticMiles from "./nft/GalacticMiles";
 export default {
   name: "Modals",
   components: {
+    GalacticMiles,
+    UnlockedFeatures,
     DeleteAccount,
     StarInfo,
     VerifyId,

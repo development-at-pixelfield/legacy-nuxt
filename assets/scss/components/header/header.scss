@@ -15,15 +15,11 @@ header{
       margin: 0 auto !important;
     }
     @media (max-width: $break-lgs){
+      width: 100%;
       padding-left: 60px;
       padding-right: 60px;
     }
     @media (max-width: $break-md) {
-      width: 100%;
-      padding-left: 100px;
-      padding-right: 100px;
-    }
-    @media (max-width: $break-smsm) {
       padding-left: 32px;
       padding-right: 32px;
     }
@@ -63,10 +59,11 @@ header{
       position: relative;
       display: flex;
       align-items: center;
-      justify-content: right;
+      justify-content: space-between;
       height: 100%;
     }
     .logo-block{
+      position: absolute;
       width: 100%;
       display: flex;
       justify-content: center;
@@ -99,6 +96,20 @@ header{
   }
 }
 
+.header-menu{
+  display: flex;
+  z-index: 1;
+
+  @media (max-width: $break-sms) {
+    display: none;
+  }
+
+  .ml-24{
+    width: 100px;
+    margin-left: 24px;
+  }
+}
+
 .marketplace-link {
   &:hover {
     cursor: pointer;
@@ -109,5 +120,6 @@ header{
   width: 100%;
   z-index: 2;
 }
+
 
 

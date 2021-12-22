@@ -104,15 +104,15 @@ export default {
       },
     };
   },
-  mounted() {
-    setTimeout(() => {
-      this.disabled = false;
-    }, 100);
-  },
   computed: {
     redirectRoute() {
       return this.$route.query.back ?? "/profile";
     },
+  },
+  mounted() {
+    setTimeout(() => {
+      this.disabled = false;
+    }, 100);
   },
   methods: {
     async beforeUpdate() {
