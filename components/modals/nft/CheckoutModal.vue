@@ -208,7 +208,6 @@ export default {
           });
         }
       } catch (error) {
-        console.log("NTF ERROR IN MODAL", error);
         await this.$store.commit("setSnackbar", {
           show: true,
           message:
@@ -223,20 +222,6 @@ export default {
           show: false,
           type: null,
         });
-        // if (error.code === 4001) {
-        //   await this.$store.commit("setSnackbar", {
-        //     show: true,
-        //     message: this.$t("snackbar.payments.cancelledByUser"),
-        //     color: "error",
-        //   });
-        // }
-        // if (error.code === 666) {
-        //   await this.$store.commit("setSnackbar", {
-        //     show: true,
-        //     message: this.$t("snackbar.payments.unsuportedNetwork"),
-        //     color: "error",
-        //   });
-        // }
       }
     },
   },
