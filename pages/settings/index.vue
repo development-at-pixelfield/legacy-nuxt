@@ -228,7 +228,7 @@ export default {
         username: [
           {
             name: "minLength",
-            text: "Must have more 5 characters",
+            text: this.$t("validations.usernameLength"),
           },
         ],
       },
