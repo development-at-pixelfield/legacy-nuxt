@@ -197,9 +197,7 @@ export default {
     convertEthereum() {
       return (price) => {
         return this.ethPrice
-          ? "est. $" +
-              Number((this.ethPrice * 100 * price) / 100).toFixed(2) +
-              "K"
+          ? "est. $" + Number((this.ethPrice * 100 * price) / 100).toFixed(2)
           : "...";
       };
     },

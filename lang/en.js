@@ -208,6 +208,7 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     validEmail: "Please enter valid email address",
     emailUsed: "This email has already been registered",
     selectOption: "You must select one of the options",
+    usernameLength: "Please enter at least 5 characters",
   },
 
   snackbar: {
