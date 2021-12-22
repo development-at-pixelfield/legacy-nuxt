@@ -8,7 +8,7 @@
         height: imgHeight,
       }"
     />
-    <div class="title" v-if="title.length > 0">
+    <div v-if="title.length > 0" class="title">
       {{ title }}
     </div>
   </div>
@@ -50,6 +50,7 @@ export default {
 <style lang="scss" scoped>
 .image-with-title {
   display: inline-block;
+  margin: 2px 10px;
 
   img {
     display: block;

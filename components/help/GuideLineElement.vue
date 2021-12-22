@@ -36,8 +36,8 @@ $number-size: 16px;
     display: flex;
     align-items: center;
     flex-direction: row;
-    flex-wrap: wrap;
     margin: ($paddings / 2) 0;
+    width: 100%;
 
     .number {
       padding: 0;
@@ -48,6 +48,7 @@ $number-size: 16px;
       line-height: $number-size;
       text-align: center;
       font-size: $number-size / 2;
+      min-width: $number-size;
     }
     .title-text {
       flex-grow: 1;
