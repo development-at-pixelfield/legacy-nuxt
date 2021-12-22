@@ -5,6 +5,10 @@ export default ({ app }, inject) => {
       errors: {
         client: "This plugin can be used only in client mode render",
         notEnabled: "Metamask is not installed",
+        badNetwork: "Selected network in Metamask is not supported",
+      },
+      errorCodes: {
+        badNetwork: -1,
       },
       methods: {
         requestAccounts: "eth_requestAccounts",
@@ -76,8 +80,13 @@ export default ({ app }, inject) => {
             contractJSON.abi,
             process.env.TRADE_CONTRACT_ADDRESS
           );
-          if (window.ethereum.networkVersion !== "5") {
-            const errorMessage = { code: 666, message: "bad network" };
+          if (
+            window.ethereum.networkVersion !== process.env.SUPPORTED_NETWORK
+          ) {
+            const errorMessage = {
+              code: this.errorCodes.badNetwork,
+              message: this.errors.badNetwork,
+            };
             throw errorMessage;
           }
           contract.defaultChain = "goerli";

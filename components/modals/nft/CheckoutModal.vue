@@ -213,7 +213,7 @@ export default {
           message:
             error.code === 4001
               ? this.$t("snackbar.payments.cancelledByUser")
-              : error.code === 666
+              : error.code === -1
               ? this.$t("snackbar.payments.unsuportedNetwork")
               : this.$t("snackbar.payments.basicError"),
           color: "error",
