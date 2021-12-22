@@ -169,12 +169,75 @@ export default {
       const method = this.nftData.last_offer.category;
       const tokenContract = this.nftData.nft_token.contract_address;
       const tokenId = this.nftData.nft_token.token_id;
-      return await this.metamask.payNFT(
-        tokenContract,
-        tokenId,
-        method,
-        lastOfferPrice
-      );
+      try {
+        await this.$store.commit("setModal", {
+          show: true,
+          type: "purchase",
+          data: {
+            nft: this.nftData,
+            status: "processing",
+          },
+        });
+        const result = await this.metamask.payNFT(
+          tokenContract,
+          tokenId,
+          method,
+          lastOfferPrice
+        );
+        if (result != null && result.transactionHash != null) {
+          this.$store.commit("setModal", {
+            show: false,
+            type: null,
+          });
+          setTimeout(async () => {
+            await this.$store.commit("setModal", {
+              show: true,
+              type: "purchase",
+              data: {
+                nft: this.nftData,
+                resultPayment: result,
+                status: "finished",
+              },
+            });
+          }, 100);
+        } else {
+          await this.$store.commit("setSnackbar", {
+            show: true,
+            message: this.$t("snackbar.payments.basicError"),
+            color: "error",
+          });
+        }
+      } catch (error) {
+        console.log("NTF ERROR IN MODAL", error);
+        await this.$store.commit("setSnackbar", {
+          show: true,
+          message:
+            error.code === 4001
+              ? this.$t("snackbar.payments.cancelledByUser")
+              : error.code === 666
+              ? this.$t("snackbar.payments.unsuportedNetwork")
+              : this.$t("snackbar.payments.basicError"),
+          color: "error",
+        });
+        this.$store.commit("setModal", {
+          show: false,
+          type: null,
+        });
+        // if (error.code === 4001) {
+        //   await this.$store.commit("setSnackbar", {
+        //     show: true,
+        //     message: this.$t("snackbar.payments.cancelledByUser"),
+        //     color: "error",
+        //   });
+        // }
+        // if (error.code === 666) {
+        //   await this.$store.commit("setSnackbar", {
+        //     show: true,
+        //     message: this.$t("snackbar.payments.unsuportedNetwork"),
+        //     color: "error",
+        //   });
+        // }
+      }
     },
   },
 };

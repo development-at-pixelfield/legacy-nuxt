@@ -227,6 +227,9 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
       loginRequired: "Before buying an NFT you must be logged in",
       notAbleToInitPayment:
         "Sorry, we are not able to init payment, please try again later",
+      cancelledByUser: "Transaction was canceled by user",
+      unsuportedNetwork: "Selected network in Metamask is not supported",
+      basicError: "Transaction can not be finished. Please refresh page.",
     },
   },
   nft_modal: {
