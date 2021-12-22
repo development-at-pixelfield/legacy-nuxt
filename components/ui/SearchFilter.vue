@@ -9,7 +9,7 @@
       :style="selectorStyles"
     >
       <p v-if="subHeader.length" class="text-small">{{ subHeader }}</p>
-      <div class="selector">
+      <div class="selector" @click="addFocus">
         <div class="label">
           <input
             ref="inputFilter"
@@ -148,12 +148,18 @@ export default {
     },
   },
   mounted() {
+    const val = this.name;
+    if (val) this.value = val;
+
     document.addEventListener("click", this.close);
   },
   beforeDestroy() {
     document.removeEventListener("click", this.close);
   },
   methods: {
+    addFocus() {
+      this.$refs.inputFilter.focus();
+    },
     removeValue() {
       this.value = "";
     },
