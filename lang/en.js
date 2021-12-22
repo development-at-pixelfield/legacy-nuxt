@@ -121,6 +121,9 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
       "Once you collect your first Galaxy NFT you will see it displayed right here.",
     collectionDesc2: "For now, why don’t you look around our marketplace?",
     collectionBtn: "Visit marketplace",
+    giftTitle: "Exclusive features awaiting!",
+    giftDesc1: `Collect Galactic Miles by buying NFTs through our platform.`,
+    giftDesc2: `Use earned points to access VIP features, such as community voting!`,
   },
   settings: {
     settings: "Settings",
@@ -165,6 +168,7 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
 
   marketplace: {
     marketplace: "Marketplace",
+    galacticMiles: "Galactic Miles",
     luminosity: "Luminosity",
     story: "Story",
     filter: "Filter",
@@ -189,6 +193,11 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     payCard: "Pay with card",
     buyNow: "Buy now",
     exchangeToken: "Exchange token",
+    galacticMilesSubTitle: `Collect Galactic Miles by buying NFTs through our platform. We will gift you 1 Galactic Mile when you buy a new NFT through our Marketplace. Use earned points to interact with VIP features. More coming soon!`,
+    openMap: "Open roadmap",
+    voteTitle: "Vote for next features!",
+    voteDesc:
+      "Vote for your favourite features with your Galactic Miles points. We regularly update the roadmap and add new suggestions.",
   },
 
   validations: {
@@ -199,6 +208,7 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     validEmail: "Please enter valid email address",
     emailUsed: "This email has already been registered",
     selectOption: "You must select one of the options",
+    usernameLength: "Please enter at least 5 characters",
   },
 
   snackbar: {
@@ -271,7 +281,25 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     howFund: "Learn how to fund your wallet",
     howFundDesc: `We created a small guide that will help you to fund
 your MetaMask wallet with ethereum. `,
+    featuresHeader: "Features unlocked!",
+    collectTitle: "You collected new Galactic Miles!",
+    collectDesc: `We want to gift you some sweet Galactic Miles for buying a  new NFT collectable through our platform.
+Use earned points to access VIP features, such as community voting! More features coming up ;)`,
+    collectBtn: "Access exclusive features",
+    galacticHeader: "Collect Galactic Miles",
+    galacticTitle: "Exclusive features awaiting!",
+    galacticDesc: `Collect Galactic Miles by buying NFTs through our marketplace.
+Use earned points to access VIP features!`,
+    galacticBtn: "Visit marketplace",
   },
+
+  roadmap: {
+    roadmap: "Roadmap",
+    roadmapDesc:
+      "Vote for your favourite features with your Galactic Miles (GM) points. We regularly update the roadmap and add new suggestions.",
+    votes: "Votes",
+  },
+
   modals: {
     modalClose: "No, go back :)",
     deleteAccount: "Delete account",

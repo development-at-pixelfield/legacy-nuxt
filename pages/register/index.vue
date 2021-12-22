@@ -8,6 +8,7 @@
         :label="$t('auth.username')"
         :error="$v.username"
         :rules="rules.username"
+        :custom-error="customUsernameError"
         :is-submit="isSubmit"
       />
 
@@ -128,6 +129,7 @@ export default {
       isSubmit: false,
       checkError: "",
       customEmailErrors: {},
+      customUsernameError: {},
       rules: {
         email: [
           { name: "required", text: this.$t("validations.notEmpty") },
@@ -144,7 +146,7 @@ export default {
           { name: "required", text: this.$t("validations.notEmpty") },
           {
             name: "minLength",
-            text: "Must have more 5 characters",
+            text: this.$t("validations.usernameLength"),
           },
         ],
         password: [{ name: "required", text: this.$t("validations.notEmpty") }],
@@ -215,12 +217,18 @@ export default {
           await this.$router.push("/profile");
         } catch (e) {
           if (e.response.data.detail === "User is already regsitered") {
-            this.customEmailErrors = {
+            return (this.customEmailErrors = {
               errors: [`This email is already registered`],
               type: "object",
-            };
-            return;
+            });
           }
+          if (e.response.data.detail === "User is already regsitered") {
+            return (this.customEmailErrors = {
+              errors: [`This username is already exists`],
+              type: "object",
+            });
+          }
+
           await this.$store.commit("setSnackbar", {
             show: true,
             message: catchErrors(e),

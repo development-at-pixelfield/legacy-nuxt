@@ -1,12 +1,13 @@
 <template>
   <div class="navigation">
     <Icon
+      v-if="showBack"
       src="arrow-left.svg"
       size="big"
-      class="pointer"
+      class="pointer mr-8"
       @on-click="back"
     ></Icon>
-    <span class="text-m-bold ml-8">{{ title }}</span>
+    <span class="text-m-bold">{{ title }}</span>
   </div>
 </template>
 
@@ -29,6 +30,10 @@ export default {
     withQuery: {
       type: Boolean,
       default: false,
+    },
+    showBack: {
+      type: Boolean,
+      default: true,
     },
   },
   methods: {

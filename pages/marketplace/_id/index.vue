@@ -258,7 +258,7 @@ export default {
   computed: {
     convertEthereum() {
       return (price) => {
-        return "est. $" + Number(this.ethPrice * price).toFixed(3) + "K";
+        return "est. $" + Number(this.ethPrice * price).toFixed(2);
       };
     },
     transactionsListLink() {

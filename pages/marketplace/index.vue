@@ -197,9 +197,7 @@ export default {
     convertEthereum() {
       return (price) => {
         return this.ethPrice
-          ? "est. $" +
-              Number((this.ethPrice * 100 * price) / 100).toFixed(2) +
-              "K"
+          ? "est. $" + Number((this.ethPrice * 100 * price) / 100).toFixed(2)
           : "...";
       };
     },
@@ -244,6 +242,7 @@ export default {
     setDefaultWatch() {
       this.$watch("filter.ordering", (val, newVal) => {
         if (val && val !== newVal) {
+          this.filter.page = 1;
           const query = { ...this.filter };
           this.setQuery(query);
         }

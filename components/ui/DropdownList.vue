@@ -10,6 +10,32 @@
       <span v-if="hasNotifications" class="red-circle"></span>
     </div>
     <ul v-if="show" class="dropdown-list" :style="style">
+      <li v-if="miles">
+        <div
+          class="container-li custom-li"
+          @click="$router.push('/galactic-miles')"
+        >
+          <div class="left-side">
+            <span class="img-block">
+              <img src="~/assets/img/gift-box.png" alt="gift-box" />
+            </span>
+            <div class="ml-8">
+              <p class="mtb text-s-bold no-color-link">
+                {{ $t("marketplace.galacticMiles") }}
+              </p>
+              <p class="mtb text-m-bold no-color-link">{{ miles }}</p>
+            </div>
+          </div>
+          <div class="right-side">
+            <img
+              :src="require(`assets/img/icons/caret-right.svg`)"
+              class="user-tag-icon"
+              alt="icon"
+            />
+          </div>
+        </div>
+      </li>
+
       <li v-for="(item, index) in items" :key="index">
         <div
           class="container-li"
@@ -55,6 +81,11 @@ export default {
       type: Number,
       required: false,
       default: null,
+    },
+    miles: {
+      type: [Number, String],
+      required: false,
+      default: 0,
     },
     top: {
       type: String,
