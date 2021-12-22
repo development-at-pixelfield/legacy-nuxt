@@ -29,7 +29,7 @@ import { functions } from "../../../utils";
 import Icon from "../../ui/Icon";
 
 const filterDefaultVars = {
-  name: "",
+  search: "",
   luminosity__in: [],
   quality_level__in: [],
   age__in: [],
@@ -53,7 +53,7 @@ export default {
   data() {
     return {
       list: [
-        { key: "name", value: "Name", form: "name" },
+        { key: "search", value: "Search", form: "search" },
         { key: "luminosity__in", value: "Luminosity", form: "luminosity" },
         { key: "quality_level__in", value: "Quality", form: "quality" },
         { key: "age__in", value: "Age", form: "age" },
@@ -116,11 +116,6 @@ export default {
       const sendItems = { ...this.filter };
       const key = item.id;
       sendItems[key] = filterDefaultVars[item.id];
-
-      if (item.id === "eth_price__gte") {
-        delete sendItems.eth_price__gte;
-        delete sendItems.eth_price__lte;
-      }
 
       this.$nuxt.$emit("applyFilters", sendItems);
     },
