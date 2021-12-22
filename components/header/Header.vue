@@ -2,9 +2,18 @@
   <header id="header" :class="{ fixed: $route.name === 'marketplace' }">
     <div class="content header-full-container">
       <div class="content-wrapper">
-        <nuxt-link to="/marketplace"
-          ><span class="text-m marketplace-link">Marketplace</span></nuxt-link
-        >
+        <div class="header-menu">
+          <nuxt-link to="/marketplace"
+            ><span class="text-m marketplace-link">{{
+              $t("marketplace.marketplace")
+            }}</span></nuxt-link
+          >
+          <nuxt-link to="/galactic-miles" class="ml-24"
+            ><span class="text-m marketplace-link">{{
+              $t("marketplace.galacticMiles")
+            }}</span></nuxt-link
+          >
+        </div>
         <div class="logo-block">
           <nuxt-link :to="logoLink"
             ><img
@@ -24,6 +33,7 @@
               :items="items"
               class="profile-dropdown"
               :src="userAvatar"
+              :miles="4"
               @action="actionHandler"
             />
           </span>
@@ -46,13 +56,16 @@ export default {
   mixins: [metamask],
   computed: {
     logoLink() {
-      return this.$auth.user ? "/profile" : "/landing";
+      return this.$auth.loggedIn && this.$auth.user ? "/profile" : "/landing";
     },
     userAvatar() {
-      return this.$auth.user.avatar ?? "";
+      if (this.$auth.loggedIn && this.$auth.user.avatar)
+        return this.$auth.user.avatar;
+
+      return "";
     },
     count() {
-      return !this.$auth.user.is_email_verified ? 1 : 0;
+      return this.$auth.loggedIn && !this.$auth.user.is_email_verified ? 1 : 0;
     },
     items() {
       return [
