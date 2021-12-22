@@ -1,19 +1,21 @@
 <template>
   <div class="main-container">
     <main>
-      <h2>
-        <nuxt-link to="/help" class="flex">
-          <img src="~/assets/img/icons/arrow-left.svg" alt="<-" />
-          <span>{{ $t("helpPage.title") }}</span>
-        </nuxt-link>
-      </h2>
-      <h1>{{ $t("helpPage.buyEth.title") }}</h1>
-      <p>{{ $t("helpPage.buyEth.p1") }}</p>
-      <p>{{ $t("helpPage.buyEth.p2") }}</p>
-      <br />
+      <Navigation
+        :title="$t('helpPage.title')"
+        :custom-link="'/help'"
+        class="nav"
+      />
 
-      <p class="bold">{{ $t("helpPage.buyEth.p3") }}</p>
-      <p>{{ $t("helpPage.buyEth.p4") }}</p>
+      <h1 class="header-big-l mb-16 mt-0 header-new header-mobile">
+        {{ $t("helpPage.buyEth.title") }}
+      </h1>
+      <p class="text-m mtb sub-title">{{ $t("helpPage.buyEth.p1") }}</p>
+      <p class="text-m mt-0 mb-48 sub-title">{{ $t("helpPage.buyEth.p2") }}</p>
+
+      <p class="text-m-bold mt-0 mb-8">{{ $t("helpPage.buyEth.p3") }}</p>
+      <p class="text-m mt-0 mb-16">{{ $t("helpPage.buyEth.p4") }}</p>
+
       <SimpleDropdown>
         <template slot="title">
           <div>{{ $t("helpPage.buyEth.dropdown1.title") }}</div>
@@ -95,10 +97,10 @@
           </GuideLineElement>
         </div>
       </SimpleDropdown>
-      <br />
 
-      <p class="bold">{{ $t("helpPage.buyEth.p5") }}</p>
-      <p>{{ $t("helpPage.buyEth.p6") }}</p>
+      <p class="text-m-bold mt-40 mb-8">{{ $t("helpPage.buyEth.p5") }}</p>
+      <p class="text-m mt-0 mb-16">{{ $t("helpPage.buyEth.p6") }}</p>
+
       <SimpleDropdown>
         <template slot="title">
           <div>{{ $t("helpPage.buyEth.dropdown2.title") }}</div>
@@ -175,17 +177,24 @@
 import SimpleDropdown from "../../../components/ui/SimpleDropdown.vue";
 import GuideLineElement from "../../../components/help/GuideLineElement.vue";
 import ImageWithTitle from "../../../components/help/ImageWithTitle.vue";
+import Navigation from "../../../components/header/Navigation";
 
 export default {
   name: "BuyETH",
-  layout: "default",
-  components: { SimpleDropdown, GuideLineElement, ImageWithTitle },
+  components: {
+    SimpleDropdown,
+    GuideLineElement,
+    ImageWithTitle,
+    Navigation,
+  },
+  layout(context) {
+    if (context.$auth.$state.user) {
+      return "auth";
+    }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "~/assets/scss/pages/help";
-* {
-  color: white;
-}
 </style>

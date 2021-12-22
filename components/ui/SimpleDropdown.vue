@@ -38,15 +38,16 @@ export default {
 <style lang="scss" scoped>
 $animation-time: 1s;
 $animation-function: ease-out;
-$paddings: 10px;
+$paddings: 12px;
 $caret-size: 16px;
 
 .simple-dropdown {
   .title {
     position: relative;
     border: 1px solid #261632;
-    margin-bottom: 5px;
+    margin-bottom: 16px;
     padding: $paddings;
+    cursor: pointer;
 
     .arrow {
       // transition: transform $animation-time $animation-function;

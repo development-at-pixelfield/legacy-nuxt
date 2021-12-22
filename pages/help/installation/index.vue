@@ -1,18 +1,21 @@
 <template>
-  <div class="main-container">
+  <div class="help-panel main-container">
     <main>
-      <h2>
-        <nuxt-link to="/help" class="flex">
-          <img src="~/assets/img/icons/arrow-left.svg" alt="<-" />
-          <span>{{ $t("helpPage.title") }}</span>
-        </nuxt-link>
-      </h2>
-      <h1>{{ $t("helpPage.install.title") }}</h1>
-      <p class="bold">{{ $t("helpPage.install.p1") }}</p>
-      <p>{{ $t("helpPage.install.p2") }}</p>
+      <Navigation
+        :title="$t('helpPage.title')"
+        :custom-link="'/help'"
+        class="nav"
+      />
+
+      <h1 class="header-big-l mb-40 mt-0 header-new">
+        {{ $t("helpPage.install.title") }}
+      </h1>
+      <p class="text-m-bold mt-0 mb-8">{{ $t("helpPage.install.p1") }}</p>
+      <p class="text-m mt-0 mb-16">{{ $t("helpPage.install.p2") }}</p>
+
       <SimpleDropdown>
         <template slot="title">
-          <div>{{ $t("helpPage.install.dropdown1.title") }}</div>
+          <div class="text-m">{{ $t("helpPage.install.dropdown1.title") }}</div>
         </template>
         <div>
           <GuideLineElement number="1">
@@ -201,10 +204,8 @@
         </div>
       </SimpleDropdown>
 
-      <br />
-
-      <p class="bold">{{ $t("helpPage.install.p3") }}</p>
-      <p>{{ $t("helpPage.install.p4") }}</p>
+      <p class="text-m-bold mt-40 mb-8">{{ $t("helpPage.install.p3") }}</p>
+      <p class="text-m mt-0 mb-16">{{ $t("helpPage.install.p4") }}</p>
 
       <SimpleDropdown>
         <template slot="title">
@@ -283,6 +284,7 @@
           </GuideLineElement>
         </div>
       </SimpleDropdown>
+
       <SimpleDropdown>
         <template slot="title">
           <div>{{ $t("helpPage.install.dropdown4.title") }}</div>
@@ -412,17 +414,23 @@
 import SimpleDropdown from "../../../components/ui/SimpleDropdown.vue";
 import GuideLineElement from "../../../components/help/GuideLineElement.vue";
 import ImageWithTitle from "../../../components/help/ImageWithTitle.vue";
-
+import Navigation from "../../../components/header/Navigation";
 export default {
   name: "Installation",
-  layout: "default",
-  components: { SimpleDropdown, GuideLineElement, ImageWithTitle },
+  components: {
+    SimpleDropdown,
+    GuideLineElement,
+    ImageWithTitle,
+    Navigation,
+  },
+  layout(context) {
+    if (context.$auth.$state.user) {
+      return "auth";
+    }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "~/assets/scss/pages/help";
-* {
-  color: white;
-}
 </style>
