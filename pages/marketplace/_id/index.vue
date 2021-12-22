@@ -269,6 +269,7 @@ export default {
       return this.$auth.user;
     },
     isEmailVerified() {
+      console.log(this.user);
       return this.user && this.user.is_email_verified;
     },
     isOwner() {
