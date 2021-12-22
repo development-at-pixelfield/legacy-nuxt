@@ -237,7 +237,7 @@ export default {
 
   computed: {
     isEmailVerified() {
-      return !this.$auth.user.is_email_verified;
+      return this.$auth.user.is_email_verified;
     },
 
     label() {
