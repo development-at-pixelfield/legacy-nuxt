@@ -331,5 +331,203 @@ Use earned points to access VIP features!`,
         "We created a guide that will help you to fund your MetaMask wallet with Ethereum.",
     },
     learnMore: "Learn more",
+
+    install: {
+      title: "How to install a MetaMask Wallet?",
+      p1: "Are you on your phone?",
+      p2: "Open to learn how to download and start using MetaMask app",
+      dropdown1: {
+        title: "Installing MetaMask app (2 min)",
+        step1: {
+          title:
+            'Go to the <a href="https://metamask.io/" class="link-c">MetaMask website</a> (https://metamask.io/) and tap "Download now". <br />Tap “Install MetaMask for iPhone” or “Install MetaMask for Android”',
+          img1Title: "MetaMask official website",
+          img2Title: "Install button for iOS",
+        },
+        step2: {
+          title:
+            "Download and install the app directly from AppStore or Play Store ",
+          img1Title: "AppStore (iOS)",
+        },
+        step3: {
+          title:
+            'The app is ready to use once it opens and you can see the welcome screen. You can now tap "Get started" button and continue to on-boarding and creating a wallet (next section).',
+          img1Title: "MetaMask welcome screen (iOS)",
+        },
+      },
+      dropdown2: {
+        title: "Creating a MetaMask wallet (5 min)",
+        step1: {
+          title:
+            'You can create a wallet right after installing the app. Tap "Get started" button in the on-boarding screen.',
+          img1Title: "MetaMask welcome screen (iOS)",
+          img2Title: "Setup wallet screen (iOS)",
+        },
+        step2: {
+          title:
+            'Read through MetaMask data policy, scroll and tap either "No Thanks" or "I Agree" to continue',
+          img1Title: "MetaMask data policy (iOS)",
+          img2Title: "MetaMask data policy (iOS)",
+        },
+        step3: {
+          title:
+            'Create a strong password and re-type it. Choose to Sign in with Touch ID (iOS). Agree to conditions and tap "Create” button',
+          img1Title: "Create password (iOS)",
+        },
+        step4: {
+          title:
+            'Secret Recovery Phrase is a string of 12 words that is a unique key to your wallet and funds. Never share your Secret Recovery Phrase. Watch the video to learn more about it and how to keep your account safe. Tap "Start" once you watch it.',
+          img1Title: "Secure your wallet video (iOS)",
+          p1: 'Read tips on securing your wallet and tap "Start" again.',
+          img2Title: "Secure your wallet tips (iOS)",
+        },
+        step5: {
+          title:
+            'Reveal you Secret Recovery Phrase and store it in a password manager, write it down or memorise the phrase. Once you have it stored, tap "Continue"',
+          p1: 'Confirm the sequence of your phrase by tapping on words in correct order. Tap "Confirm" to continue',
+          img1Title: "View Secret Recovery Phrase (iOS)",
+          img2Title: "Confirm Secret Recovery Phrase (iOS)",
+        },
+        step6: {
+          title:
+            'Well done! Your wallet is now protected and ready to be used. Tap "Done" to open your wallet.',
+          p1: "View your MetaMask Wallet in the app. To access Galaxy marketplace through your phone, you will be asked to sign into your MetaMask app and navigate through MetaMask browser to buy and sell (coming soon!) Galaxy NFTs.",
+          img1Title: "Confirmation (iOS)",
+          img2Title: "MetaMask wallet overview (iOS)",
+        },
+      },
+      p3: "Are you on your computer?",
+      p4: "Open to learn how to download and start using MetaMask Chrome Extension",
+      dropdown3: {
+        title: "Installing MetaMask extension (2 min)",
+        step1: {
+          title:
+            'Go to the <a href="https://metamask.io/" class="link-c">MetaMask website</a> (https://metamask.io/) and tap "Download now". <br />Tap “Install MetaMask for iPhone” or “Install MetaMask for Android”',
+          img1Title: "MeataMask official website",
+        },
+        step2: {
+          title: "Click on “Download now”",
+          img1Title: "Installation page",
+        },
+        step3: {
+          title: "Click on “Install MetaMask for Chrome”",
+          img1Title: "MetaMask extension page on Chrome web store ",
+        },
+        step4: {
+          title: 'In Google Chrome web store, click “Add to Chrome"',
+          img1Title: "MetaMask extension page on Chrome web store",
+        },
+      },
+      dropdown4: {
+        title: "Creating a MetaMask wallet (5 min)",
+        step1: {
+          title: "",
+          p1: "You can create a wallet right after installing the extension. Alternatively, you can also start the process by clicking on extension button in the right top corner of your browser. ",
+          p2: 'Click on "Get started" button in the welcome screen',
+          img1Title: "MetaMask welcome screen",
+        },
+        step2: {
+          title: 'Click on "Create a Wallet" option',
+          img1Title: "Setup wallet screen",
+        },
+        step3: {
+          title:
+            'Read through MetaMask data policy and click either "No Thanks" or "I Agree" to continue',
+          img1Title: "MetaMask data policy",
+        },
+        step4: {
+          title:
+            'Create a strong password and re-type it. Agree to conditions and click "Create button"',
+          img1Title: "Create password ",
+        },
+        step5: {
+          title:
+            'Secret Recovery Phrase is a string of 12 words that is a unique key to your wallet and funds. Never share your Secret Recovery Phrase. Learn more about it and how to keep your account safe in the video. Click "Next" once you watch it.',
+          img1Title: "Secure your wallet video ",
+        },
+        step6: {
+          title:
+            'Reveal you Secret Recovery Phrase and store it in a password manager, write it down or memorise the phrase. Once you have it stored, click "Next"',
+          img1Title: "View Secret Recovery Phrase ",
+        },
+        step7: {
+          title:
+            'Confirm the sequence of your phrase by clicking on words in correct order. Click "Confirm" to continue',
+          img1Title: "Confirm Secret Recovery Phrase",
+        },
+        step8: {
+          title:
+            'Well done! Your wallet is now protected and ready to be used. Read the tips and click "All Done"',
+          img1Title: "Confirmation",
+        },
+      },
+    },
+
+    buyEth: {
+      title: "How to buy ETH using MetaMask wallet?",
+      p1: "You can fund your wallet by buying ETH with ApplePay or credit card directly in your MetaMask account (both in mobile app and browser extension). ",
+      p2: "First you must make sure that you are logged into your MetaMask wallet associated with your Galaxy account through browser extension or mobile app.",
+      p3: "Are you on your phone?",
+      p4: "Open to learn how to buy Ethereum using MetaMask wallet app",
+      dropdown1: {
+        title: "Adding money to your MetaMask wallet",
+        step1: {
+          title:
+            'When signed into the app, you can add funds from the overview of your MetaMask account by tapping on "Buy" button or from the menu of MetaMask app by tapping on "Add funds" button.',
+          p1: '(If you tap on Add funds button in the menu continue to next step by tapping on "Buy ETH" underneath a QR code)',
+          img1Title: "Wallet view (iOS)",
+          img2Title: "Add funds from menu (iOS)",
+          img3Title: "Add funds - QR code (iOS)",
+        },
+        step2: {
+          title:
+            "Choose from one of the following options to deposit ETH and fund your wallet",
+          li1: "Buy ETH with Wyre",
+          li2: "Buy ETH with Transak",
+          img1Title: "Purchase method selection (iOS)",
+        },
+        step3: {
+          title:
+            "Pick your preferred option and follow the instructions to purchase ETH",
+          p1: "Remember to think about gas and other fees you should consider when buying cryptocurrencies. Remember to check if your country of residence approves the service you decided to use to buy ETH",
+          img1Title: "Purchase via Wyre (iOS)",
+          img2Title: "Purchase via Transak (iOS)",
+        },
+        step4: {
+          title:
+            "Once you complete the purchase you will be able to see your funds the overview of your wallet. <br />Now you can continue with purchase of your favourite Galaxy NFT!",
+        },
+      },
+      p5: "Are you on your computer?",
+      p6: "Open to learn how to buy Ethereum using MetaMask Chrome extension",
+      dropdown2: {
+        title: "Adding money to your MetaMask wallet",
+        step1: {
+          title:
+            'When signed in, click on "Buy" button in the overview of your MetaMask account. You can follow same instructions when accessing your account from MetaMask extension widget (top right of your browser).',
+          img1Title: "MetaMask wallet overview and extension",
+        },
+        step2: {
+          title:
+            "Choose from one of the following options to deposit ETH and fund your wallet",
+          li1: "Buy ETH with Wyre",
+          li2: "Buy ETH with Transak",
+          li3: "Directly Deposit ETH",
+          img1Title: "Purchase method selection",
+        },
+        step3: {
+          title:
+            'Pick your preferred option and follow the instructions to purchase ETH that will open in a new window or pop up for "Direct Deposit Ether"',
+          p1: "Remember to think about gas and other fees you should consider when buying cryptocurrencies",
+          p2: "Remember to check if your country of residence approves the service you decided to use to buy ETH",
+          img1Title: "Purchase through Wyre",
+          img2Title: "Purchase via Transak",
+        },
+        step4: {
+          title:
+            "Once you complete the purchase you will be able to see your funds the overview of your wallet<br />Now you can continue with purchase of your favourite Galaxy NFT!",
+        },
+      },
+    },
   },
 };
