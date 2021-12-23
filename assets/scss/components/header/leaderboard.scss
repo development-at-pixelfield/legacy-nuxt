@@ -15,9 +15,8 @@ $animationSpeed: 40s;
 	overflow:hidden;
 	position: relative;
 	width: 100%;
-  color: white;
-  border-bottom: 1px solid #301C3F;
-	
+	color: white;
+	border-bottom: 1px solid #301C3F;
 	
 	.leaderboard-track {
 		animation: scroll $animationSpeed linear infinite;
@@ -28,8 +27,15 @@ $animationSpeed: 40s;
 	.leaderboard-single {
 		line-height: 40px;
 		width: 220px;
-    &:first-child {
-      padding-left: 24px;
-    }
+		span {
+			display: block;
+			white-space: nowrap;
+			overflow: hidden;
+			padding-right: 5px;
+			text-overflow: ellipsis;
+		}
+		&:first-child {
+			padding-left: 24px;
+		}
 	}
 }

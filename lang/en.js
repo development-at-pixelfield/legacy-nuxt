@@ -124,6 +124,7 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     giftTitle: "Exclusive features awaiting!",
     giftDesc1: `Collect Galactic Miles by buying NFTs through our platform.`,
     giftDesc2: `Use earned points to access VIP features, such as community voting!`,
+    leaderboard: `Largest collections:`,
   },
   settings: {
     settings: "Settings",

@@ -36,6 +36,15 @@ export const actions = {
   getMyNfts(context, payload) {
     return this.$axios.$get(`/nfts/my/list/`);
   },
+  /**
+   *
+   * @param context
+   * @param payload {}
+   * @returns {Promise<AxiosResponse<any>>}
+   */
+  getLeaderboard(context, payload) {
+    return this.$axios.$get(`/nfts/current/leaderboard/`);
+  },
 
   /**
    *
