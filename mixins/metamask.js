@@ -51,7 +51,7 @@ export default {
         await this.setDisconnected();
         window
           .open(
-            `https://metamask.app.link/dapp/${process.env.FE_URL}/profile`,
+            `https://metamask.app.link/dapp/${window.location.host}/profile`,
             "_blank"
           )
           .focus();
