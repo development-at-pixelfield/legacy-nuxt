@@ -24,14 +24,21 @@
       </div>
     </div>
 
-    <div class="content">
-      <RoadmapItem :status="'new'" @add-count="addCount">
-        <span slot="count" class="header-title1 no-color-link">22</span>
-        <p slot="title" class="mt-0 mb-4 no-color-link text-m-bold">Title</p>
+    <div v-if="nfts.results && nfts.results.length" class="content">
+      <RoadmapItem
+        v-for="item in nfts.results"
+        :key="item.uid"
+        :status="item.status"
+        @add-count="addCount"
+      >
+        <span slot="count" class="header-title1 no-color-link">{{
+          item.votes
+        }}</span>
+        <p slot="title" class="mt-0 mb-4 no-color-link text-m-bold">
+          {{ item.title }}
+        </p>
         <p slot="description" class="mtb no-color-link text-m">
-          when an unknown printer took a galley of type and scrambled it to make
-          a type specimen book. It has survived not only five centuries, but
-          also the leap into electronic typesetting, remaining essentially
+          {{ item.description }}
         </p>
       </RoadmapItem>
 
@@ -54,6 +61,18 @@
           also the leap into electronic typesetting, remaining essentially
         </p>
       </RoadmapItem>
+      <div class="pagination-wrapper">
+        <Pagination
+          :list="nfts.results"
+          :total="nfts.count"
+          :page.sync="filter.page"
+          :page-number="filter.page"
+          :current-page="nfts.current"
+          :pages-count="nfts.pages_count"
+          :limit="filter.page_size || nfts.page_size"
+          @update:page="updatePage"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -61,18 +80,79 @@
 <script>
 import Navigation from "../../components/header/Navigation";
 import RoadmapItem from "../../components/marketplace/RoadmapItem";
+import Pagination from "../../components/marketplace/Pagination";
+import { functions } from "../../utils";
+import { catchErrors } from "../../utils/catchErrors";
+const filterDefaultVars = {
+  page: 1,
+  page_size: 1,
+};
+
 export default {
   name: "Index",
   components: {
     Navigation,
     RoadmapItem,
+    Pagination,
   },
   layout(context) {
     if (context.$auth.$state.user) {
       return "auth";
     }
   },
+  async asyncData({ store, route, error }) {
+    try {
+      const query = route.query;
+      const filter = { ...filterDefaultVars };
+      Object.keys(filter).forEach((key) => {
+        filter[key] = query[key] || filterDefaultVars[key];
+      });
+
+      const nfts = await store.dispatch("nfts/getRoadmap", filter);
+      return { nfts, filter };
+    } catch (e) {
+      const status = e.response.status;
+      if (status === 404) {
+        error({ statusCode: 404, message: "Not found" });
+      }
+    }
+  },
+  data() {
+    return {
+      count: 0,
+      nfts: {},
+    };
+  },
   methods: {
+    updatePage(val) {
+      const cleanObject = functions.cleanObject(this.$route.query);
+      this.filter.page = val;
+      cleanObject.page = val;
+      this.setQuery(cleanObject);
+    },
+    async setQuery(query) {
+      const cleanObject = await functions.cleanObject(query);
+      await this.fetchNfts(cleanObject);
+
+      delete cleanObject.page_size;
+      await this.$router.push({ query: cleanObject });
+
+      setTimeout(() => {
+        this.filterHeader = cleanObject;
+        this.filter = query;
+      }, 0);
+    },
+    async fetchNfts(query) {
+      try {
+        this.nfts = await this.$store.dispatch("nfts/getRoadmap", query);
+      } catch (e) {
+        await this.$store.commit("setSnackbar", {
+          show: true,
+          message: catchErrors(e),
+          color: "error",
+        });
+      }
+    },
     addCount() {
       const count = 0;
       if (!count) {

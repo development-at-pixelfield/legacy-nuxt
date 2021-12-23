@@ -18,6 +18,16 @@ export const actions = {
     return this.$axios.$get(url);
   },
 
+  getRoadmap(context, payload) {
+    payload.page = payload && payload.page ? +payload.page : 1;
+    payload.page_size = payload && payload.page_size ? +payload.page_size : 1;
+    payload = functions.arrayToStr(payload);
+    payload = functions.cleanObject(payload);
+    const queryString = functions.objectToQuery(payload);
+    const url = `/nfts/roadmap/features/?${queryString}`;
+    return this.$axios.$get(url);
+  },
+
   /**
    *
    * @param context
