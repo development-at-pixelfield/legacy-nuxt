@@ -66,7 +66,7 @@
             {{ item.name }} <br />
           </p>
           <p slot="profit" class="profit mtb text-m text-center">
-            {{ item.price_eth }}Ξ
+            {{ (+item.price_eth).toFixed(2) }}Ξ
           </p>
           <p slot="finance" class="finance mtb text-m-bold text-center">
             {{ convertEthereum(item.price_eth) }}

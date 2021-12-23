@@ -20,7 +20,7 @@
           <div class="left-side">
             <h1 class="mb-8 mt-0 detail-title">{{ nft.name }}</h1>
             <span class="header-title1"
-              >Current price: {{ (+currentPriceOrSoldPrice).toFixed(3) }}Ξ</span
+              >Current price: {{ (+currentPriceOrSoldPrice).toFixed(2) }}Ξ</span
             >
             <span class="header-title1 ml-16">{{
               convertEthereum(currentPriceOrSoldPrice)
@@ -234,7 +234,6 @@ export default {
   async asyncData({ app, store, params }) {
     try {
       const nft = await store.dispatch("nfts/getNftsById", { uid: params.id });
-      // console.log(nft);
       const ethPrice = (await store.dispatch("fetchEthPrice")).rate;
 
       let showAuction = false;
@@ -370,7 +369,11 @@ export default {
       });
     },
     async exchangeToken() {
-      await this.$router.push("/exchange");
+      const query = {
+        nft: this.nft.uid,
+      };
+
+      await this.$router.push({ path: "/exchange", query });
     },
 
     timerFinished() {

@@ -1,8 +1,8 @@
 <template>
   <div class="exchange-wrapper main-container help-panel">
     <Navigation
-      :title="$t('helpPage.title')"
-      :custom-link="'/marketplace'"
+      :title="label ? label : $t('helpPage.title')"
+      :custom-link="label ? `/marketplace/${$route.query.nft}` : '/help'"
       class="nav mb-4"
     />
 
@@ -65,10 +65,27 @@ export default {
   components: {
     Navigation,
   },
+
   layout(context) {
     if (context.$auth.$state.user) {
       return "auth";
     }
+  },
+  async asyncData({ store, route }) {
+    let label = "";
+    if (route.query.nft) {
+      const nft = await store.dispatch("nfts/getNftsById", {
+        uid: route.query.nft,
+      });
+      label = nft.name;
+    }
+
+    return { label };
+  },
+  data() {
+    return {
+      label: "",
+    };
   },
 };
 </script>

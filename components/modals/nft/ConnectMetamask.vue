@@ -1,8 +1,5 @@
 <template>
-  <ScaffoldModal
-    :heading="$t('nft_modal.installMetamask')"
-    @close="handle('close')"
-  >
+  <ScaffoldModal :heading="$t('nft_modal.installMetamask')" @close="close">
     <div class="verification-container">
       <img src="~/assets/img/icons/large-metamask-wallet-image.svg" />
       <div class="verification-container_textbox">
@@ -36,6 +33,9 @@ export default {
   methods: {
     handle(emit) {
       this.$router.push("/help");
+    },
+    close() {
+      this.$emit("close");
     },
   },
 };
