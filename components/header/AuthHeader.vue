@@ -136,7 +136,7 @@ export default {
 
   computed: {
     logoLink() {
-      return "/landing";
+      return "/";
     },
     userAvatar() {
       if (this.$auth.loggedIn && this.$auth.user.avatar)

@@ -40,6 +40,14 @@ export default {
     minutes: "Minutes",
     seconds: "Seconds",
     joinUs: "Join us on",
+    nftUniqueTitle: "What makes Galaxy NFTs unique?",
+    uniqueTitle1: "The NFTs value is backed by real diamonds",
+    uniqueDesc1: "Description text text text",
+    uniqueTitle2: "Commission system 2nd line",
+    uniqueDesc2: "Description text text text",
+    uniqueTitle3:
+      "Pre-purchase rights to unique and beautiful jewellery in metaverse",
+    uniqueDesc3: "Description text text text",
     orFollow: "or follow us on other platforms",
     discoverTitle:
       "Be the first one to wear luxury diamond assets in the metaverse.",
@@ -51,6 +59,7 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
       "to have a chance to become the first owner of our 3D NFT or to win luxury diamond jewelery.",
     name: "Name",
     signUp: "Join the community",
+    availableNow: "Available now",
     backTop: "BACK TO TOP",
     teamDesc: `Our team is based around the world.`,
     roadDesc: `Find out more about our plans by clicking on each star.`,
@@ -81,7 +90,7 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     starTitle7: "COLLAB WITH METAVERSES",
     starTitle8: "DUBAI EVENT",
     starTitle9: "HOLOGRAM",
-    becomeTesterTitle: "Get the latest info first, join the galaxy community",
+    becomeTesterTitle: "Explore our collections",
     textSecTitle:
       " A diamond company with more than 15 years experience has our backs.",
     textSecDesc1: `To give our project even more credibility, we are proud to announce
@@ -93,6 +102,8 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
           world diamond exchanges.`,
     textSecDesc2: `Diamonds are long-standing security for many investors, now, you can
           be the first to experience this in the NFT world with us.`,
+    blogTitle: "Read our blog to stay up to date with latest news",
+    readArticle: "Read article",
   },
 
   profile: {
@@ -171,6 +182,7 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     galacticMiles: "Galactic Miles",
     help: "Help",
     luminosity: "Luminosity",
+    copyright: "Copyright © 2022. Galaxy. All rights reserved.",
     story: "Story",
     filter: "Filter",
     clearAll: "Clear All",
