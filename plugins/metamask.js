@@ -5,6 +5,10 @@ export default ({ app }, inject) => {
       errors: {
         client: "This plugin can be used only in client mode render",
         notEnabled: "Metamask is not installed",
+        badNetwork: "Selected network in Metamask is not supported",
+      },
+      errorCodes: {
+        badNetwork: -1,
       },
       methods: {
         requestAccounts: "eth_requestAccounts",
@@ -68,35 +72,51 @@ export default ({ app }, inject) => {
         const contractJSON = require("./NftTrader.json");
         const userAccount = await this.selectedAccount();
         const currentPriceWei = this.fromEthToWei(currentPriceEther);
-        await window.web3.currentProvider.enable();
-        console.log(userAccount);
-        console.log(window.web3.currentProvider);
-        const contract = new this.web3.eth.Contract(
-          contractJSON.abi,
-          process.env.TRADE_CONTRACT_ADDRESS
-        );
-        contract.defaultChain = "goerli";
-        console.log(contract.defaultChain);
-        // console.log(contract.getProvider);
-        if (methodType === "timed") {
-          const result = await contract.methods
-            .timedPurchase(tokenContract, nftTokenId)
-            .send({ from: userAccount, value: currentPriceWei });
-          console.log(result);
+        try {
+          await window.web3.currentProvider.enable();
+          console.log(userAccount);
+          console.log(window.web3.currentProvider);
+          const contract = new this.web3.eth.Contract(
+            contractJSON.abi,
+            process.env.TRADE_CONTRACT_ADDRESS
+          );
+          if (
+            window.ethereum.networkVersion !== process.env.SUPPORTED_NETWORK
+          ) {
+            const errorMessage = {
+              code: this.errorCodes.badNetwork,
+              message: this.errors.badNetwork,
+            };
+            throw errorMessage;
+          }
+          contract.defaultChain = "goerli";
+          console.log(contract.defaultChain);
+          // console.log(contract.getProvider);
+          if (methodType === "timed") {
+            const result = await contract.methods
+              .timedPurchase(tokenContract, nftTokenId)
+              .send({ from: userAccount, value: currentPriceWei });
+            console.log(result);
+            return result;
+          }
+          if (methodType === "fixed") {
+            const result = await contract.methods
+              .constantPurchase(tokenContract, nftTokenId)
+              .send({ from: userAccount, value: currentPriceWei });
+            console.log(result);
+            return result;
+          }
+          // const contractInstance = this.web3.eth
+          //   .Contract(contractJSON.abi)
+          //   .at(tokenContract);
+          console.log(methodType);
+          console.log(contract);
+          console.log(contractJSON);
+          // https://ethereum.stackexchange.com/questions/25431/metamask-how-to-access-call-deployed-contracts-functions-using-metamask
+        } catch (error) {
+          console.log("NTF ERROR", error);
+          throw error;
         }
-        if (methodType === "fixed") {
-          const result = await contract.methods
-            .constantPurchase(tokenContract, nftTokenId)
-            .send({ from: userAccount, value: currentPriceWei });
-          console.log(result);
-        }
-        // const contractInstance = this.web3.eth
-        //   .Contract(contractJSON.abi)
-        //   .at(tokenContract);
-        console.log(methodType);
-        console.log(contract);
-        console.log(contractJSON);
-        // https://ethereum.stackexchange.com/questions/25431/metamask-how-to-access-call-deployed-contracts-functions-using-metamask
       },
     };
   });

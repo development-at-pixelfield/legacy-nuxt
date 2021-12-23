@@ -17,13 +17,17 @@
     <div v-else class="finished-nft">
       <div>
         {{ $t("nft_modal.ownerOf") }}
-        <span class="finished-nft_special-text">{{ nft.name }}</span>
+        <span class="finished-nft_special-text">{{ nftData.name }}</span>
       </div>
       <div>
         {{ $t("nft_modal.transactionHash") }}:
-        <span class="finished-nft_special-text tooltip" @click="copyToClip"
+        <span
+          class="finished-nft_special-text tooltip pointer"
+          @click="copyToClip"
           >{{ refinedHash
-          }}<span class="tooltiptext">{{ nft.hash }}</span></span
+          }}<span class="tooltiptext">{{
+            resultPayment.transactionHash
+          }}</span></span
         >
       </div>
       <Button
@@ -48,24 +52,16 @@ export default {
     Spinner,
     Button,
   },
-  props: {
-    nft: {
-      type: Object,
-      required: true,
-      default: () => ({
-        name: "Example NFT",
-        hash: "0xB90A2fEBB4333f0c86F6785bB23460eb4544F49c",
-      }),
-    },
-  },
   data() {
     return {
-      status: "approval",
+      nftData: this.$store.getters.modal.data.nft,
+      resultPayment: this.$store.getters.modal.data.resultPayment,
+      status: this.$store.getters.modal.data.status,
     };
   },
   computed: {
     refinedHash() {
-      return functions.refineHash(this.nft.hash);
+      return functions.refineHash(this.resultPayment.transactionHash);
     },
     headingText() {
       const config = {
@@ -78,7 +74,7 @@ export default {
   },
   methods: {
     async copyToClip() {
-      const copyText = this.nft.hash;
+      const copyText = this.resultPayment.transactionHash;
       navigator.clipboard.writeText(copyText);
       await this.$store.commit("setSnackbar", {
         show: true,
@@ -96,7 +92,10 @@ export default {
     addWallet(wallet) {
       this.$emit("addWallet", wallet);
     },
-
+    addFunds() {
+      this.$emit("close");
+      this.$router.push("/profile");
+    },
     close() {
       this.$emit("close");
     },
