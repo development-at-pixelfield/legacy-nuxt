@@ -41,8 +41,11 @@ export default {
   components: {
     Button,
   },
-  layout: "auth",
-  middleware: "auth",
+  layout(context) {
+    if (context.$auth.$state.user) {
+      return "auth";
+    }
+  },
 };
 </script>
 

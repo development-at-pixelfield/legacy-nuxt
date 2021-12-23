@@ -3,17 +3,29 @@
     <div class="content header-full-container">
       <div class="content-wrapper">
         <div class="header-menu">
-          <nuxt-link to="/marketplace"
-            ><span class="text-m marketplace-link">{{
-              $t("marketplace.marketplace")
-            }}</span></nuxt-link
-          >
-          <nuxt-link to="/galactic-miles" class="ml-24"
-            ><span class="text-m marketplace-link">{{
-              $t("marketplace.galacticMiles")
-            }}</span></nuxt-link
-          >
+          <div class="desktop-menu">
+            <nuxt-link to="/marketplace"
+              ><span class="text-m marketplace-link">{{
+                $t("marketplace.marketplace")
+              }}</span></nuxt-link
+            >
+            <nuxt-link to="/galactic-miles" class="ml-24"
+              ><span class="text-m marketplace-link">{{
+                $t("marketplace.galacticMiles")
+              }}</span></nuxt-link
+            >
+            <nuxt-link to="/help" class="ml-24"
+              ><span class="text-m marketplace-link">{{
+                $t("marketplace.help")
+              }}</span></nuxt-link
+            >
+          </div>
+
+          <div class="mobile-menu" @click="mobileMenu = true">
+            <img src="~/assets/img/icons/burger-menu.svg" alt="burger-menu" />
+          </div>
         </div>
+
         <div class="logo-block">
           <nuxt-link :to="logoLink"
             ><img
@@ -22,11 +34,13 @@
               alt="logo"
           /></nuxt-link>
         </div>
+
         <div class="waller-info">
           <span class="avatar">
             <DropdownWallet class="profile-dropdown" />
           </span>
         </div>
+
         <div class="user-info">
           <span class="avatar">
             <DropdownList
@@ -38,6 +52,49 @@
             />
           </span>
         </div>
+      </div>
+
+      <div class="mobile-menu-list" :class="{ 'open-menu': mobileMenu }">
+        <div class="header-block mb-40">
+          <div class="left-side">
+            <span class="display-f mr-8">
+              <img src="~/assets/img/icons/burger-menu.svg" alt="burger-menu"
+            /></span>
+            <span class="text-m-bold no-color-link">Menu</span>
+          </div>
+
+          <span @click="mobileMenu = false">
+            <img src="~/assets/img/icons/close-modal.svg" alt="close-icon"
+          /></span>
+        </div>
+
+        <p class="mt-0 mb-40">
+          <nuxt-link
+            to="/marketplace"
+            class="ml-16"
+            @click.native="mobileMenu = false"
+            ><span class="header-title1 marketplace-link">{{
+              $t("marketplace.marketplace")
+            }}</span></nuxt-link
+          >
+        </p>
+        <p class="mt-0 mb-40">
+          <nuxt-link
+            to="/galactic-miles"
+            class="ml-16"
+            @click.native="mobileMenu = false"
+            ><span class="header-title1 marketplace-link">{{
+              $t("marketplace.galacticMiles")
+            }}</span></nuxt-link
+          >
+        </p>
+        <p class="mt-0 mb-40">
+          <nuxt-link to="/help" class="ml-16" @click.native="mobileMenu = false"
+            ><span class="header-title1 marketplace-link">{{
+              $t("marketplace.help")
+            }}</span></nuxt-link
+          >
+        </p>
       </div>
     </div>
   </header>
@@ -54,6 +111,12 @@ export default {
     DropdownWallet,
   },
   mixins: [metamask],
+  data() {
+    return {
+      mobileMenu: false,
+    };
+  },
+
   computed: {
     logoLink() {
       return this.$auth.loggedIn && this.$auth.user ? "/profile" : "/landing";
