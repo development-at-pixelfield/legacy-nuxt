@@ -105,7 +105,57 @@
             />
           </div>
         </div>
-        <div v-if="connectedWallet" class="user-action-block view-wallet">
+        <div
+          v-if="nfts.results && nfts.results.length"
+          class="marketplace-wrapper"
+        >
+          <div class="main-list-container">
+            <div class="content">
+              <MarketItem
+                v-for="item in nfts.results"
+                :key="item.uid"
+                @on-click="toDetail(item)"
+              >
+                <img
+                  slot="image"
+                  :src="
+                    item.image_cover
+                      ? item.image_cover
+                      : require('~/assets/img/bear-head.svg')
+                  "
+                  alt="image"
+                />
+                <p slot="title" class="text-m-bold mt-8 mb-8 text-center">
+                  {{ item.name }} <br />
+                </p>
+                <p slot="profit" class="profit mtb text-m text-center">
+                  {{ item.price_eth }}Ξ
+                </p>
+                <p slot="finance" class="finance mtb text-m-bold text-center">
+                  {{ convertEthereum(item.price_eth) }}
+                </p>
+              </MarketItem>
+            </div>
+            <div v-if="nfts.count" class="pagination-wrapper">
+              <Pagination
+                :list="nfts.results"
+                :total="nfts.count"
+                :page.sync="filter.page"
+                :page-number="filter.page"
+                :current-page="nfts.current"
+                :pages-count="nfts.pages_count"
+                :limit="filter.page_size || nfts.page_size"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          v-if="
+            connectedWallet &&
+            (nfts.results == null || nfts.results.length == 0)
+          "
+          class="user-action-block view-wallet"
+        >
           <div class="user-action-block-icon">
             <img
               :src="require(`assets/img/collection-profile.svg`)"
@@ -141,21 +191,42 @@
 
 <script>
 import Button from "../../components/ui/Button";
+import MarketItem from "../../components/marketplace/MarketItem";
+import Pagination from "../../components/marketplace/Pagination";
 import { catchErrors } from "../../utils/catchErrors";
 import metamask from "../../mixins/metamask";
 export default {
   name: "Index",
   components: {
     Button,
+    MarketItem,
+    Pagination,
   },
   mixins: [metamask],
   layout: "auth",
   middleware: "auth",
+  async asyncData({ store, route, error }) {
+    try {
+      const nfts = await store.dispatch("nfts/getMyNfts");
+      return { nfts };
+    } catch (e) {
+      const status = e.response.status;
+      if (status === 404) {
+        error({ statusCode: 404, message: "Not found" });
+      }
+    }
+  },
   data() {
     return {
       imgSrc: "",
       username: "",
       balance: 0,
+      count: 0,
+      nfts: {},
+      filter: {
+        page: 1,
+      },
+      ethPrice: null,
       balanceLoaded: false,
       isVerified: false,
     };
@@ -174,6 +245,15 @@ export default {
       }
       return account;
     },
+    convertEthereum() {
+      return (price) => {
+        return this.ethPrice
+          ? "est. $" +
+              Number((this.ethPrice * 100 * price) / 100).toFixed(2) +
+              "K"
+          : "...";
+      };
+    },
   },
   created() {
     if (this.$auth.user.avatar) {
@@ -190,6 +270,9 @@ export default {
     if (this.$auth.user.is_verified && this.$auth.user.is_email_verified) {
       this.isVerified = true;
     }
+  },
+  async mounted() {
+    this.ethPrice = (await this.$store.dispatch("fetchEthPrice")).rate;
   },
   methods: {
     openWallet() {
@@ -228,10 +311,15 @@ export default {
         });
       }
     },
+    toDetail(item) {
+      this.$store.commit("setQuery", this.$route.query);
+      this.$router.push(`/marketplace/${item.uid}`);
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "assets/scss/pages/profile";
+@import "assets/scss/pages/marketplace";
 </style>
