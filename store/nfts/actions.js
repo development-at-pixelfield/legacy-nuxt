@@ -27,6 +27,15 @@ export const actions = {
   getNftsById(context, payload) {
     return this.$axios.$get(`/nfts/${payload.uid}/`);
   },
+  /**
+   *
+   * @param context
+   * @param payload {}
+   * @returns {Promise<AxiosResponse<any>>}
+   */
+  getMyNfts(context, payload) {
+    return this.$axios.$get(`/nfts/my/list/`);
+  },
 
   /**
    *
