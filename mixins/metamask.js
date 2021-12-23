@@ -40,6 +40,8 @@ export default {
       await this.setDisconnected();
     },
     async connectMetamask() {
+      // const provider = await detectEthereumProvider({ mustBeMetaMask: true });
+      // console.log("provider Ethereum", provider);
       if (!this.metamask.isEnabled) {
         await this.$store.commit("setSnackbar", {
           show: true,
@@ -47,6 +49,12 @@ export default {
           color: "error",
         });
         await this.setDisconnected();
+        window
+          .open(
+            `https://metamask.app.link/dapp/${window.location.host}/profile`,
+            "_blank"
+          )
+          .focus();
         return false;
       }
       try {
