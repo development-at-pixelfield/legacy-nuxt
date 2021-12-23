@@ -6,6 +6,7 @@ header{
   height: 56px;
   background: #08010E;
   border-bottom: 1px solid #301C3F;
+  position: relative;
 
   .header-full-container {
     width: 944px;
@@ -77,6 +78,7 @@ header{
       z-index: 1;
       display: flex;
       position: absolute;
+      align-items: center;
       right: 0;
 
       .avatar{
@@ -94,15 +96,66 @@ header{
       }
     }
   }
+
+  .mobile-menu-list{
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: $c-greyscale-140;
+    width: 0;
+    height: 100vh;
+    z-index: 100;
+    padding: 34px 11px;
+    transform: translateX(-100px);
+    opacity: 0;
+    transition: all 0.3s ease-out;
+
+    .header-block{
+      display: flex;
+      justify-content: space-between;
+
+      .left-side{
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  .open-menu{
+    opacity: 1;
+    width: 100%;
+    transform: translateX(0);
+    transition: all 0.3s ease-out;
+  }
+
+  .divider{
+    width: 107%;
+    height: 1px;
+    background: #ACA4B2;
+    margin-left: -12px;
+    display: block;
+    margin-bottom: 40px;
+  }
 }
 
 .header-menu{
   display: flex;
   z-index: 1;
 
-  @media (max-width: $break-sms) {
-    display: none;
+  .desktop-menu{
+    @media (max-width: $break-sm) {
+      display: none;
+    }
   }
+  .mobile-menu{
+    display: none;
+
+    @media (max-width: $break-sm) {
+      display: inline-flex;
+      cursor: pointer;
+    }
+  }
+
 
   .ml-24{
     width: 100px;
@@ -123,6 +176,12 @@ header{
 .fixed{
   width: 100%;
   z-index: 2;
+}
+
+.not-auth{
+  @media (max-width: $break-sm) {
+    display: none !important;
+  }
 }
 
 

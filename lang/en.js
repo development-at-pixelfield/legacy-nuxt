@@ -169,6 +169,7 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
   marketplace: {
     marketplace: "Marketplace",
     galacticMiles: "Galactic Miles",
+    help: "Help",
     luminosity: "Luminosity",
     story: "Story",
     filter: "Filter",
