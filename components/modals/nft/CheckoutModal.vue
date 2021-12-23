@@ -21,9 +21,12 @@
       <Checkbox :name.sync="agree" class="mb-32 terms" :error="checkError">
         <label slot="label" class="text-m">
           {{ $t("auth.agreeWith") }} &nbsp;
-          <nuxt-link to="/" class="no-color-link"
-            >{{ $t("auth.termCond") }}
-          </nuxt-link>
+          <a
+            target="_blank"
+            href="https://storage.googleapis.com/pfld-outdoor-production-documents-bucket/ISIAjobs_Terms_and_Conditions_2021_10_05_revMP_fin%20(1).pdf"
+            class="no-color-dec-link text-btn"
+            >{{ $t("auth.termCond") }}</a
+          >
         </label>
       </Checkbox>
       <div class="button-wrap">
@@ -112,6 +115,11 @@ export default {
     balanceDollars() {
       const balance = +this.ethToUsd(this.balance);
       return balance.toFixed(4);
+    },
+  },
+  watch: {
+    agree(val) {
+      if (val) this.checkError = "";
     },
   },
   async mounted() {

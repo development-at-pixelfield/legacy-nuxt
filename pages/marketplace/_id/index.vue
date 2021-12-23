@@ -269,7 +269,6 @@ export default {
       return this.$auth.user;
     },
     isEmailVerified() {
-      console.log(this.user);
       return this.user && this.user.is_email_verified;
     },
     isOwner() {
@@ -294,6 +293,11 @@ export default {
   },
   methods: {
     async payCard() {
+      const availToPayOrState = this.availToPay();
+      if (availToPayOrState !== true) {
+        return await this[availToPayOrState.action]();
+      }
+
       await this.$store.commit("setModal", {
         show: true,
         type: "pay-card",
@@ -309,7 +313,6 @@ export default {
     },
 
     availToPay() {
-      console.log(this.user);
       const states = {
         not_auth: !!this.user,
         metamask_not_installed: this.metamask.isEnabled,

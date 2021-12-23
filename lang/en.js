@@ -200,6 +200,20 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
       "Vote for your favourite features with your Galactic Miles points. We regularly update the roadmap and add new suggestions.",
   },
 
+  exchange: {
+    title: "Exchange your NFT for a real diamond",
+    textSecTitle:
+      "All of our stars are backed by real diamond in the initial sale value.",
+    textSecSubTitle: `If you currently own a Galaxy NFT, you can always exchange it with us for a real diamond in the value of the first sale of the NFT. The exchange is provided by Diamond International Corporation (DIC), a diamond company with more than 15 years of experience trading diamonds and jewellery.`,
+    infoTitle: "How to exchange my NFT for diamond?",
+    itemTitle1: "Message us",
+    itemDesc1: `If you are owner of any of our stars, message us on <a href="mailto:exchange@galaxy.diamonds" class="no-color-link">exchange@galaxy.diamonds</a>  to start the exchange process. We will walk you through every step and confirm what kind of diamond you are eligible to.`,
+    itemTitle2: "Send us your NFT back",
+    itemDesc2: `We will provide you with our wallet address where you can transfer your NFT. If you have never done this before, we will help you with the process.`,
+    itemTitle3: "Receive a diamond to your address",
+    itemDesc3: `We will ship your diamond to you as soon as we receive the NFT back. `,
+  },
+
   validations: {
     notEmpty: "This field cannot be empty.",
     sameAsPassword: "Please make sure your passwords match.",

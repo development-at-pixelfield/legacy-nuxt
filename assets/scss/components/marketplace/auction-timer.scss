@@ -2,7 +2,10 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  //width: 448px;
+
+  @media (max-width: $break-smsm) {
+    justify-content: center;
+  }
 
   .info{
     display: flex;
