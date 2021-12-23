@@ -1,5 +1,5 @@
 <template>
-  <div class="main-container">
+  <div class="help-panel main-container">
     <main>
       <Navigation
         :title="$t('helpPage.title')"

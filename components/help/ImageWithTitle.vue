@@ -4,11 +4,11 @@
       :src="imgSrc"
       :alt="imgAlt"
       :style="{
-        width: imgWidth,
+        width: '100%',
         height: imgHeight,
       }"
     />
-    <div v-if="title.length > 0" class="title">
+    <div v-if="title.length > 0" class="title text-s mt-4">
       {{ title }}
     </div>
   </div>
@@ -48,18 +48,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.image-with-title {
-  display: inline-block;
-  margin: 2px 10px;
-
-  img {
-    display: block;
-  }
-  div.title {
-    display: block;
-    max-width: 100%;
-    text-align: center;
-    font-size: smaller;
-  }
-}
+@import "assets/scss/components/help/image-title";
 </style>

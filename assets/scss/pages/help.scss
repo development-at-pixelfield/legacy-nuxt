@@ -40,8 +40,9 @@
   font-weight: bold;
 }
 
-a {
+.link-c {
   text-decoration: none;
+  color: $c-link;
 }
 .flex {
   display: flex;
