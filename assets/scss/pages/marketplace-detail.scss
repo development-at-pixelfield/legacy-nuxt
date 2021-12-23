@@ -112,6 +112,11 @@
 
         .action{
           display: flex;
+
+          @media (max-width: $break-xsm) {
+            flex-direction: column;
+            width: 100%;
+          }
         }
 
         .first-btn{
@@ -293,6 +298,7 @@
 
         li{
           margin-right: 4px;
+          margin-bottom: 6px;
 
           &:last-child{
             margin-right: 0;

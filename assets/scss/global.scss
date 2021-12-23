@@ -430,4 +430,12 @@ input{
   color: $c-link;
 }
 
+.nav{
+  padding-top: 44px;
+
+  @media (max-width: $break-sms) {
+    padding-top: 28px;
+  }
+}
+
 

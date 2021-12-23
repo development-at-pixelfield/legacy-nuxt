@@ -223,6 +223,10 @@
     }
   }
 
+  &__disabled-grey{
+    cursor: not-allowed;
+  }
+
   &__disabled-new{
     cursor: not-allowed;
     background: $c-greyscale-80;
