@@ -113,6 +113,24 @@
 
         .user-block {
 
+          .img-block{
+            position: relative;
+            display: flex;
+
+            &::before{
+              content: "";
+              position: absolute;
+              background: #79affd;
+              opacity: 0.8;
+              box-shadow: 0 0 30px 0.5px #79affd;
+              filter: blur(12.2px);
+              width: 14px;
+              height: 14px;
+              top: 2px;
+              right: 1px;
+            }
+          }
+
           .user-states {
             display: flex;
 

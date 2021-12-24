@@ -109,6 +109,7 @@ header{
     transform: translateX(-100px);
     opacity: 0;
     transition: all 0.3s ease-out;
+    visibility: hidden;
 
     .header-block{
       display: flex;
@@ -126,6 +127,7 @@ header{
     width: 100%;
     transform: translateX(0);
     transition: all 0.3s ease-out;
+    visibility: visible;
   }
 
   .divider{
