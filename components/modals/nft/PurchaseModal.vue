@@ -22,10 +22,10 @@
       <div>
         {{ $t("nft_modal.transactionHash") }}:
         <span
-          class="finished-nft_special-text tooltip pointer"
+          class="finished-nft_special-text tooltip pointer no-dec-link"
           @click="copyToClip"
           >{{ refinedHash
-          }}<span class="tooltiptext">{{
+          }}<span class="tooltiptext no-dec-link">{{
             resultPayment.transactionHash
           }}</span></span
         >

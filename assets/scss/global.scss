@@ -313,6 +313,9 @@ ul{
   color: white;
   text-decoration: none;
 }
+.no-dec-link{
+  text-decoration: none;
+}
 .pointer{
   cursor: pointer;
 }
@@ -442,7 +445,7 @@ input{
 }
 
 .help-panel{
-  padding-bottom: 56px;
+  padding-bottom: 56px !important;
 }
 .link-c {
   color: $c-link;

@@ -68,7 +68,11 @@
           /></span>
         </div>
 
-        <p class="mt-0 mb-40">
+        <p
+          class="mt-0 mb-40 pointer"
+          :class="{ 'active-link': $route.path === '/marketplace' }"
+          @click="toLink('/marketplace')"
+        >
           <nuxt-link
             to="/marketplace"
             class="ml-16"
@@ -78,7 +82,11 @@
             }}</span></nuxt-link
           >
         </p>
-        <p class="mt-0 mb-40">
+        <p
+          class="mt-0 mb-40 pointer"
+          :class="{ 'active-link': $route.path === '/galactic-miles' }"
+          @click="toLink('/galactic-miles')"
+        >
           <nuxt-link
             to="/galactic-miles"
             class="ml-16"
@@ -88,7 +96,11 @@
             }}</span></nuxt-link
           >
         </p>
-        <p class="mt-0 mb-40">
+        <p
+          class="mt-0 mb-40 pointer"
+          :class="{ 'active-link': $route.path === '/help' }"
+          @click="toLink('/help')"
+        >
           <nuxt-link to="/help" class="ml-16" @click.native="mobileMenu = false"
             ><span class="header-title1 marketplace-link">{{
               $t("marketplace.help")
@@ -170,6 +182,10 @@ export default {
     }
   },
   methods: {
+    toLink(link) {
+      this.$router.push(link);
+      this.mobileMenu = false;
+    },
     async actionHandler(item) {
       if (item.value === "logout") {
         await this.$auth.logout();

@@ -12,10 +12,8 @@
 }
 
 .modal-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .modal-container {
@@ -23,6 +21,7 @@
   border-radius: 3px;
   padding: 24px;
   width: 464px;
+  margin: 0 auto;
 
   @media (max-width: $break-sms) {
     width: 100%;
