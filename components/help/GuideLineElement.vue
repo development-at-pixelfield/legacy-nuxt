@@ -8,7 +8,7 @@
         <slot name="title"></slot>
       </div>
     </div>
-    <div class="content">
+    <div v-if="hasDefaultSlot" class="content">
       <slot></slot>
     </div>
   </div>
@@ -22,6 +22,11 @@ export default {
       type: [String, Number],
       required: false,
       default: "",
+    },
+  },
+  computed: {
+    hasDefaultSlot() {
+      return this.$slots.default;
     },
   },
 };

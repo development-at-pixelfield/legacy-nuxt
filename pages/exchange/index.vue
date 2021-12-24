@@ -71,13 +71,18 @@ export default {
       return "auth";
     }
   },
-  async asyncData({ store, route }) {
+  middleware: "auth",
+  async asyncData({ app, store, route, redirect }) {
     let label = "";
     if (route.query.nft) {
       const nft = await store.dispatch("nfts/getNftsById", {
         uid: route.query.nft,
       });
       label = nft.name;
+
+      if (!nft.owner || nft.owner.username !== app.$auth.user.username) {
+        redirect("/marketplace");
+      }
     }
 
     return { label };

@@ -18,7 +18,9 @@
 
       <SimpleDropdown>
         <template slot="title">
-          <div>{{ $t("helpPage.buyEth.dropdown1.title") }}</div>
+          <div class="text-m c-grey">
+            {{ $t("helpPage.buyEth.dropdown1.title") }}
+          </div>
         </template>
         <div>
           <GuideLineElement number="1">
@@ -103,7 +105,9 @@
 
       <SimpleDropdown>
         <template slot="title">
-          <div>{{ $t("helpPage.buyEth.dropdown2.title") }}</div>
+          <div class="text-m c-grey">
+            {{ $t("helpPage.buyEth.dropdown2.title") }}
+          </div>
         </template>
         <div>
           <GuideLineElement number="1">

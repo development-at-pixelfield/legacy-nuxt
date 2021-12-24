@@ -26,8 +26,12 @@
         width: 100%;
       }
 
-      @media (max-width: 400px) {
+      @media (max-width: 407px) {
         padding: 8px;
+      }
+
+      @media (max-width: 375px) {
+        top: -75px;
       }
 
       &::after{
@@ -41,6 +45,9 @@
         right: 47.5%;
         top: 40px;
 
+        @media (max-width: 375px) {
+          top: 64px;
+        }
       }
     }
   }
