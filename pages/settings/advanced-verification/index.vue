@@ -41,13 +41,7 @@
         </p>
 
         <FilterDropdown
-          :list="[
-            { label: 'Option1', value: 1 },
-            { label: 'Option2', value: 2 },
-            { label: 'Option3', value: 3 },
-            { label: 'Option4', value: 4 },
-            { label: 'Option5', value: 5 },
-          ]"
+          :list="countries"
           :return-object="false"
           :item-value="'value'"
           :item-label="'label'"
@@ -67,22 +61,30 @@
         </p>
 
         <RadioCircle
+          v-if="idList.ID_CARD"
           class="mb-16"
           :name.sync="idType"
-          :value="'id_card'"
+          :value="'ID_CARD'"
           :label="'ID card'"
         />
-
         <RadioCircle
+          v-if="idList.DRIVERS_LICENSE"
           class="mb-16"
           :name.sync="idType"
-          :value="'driver_license'"
+          :value="'DRIVERS_LICENSE'"
           :label="'Driver license'"
         />
-
         <RadioCircle
+          v-if="idList.PASSPORT"
+          class="mb-16"
           :name.sync="idType"
-          :value="'passport'"
+          :value="'PASSPORT'"
+          :label="'Passport'"
+        />
+        <RadioCircle
+          v-if="idList.RESIDENCE_PERMIT"
+          :name.sync="idType"
+          :value="'RESIDENCE_PERMIT'"
           :label="'Passport'"
         />
       </div>
@@ -126,14 +128,33 @@ export default {
   },
   layout: "auth",
   middleware: "auth",
+  async asyncData({ store }) {
+    try {
+      const resp = await store.dispatch("nfts/getCountries");
+      let countries = [];
+      resp.forEach((item) => {
+        const objC = {
+          label: item.Country,
+          value: item.ISO_2,
+        };
+
+        countries = [...countries, objC];
+      });
+
+      return { countries, options: resp };
+    } catch (e) {}
+  },
   data() {
     return {
       firstName: "",
       lastName: "",
       country: "",
       idType: "",
+      idList: {},
       isSubmit: false,
       countryError: false,
+      countries: [],
+      options: [],
       rules: {
         firstName: [
           { name: "required", text: this.$t("validations.notEmpty") },
@@ -151,7 +172,10 @@ export default {
 
   watch: {
     country(val) {
-      if (val) this.countryError = false;
+      if (val) {
+        this.countryError = false;
+        this.idList = this.options.find((item) => val === item.ISO_2);
+      }
     },
     idType(val) {
       if (val) this.idError = false;
@@ -186,6 +210,14 @@ export default {
 
     async saveContinue() {
       try {
+        const data = {
+          first_name: this.firstName,
+          last_name: this.lastName,
+          document_type: this.idType,
+          document_country: this.country,
+        };
+
+        await this.$store.dispatch("nfts/verifyUser", data);
         await this.$router.push("/settings");
       } catch (e) {
         await this.$store.commit("setSnackbar", {

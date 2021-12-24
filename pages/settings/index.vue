@@ -2,7 +2,7 @@
   <div class="form-container full-h">
     <h1 class="header-title">{{ $t("settings.settings") }}</h1>
     <div class="content">
-      <div v-if="showVerifyEmail" class="verification form-group mb-24">
+      <div v-if="!isFullVerify" class="verification form-group mb-24">
         <div class="info-block mb-24">
           <div class="img-block">
             <img src="~/assets/img/icons/shield.png" alt="verify-icon" />
@@ -236,8 +236,14 @@ export default {
   },
 
   computed: {
+    isFullVerify() {
+      return this.$auth.user.is_email_verified && this.$auth.user.is_verified;
+    },
     isEmailVerified() {
       return this.$auth.user.is_email_verified;
+    },
+    isVerify() {
+      return this.$auth.user.is_verified;
     },
 
     label() {
@@ -267,6 +273,21 @@ export default {
     this.email = this.$auth.user.email;
     this.username = this.$auth.user.username || "";
     this.showAlerts = this.$auth.user.nft_notifications;
+
+    const list = {
+      normal: ["created"],
+      success: ["approved"],
+      progress: ["started", "submitted"],
+      warning: ["abandoned", "declined", "resubmission_requested"],
+    };
+
+    if (this.$auth.user.last_verification_status) {
+      Object.keys(list).map((key, index) => {
+        if (list[key].includes(this.$auth.user.last_verification_status)) {
+          this.status = key;
+        }
+      });
+    }
   },
 
   methods: {
@@ -350,7 +371,7 @@ export default {
         show: true,
         type: "info-verification",
         data: {
-          reason: "Reason",
+          reason: this.$auth.user.last_verification_decline_reason,
         },
       });
     },
