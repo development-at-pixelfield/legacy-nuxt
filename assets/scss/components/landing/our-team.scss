@@ -7,6 +7,15 @@
   .back-img{
     width: 100%;
     position: absolute;
+
+    @media (max-width: 1390px) {
+      height: 100%;
+    }
+
+    @media (max-width: $break-md) {
+      width: auto;
+      height: auto;
+    }
   }
 
   //&::after{
@@ -166,10 +175,14 @@
       }
     }
 
-    footer {
+    .footer {
       padding-top: 120px;
       padding-bottom: 80px;
       position: relative;
+
+      @media (max-width: $break-md) {
+        padding-top: 40px;
+      }
 
       @media (max-width: $break-sms) {
         padding-bottom: 40px;

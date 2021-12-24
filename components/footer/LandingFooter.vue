@@ -1,42 +1,51 @@
 <template>
   <footer>
-    <div class="content">
-      <p class="mt-0 mb-8 text-m-bold">{{ $t("landing.joinUs") }}</p>
-      <div class="action">
-        <a href="https://discord.com/invite/galaxydiamonds" class="discord-btn">
-          <img src="~/assets/img/icons/discord-big.svg" alt="discord-icon" />
-        </a>
+    <div class="full-container">
+      <div class="content">
+        <div class="img-block display-f">
+          <img src="~/assets/img/header-logo.svg" alt="footer-logo" />
+        </div>
+
+        <ul>
+          <li>
+            <nuxt-link to="/marketplace" class="text-m no-color-dec-link">{{
+              $t("marketplace.marketplace")
+            }}</nuxt-link>
+          </li>
+          <li>
+            <nuxt-link to="/galactic-miles" class="text-m no-color-dec-link">{{
+              $t("marketplace.galacticMiles")
+            }}</nuxt-link>
+          </li>
+          <li>
+            <nuxt-link to="/help" class="text-m no-color-dec-link">
+              {{ $t("marketplace.help") }}
+            </nuxt-link>
+          </li>
+          <li>
+            <a
+              target="_blank"
+              href="https://storage.googleapis.com/pfld-outdoor-production-documents-bucket/ISIAjobs_Terms_and_Conditions_2021_10_05_revMP_fin%20(1).pdf"
+              class="text-m no-color-dec-link"
+              >{{ $t("auth.termCond") }}</a
+            >
+          </li>
+        </ul>
+
+        <span class="text-s no-color-link">{{
+          $t("marketplace.copyright")
+        }}</span>
       </div>
     </div>
-
-    <Button
-      class="top-btn"
-      :label="$t('landing.backTop')"
-      :background="'primary'"
-      :size="'medium'"
-      :color="'c-white'"
-      @on-click="scrollTop"
-    >
-      <span slot="icon" class="ml-4 emoji">👆</span>
-    </Button>
   </footer>
 </template>
 
 <script>
-import Button from "../ui/Button";
 export default {
   name: "LandingFooter",
-  components: {
-    Button,
-  },
-  methods: {
-    scrollTop() {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    },
-  },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "assets/scss/components/footer/landing-footer";
+@import "assets/scss/components/landing/footer";
 </style>
