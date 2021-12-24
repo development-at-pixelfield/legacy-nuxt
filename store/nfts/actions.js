@@ -64,4 +64,23 @@ export const actions = {
   initPayment(context, payload) {
     return this.$axios.$post(`/nfts/sell_offers/payment/init/`, payload);
   },
+
+  /**
+   * Get veriff countries
+   * @param context
+   * @returns {Promise<any>}
+   */
+  getCountries(context, payload) {
+    return this.$axios.$get(`/veriff/countries/`);
+  },
+
+  /**
+   * Veriff user
+   * @param context
+   * @param payload{Object<{first_name: string, last_name: string, document_type: string, document_country: string}>}
+   * @returns {Promise<any>}
+   */
+  verifyUser(context, payload) {
+    return this.$axios.$post(`/veriff/start/`, payload);
+  },
 };
