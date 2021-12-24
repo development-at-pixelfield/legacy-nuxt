@@ -17,6 +17,8 @@
 
       <Blog />
 
+      <Faq />
+
       <TextSection />
 
       <OurTeam />
@@ -38,8 +40,10 @@ import TextSection from "../components/landing/TextSection";
 import BlackWhole from "../components/landing/BlackWhole";
 import LandingFooter from "../components/footer/LandingFooter";
 import Blog from "../components/landing/Blog";
+import Faq from "../components/landing/Faq";
 export default {
   components: {
+    Faq,
     RoadMap,
     NftsUnique,
     Sounds,

@@ -9,9 +9,6 @@
         ~/assets/img/landing/map.png 1.5x,
         ~/assets/img/landing/map.png 2x
       "
-      sizes="(max-width: 320px) 280px,
-            (max-width: 480px) 440px,
-            800px"
     />
 
     <div class="map-wrapper">
@@ -86,7 +83,7 @@
         <img src="~/assets/img/landing/cloud2.svg" alt="" />
       </span>
 
-      <footer>
+      <div class="footer">
         <div class="content">
           <p class="mt-0 mb-8 text-m-bold">{{ $t("landing.joinUs") }}</p>
           <div class="action">
@@ -112,7 +109,7 @@
         >
           <span slot="icon" class="ml-4 emoji">👆</span>
         </Button>
-      </footer>
+      </div>
     </div>
   </div>
 </template>
