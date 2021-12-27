@@ -178,17 +178,11 @@ export default {
         this.voting = true;
         try {
           await this.$store.dispatch("nfts/voteRoadmap", uuid);
-          const items = [];
-          for (let i = 0, l = this.nfts.results.length; i < l; i++) {
-            if (this.nfts.results[i].uid === uuid) {
-              this.nfts.results[i].votes++;
-              this.nfts.results[i].loading = true;
-              items.push(this.nfts.results[i]);
-            } else {
-              items.push(this.nfts.results[i]);
-            }
-          }
-          this.nfts.results = items;
+          const voitNft = this.nfts.results.filter(
+            (item) => item.uid === uuid
+          )[0];
+          voitNft.votes++;
+          voitNft.loading = true;
           setTimeout(() => {
             this.updatePage(this.filter.page);
             this.count--;
