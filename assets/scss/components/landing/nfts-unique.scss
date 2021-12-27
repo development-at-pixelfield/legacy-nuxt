@@ -45,7 +45,7 @@
       border-radius: 8px;
       padding: 24px;
       margin-bottom: 16px;
-      width: 440px;
+      width: 460px;
 
       @media (max-width: $break-smd) {
         width: 100%;
@@ -65,11 +65,12 @@
 
       @media (max-width: $break-smd) {
         order: 2;
+        border-radius: 0 0 8px 8px;
       }
     }
 
     .big-image{
-      height: 387px;
+      width: 484px;
       border-radius: 0 8px 8px 0;
 
       img{
@@ -81,9 +82,12 @@
       @media (max-width: $break-smd) {
         order: 1;
         height: 270px;
+        width: auto;
       }
     }
   }
+}
 
-
+.change-right{
+  margin-bottom: 0 !important;
 }

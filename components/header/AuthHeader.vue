@@ -5,19 +5,25 @@
         <div class="header-menu">
           <div class="desktop-menu">
             <nuxt-link to="/marketplace"
-              ><span class="text-m marketplace-link">{{
-                $t("marketplace.marketplace")
-              }}</span></nuxt-link
+              ><span
+                class="text-m marketplace-link"
+                :class="{ current: active === 1 }"
+                >{{ $t("marketplace.marketplace") }}</span
+              ></nuxt-link
             >
             <nuxt-link to="/galactic-miles" class="ml-24"
-              ><span class="text-m marketplace-link">{{
-                $t("marketplace.galacticMiles")
-              }}</span></nuxt-link
+              ><span
+                class="text-m marketplace-link"
+                :class="{ current: active === 2 }"
+                >{{ $t("marketplace.galacticMiles") }}</span
+              ></nuxt-link
             >
             <nuxt-link to="/help" class="ml-24"
-              ><span class="text-m marketplace-link">{{
-                $t("marketplace.help")
-              }}</span></nuxt-link
+              ><span
+                class="text-m marketplace-link"
+                :class="{ current: active === 3 }"
+                >{{ $t("marketplace.help") }}</span
+              ></nuxt-link
             >
           </div>
 
@@ -36,9 +42,12 @@
         </div>
 
         <div class="user-info not-auth">
-          <nuxt-link to="/login" class="no-color-link display-f">{{
-            $t("auth.login")
-          }}</nuxt-link>
+          <nuxt-link
+            to="/login"
+            class="no-color-link display-f"
+            :class="{ current: active === 4 }"
+            >{{ $t("auth.login") }}</nuxt-link
+          >
           <Button
             class="top-btn ml-24"
             :label="$t('auth.register')"
@@ -141,13 +150,13 @@
 <script>
 import metamask from "../../mixins/metamask";
 import Button from "../ui/Button";
-
+import menu from "../../mixins/menu";
 export default {
   name: "Header",
   components: {
     Button,
   },
-  mixins: [metamask],
+  mixins: [metamask, menu],
   data() {
     return {
       mobileMenu: false,

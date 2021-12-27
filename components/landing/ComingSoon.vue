@@ -3,7 +3,7 @@
     <LandingHeader />
 
     <div class="content full-container">
-      <span :class="{ show: show }">
+      <span :class="{ show: show }" class="web-span">
         <img
           id="header-logo"
           src="~/assets/img/landing/Bear_front.png"

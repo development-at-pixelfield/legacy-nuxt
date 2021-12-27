@@ -173,6 +173,11 @@ header{
   }
 }
 
+.landing-header{
+  background: transparent;
+  border: none;
+}
+
 .marketplace-link {
   &:hover {
     cursor: pointer;
@@ -182,6 +187,9 @@ header{
 .fixed{
   width: 100%;
   z-index: 2;
+}
+.current{
+  font-weight: 700;
 }
 
 .not-auth{
