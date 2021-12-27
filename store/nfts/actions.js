@@ -20,6 +20,16 @@ export const actions = {
     return this.$axios.$get(url);
   },
 
+  getRoadmap(context, payload) {
+    payload.page = payload && payload.page ? +payload.page : 1;
+    payload.page_size = payload && payload.page_size ? +payload.page_size : 10;
+    payload = functions.arrayToStr(payload);
+    payload = functions.cleanObject(payload);
+    const queryString = functions.objectToQuery(payload);
+    const url = `/nfts/roadmap/features/?${queryString}`;
+    return this.$axios.$get(url);
+  },
+
   /**
    *
    * @param context
@@ -67,6 +77,9 @@ export const actions = {
     return this.$axios.$post(`/nfts/sell_offers/payment/init/`, payload);
   },
 
+  voteRoadmap(context, payload) {
+    return this.$axios.$post(`/nfts/roadmap/vote/${payload}/`);
+  },
   /**
    * Get veriff countries
    * @param context

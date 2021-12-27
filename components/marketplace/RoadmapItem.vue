@@ -6,9 +6,26 @@
         <span
           v-if="status === 'new'"
           class="vote-action"
+          :class="{ 'view-loading': loading }"
           @click="$emit('add-count')"
         >
-          <img src="~/assets/img/icons/caret-up.svg" alt="caret-up" />
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 10L8 5L13 10"
+              stroke="white"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          <span v-if="loading">+1</span>
         </span>
         <span v-else class="text-s-bold votes">{{ $t("roadmap.votes") }}</span>
       </div>
@@ -41,6 +58,10 @@ export default {
     status: {
       type: String,
       default: "new",
+    },
+    loading: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
