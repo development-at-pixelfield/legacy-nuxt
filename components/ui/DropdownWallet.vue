@@ -195,7 +195,8 @@ export default {
       this.show = false;
     },
     async copyToClip() {
-      const copyText = this.$store.getters.walletAccount;
+      const copyText =
+        this.$store.getters.walletAccount || this.$auth.user.wallet_address;
       navigator.clipboard.writeText(copyText);
       await this.$store.commit("setSnackbar", {
         show: true,

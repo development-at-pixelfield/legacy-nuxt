@@ -132,13 +132,13 @@ export default {
         const cloud2 = document.querySelector("#cloud2");
         const diff = window.scrollY - posParent.y;
 
-        const cloud1Style = (diff - 3600) / 2.5;
-        const cloud2Style = (diff - 3000) / 2;
+        const cloud1Style = (diff - 3600) / 3.5;
+        const cloud2Style = (diff - 3000) / 3.5;
 
-        if (cloud1Style > 100) {
+        if (cloud1Style > 0) {
           cloud1.style.bottom = `${cloud1Style}px`;
         }
-        if (cloud2Style > 500) {
+        if (cloud2Style > 0) {
           cloud2.style.bottom = `${cloud2Style}px`;
         }
       }

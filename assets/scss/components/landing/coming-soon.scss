@@ -16,7 +16,7 @@
 
   .content {
     padding-bottom: 100px;
-    padding-top: 100px;
+    //padding-top: 100px;
     text-align: center;
     height: 100%;
     justify-content: center;
@@ -58,6 +58,16 @@
       opacity: 1;
       transform: translateY(1px);
     }
+  }
+}
+
+.web-span{
+  width: 159px;
+  height: 154px;
+
+  img{
+    width: 100%;
+    height: 100%;
   }
 }
 

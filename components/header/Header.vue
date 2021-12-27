@@ -5,19 +5,25 @@
         <div class="header-menu">
           <div class="desktop-menu">
             <nuxt-link to="/marketplace"
-              ><span class="text-m marketplace-link">{{
-                $t("marketplace.marketplace")
-              }}</span></nuxt-link
+              ><span
+                class="text-m marketplace-link"
+                :class="{ current: active === 1 }"
+                >{{ $t("marketplace.marketplace") }}</span
+              ></nuxt-link
             >
             <nuxt-link to="/galactic-miles" class="ml-24"
-              ><span class="text-m marketplace-link">{{
-                $t("marketplace.galacticMiles")
-              }}</span></nuxt-link
+              ><span
+                class="text-m marketplace-link"
+                :class="{ current: active === 2 }"
+                >{{ $t("marketplace.galacticMiles") }}</span
+              ></nuxt-link
             >
             <nuxt-link to="/help" class="ml-24"
-              ><span class="text-m marketplace-link">{{
-                $t("marketplace.help")
-              }}</span></nuxt-link
+              ><span
+                class="text-m marketplace-link"
+                :class="{ current: active === 3 }"
+                >{{ $t("marketplace.help") }}</span
+              ></nuxt-link
             >
           </div>
 
@@ -116,13 +122,14 @@
 import DropdownList from "../ui/DropdownList";
 import DropdownWallet from "../ui/DropdownWallet";
 import metamask from "../../mixins/metamask";
+import menu from "../../mixins/menu";
 export default {
   name: "Header",
   components: {
     DropdownList,
     DropdownWallet,
   },
-  mixins: [metamask],
+  mixins: [metamask, menu],
   data() {
     return {
       mobileMenu: false,

@@ -172,14 +172,14 @@
 
       .desktop-sound {
         display: flex;
-        transform: translateX(180px);
+        //transform: translateX(180px);
 
         @media (max-width: 1700px) {
-          transform: translateX(80px);
+          //transform: translateX(80px);
         }
 
         @media (max-width: 1600px) {
-          transform: translateX(0);
+          //transform: translateX(0);
         }
 
         @media (max-width: $break-lgs) {
