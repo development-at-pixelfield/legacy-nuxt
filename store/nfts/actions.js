@@ -11,6 +11,8 @@ export const actions = {
   getNfts(context, payload) {
     payload.page = payload && payload.page ? +payload.page : 1;
     payload.page_size = payload && payload.page_size ? +payload.page_size : 12;
+    payload.ordering =
+      payload && payload.ordering ? payload.ordering : "-deployed_at";
     payload = functions.arrayToStr(payload);
     payload = functions.cleanObject(payload);
     const queryString = functions.objectToQuery(payload);
@@ -77,5 +79,23 @@ export const actions = {
 
   voteRoadmap(context, payload) {
     return this.$axios.$post(`/nfts/roadmap/vote/${payload}/`);
+  },
+  /**
+   * Get veriff countries
+   * @param context
+   * @returns {Promise<any>}
+   */
+  getCountries(context, payload) {
+    return this.$axios.$get(`/veriff/countries/`);
+  },
+
+  /**
+   * Veriff user
+   * @param context
+   * @param payload{Object<{first_name: string, last_name: string, document_type: string, document_country: string}>}
+   * @returns {Promise<any>}
+   */
+  verifyUser(context, payload) {
+    return this.$axios.$post(`/veriff/start/`, payload);
   },
 };

@@ -3,10 +3,24 @@
   //height: 650px;
   position: relative;
   overflow: hidden;
+  height: -webkit-fill-available;
+
+  @media (max-width: 2000px) {
+    height: auto;
+  }
 
   .back-img{
     width: 100%;
     position: absolute;
+
+    @media (max-width: 1390px) {
+      height: 100%;
+    }
+
+    @media (max-width: $break-md) {
+      width: auto;
+      height: auto;
+    }
   }
 
   //&::after{
@@ -54,7 +68,7 @@
       height: 305px;
       display: inline-flex;
       position: absolute;
-      bottom: 250px;
+      bottom: 0;
       left: -30px;
 
       @media (max-width: 600px) {
@@ -73,7 +87,7 @@
       height: 247px;
       display: inline-flex;
       position: absolute;
-      bottom: 600px;
+      bottom: 0;
       right: 0;
 
       @media (max-width: 600px) {
@@ -166,10 +180,14 @@
       }
     }
 
-    footer {
+    .footer {
       padding-top: 120px;
       padding-bottom: 80px;
       position: relative;
+
+      @media (max-width: $break-md) {
+        padding-top: 40px;
+      }
 
       @media (max-width: $break-sms) {
         padding-bottom: 40px;

@@ -52,7 +52,12 @@
         <p class="text-m-bold mb-16 mt-0">{{ $t("modals.walletLinks") }}</p>
         <div class="dropdown-wallet-connect mb-16 view-active pointer">
           <div class="dropdown-wallet-connect-text view-nopadding">
-            <p class="text-m-bold mb-0 mt-0">How to connect wallet</p>
+            <p
+              class="text-m-bold mb-0 mt-0"
+              @click="$router.push('/help/installation')"
+            >
+              How to connect wallet
+            </p>
           </div>
           <div class="dropdown-wallet-connect-button view-icon text-btn">
             <img src="~/assets/img/icons/caret-right.svg" alt="link" />
@@ -60,7 +65,12 @@
         </div>
         <div class="dropdown-wallet-connect view-active pointer">
           <div class="dropdown-wallet-connect-text view-nopadding">
-            <p class="text-m-bold mb-0 mt-0">How to buy ETH</p>
+            <p
+              class="text-m-bold mb-0 mt-0"
+              @click="$router.push('/help/buy-eth')"
+            >
+              How to buy ETH
+            </p>
           </div>
           <div class="dropdown-wallet-connect-button view-icon text-btn">
             <img src="~/assets/img/icons/caret-right.svg" alt="link" />
@@ -104,7 +114,7 @@
             :size="'small'"
             :color="'c-white'"
             :label="$t('modals.walletMore')"
-            @on-click="$router.push('/settings')"
+            @on-click="$router.push('/help')"
           />
         </div>
       </div>
@@ -185,7 +195,8 @@ export default {
       this.show = false;
     },
     async copyToClip() {
-      const copyText = this.$store.getters.walletAccount;
+      const copyText =
+        this.$store.getters.walletAccount || this.$auth.user.wallet_address;
       navigator.clipboard.writeText(copyText);
       await this.$store.commit("setSnackbar", {
         show: true,

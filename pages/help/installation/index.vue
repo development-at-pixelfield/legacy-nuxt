@@ -15,7 +15,9 @@
 
       <SimpleDropdown>
         <template slot="title">
-          <div class="text-m">{{ $t("helpPage.install.dropdown1.title") }}</div>
+          <div class="text-m c-grey">
+            {{ $t("helpPage.install.dropdown1.title") }}
+          </div>
         </template>
         <div>
           <GuideLineElement number="1">
@@ -72,7 +74,9 @@
 
       <SimpleDropdown>
         <template slot="title">
-          <div>{{ $t("helpPage.install.dropdown2.title") }}</div>
+          <div class="text-m c-grey">
+            {{ $t("helpPage.install.dropdown2.title") }}
+          </div>
         </template>
         <div>
           <GuideLineElement number="1">
@@ -209,7 +213,9 @@
 
       <SimpleDropdown>
         <template slot="title">
-          <div>{{ $t("helpPage.install.dropdown3.title") }}</div>
+          <div class="text-m c-grey">
+            {{ $t("helpPage.install.dropdown3.title") }}
+          </div>
         </template>
         <div>
           <GuideLineElement number="1">
@@ -287,7 +293,9 @@
 
       <SimpleDropdown>
         <template slot="title">
-          <div>{{ $t("helpPage.install.dropdown4.title") }}</div>
+          <div class="text-m c-grey">
+            {{ $t("helpPage.install.dropdown4.title") }}
+          </div>
         </template>
         <div>
           <GuideLineElement number="1">

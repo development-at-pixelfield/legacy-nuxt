@@ -5,19 +5,25 @@
         <div class="header-menu">
           <div class="desktop-menu">
             <nuxt-link to="/marketplace"
-              ><span class="text-m marketplace-link">{{
-                $t("marketplace.marketplace")
-              }}</span></nuxt-link
+              ><span
+                class="text-m marketplace-link"
+                :class="{ current: active === 1 }"
+                >{{ $t("marketplace.marketplace") }}</span
+              ></nuxt-link
             >
             <nuxt-link to="/galactic-miles" class="ml-24"
-              ><span class="text-m marketplace-link">{{
-                $t("marketplace.galacticMiles")
-              }}</span></nuxt-link
+              ><span
+                class="text-m marketplace-link"
+                :class="{ current: active === 2 }"
+                >{{ $t("marketplace.galacticMiles") }}</span
+              ></nuxt-link
             >
             <nuxt-link to="/help" class="ml-24"
-              ><span class="text-m marketplace-link">{{
-                $t("marketplace.help")
-              }}</span></nuxt-link
+              ><span
+                class="text-m marketplace-link"
+                :class="{ current: active === 3 }"
+                >{{ $t("marketplace.help") }}</span
+              ></nuxt-link
             >
           </div>
 
@@ -68,7 +74,11 @@
           /></span>
         </div>
 
-        <p class="mt-0 mb-40">
+        <p
+          class="mt-0 mb-40 pointer"
+          :class="{ 'active-link': $route.path === '/marketplace' }"
+          @click="toLink('/marketplace')"
+        >
           <nuxt-link
             to="/marketplace"
             class="ml-16"
@@ -78,7 +88,11 @@
             }}</span></nuxt-link
           >
         </p>
-        <p class="mt-0 mb-40">
+        <p
+          class="mt-0 mb-40 pointer"
+          :class="{ 'active-link': $route.path === '/galactic-miles' }"
+          @click="toLink('/galactic-miles')"
+        >
           <nuxt-link
             to="/galactic-miles"
             class="ml-16"
@@ -88,7 +102,11 @@
             }}</span></nuxt-link
           >
         </p>
-        <p class="mt-0 mb-40">
+        <p
+          class="mt-0 mb-40 pointer"
+          :class="{ 'active-link': $route.path === '/help' }"
+          @click="toLink('/help')"
+        >
           <nuxt-link to="/help" class="ml-16" @click.native="mobileMenu = false"
             ><span class="header-title1 marketplace-link">{{
               $t("marketplace.help")
@@ -104,13 +122,14 @@
 import DropdownList from "../ui/DropdownList";
 import DropdownWallet from "../ui/DropdownWallet";
 import metamask from "../../mixins/metamask";
+import menu from "../../mixins/menu";
 export default {
   name: "Header",
   components: {
     DropdownList,
     DropdownWallet,
   },
-  mixins: [metamask],
+  mixins: [metamask, menu],
   data() {
     return {
       mobileMenu: false,
@@ -170,6 +189,10 @@ export default {
     }
   },
   methods: {
+    toLink(link) {
+      this.$router.push(link);
+      this.mobileMenu = false;
+    },
     async actionHandler(item) {
       if (item.value === "logout") {
         await this.$auth.logout();

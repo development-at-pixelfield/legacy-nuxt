@@ -11,11 +11,13 @@
           <div class="user-block">
             <p class="mt-0 mb-8 header-title">
               {{ username }}
-              <img
-                v-if="isVerified"
-                :src="require(`assets/img/icons/verified-account.svg`)"
-                alt="icon"
-              />
+              <span class="img-block">
+                <img
+                  v-if="isVerified"
+                  :src="require(`assets/img/icons/verified-account.svg`)"
+                  alt="icon"
+                />
+              </span>
             </p>
             <ul class="user-states mt-0 mb-0">
               <li
@@ -29,9 +31,12 @@
                   class="text-m-bold user-tag-text"
                   >{{ myWallet }}</span
                 >
-                <span v-else class="text-m-bold user-tag-text">{{
-                  $t("nft_modal.connect_wallet")
-                }}</span>
+                <span
+                  v-else
+                  class="text-m-bold user-tag-text"
+                  @click="connectMetamask"
+                  >{{ $t("nft_modal.connect_wallet") }}</span
+                >
                 <img
                   :src="require(`assets/img/icons/caret-right.svg`)"
                   class="user-tag-icon"
@@ -92,7 +97,9 @@
               {{ $t("profile.walletTitle") }}
             </p>
             <p class="mt-0 mb-0 text-m-bold">{{ $t("profile.walletDesc1") }}</p>
-            <p class="mt-0 mb-0 link">{{ $t("profile.walletDesc2") }}</p>
+            <p class="mt-0 mb-0 link pointer" @click="$router.push('/help')">
+              {{ $t("profile.walletDesc2") }}
+            </p>
           </div>
           <div class="user-action-block-button">
             <Button

@@ -176,6 +176,24 @@ ul{
   }
 }
 
+.header-h{
+  color: $c-white;
+  text-align: center;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 38px;
+  letter-spacing: -0.01em;
+  margin-top: 0;
+
+  @media (max-width: $break-sms) {
+    font-weight: 800;
+    font-size: 37px;
+    line-height: 37px;
+    letter-spacing: -0.02em
+  }
+}
+
 
 //Margins
 .mtb{
@@ -293,6 +311,9 @@ ul{
 }
 .no-color-dec-link{
   color: white;
+  text-decoration: none;
+}
+.no-dec-link{
   text-decoration: none;
 }
 .pointer{
@@ -424,10 +445,13 @@ input{
 }
 
 .help-panel{
-  padding-bottom: 56px;
+  padding-bottom: 56px !important;
 }
 .link-c {
   color: $c-link;
+}
+.c-grey {
+  color: $c-greyscale-20 !important;
 }
 
 .nav{

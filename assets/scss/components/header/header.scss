@@ -109,6 +109,7 @@ header{
     transform: translateX(-100px);
     opacity: 0;
     transition: all 0.3s ease-out;
+    visibility: hidden;
 
     .header-block{
       display: flex;
@@ -119,6 +120,10 @@ header{
         align-items: center;
       }
     }
+
+    .active-link{
+      border-left: 1px solid #FFF;
+    }
   }
 
   .open-menu{
@@ -126,6 +131,7 @@ header{
     width: 100%;
     transform: translateX(0);
     transition: all 0.3s ease-out;
+    visibility: visible;
   }
 
   .divider{
@@ -167,6 +173,11 @@ header{
   }
 }
 
+.landing-header{
+  background: transparent;
+  border: none;
+}
+
 .marketplace-link {
   &:hover {
     cursor: pointer;
@@ -176,6 +187,9 @@ header{
 .fixed{
   width: 100%;
   z-index: 2;
+}
+.current{
+  font-weight: 700;
 }
 
 .not-auth{
