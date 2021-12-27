@@ -1,8 +1,8 @@
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    titleTemplate: "Galaxy.diamonds | Own the universe",
-    title: "Galaxy.diamonds | Own the universe",
+    titleTemplate: "Legacy | Own the universe",
+    title: "Legacy | Own the universe",
     meta: [
       {charset: "utf-8"},
       {
