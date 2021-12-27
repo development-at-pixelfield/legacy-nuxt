@@ -20,7 +20,7 @@ export const actions = {
 
   getRoadmap(context, payload) {
     payload.page = payload && payload.page ? +payload.page : 1;
-    payload.page_size = payload && payload.page_size ? +payload.page_size : 1;
+    payload.page_size = payload && payload.page_size ? +payload.page_size : 10;
     payload = functions.arrayToStr(payload);
     payload = functions.cleanObject(payload);
     const queryString = functions.objectToQuery(payload);
@@ -73,5 +73,9 @@ export const actions = {
    */
   initPayment(context, payload) {
     return this.$axios.$post(`/nfts/sell_offers/payment/init/`, payload);
+  },
+
+  voteRoadmap(context, payload) {
+    return this.$axios.$post(`/nfts/roadmap/vote/${payload}/`);
   },
 };

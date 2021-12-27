@@ -20,7 +20,9 @@
           class="user-tag-gift"
           alt="icon"
         />
-        <span class="text-m-bold user-tag-text">4 GM (4 votes)</span>
+        <span class="text-m-bold user-tag-text"
+          >{{ count }}GM ({{ count }} votes)</span
+        >
       </div>
     </div>
 
@@ -29,11 +31,15 @@
         v-for="item in nfts.results"
         :key="item.uid"
         :status="item.status"
-        @add-count="addCount"
+        :loading="item.loading"
+        @add-count="addCount(item.uid)"
       >
-        <span slot="count" class="header-title1 no-color-link">{{
-          item.votes
-        }}</span>
+        <span
+          slot="count"
+          class="header-title1 no-color-link"
+          :class="{ 'view-loading': item.loading }"
+          >{{ item.votes }}</span
+        >
         <p slot="title" class="mt-0 mb-4 no-color-link text-m-bold">
           {{ item.title }}
         </p>
@@ -42,7 +48,7 @@
         </p>
       </RoadmapItem>
 
-      <RoadmapItem :status="'progress'">
+      <!-- <RoadmapItem :status="'progress'">
         <span slot="count" class="header-title1 no-color-link">22</span>
         <p slot="title" class="mt-0 mb-4 no-color-link text-m-bold">Title</p>
         <p slot="description" class="mtb no-color-link text-m">
@@ -60,7 +66,7 @@
           a type specimen book. It has survived not only five centuries, but
           also the leap into electronic typesetting, remaining essentially
         </p>
-      </RoadmapItem>
+      </RoadmapItem> -->
       <div class="pagination-wrapper">
         <Pagination
           :list="nfts.results"
@@ -85,7 +91,7 @@ import { functions } from "../../utils";
 import { catchErrors } from "../../utils/catchErrors";
 const filterDefaultVars = {
   page: 1,
-  page_size: 1,
+  page_size: 10,
 };
 
 export default {
@@ -120,8 +126,14 @@ export default {
   data() {
     return {
       count: 0,
+      voting: false,
       nfts: {},
     };
+  },
+  created() {
+    if (this.$auth.user.miles_amount) {
+      this.count = this.$auth.user.miles_amount;
+    }
   },
   methods: {
     updatePage(val) {
@@ -153,9 +165,8 @@ export default {
         });
       }
     },
-    addCount() {
-      const count = 0;
-      if (!count) {
+    async addCount(uuid) {
+      if (this.count === 0) {
         return this.$store.commit("setModal", {
           show: true,
           type: "galactic-miles",
@@ -163,6 +174,39 @@ export default {
       }
 
       if (!this.$auth.loggedIn) return this.$router.push("/login");
+      if (!this.voting) {
+        this.voting = true;
+        try {
+          await this.$store.dispatch("nfts/voteRoadmap", uuid);
+          const items = [];
+          for (let i = 0, l = this.nfts.results.length; i < l; i++) {
+            if (this.nfts.results[i].uid === uuid) {
+              this.nfts.results[i].votes++;
+              this.nfts.results[i].loading = true;
+              items.push(this.nfts.results[i]);
+            } else {
+              items.push(this.nfts.results[i]);
+            }
+          }
+          this.nfts.results = items;
+          setTimeout(() => {
+            const items = [];
+            for (let i = 0, l = this.nfts.results.length; i < l; i++) {
+              this.nfts.results[i].loading = false;
+              items.push(this.nfts.results[i]);
+            }
+            this.nfts.results = items;
+            this.voting = false;
+            this.count--;
+          }, 5000);
+        } catch (error) {
+          await this.$store.commit("setSnackbar", {
+            show: true,
+            message: this.$t("snackbar.voteFail"),
+            color: "error",
+          });
+        }
+      }
     },
   },
 };
