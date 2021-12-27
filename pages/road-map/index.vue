@@ -190,13 +190,7 @@ export default {
           }
           this.nfts.results = items;
           setTimeout(() => {
-            const items = [];
-            for (let i = 0, l = this.nfts.results.length; i < l; i++) {
-              this.nfts.results[i].loading = false;
-              items.push(this.nfts.results[i]);
-            }
-            this.nfts.results = items;
-            this.voting = false;
+            this.updatePage(this.filter.page);
             this.count--;
           }, 5000);
         } catch (error) {
