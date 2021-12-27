@@ -11,6 +11,10 @@ $number-size: 24px;
     margin-bottom: 16px;
     width: 100%;
 
+    @media (max-width: $break-sms) {
+      align-items: flex-start;
+    }
+
     .number {
       padding: 0;
       width: $number-size;
@@ -21,6 +25,21 @@ $number-size: 24px;
       text-align: center;
       font-size: $number-size / 2;
       min-width: $number-size;
+      position: relative;
+      z-index: 1;
+
+      &::before{
+        @media (max-width: $break-sms) {
+          content: "";
+          position: absolute;
+          height: 420%;
+          width: 1px;
+          background: #8933cd;
+          left: 12px;
+          z-index: -1;
+          top: 48px;
+        }
+      }
     }
     .title-text {
       flex-grow: 1;

@@ -33,7 +33,7 @@
                 <span class="img-block-s">
                   <img
                     :src="
-                      nft.owner
+                      nft.owner && nft.owner.avatar
                         ? nft.owner.avatar
                         : require('assets/img/auction.png')
                     "

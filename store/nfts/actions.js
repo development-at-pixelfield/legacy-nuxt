@@ -11,6 +11,8 @@ export const actions = {
   getNfts(context, payload) {
     payload.page = payload && payload.page ? +payload.page : 1;
     payload.page_size = payload && payload.page_size ? +payload.page_size : 12;
+    payload.ordering =
+      payload && payload.ordering ? payload.ordering : "-deployed_at";
     payload = functions.arrayToStr(payload);
     payload = functions.cleanObject(payload);
     const queryString = functions.objectToQuery(payload);

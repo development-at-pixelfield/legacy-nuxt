@@ -97,7 +97,7 @@
               {{ $t("profile.walletTitle") }}
             </p>
             <p class="mt-0 mb-0 text-m-bold">{{ $t("profile.walletDesc1") }}</p>
-            <p class="mt-0 mb-0 link" @click="$router.push('/help')">
+            <p class="mt-0 mb-0 link pointer" @click="$router.push('/help')">
               {{ $t("profile.walletDesc2") }}
             </p>
           </div>
