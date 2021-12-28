@@ -4,8 +4,8 @@ a {
 
 header{
   height: 56px;
-  background: #08010E;
-  border-bottom: 1px solid #301C3F;
+  background: $c-background;
+  border-bottom: 1px solid $c-greyscale-100;
   position: relative;
 
   .header-full-container {

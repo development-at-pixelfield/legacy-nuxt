@@ -13,8 +13,8 @@
             }}</nuxt-link>
           </li>
           <li>
-            <nuxt-link to="/galactic-miles" class="text-m no-color-dec-link">{{
-              $t("marketplace.galacticMiles")
+            <nuxt-link to="/legacy-scores" class="text-m no-color-dec-link">{{
+              $t("marketplace.legacyScores")
             }}</nuxt-link>
           </li>
           <li>

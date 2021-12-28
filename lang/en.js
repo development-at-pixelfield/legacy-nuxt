@@ -192,6 +192,7 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
   marketplace: {
     marketplace: "Marketplace",
     galacticMiles: "Galactic Miles",
+    legacyScores: "Legacy Scores",
     help: "Help",
     luminosity: "Luminosity",
     copyright: "Copyright © 2022. Galaxy. All rights reserved.",

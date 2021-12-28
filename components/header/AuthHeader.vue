@@ -11,11 +11,11 @@
                 >{{ $t("marketplace.marketplace") }}</span
               ></nuxt-link
             >
-            <nuxt-link to="/galactic-miles" class="ml-24"
+            <nuxt-link to="/legacy-scores" class="ml-24"
               ><span
                 class="text-m marketplace-link"
                 :class="{ current: active === 2 }"
-                >{{ $t("marketplace.galacticMiles") }}</span
+                >{{ $t("marketplace.legacyScores") }}</span
               ></nuxt-link
             >
             <nuxt-link to="/help" class="ml-24"
@@ -89,15 +89,15 @@
         </p>
         <p
           class="mt-0 mb-40 pointer"
-          :class="{ 'active-link': $route.path === '/galactic-miles' }"
-          @click="toLink('/galactic-miles')"
+          :class="{ 'active-link': $route.path === '/legacy-scores' }"
+          @click="toLink('/legacy-scores')"
         >
           <nuxt-link
-            to="/galactic-miles"
+            to="/legacy-scores"
             class="ml-16"
             @click.native="mobileMenu = false"
             ><span class="header-title1 marketplace-link">{{
-              $t("marketplace.galacticMiles")
+              $t("marketplace.legacyScores")
             }}</span></nuxt-link
           >
         </p>

@@ -1,7 +1,7 @@
 <template>
   <div class="galactic-wrapper main-container">
     <h1 class="header-big-l no-color-link mb-0">
-      {{ $t("marketplace.galacticMiles") }}
+      {{ $t("marketplace.legacyScores") }}
     </h1>
     <p class="mt-16 mb-16 no-color-link text-m">
       {{ $t("marketplace.galacticMilesSubTitle") }}

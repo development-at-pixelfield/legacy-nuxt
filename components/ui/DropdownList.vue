@@ -13,7 +13,7 @@
       <li v-if="miles">
         <div
           class="container-li custom-li"
-          @click="$router.push('/galactic-miles')"
+          @click="$router.push('/legacy-scores')"
         >
           <div class="left-side">
             <span class="img-block">
@@ -21,7 +21,7 @@
             </span>
             <div class="ml-8">
               <p class="mtb text-s-bold no-color-link">
-                {{ $t("marketplace.galacticMiles") }}
+                {{ $t("marketplace.legacyScores") }}
               </p>
               <p class="mtb text-m-bold no-color-link">{{ miles }}</p>
             </div>

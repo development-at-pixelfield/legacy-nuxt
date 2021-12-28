@@ -43,7 +43,7 @@
                   alt="icon"
                 />
               </li>
-              <li class="user-tag" @click="$router.push('/galactic-miles')">
+              <li class="user-tag" @click="$router.push('/legacy-scores')">
                 <img
                   :src="require(`assets/img/gift.svg`)"
                   class="user-tag-gift"

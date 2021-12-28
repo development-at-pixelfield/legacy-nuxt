@@ -1,7 +1,7 @@
 <template>
   <div class="road-map-wrapper main-container">
     <Navigation
-      :title="$t('marketplace.galacticMiles')"
+      :title="$t('marketplace.legacyScores')"
       class="mb-8"
       :show-back="$auth.loggedIn"
     />
@@ -169,7 +169,7 @@ export default {
       if (this.count === 0) {
         return this.$store.commit("setModal", {
           show: true,
-          type: "galactic-miles",
+          type: "legacy-scores",
         });
       }
 
