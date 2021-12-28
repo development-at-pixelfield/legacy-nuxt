@@ -330,7 +330,7 @@ your MetaMask wallet with ethereum. `,
     collectDesc: `We want to gift you some sweet Galactic Miles for buying a  new NFT collectable through our platform.
 Use earned points to access VIP features, such as community voting! More features coming up ;)`,
     collectBtn: "Access exclusive features",
-    galacticHeader: "Collect Galactic Miles",
+    galacticHeader: "Collect Legacy Scores",
     galacticTitle: "Exclusive features awaiting!",
     galacticDesc: `Collect Galactic Miles by buying NFTs through our marketplace.
 Use earned points to access VIP features!`,

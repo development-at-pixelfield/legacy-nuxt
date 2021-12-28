@@ -9,7 +9,7 @@
     <div class="content">
       <div class="left-side">
         <span class="img-block">
-          <img src="~/assets/img/galaxy-rocket.png" alt="rocket" />
+          <img src="~/assets/img/vote.png" alt="vote" />
         </span>
         <div class="info">
           <h3 class="header-title1 mb-4 mt-0 no-color-link">
