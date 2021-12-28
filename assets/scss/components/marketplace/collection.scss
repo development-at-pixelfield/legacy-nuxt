@@ -1,16 +1,32 @@
-.main-container {
-  padding: 40px;
+.content-container {
   background: $c-greyscale-120;
   border: 1px solid $c-greyscale-80;
   color: white;
+  margin-top: 40px;
+  padding: 40px;
 
   @media (max-width: $break-sms) {
-    margin-top: -120px;
     padding: 24px 16px;
   }
 
-  .collection {
+  .collection{
+    padding-bottom: 32px;
     display: grid;
+    grid-gap: 16px 16px;
+    grid-template-columns: repeat(auto-fill, 224px);
+    justify-content: center;
+
+    @media (max-width: 530px) {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    @media (max-width: 380px) {
+      justify-content: center;
+    }
+
     
+
   }
 }

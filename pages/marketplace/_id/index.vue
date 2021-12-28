@@ -120,6 +120,7 @@
             </div>
             <div class="timer text-l">
               <AuctionTimer
+                v-if="nft && nft.last_offer"
                 :time="nft.last_offer.price_changes_at"
                 :show-auction.sync="showAuction"
                 @finished="timerFinished"
@@ -181,7 +182,11 @@
         </a>
       </div>
     </div>
-    <Collection :collection-name="nft.constellation.name" />
+    <Collection
+      v-if="nft.constellation"
+      :constellation-name="nft.constellation.name"
+      class="mt-40"
+    />
   </div>
 </template>
 
@@ -189,7 +194,7 @@
 import Navigation from "../../../components/header/Navigation";
 import WebGl from "../../../components/marketplace/WebGl";
 import Button from "../../../components/ui/Button";
-import AuctionTimer from "../../../components/marketplace/AuctionTimer";
+// import AuctionTimer from "../../../components/marketplace/AuctionTimer";
 import converter from "../../../mixins/converter";
 import metamask from "../../../mixins/metamask";
 import Collection from "~/components/marketplace/Collection.vue";
@@ -201,7 +206,7 @@ export default {
     WebGl,
     Button,
     Collection,
-    AuctionTimer,
+    // AuctionTimer,
   },
   mixins: [converter, metamask],
   layout(context) {
