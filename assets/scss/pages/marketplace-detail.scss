@@ -195,7 +195,7 @@
 
     .auction{
       background: $c-greyscale-100;
-      padding: 28px 24px;
+      padding: 24px;
       display: flex;
       justify-content: space-between;
 
@@ -211,6 +211,7 @@
 
       .left-side{
         display: flex;
+        align-items: center;
 
         @media (max-width: $break-md) {
           margin-bottom: 24px;
@@ -256,6 +257,8 @@
       }
 
       .right-side{
+        width: 213px;
+        
         @media (max-width: $break-smsm) {
           width: 100%;
           text-align: center;
@@ -264,6 +267,8 @@
         .text{
           display: flex;
           align-items: center;
+          justify-content: center;
+          margin-bottom: 6px;
 
           @media (max-width: $break-smsm) {
             width: 100%;
@@ -306,8 +311,8 @@
 
           .tag{
             padding: 4px 4px 4px 8px;
-            background: #6000AE;
-            border-radius: 3px;
+            background: #3843FF            ;
+            border-radius: 12px;
           }
         }
       }
@@ -338,4 +343,8 @@
       }
     }
   }
+}
+
+.auction-bell {
+  margin-right: 6px;
 }

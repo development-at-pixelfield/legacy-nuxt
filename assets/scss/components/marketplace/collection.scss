@@ -1,0 +1,16 @@
+.main-container {
+  padding: 40px;
+  background: $c-greyscale-120;
+  border: 1px solid $c-greyscale-80;
+  color: white;
+
+  @media (max-width: $break-sms) {
+    margin-top: -120px;
+    padding: 24px 16px;
+  }
+
+  .collection {
+    display: grid;
+    
+  }
+}
