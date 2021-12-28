@@ -5,7 +5,7 @@
       <div v-if="!isFullVerify" class="verification form-group mb-24">
         <div class="info-block mb-24">
           <div class="img-block">
-            <img src="~/assets/img/icons/shield.png" alt="verify-icon" />
+            <img src="~/assets/img/icons/sheild.png" alt="verify-icon" />
           </div>
 
           <div class="ml-8">

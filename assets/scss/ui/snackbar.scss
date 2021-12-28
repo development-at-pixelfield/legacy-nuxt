@@ -26,14 +26,14 @@
   }
 
   &--success {
-    background: $c-success;
+    background: linear-gradient(0deg, rgba(29, 209, 161, 0.1), rgba(29, 209, 161, 0.1)), #1C1D2B;;
     border-radius: 3px;
-    border: 1px solid #261632;
+    border: none;
   }
   &--error {
-    background: $c-error;
+    background: linear-gradient(0deg, rgba(255, 112, 81, 0.1), rgba(255, 112, 81, 0.1)), #1C1D2B;;
     border-radius: 3px;
-    border: 1px solid #261632;
+    border: none;
   }
   &--normal {
     border: 1px solid #261632;
@@ -42,10 +42,10 @@
   }
 
   &--text-color-success{
-    color: $c-greyscale-120 !important;
+    color: $c-success !important;
   }
   &--text-color-error{
-    color: $c-white;
+    color: $c-error;
   }
   &--text-color-normal{
     color: $c-white;
