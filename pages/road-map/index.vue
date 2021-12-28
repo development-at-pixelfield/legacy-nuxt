@@ -21,7 +21,7 @@
           alt="icon"
         />
         <span class="text-m-bold user-tag-text"
-          >{{ count }}GM ({{ count }} votes)</span
+          >{{ count }} LS ({{ count }} votes)</span
         >
       </div>
     </div>

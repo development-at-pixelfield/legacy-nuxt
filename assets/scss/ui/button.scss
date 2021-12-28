@@ -128,13 +128,13 @@
   &__warning{
     background: transparent;
     position: relative;
-    border: 1px solid $c-system-error;
+    border: 1px solid $c-error;
   }
 
   &__full-warning{
-    background: $c-system-error;
+    background: $c-error;
     position: relative;
-    border: 1px solid $c-system-error;
+    border: 1px solid $c-error
   }
 
   &__circle{
@@ -204,7 +204,7 @@
     color: $c-black
   }
   &__c-warning{
-    color: $c-system-error
+    color: $c-error
   }
   &__c-grey{
     color: $c-greyscale-20
