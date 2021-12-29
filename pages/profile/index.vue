@@ -45,7 +45,7 @@
               </li>
               <li class="user-tag" @click="$router.push('/legacy-scores')">
                 <img
-                  :src="require(`assets/img/gift.svg`)"
+                  :src="require(`assets/img/icons/gift.png`)"
                   class="user-tag-gift"
                   alt="icon"
                 />
@@ -68,7 +68,7 @@
       <div class="user-content">
         <div v-if="!isVerified" class="user-action-block">
           <div class="user-action-block-icon">
-            <img :src="require(`assets/img/verify-profile.svg`)" alt="icon" />
+            <img :src="require(`assets/img/verify-profile.png`)" alt="icon" />
           </div>
           <div class="user-action-block-text">
             <p class="mt-0 mb-4 header-title">
@@ -90,7 +90,7 @@
         </div>
         <div v-if="!connectedWallet" class="user-action-block view-wallet">
           <div class="user-action-block-icon">
-            <img :src="require(`assets/img/wallet-profile.svg`)" alt="icon" />
+            <img :src="require(`assets/img/wallet-profile.png`)" alt="icon" />
           </div>
           <div class="user-action-block-text">
             <p class="mt-0 mb-4 header-title">
@@ -165,7 +165,7 @@
         >
           <div class="user-action-block-icon">
             <img
-              :src="require(`assets/img/collection-profile.svg`)"
+              :src="require(`assets/img/collection-profile.png`)"
               alt="icon"
             />
           </div>
@@ -193,7 +193,7 @@
         </div>
         <div class="user-action-block view-wallet">
           <div class="user-action-block-icon">
-            <img :src="require(`assets/img/gift.png`)" alt="icon" />
+            <img :src="require(`assets/img/scores.png`)" alt="icon" />
           </div>
           <div class="user-action-block-text">
             <p class="mt-0 mb-4 header-title">
