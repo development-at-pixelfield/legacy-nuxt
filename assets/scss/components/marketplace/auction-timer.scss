@@ -1,7 +1,8 @@
 .timer-wrapper{
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
+  width: 213px;
 
   @media (max-width: $break-smsm) {
     justify-content: center;
@@ -16,7 +17,7 @@
       text-align: center;
       backdrop-filter: blur(40px);
       font-weight: bold;
-      font-size: 56px;
+      font-size: 48px;
       line-height: 100%;
       letter-spacing: -0.025em;
     }
