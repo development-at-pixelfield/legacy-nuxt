@@ -75,7 +75,7 @@
     top: 48px;
     left: -120px;
     min-width: 216px;
-    background: #1D1126;
+    background: $c-greyscale-100;
     border-radius: 3px;
     //padding: 8px 16px;
     padding: 8px 0;
@@ -98,7 +98,7 @@
         cursor: pointer;
 
         &:hover {
-          background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), #301C3F;;
+          background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), $c-greyscale-100;
         }
 
         &:active .label-item{
@@ -162,7 +162,7 @@
     top: 30px;
     left: -265px;
     min-width: 296px;
-    background: #1D1126;
+    background: $c-greyscale-140;
     border-radius: 3px;
     //padding: 8px 16px;
     padding: 16px 16px 20px;

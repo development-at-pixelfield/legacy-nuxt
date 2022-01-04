@@ -136,7 +136,7 @@ export default {
           ? "#3843FF"
           : this.error || this.errorBorder
           ? "#FC4E4E"
-          : "#261632",
+          : "#11121B",
         borderWidth: "1px",
         borderStyle: "solid",
       };

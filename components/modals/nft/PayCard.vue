@@ -5,7 +5,7 @@
     @close="close()"
   >
     <div class="verification-container">
-      <img class="image" src="~/assets/img/icons/pay-card.png" />
+      <img class="" src="~/assets/img/icons/pay-card.png" />
       <div class="verification-container_textbox">
         <div class="verification-container_textbox_title">
           {{ $t("nft_modal.howFund") }}

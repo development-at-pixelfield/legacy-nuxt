@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <div class="main-container">
+    <div class="main-container p-r">
       <div class="detail">
         <div class="main-info block-margin">
           <div class="left-side">
@@ -52,8 +52,9 @@
                 <Button
                   class="single-btn"
                   :label="$t('marketplace.buyNow')"
-                  :background="'disabled-new'"
+                  :background="'grey-m'"
                   :size="'medium'"
+                  :color="'c-white'"
                   :tooltip="'Community re-listing coming soon!'"
                 />
               </div>
@@ -182,10 +183,11 @@
         </a>
       </div>
     </div>
+
     <Collection
       v-if="nft.constellation"
       :constellation-name="nft.constellation.name"
-      class="mt-40"
+      class="mt-40 p-r"
     />
   </div>
 </template>
@@ -194,7 +196,7 @@
 import Navigation from "../../../components/header/Navigation";
 import WebGl from "../../../components/marketplace/WebGl";
 import Button from "../../../components/ui/Button";
-// import AuctionTimer from "../../../components/marketplace/AuctionTimer";
+import AuctionTimer from "../../../components/marketplace/AuctionTimer";
 import converter from "../../../mixins/converter";
 import metamask from "../../../mixins/metamask";
 import Collection from "~/components/marketplace/Collection.vue";
@@ -206,7 +208,7 @@ export default {
     WebGl,
     Button,
     Collection,
-    // AuctionTimer,
+    AuctionTimer,
   },
   mixins: [converter, metamask],
   layout(context) {

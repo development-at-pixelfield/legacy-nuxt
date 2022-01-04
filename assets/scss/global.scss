@@ -360,7 +360,7 @@ input{
   //}
 
   &:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 30px #301C3F inset !important;
+    -webkit-box-shadow: 0 0 0 30px $c-greyscale-120 inset !important;
     -webkit-text-fill-color: white !important;
     -webkit-border-radius: 0 !important;
     font-size: 16px;
@@ -453,6 +453,10 @@ input{
 }
 .c-grey {
   color: $c-greyscale-20 !important;
+}
+
+.p-r{
+  position: relative;
 }
 
 .nav{

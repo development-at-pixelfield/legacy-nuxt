@@ -1,15 +1,32 @@
 .marketplace-detail{
-  background: $c-background;
+  //background: $c-background;
   padding-bottom: 40px;
+
+  //opacity: 0.2;
   //height: 100vh;
+  position: relative;
+
+  &::before{
+    content: "";
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(179.65deg, #FFB0CB -3.77%, rgba(255, 176, 203, 0) 87.33%),url("~assets/img/market-header.png");
+    background-blend-mode: color, normal;
+    background-position: top center;
+    opacity: 0.2;
+  }
 
   .done{
     color: #1DD1A1;
   }
 
   .header{
-    background: url("~assets/img/landing/starsgroup.png");
-    background-position: center;
+    //background: url("~assets/img/market-header.png");
+    //background-position: center;
     padding-bottom: 140px;
 
     @media (max-width: $break-sms) {
@@ -18,6 +35,7 @@
 
     .nav{
       padding-top: 44px;
+      position: relative;
       //margin-bottom: 56px;
 
       @media (max-width: $break-sms) {
@@ -135,7 +153,7 @@
         }
 
         .sold-action{
-          background: #301C3F;
+          background: $c-greyscale-100;
           border-radius: 3px;
           padding: 24px;
           display: flex;
@@ -258,7 +276,7 @@
 
       .right-side{
         width: 213px;
-        
+
         @media (max-width: $break-smsm) {
           width: 100%;
           text-align: center;
@@ -311,7 +329,7 @@
 
           .tag{
             padding: 4px 4px 4px 8px;
-            background: #3843FF            ;
+            background: #3843FF;
             border-radius: 12px;
           }
         }
@@ -319,7 +337,7 @@
     }
 
     .history{
-      border: 1px solid #301C3F;
+      border: 1px solid $c-greyscale-100;
       padding: 12px;
       display: flex;
       align-items: center;
