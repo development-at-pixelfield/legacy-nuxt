@@ -1,7 +1,7 @@
 <template>
   <ScaffoldModal :heading="data.title" @close="close('close')">
     <div class="verification-container">
-      <img src="~/assets/img/icons/verification-symbol.svg" />
+      <img src="~/assets/img/verification-symbol.png" />
       <div class="verification-container_textbox">
         <div class="verification-container_textbox_title">
           {{ data.title }}
