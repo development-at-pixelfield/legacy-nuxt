@@ -91,10 +91,10 @@
           </div>
         </div>
 
-        <div v-if="showAuction" class="auction block-margin">
+        <div class="auction block-margin">
           <div class="left-side">
             <div class="img-block">
-              <img src="~/assets/img/auction.png" alt="auction" />
+              <img src="~/assets/img/icons/auction-tags.svg" alt="auction" />
             </div>
             <div class="info">
               <p class="mt-0 mb-4 header-title1">Dutch auction</p>
@@ -108,14 +108,19 @@
           <div class="right-side">
             <div class="text">
               <span class="display-f">
-                <img src="~/assets/img/icons/bell.svg" alt="bell" />
+                <img
+                  class="auction-bell"
+                  src="~/assets/img/auction-bell.svg"
+                  alt="bell"
+                />
               </span>
               <span class="text-m-bold valid-text"
-                >The current price is valid for</span
+                >The price will decrease in</span
               >
             </div>
             <div class="timer text-l">
               <AuctionTimer
+                v-if="nft && nft.last_offer"
                 :time="nft.last_offer.price_changes_at"
                 :show-auction.sync="showAuction"
                 @finished="timerFinished"
@@ -175,35 +180,13 @@
             >
           </div>
         </a>
-
-        <div class="auction satisfaction">
-          <div class="left-side">
-            <div class="img-block">
-              <img src="~/assets/img/satisfaction.png" alt="satisfaction" />
-            </div>
-            <div class="info">
-              <p class="mt-0 mb-4 header-title1">100% satisfaction!</p>
-              <p class="mtb text-m-bold">
-                Time to swap your Galaxy NFTs for hard assets? All our NFTs are
-                backed up with real diamonds.
-              </p>
-            </div>
-          </div>
-
-          <div class="right-side">
-            <Button
-              class="second-btn"
-              :label="$t('marketplace.exchangeToken')"
-              :background="isOwner ? 'primary' : 'grey'"
-              :size="'medium'"
-              :disabled="!isOwner"
-              :color="isOwner ? 'c-white' : 'c-grey'"
-              @on-click="exchangeToken"
-            />
-          </div>
-        </div>
       </div>
     </div>
+    <Collection
+      v-if="nft.constellation"
+      :constellation-name="nft.constellation.name"
+      class="mt-40"
+    />
   </div>
 </template>
 
@@ -211,9 +194,10 @@
 import Navigation from "../../../components/header/Navigation";
 import WebGl from "../../../components/marketplace/WebGl";
 import Button from "../../../components/ui/Button";
-import AuctionTimer from "../../../components/marketplace/AuctionTimer";
+// import AuctionTimer from "../../../components/marketplace/AuctionTimer";
 import converter from "../../../mixins/converter";
 import metamask from "../../../mixins/metamask";
+import Collection from "~/components/marketplace/Collection.vue";
 
 export default {
   name: "Index",
@@ -221,7 +205,8 @@ export default {
     Navigation,
     WebGl,
     Button,
-    AuctionTimer,
+    Collection,
+    // AuctionTimer,
   },
   mixins: [converter, metamask],
   layout(context) {
@@ -249,7 +234,7 @@ export default {
   data() {
     return {
       showCard: false,
-      showAuction: false,
+      showAuction: true,
       ethPrice: null,
       nft: {},
     };
