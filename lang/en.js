@@ -27,12 +27,14 @@ export default {
   },
 
   landing: {
-    mainTitle: "Own a piece of Galaxy through Diamond-backed NFT",
+    mainTitle: "The Legacy starts here.",
+    mainDesc: "Raving metaverse community for ultra fans and mega stars.",
     discover: "Discover",
     roadmap: "Roadmap",
     becomeTester: "Become a tester",
     joinTheCommunity: "Join the community",
     learnMore: "Learn More",
+    registerNow: "Register Now",
     ourTeam: "Our team",
     ourRoadMap: "Roadmap",
     days: "Days",
@@ -49,10 +51,9 @@ export default {
       "Pre-purchase rights to unique and beautiful jewellery in metaverse",
     uniqueDesc3: "Description text text text",
     orFollow: "or follow us on other platforms",
-    discoverTitle:
-      "Be the first one to wear luxury diamond assets in the metaverse.",
-    discoverDesc: `We are aware of all the magic the NFT world brings and what is currently happening in our and NFT world. Therefore, we want to bring something new. Something unique. The only thing we can see is a big goal ahead of us - to become the first and largest vendor of luxury diamond assets in the metaverse(s). <br/>
-Where did the idea of our NFT project come from? Diamonds are fallen stars. We've decided to put them back where they belong. Back to the sky. To the galaxy.`,
+    discoverTitle: "We are a small team with great dreams ;)",
+    discoverDesc: `Our team is spread across the world, and our passion lies in creating exciting new ventures in business and technology.
+Our idea was born from within us - we are ultimate fans ourselves, inspired and starstrack by legendary personalities. We want to bring the world of NFTs and build ultimate fandom communities.`,
     soundGood: "Join our Discord community?",
     orJoin: "or join us on other platforms",
     joinUsDiscord:
@@ -90,7 +91,8 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     starTitle7: "COLLAB WITH METAVERSES",
     starTitle8: "DUBAI EVENT",
     starTitle9: "HOLOGRAM",
-    becomeTesterTitle: "Explore our collections",
+    becomeTesterTitle: "Become the top fan in the metaverse",
+    becomeTesterDesc: `All collections are packed with unique NFT cards and exciting personalised gifts from the top sports, arts and VIP celebrities. `,
     textSecTitle:
       " A diamond company with more than 15 years experience has our backs.",
     textSecDesc1: `To give our project even more credibility, we are proud to announce
@@ -107,7 +109,7 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
   },
 
   faq: {
-    title: "Faq",
+    title: "All your burning questions answered",
     desc: "Your questions answered",
     accTitle1: "Why diamonds?",
     accDesc1: `Diamonds are long-standing security for many investors, now, you can be the first to experience this in the NFT world with us. We give our project even more credibility, we are proud to announce that Diamond International Corporation (DIC) company stands behind the project. We have many years of experience with luxury diamond jewellery. As well as luxury showrooms in the main cities of the Czech and Slovak Republic. Facts: DIC manufactured the crowns for MISS Universe in the years 2014-2016. DIC is also a member of prestigious world diamond exchanges. `,

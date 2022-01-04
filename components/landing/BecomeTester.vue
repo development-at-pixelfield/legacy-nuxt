@@ -2,8 +2,10 @@
   <div id="become-tester" class="become-tester">
     <div class="content full-container">
       <div class="mt-0 header-block">
-        <span class="rocket-icon">🚀</span>
         <span class="header-h">{{ $t("landing.becomeTesterTitle") }}</span>
+        <p class="header-desc no-color-link">
+          {{ $t("landing.becomeTesterDesc") }}
+        </p>
       </div>
       <div class="form-group">
         <div class="item">

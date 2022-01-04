@@ -1,6 +1,6 @@
 <template>
   <div class="accordion">
-    <div class="header" @click="toggle">
+    <div class="header" :class="{ 'no-border': show || last }" @click="toggle">
       <div class="wrapp">
         <slot name="count"></slot>
         <slot name="header"></slot>
@@ -29,6 +29,12 @@
 <script>
 export default {
   name: "Accordion",
+  props: {
+    last: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       show: false,

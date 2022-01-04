@@ -3,21 +3,11 @@
   padding-top: 80px;
   padding-bottom: 80px;
 
-
   h2{
-    color: $c-white;
-    font-weight: 800;
-    font-size: 64px;
-    line-height: 95%;
-    letter-spacing: -0.01em;
-    margin-bottom: 32px;
-    text-transform: uppercase;
+    margin-bottom: 78px;
 
-    @media (max-width: $break-smsm) {
-      text-align: center;
-      margin-bottom: 16px;
-      font-size: 37px;
-      letter-spacing: -0.02em;
+    @media (max-width: $break-sms){
+      margin-bottom: 38px
     }
   }
 

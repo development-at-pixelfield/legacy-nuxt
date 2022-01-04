@@ -1,7 +1,7 @@
 footer{
-  background: linear-gradient(0deg, #11011F, #11011F), linear-gradient(170.73deg, #000 4.64%, #00081C 17.98%, #000B28 92.98%);
-  padding-top: 80px;
-  padding-bottom: 80px;
+  background: #100C0F;
+  padding-top: 70px;
+  padding-bottom: 48px;
   position: relative;
 
   @media (max-width: $break-sms) {
@@ -23,6 +23,12 @@ footer{
     ul{
       list-style-type: none;
       display: flex;
+      margin: 0;
+
+      @media (max-width: $break-mds) {
+        margin-bottom: 16px;
+        margin-top: 16px;
+      }
 
       li{
         margin-right: 16px;
@@ -36,6 +42,16 @@ footer{
         @media (max-width: $break-xs) {
           font-size: 12px;
           line-height: 16px;
+        }
+      }
+    }
+
+    .socials{
+      a{
+        margin-right: 16px;
+
+        &:last-child{
+          margin-right: 0;
         }
       }
     }

@@ -1,27 +1,17 @@
 <template>
   <div class="landing-wrapper">
     <main>
-      <BlackWhole />
-
       <ComingSoon />
-
-      <Discover />
 
       <BecomeTester />
 
       <NftsUnique />
 
-      <RoadMap />
-
-      <Sounds />
-
       <Blog />
 
       <Faq />
 
-      <TextSection />
-
-      <OurTeam />
+      <Discover />
 
       <LandingFooter />
     </main>
@@ -30,30 +20,20 @@
 
 <script>
 import NftsUnique from "../components/landing/NftsUnique";
-import Sounds from "../components/landing/Sounds";
 import Discover from "../components/landing/Discover";
 import BecomeTester from "../components/landing/BecomeTester";
-import OurTeam from "../components/landing/OurTeam";
 import ComingSoon from "../components/landing/ComingSoon";
-import RoadMap from "../components/landing/RoadMap";
-import TextSection from "../components/landing/TextSection";
-import BlackWhole from "../components/landing/BlackWhole";
 import LandingFooter from "../components/footer/LandingFooter";
 import Blog from "../components/landing/Blog";
 import Faq from "../components/landing/Faq";
 export default {
   components: {
     Faq,
-    RoadMap,
     NftsUnique,
-    Sounds,
     LandingFooter,
     Discover,
     BecomeTester,
     ComingSoon,
-    OurTeam,
-    TextSection,
-    BlackWhole,
     Blog,
   },
   layout: "landing",
