@@ -10,61 +10,67 @@
       <div class="form-group">
         <div class="item">
           <span class="item-img">
-            <img src="~/assets/img/bear-front.png" alt="bear-image" />
+            <img src="~/assets/img/landing/nft-featured.png" alt="bear-image" />
           </span>
 
-          <p class="no-color-link header-title1 mb-16 mt-24 text-center">
-            {Constellation name}
-          </p>
+          <div class="info">
+            <p class="no-color-link header-title1 mb-16 mt-24 text-center">
+              Athlete Legends
+            </p>
 
-          <div class="action center-block">
-            <Button
-              :label="$t('landing.availableNow')"
-              :background="'primary'"
-              :size="'small'"
-              :color="'c-white'"
-              @on-click="$router.push('/marketplace')"
-            />
+            <div class="action center-block">
+              <Button
+                :label="$t('landing.availableNow')"
+                :background="'primary'"
+                :size="'medium'"
+                :color="'c-white'"
+                @on-click="$router.push('/marketplace')"
+              />
+            </div>
           </div>
         </div>
 
         <div class="item">
           <span class="item-img">
-            <img src="~/assets/img/bear-front.png" alt="bear-image" />
+            <img src="~/assets/img/landing/nft-featured.png" alt="bear-image" />
           </span>
 
-          <p class="no-color-link header-title1 mb-16 mt-24 text-center">
-            {Constellation name}
-          </p>
+          <div class="info">
+            <p class="no-color-link header-title1 mb-16 mt-24 text-center">
+              Athlete Legends
+            </p>
 
-          <div class="action center-block">
-            <Button
-              :label="$t('landing.availableNow')"
-              :background="'primary'"
-              :size="'small'"
-              :color="'c-white'"
-              @on-click="$router.push('/marketplace')"
-            />
+            <div class="action center-block">
+              <Button
+                :label="$t('landing.availableNow')"
+                :background="'primary'"
+                :size="'medium'"
+                :color="'c-white'"
+                @on-click="$router.push('/marketplace')"
+              />
+            </div>
           </div>
         </div>
 
         <div class="item">
           <span class="item-img">
-            <img src="~/assets/img/bear-front.png" alt="bear-image" />
+            <img src="~/assets/img/landing/nft-featured.png" alt="bear-image" />
           </span>
 
-          <p class="no-color-link header-title1 mb-16 mt-24 text-center">
-            {Constellation name}
-          </p>
+          <div class="info">
+            <p class="no-color-link header-title1 mb-16 mt-24 text-center">
+              Athlete Legends
+            </p>
 
-          <div class="action center-block">
-            <Button
-              :label="$t('landing.availableNow')"
-              :background="'primary'"
-              :size="'small'"
-              :color="'c-white'"
-              @on-click="$router.push('/marketplace')"
-            />
+            <div class="action center-block">
+              <Button
+                :label="$t('landing.availableNow')"
+                :background="'primary'"
+                :size="'medium'"
+                :color="'c-white'"
+                @on-click="$router.push('/marketplace')"
+              />
+            </div>
           </div>
         </div>
       </div>

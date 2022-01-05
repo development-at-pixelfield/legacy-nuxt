@@ -1,6 +1,11 @@
 .landing-wrapper{
-  height: 100vh;
-  //background: #1E0037;
+  //height: 100vh;
+  background: linear-gradient(
+      19.11deg, rgba(254, 90, 145, 0) 26.75%, #1b1923 40.73%), linear-gradient(
+      0deg, #131113, #0f0f0f), url("~assets/img/bg.png") no-repeat;
+  background-blend-mode: color, color, normal;
+  //opacity: 0.2;
+  //transform: matrix(-0.97, 0.28, -0.23, -0.96, 0, 0);
 
   main{
     display: contents;

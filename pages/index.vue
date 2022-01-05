@@ -3,9 +3,13 @@
     <main>
       <ComingSoon />
 
+      <Welcome />
+
       <BecomeTester />
 
-      <NftsUnique />
+      <JoinLegacy />
+
+      <JoinUs />
 
       <Blog />
 
@@ -19,22 +23,26 @@
 </template>
 
 <script>
-import NftsUnique from "../components/landing/NftsUnique";
 import Discover from "../components/landing/Discover";
 import BecomeTester from "../components/landing/BecomeTester";
 import ComingSoon from "../components/landing/ComingSoon";
 import LandingFooter from "../components/footer/LandingFooter";
 import Blog from "../components/landing/Blog";
 import Faq from "../components/landing/Faq";
+import JoinLegacy from "../components/landing/JoinLegacy";
+import Welcome from "../components/landing/Welcome";
+import JoinUs from "../components/landing/JoinUs";
 export default {
   components: {
     Faq,
-    NftsUnique,
+    JoinLegacy,
     LandingFooter,
     Discover,
     BecomeTester,
     ComingSoon,
     Blog,
+    Welcome,
+    JoinUs,
   },
   layout: "landing",
   middleware: ["isLoggedIn"],

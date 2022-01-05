@@ -57,7 +57,7 @@
         </div>
       </div>
 
-      <div class="text-center mt-24">
+      <div class="text-center mt-8">
         <span class="text-s no-color-link">{{
           $t("marketplace.copyright")
         }}</span>

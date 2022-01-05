@@ -1,70 +1,38 @@
 <template>
-  <div class="join-us-wrapper">
-    <div class="full-container">
+  <div class="welcome-wrapper">
+    <div class="content full-container">
       <div class="left-side">
-        <h1 class="mt-0">{{ $t("landing.joinUs") }}</h1>
-        <div class="action">
+        <h2 class="header-h no-color-link">
+          {{ $t("landing.joinTitle1") }}
+        </h2>
+
+        <p class="sub-title no-color-link">
+          {{ $t("landing.joinDesc1") }}
+        </p>
+
+        <div class="action mt-16 display-f">
           <a
             href="https://discord.com/invite/galaxydiamonds"
-            class="discord-btn"
+            class="discord-btn no-color-dec-link text-m-bold"
             target="_blank"
           >
-            <img src="~/assets/img/icons/discord-big.svg" alt="discord-icon" />
+            {{ $t("landing.joinBtn1") }}
           </a>
         </div>
       </div>
+
       <div class="right-side">
-        <p class="follow">{{ $t("landing.orFollow") }}</p>
-        <ul class="mtb">
-          <li>
-            <a
-              target="_blank"
-              href="https://www.facebook.com/Galaxydiamonds-101350175672894"
-              class="social-link"
-            >
-              <Icon src="facebook-negative.svg" size="big"></Icon>
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://twitter.com/GalaxyDiaNFT"
-              class="social-link"
-              target="_blank"
-            >
-              <Icon src="twitter-negative.svg" size="big"></Icon>
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://www.instagram.com/galaxydiamondsnft/"
-              class="social-link"
-              target="_blank"
-            >
-              <Icon src="instagram-negative.svg" size="big"></Icon>
-            </a>
-          </li>
-          <li>
-            <a
-              target="_blank"
-              href="https://t.me/joinchat/QExLizfchzg1ZTNk"
-              class="social-link"
-            >
-              <Icon src="telegram-negative.svg" size="big"></Icon>
-            </a>
-          </li>
-        </ul>
+        <span class="img-block">
+          <img src="~/assets/img/landing/frame.png" alt="texture" />
+        </span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Icon from "../ui/Icon";
 export default {
-  name: "JoinUs",
-  components: {
-    Icon,
-  },
+  name: "Welcome",
 };
 </script>
 

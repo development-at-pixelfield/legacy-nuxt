@@ -1,7 +1,7 @@
 footer{
   background: #100C0F;
   padding-top: 70px;
-  padding-bottom: 48px;
+  padding-bottom: 45px;
   position: relative;
 
   @media (max-width: $break-sms) {
@@ -13,6 +13,7 @@ footer{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 
     @media (max-width: $break-mds) {
       flex-direction: column;
@@ -22,12 +23,17 @@ footer{
 
     ul{
       list-style-type: none;
+      //display: flex;
+      //margin: 0;
+      position: absolute;
+      width: 100%;
       display: flex;
-      margin: 0;
+      justify-content: center;
 
       @media (max-width: $break-mds) {
         margin-bottom: 16px;
         margin-top: 16px;
+        position: static;
       }
 
       li{
@@ -49,6 +55,7 @@ footer{
     .socials{
       a{
         margin-right: 16px;
+        display: inline-flex;
 
         &:last-child{
           margin-right: 0;

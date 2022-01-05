@@ -51,6 +51,9 @@ export default {
       "Pre-purchase rights to unique and beautiful jewellery in metaverse",
     uniqueDesc3: "Description text text text",
     orFollow: "or follow us on other platforms",
+    joinTitle: "What happens when you join Legacy fandom?",
+    joinDesc:
+      "We prepared amazing features and perks, so your experience is always exciting and full of surprises. ",
     discoverTitle: "We are a small team with great dreams ;)",
     discoverDesc: `Our team is spread across the world, and our passion lies in creating exciting new ventures in business and technology.
 Our idea was born from within us - we are ultimate fans ourselves, inspired and starstrack by legendary personalities. We want to bring the world of NFTs and build ultimate fandom communities.`,
@@ -60,7 +63,7 @@ Our idea was born from within us - we are ultimate fans ourselves, inspired and 
       "to have a chance to become the first owner of our 3D NFT or to win luxury diamond jewelery.",
     name: "Name",
     signUp: "Join the community",
-    availableNow: "Available now",
+    availableNow: "Explore Collection",
     backTop: "BACK TO TOP",
     teamDesc: `Our team is based around the world.`,
     roadDesc: `Find out more about our plans by clicking on each star.`,
@@ -106,6 +109,20 @@ Our idea was born from within us - we are ultimate fans ourselves, inspired and 
           be the first to experience this in the NFT world with us.`,
     blogTitle: "Read our blog to stay up to date with latest news",
     readArticle: "Read article",
+    joinItem1: "Connect with the Legends",
+    joinItemDesc1: `We offer a chance to meet your Legends and connect with other fans through exclusive virtual meet and greets and private chat rooms.`,
+    joinItem2: "Commission system for first owners",
+    joinItemDesc2: `Top fans who buy the first ‘virgin’ NFT token are going to be awarded with commission in secondary market re-sales.`,
+    joinItem3: "Rewards for fandom members",
+    joinItemDesc3: `The legends prepared amazing rewards to celebrate their top fans - from personalised merch to a chance to meet them in person.`,
+    welcomeTitle: "The ultimate fandom experience",
+    welcomeSubTitle: "Taking the fandom to the next level.",
+    welcomeDesc:
+      "Our vision is to make Legacy the best fandom hub in the metaverse. We want to give our Legends a well-deserved platform to celebrate their triumphs and share appreciation for their beloved top fans, just like yourself!",
+    joinTitle1: "Want to join the Legacy community?",
+    joinDesc1:
+      "Connect with us on Discord to chat, ask questions and stay in touch :)",
+    joinBtn1: "Join us on Discord",
   },
 
   faq: {
