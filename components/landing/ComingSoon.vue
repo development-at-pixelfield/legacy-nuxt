@@ -1,7 +1,5 @@
 <template>
   <div class="coming-soon">
-    <LandingHeader />
-
     <div class="content full-container">
       <h1 :class="{ show: show1 }">
         {{ $t("landing.mainTitle") }}
@@ -31,12 +29,10 @@
 </template>
 
 <script>
-import LandingHeader from "../header/LandingHeader";
 import Button from "../ui/Button";
 export default {
   name: "ComingSoon",
   components: {
-    LandingHeader,
     Button,
   },
   data() {
