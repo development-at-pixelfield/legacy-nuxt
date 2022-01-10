@@ -1,6 +1,10 @@
 <template>
   <div class="landing-wrapper">
+    <span class="back-img"></span>
+
     <main>
+      <LandingHeader />
+
       <ComingSoon />
 
       <Welcome />
@@ -32,6 +36,7 @@ import Faq from "../components/landing/Faq";
 import JoinLegacy from "../components/landing/JoinLegacy";
 import Welcome from "../components/landing/Welcome";
 import JoinUs from "../components/landing/JoinUs";
+import LandingHeader from "../components/header/LandingHeader";
 export default {
   components: {
     Faq,
@@ -43,6 +48,7 @@ export default {
     Blog,
     Welcome,
     JoinUs,
+    LandingHeader,
   },
   layout: "landing",
   middleware: ["isLoggedIn"],
