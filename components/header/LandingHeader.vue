@@ -1,9 +1,5 @@
 <template>
-  <header
-    id="header"
-    :class="{ fixed: $route.name === 'marketplace' }"
-    class="landing-header"
-  >
+  <header id="header" :class="{ fixed: $route.name === 'marketplace' }">
     <div class="content header-full-container">
       <div class="content-wrapper">
         <div class="header-menu">

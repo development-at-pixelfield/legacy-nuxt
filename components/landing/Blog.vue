@@ -14,22 +14,10 @@
           </span>
 
           <div class="info">
-            <p class="text-m-bold no-color-link mtb">DD/MM/YY</p>
-            <p class="header-title1 no-color-link mtb">
+            <p class="text-s-bold no-color-link mtb date">DD/MM/YY</p>
+            <p class="title no-color-link mtb">
               NFT Collectibles: What are they?
             </p>
-            <span class="divider"></span>
-            <div class="action">
-              <span class="text-m-bold no-color-link">{{
-                $t("landing.readArticle")
-              }}</span>
-              <span>
-                <img
-                  src="~/assets/img/icons/arrow-up-right.svg"
-                  alt="arrow-up-right"
-                />
-              </span>
-            </div>
           </div>
         </div>
 
@@ -43,22 +31,10 @@
           </span>
 
           <div class="info">
-            <p class="text-m-bold no-color-link mtb">DD/MM/YY</p>
-            <p class="header-title1 no-color-link mtb">
+            <p class="text-s-bold no-color-link mtb date">DD/MM/YY</p>
+            <p class="title no-color-link mtb">
               NFT Collectibles: What are they?
             </p>
-            <span class="divider"></span>
-            <div class="action">
-              <span class="text-m-bold no-color-link">{{
-                $t("landing.readArticle")
-              }}</span>
-              <span>
-                <img
-                  src="~/assets/img/icons/arrow-up-right.svg"
-                  alt="arrow-up-right"
-                />
-              </span>
-            </div>
           </div>
         </div>
 
@@ -72,22 +48,27 @@
           </span>
 
           <div class="info">
-            <p class="text-m-bold no-color-link mtb">DD/MM/YY</p>
-            <p class="header-title1 no-color-link mtb">
+            <p class="text-s-bold no-color-link mtb date">DD/MM/YY</p>
+            <p class="title no-color-link mtb">
               NFT Collectibles: What are they?
             </p>
-            <span class="divider"></span>
-            <div class="action">
-              <span class="text-m-bold no-color-link">{{
-                $t("landing.readArticle")
-              }}</span>
-              <span>
-                <img
-                  src="~/assets/img/icons/arrow-up-right.svg"
-                  alt="arrow-up-right"
-                />
-              </span>
-            </div>
+          </div>
+        </div>
+
+        <div class="blog-item">
+          <span class="display-f">
+            <img
+              src="~/assets/img/landing/blog1.png"
+              alt="blog-image"
+              class="blog-img"
+            />
+          </span>
+
+          <div class="info">
+            <p class="text-s-bold no-color-link mtb date">DD/MM/YY</p>
+            <p class="title no-color-link mtb">
+              NFT Collectibles: What are they?
+            </p>
           </div>
         </div>
       </div>
