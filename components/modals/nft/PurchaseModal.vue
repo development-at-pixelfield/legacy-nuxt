@@ -33,7 +33,7 @@
       <Button
         :size="'full'"
         :color="'c-white'"
-        :label="`View your NFT`"
+        :label="`Continue`"
         @on-click="addFunds"
       />
     </div>
@@ -94,7 +94,7 @@ export default {
     },
     addFunds() {
       this.$emit("close");
-      this.$router.push("/profile");
+      this.$nuxt.$emit("fetchNftData");
     },
     close() {
       this.$emit("close");

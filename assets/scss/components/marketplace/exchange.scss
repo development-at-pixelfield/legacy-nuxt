@@ -66,6 +66,10 @@
         border-radius: 3px;
         padding: 24px;
         margin-bottom: 16px;
+
+        @media (max-width: $break-smsm) {
+          width: 100%;
+        }
       }
     }
   }

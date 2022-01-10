@@ -37,8 +37,11 @@
         <span
           slot="count"
           class="header-title1 no-color-link"
-          :class="{ 'view-loading': item.loading }"
-          >{{ item.votes }}</span
+          :class="{
+            'view-loading': item.loading,
+            votes: item.status !== 'new',
+          }"
+          >{{ convertVotes(item.votes) }}</span
         >
         <p slot="title" class="mt-0 mb-4 no-color-link text-m-bold">
           {{ item.title }}
@@ -101,6 +104,7 @@ export default {
     RoadmapItem,
     Pagination,
   },
+  auth: false,
   layout(context) {
     if (context.$auth.$state.user) {
       return "auth";
@@ -125,15 +129,29 @@ export default {
   },
   data() {
     return {
-      count: 0,
-      voting: false,
       nfts: {},
     };
   },
-  created() {
-    if (this.$auth.user.miles_amount) {
-      this.count = this.$auth.user.miles_amount;
-    }
+  computed: {
+    convertVotes() {
+      return (votes) => {
+        if (+votes > 9999) {
+          const value = +votes / 1000;
+          return value.toString().substring(0, 4) + "k";
+        }
+
+        if (+votes > 999) {
+          const value = +votes / 1000;
+          return value.toString().substring(0, 3) + "k";
+        }
+
+        return votes;
+      };
+    },
+    count() {
+      if (this.$auth.loggedIn) return this.$auth.user.miles_amount;
+      return 0;
+    },
   },
   methods: {
     updatePage(val) {
@@ -166,6 +184,10 @@ export default {
       }
     },
     async addCount(uuid) {
+      if (!this.$auth.loggedIn) {
+        this.$router.push("/login");
+        return;
+      }
       if (this.count === 0) {
         return this.$store.commit("setModal", {
           show: true,
@@ -174,26 +196,23 @@ export default {
       }
 
       if (!this.$auth.loggedIn) return this.$router.push("/login");
-      if (!this.voting) {
-        this.voting = true;
-        try {
-          await this.$store.dispatch("nfts/voteRoadmap", uuid);
-          const voitNft = this.nfts.results.filter(
-            (item) => item.uid === uuid
-          )[0];
-          voitNft.votes++;
-          voitNft.loading = true;
-          setTimeout(() => {
-            this.updatePage(this.filter.page);
-            this.count--;
-          }, 5000);
-        } catch (error) {
-          await this.$store.commit("setSnackbar", {
-            show: true,
-            message: this.$t("snackbar.voteFail"),
-            color: "error",
-          });
-        }
+      try {
+        await this.$store.dispatch("nfts/voteRoadmap", uuid);
+        const voitNft = this.nfts.results.filter(
+          (item) => item.uid === uuid
+        )[0];
+        voitNft.votes++;
+        voitNft.loading = true;
+        await this.$auth.fetchUser();
+        setTimeout(() => {
+          this.updatePage(this.filter.page);
+        }, 5000);
+      } catch (error) {
+        await this.$store.commit("setSnackbar", {
+          show: true,
+          message: this.$t("snackbar.voteFail"),
+          color: "error",
+        });
       }
     },
   },

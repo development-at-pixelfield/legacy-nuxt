@@ -67,7 +67,11 @@ export default {
   data() {
     return {
       pressed: false,
-      statuses: { new: "New", progress: "In progress", completed: "Completed" },
+      statuses: {
+        new: "New",
+        in_progress: "In progress",
+        completed: "Completed",
+      },
     };
   },
 

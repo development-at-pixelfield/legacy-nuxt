@@ -1,26 +1,24 @@
 <template>
   <div class="marketplace-detail">
-    <div class="header">
-      <div class="main-container">
+    <div id="header-img" class="header">
+      <div class="main-container header-nav">
         <Navigation
           :title="$t('marketplace.marketplace')"
           :custom-link="'/marketplace'"
           :with-query="true"
           class="nav"
         />
-        <div class="img-block">
-          <WebGl v-if="nft.model_file" :src="nft.model_file" />
-        </div>
       </div>
+      <WebGl :nft="nft"></WebGl>
     </div>
 
-    <div class="main-container p-r">
+    <div class="main-container detail-info">
       <div class="detail">
         <div class="main-info block-margin">
           <div class="left-side">
             <h1 class="mb-8 mt-0 detail-title">{{ nft.name }}</h1>
             <span class="header-title1"
-              >Current price: {{ (+currentPriceOrSoldPrice).toFixed(2) }}Ξ</span
+              >Current price: {{ currentPriceOrSoldPrice }}Ξ</span
             >
             <span class="header-title1 ml-16">{{
               convertEthereum(currentPriceOrSoldPrice)
@@ -55,6 +53,33 @@
                   :background="'grey-m'"
                   :size="'medium'"
                   :color="'c-white'"
+                  :tooltip="'Community re-listing coming soon!'"
+                />
+              </div>
+            </div>
+
+            <div v-else-if="isTokenTransfer" class="sold-action">
+              <div class="left-side-s">
+                <span class="img-block-s">
+                  <img :src="tokenTransferAvatar" alt="auction" class="img-s" />
+                </span>
+
+                <div>
+                  <p class="mtb text-m-bold">
+                    {{ $t("marketplace.transferringToken") }}
+                  </p>
+                  <p class="mtb text-m-bold">
+                    {{ tokenTransferInfo.username }}
+                  </p>
+                </div>
+              </div>
+
+              <div class="right-side-s">
+                <Button
+                  class="single-btn"
+                  :label="$t('marketplace.buyNow')"
+                  :background="'disabled-new'"
+                  :size="'medium'"
                   :tooltip="'Community re-listing coming soon!'"
                 />
               </div>
@@ -150,7 +175,9 @@
               <span class="tag text-s-bold">Age ({{ nft.age }})</span>
             </li>
             <li v-if="nft.nft_type">
-              <span class="tag text-s-bold">Type ({{ nft.nft_type }})</span>
+              <span class="tag text-s-bold"
+                >Type ({{ formatNftType(nft.nft_type) }})</span
+              >
             </li>
             <li v-if="nft.is_constellation">
               <span class="tag text-s-bold">Path of constellation (Yes)</span>
@@ -183,32 +210,33 @@
         </a>
       </div>
     </div>
-
     <Collection
-      v-if="nft.constellation"
+      v-if="nft.constellation && nft.related_nfts.length"
       :constellation-name="nft.constellation.name"
-      class="mt-40 p-r"
+      :related-nfts="nft.related_nfts"
+      :eth-price="ethPrice"
+      class="mt-40"
     />
   </div>
 </template>
 
 <script>
 import Navigation from "../../../components/header/Navigation";
-import WebGl from "../../../components/marketplace/WebGl";
 import Button from "../../../components/ui/Button";
 import AuctionTimer from "../../../components/marketplace/AuctionTimer";
 import converter from "../../../mixins/converter";
 import metamask from "../../../mixins/metamask";
+import WebGl from "../../../components/marketplace/WebGl";
 import Collection from "~/components/marketplace/Collection.vue";
 
 export default {
   name: "Index",
   components: {
     Navigation,
-    WebGl,
     Button,
     Collection,
     AuctionTimer,
+    WebGl,
   },
   mixins: [converter, metamask],
   layout(context) {
@@ -218,7 +246,7 @@ export default {
   },
   auth: false,
   middleware: "auth",
-  async asyncData({ app, store, params }) {
+  async asyncData({ app, store, params, error }) {
     try {
       const nft = await store.dispatch("nfts/getNftsById", { uid: params.id });
       const ethPrice = (await store.dispatch("fetchEthPrice")).rate;
@@ -230,7 +258,7 @@ export default {
 
       return { nft, ethPrice, showAuction };
     } catch (e) {
-      console.log(e);
+      error({ statusCode: 404, message: "Page not found" });
     }
   },
   data() {
@@ -238,10 +266,26 @@ export default {
       showCard: false,
       showAuction: true,
       ethPrice: null,
-      nft: {},
+      nft: null,
     };
   },
   computed: {
+    isTokenTransfer() {
+      return this.nft.last_offer.token_transfers_process.length;
+    },
+    tokenTransferInfo() {
+      return this.nft.last_offer.token_transfers_process[0];
+    },
+    tokenTransferAvatar() {
+      return this.tokenTransferInfo.avatar
+        ? this.tokenTransferInfo.avatar
+        : require("assets/img/default-transfer-avatar.png");
+    },
+    formatNftType() {
+      return (type) => {
+        return type.charAt(0).toUpperCase() + type.slice(1);
+      };
+    },
     convertEthereum() {
       return (price) => {
         return "est. $" + Number(this.ethPrice * price).toFixed(2);
@@ -276,6 +320,16 @@ export default {
         ? lastOffer.eth_current_price
         : 0;
     },
+  },
+  mounted() {
+    this.$nuxt.$on("fetchNftData", async () => {
+      this.nft = await this.$store.dispatch("nfts/getNftsById", {
+        uid: this.$route.params.id,
+      });
+    });
+  },
+  beforeDestroy() {
+    this.$nuxt.$off("fetchNftData");
   },
   methods: {
     async payCard() {

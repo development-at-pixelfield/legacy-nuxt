@@ -6,14 +6,17 @@
           <div class="avatar-block">
             <img v-if="imgSrc" :src="imgSrc" alt="avatar" class="avatar-img" />
             <input type="file" class="avatar-input" @change="fileUpload" />
+
+            <span class="hover-img display-f">
+              <img src="~/assets/img/icons/plus-circle.svg" alt="plus-icon" />
+            </span>
           </div>
 
           <div class="user-block">
             <p class="mt-0 mb-8 header-title">
               {{ username }}
-              <span class="img-block">
+              <span v-if="isVerified" class="img-block">
                 <img
-                  v-if="isVerified"
                   :src="require(`assets/img/icons/verified-account.svg`)"
                   alt="icon"
                 />

@@ -25,6 +25,10 @@
     border-radius: 80px
   }
 
+  .error{
+    border: 1px solid $c-system-error;
+  }
+
   .current{
     background: $c-primary;
     border: none;

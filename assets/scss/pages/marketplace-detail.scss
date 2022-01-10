@@ -1,51 +1,44 @@
 .marketplace-detail{
-  //background: $c-background;
+  background: $c-background;
   padding-bottom: 40px;
-
-  //opacity: 0.2;
   //height: 100vh;
-  position: relative;
-
-  &::before{
-    content: "";
-    width: 100%;
-    height: 100%;
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: linear-gradient(179.65deg, #FFB0CB -3.77%, rgba(255, 176, 203, 0) 87.33%),url("~assets/img/market-header.png");
-    background-blend-mode: color, normal;
-    background-position: top center;
-    opacity: 0.2;
-  }
 
   .done{
     color: #1DD1A1;
   }
 
   .header{
-    //background: url("~assets/img/market-header.png");
+    //background: url("~assets/img/landing/starsgroup.png");
     //background-position: center;
-    padding-bottom: 140px;
+    //padding-bottom: 140px;
+    margin-bottom: 140px;
+    position: relative;
+    height: 443px;
 
-    @media (max-width: $break-sms) {
-      height: 450px;
+    //@media (max-width: $break-sms) {
+    //  height: 450px;
+    //}
+
+    .header-nav{
+      position: relative;
+
+      #container{
+        position: absolute;
+        top: 0;
+        margin: 0 auto;
+      }
     }
 
     .nav{
       padding-top: 44px;
       position: relative;
+      z-index: 1;
       //margin-bottom: 56px;
 
       @media (max-width: $break-sms) {
         padding-top: 28px;
         margin-bottom: 29px;
       }
-    }
-
-    canvas{
-      margin: 0 auto;
     }
 
     .img-block{
@@ -65,6 +58,11 @@
         object-fit: cover;
       }
     }
+  }
+
+  .detail-info{
+    position: relative;
+    z-index: 1;
   }
 
   .detail{
@@ -153,13 +151,13 @@
         }
 
         .sold-action{
-          background: $c-greyscale-100;
+          background: #301C3F;
           border-radius: 3px;
           padding: 24px;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          width: 367px;
+          width: 407px;
 
           @media (max-width: $break-sms) {
             width: 100% !important;
@@ -213,7 +211,7 @@
 
     .auction{
       background: $c-greyscale-100;
-      padding: 24px;
+      padding: 28px 24px;
       display: flex;
       justify-content: space-between;
 
@@ -229,7 +227,6 @@
 
       .left-side{
         display: flex;
-        align-items: center;
 
         @media (max-width: $break-md) {
           margin-bottom: 24px;
@@ -275,8 +272,6 @@
       }
 
       .right-side{
-        width: 213px;
-
         @media (max-width: $break-smsm) {
           width: 100%;
           text-align: center;
@@ -285,8 +280,6 @@
         .text{
           display: flex;
           align-items: center;
-          justify-content: center;
-          margin-bottom: 6px;
 
           @media (max-width: $break-smsm) {
             width: 100%;
@@ -329,15 +322,15 @@
 
           .tag{
             padding: 4px 4px 4px 8px;
-            background: #3843FF;
-            border-radius: 12px;
+            background: #6000AE;
+            border-radius: 3px;
           }
         }
       }
     }
 
     .history{
-      border: 1px solid $c-greyscale-100;
+      border: 1px solid #301C3F;
       padding: 12px;
       display: flex;
       align-items: center;
@@ -361,8 +354,4 @@
       }
     }
   }
-}
-
-.auction-bell {
-  margin-right: 6px;
 }

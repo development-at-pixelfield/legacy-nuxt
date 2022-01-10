@@ -1,5 +1,5 @@
 <template>
-  <div class="form-container full-h">
+  <div class="form-container">
     <h1 class="header-title">{{ $t("settings.settings") }}</h1>
     <div class="content">
       <div v-if="!isFullVerify" class="verification form-group mb-24">
@@ -290,6 +290,20 @@ export default {
     }
   },
 
+  mounted() {
+    if (this.$route.query?.veriff_submitted) {
+      this.$store.commit("setSnackbar", {
+        show: true,
+        message: "ID submitted for verification. It may take a few minutes...",
+        color: "success",
+        html: true,
+      });
+      setTimeout(() => {
+        this.$router.replace({ query: {} });
+      }, 1500);
+    }
+  },
+
   methods: {
     async beforeUpdate() {
       await this.$v.$touch();
@@ -372,6 +386,7 @@ export default {
         type: "info-verification",
         data: {
           reason: this.$auth.user.last_verification_decline_reason,
+          status: this.$auth.user.last_verification_status,
         },
       });
     },

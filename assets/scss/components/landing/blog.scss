@@ -36,6 +36,7 @@
       cursor: pointer;
       display: flex;
       margin-bottom: 48px;
+      position: relative;
 
       @media (max-width: $break-lg) {
         width: 48%;
@@ -44,6 +45,15 @@
       @media (max-width: $break-sm) {
         flex-direction: column;
         width: 100%;
+      }
+
+      a{
+        text-decoration: none;
+        display: flex;
+
+        .blog-content{
+          display: flex;
+        }
       }
 
 

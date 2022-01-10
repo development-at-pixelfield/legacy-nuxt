@@ -25,6 +25,10 @@ header{
       padding-right: 32px;
     }
 
+    @media (max-width: $break-sm) {
+      padding: 0 16px;
+    }
+
     //@media (max-width: 1280px){
     //  padding-left: 24px !important;
     //  padding-right: 24px !important;

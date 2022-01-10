@@ -12,12 +12,24 @@
   //  margin-right: 16px;
   //}
 
-  @media (max-width: 530px) {
-    width: 47%;
-    padding: 26px 21px;
-    margin-right: 0;
-    margin-bottom: 16px;
+  &_collection {
+    background: #301C3F;
+
+    @media (max-width: 530px) {
+      padding: 26px 21px;
+      margin-right: 0;
+    }
   }
+
+  &_default {
+    @media (max-width: 530px) {
+      width: 47%;
+      padding: 26px 21px;
+      margin-right: 0;
+      margin-bottom: 16px;
+    }
+  }
+
 
   .img-block{
     width: 86px;

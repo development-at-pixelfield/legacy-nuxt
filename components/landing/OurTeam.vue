@@ -125,6 +125,9 @@ export default {
   methods: {
     scrollHandler(e) {
       const element = document.querySelector("#our-team");
+      if (!element) {
+        return;
+      }
       const posParent = element.getBoundingClientRect();
 
       if (posParent.top + 250 < window.innerHeight && posParent.bottom >= 0) {

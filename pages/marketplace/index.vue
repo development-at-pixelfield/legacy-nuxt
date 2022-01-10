@@ -3,6 +3,7 @@
     class="marketplace-wrapper"
     :class="{ 'no-items': !nfts.results || !nfts.results.length }"
   >
+    <LoadingBar></LoadingBar>
     <div class="filter">
       <FilterList
         :is-open-panel.sync="isOpenPanel"
@@ -117,6 +118,7 @@ import Button from "../../components/ui/Button";
 import { functions } from "../../utils";
 import { catchErrors } from "../../utils/catchErrors";
 import converter from "../../mixins/converter";
+import LoadingBar from "../../components/LoadingBar";
 
 const filterDefaultVars = {
   page: 1,
@@ -138,6 +140,7 @@ export default {
     FilterList,
     FiltersItems,
     Button,
+    LoadingBar,
   },
   mixins: [converter],
   layout(context) {
@@ -145,9 +148,11 @@ export default {
       return "auth";
     }
   },
-  async asyncData({ store, route, error }) {
+  async asyncData({ app, store, route, error }) {
     try {
       const formOptions = await store.dispatch("nfts/getNftsForm");
+
+      // const leaders = await store.dispatch("nfts/getLeaderboard");
 
       // console.log(formOptions, "formOptions");
 

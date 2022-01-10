@@ -3,7 +3,7 @@
     class="auth-wrapper"
     :class="{ 'register-wrapper': $route.name === 'register' }"
   >
-    <!-- <Leaderboard /> -->
+    <Leaderboard v-if="showLeaderboard" />
     <AuthHeader />
     <nuxt />
     <Snackbar
@@ -19,21 +19,31 @@
   </div>
 </template>
 <script>
-// import Leaderboard from "../components/header/Leaderboard";
 import Snackbar from "../components/ui/Snackbar";
 import AuthHeader from "../components/header/AuthHeader";
+import Leaderboard from "../components/header/Leaderboard";
 export default {
   components: {
     Snackbar,
     AuthHeader,
-    // Leaderboard,
+    Leaderboard,
   },
   data() {
-    return {};
+    return {
+      allowedRoutesForLeaderBoard: [
+        "login",
+        "register",
+        "recover-password",
+        "new-password",
+      ],
+    };
   },
   computed: {
     snackbar() {
       return this.$store.getters.snackbar;
+    },
+    showLeaderboard() {
+      return !this.allowedRoutesForLeaderBoard.includes(this.$route.name);
     },
   },
   methods: {
