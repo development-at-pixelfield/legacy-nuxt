@@ -152,14 +152,14 @@
     }
 
     .new-bg{
-      background: linear-gradient(0deg, rgba(120, 127, 255, 0.05), rgba(120, 127, 255, 0.05)), #301C3F;
+      background: linear-gradient(0deg, rgba(120, 127, 255, 0.05), rgba(120, 127, 255, 0.05)), $c-greyscale-120;
 
     }
     .in_progress-bg{
-      background: linear-gradient(0deg, rgba(255, 201, 136, 0.1), rgba(255, 201, 136, 0.1)), #301C3F;
+      background: linear-gradient(0deg, rgba(255, 201, 136, 0.1), rgba(255, 201, 136, 0.1)), $c-greyscale-120;
     }
     .completed-bg{
-      background: linear-gradient(0deg, rgba(29, 209, 161, 0.1), rgba(29, 209, 161, 0.1)), #301C3F;
+      background: linear-gradient(0deg, rgba(29, 209, 161, 0.1), rgba(29, 209, 161, 0.1)), $c-greyscale-120;
     }
   }
 }

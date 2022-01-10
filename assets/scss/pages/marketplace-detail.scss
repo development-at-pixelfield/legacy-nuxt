@@ -151,7 +151,7 @@
         }
 
         .sold-action{
-          background: #301C3F;
+          background: $c-greyscale-100;
           border-radius: 3px;
           padding: 24px;
           display: flex;
@@ -322,7 +322,7 @@
 
           .tag{
             padding: 4px 4px 4px 8px;
-            background: #6000AE;
+            background: $c-primary;
             border-radius: 3px;
           }
         }
@@ -330,7 +330,7 @@
     }
 
     .history{
-      border: 1px solid #301C3F;
+      border: 1px solid $c-greyscale-100;
       padding: 12px;
       display: flex;
       align-items: center;

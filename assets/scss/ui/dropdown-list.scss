@@ -37,7 +37,7 @@
         background: #261632;
 
         &:hover{
-          background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), #301C3F;
+          background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), $c-greyscale-120;
         }
       }
       &-state {
