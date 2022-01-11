@@ -26,10 +26,10 @@
         color: $c-white;
         text-align: center;
         font-style: normal;
-        font-weight: 800;
+        font-weight: bold;
         font-size: 40px;
         line-height: 38px;
-        letter-spacing: -0.01em;
+        letter-spacing: -0.025em;
         margin-top: 0;
         margin-bottom: 24px;
         display: block;
@@ -138,6 +138,7 @@
           display: flex;
           width: 260px;
           height: 260px;
+          margin: 0 auto;
           //background: #08010E;
           //border-radius: 8px;
           //padding-bottom: 37px;

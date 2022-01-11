@@ -182,10 +182,10 @@ ul{
   color: $c-white;
   text-align: center;
   font-style: normal;
-  font-weight: 800;
+  font-weight: bold;
   font-size: 40px;
   line-height: 38px;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.025em;
   margin-top: 0;
 
   @media (max-width: $break-sms) {

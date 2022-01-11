@@ -1,5 +1,6 @@
 .discover-wrapper {
   //background: $c-land-background;
+  position: relative;
 
   .sounds {
     display: flex;
@@ -73,10 +74,10 @@
 
         h2 {
           color: $c-white;
-          font-weight: 800;
+          font-weight: bold;
           font-size: 64px;
           line-height: 95%;
-          letter-spacing: -0.01em;
+          letter-spacing: -0.025em;
           margin-bottom: 48px;
           width: 500px;
 
@@ -303,10 +304,10 @@
         }
 
         h2{
-          font-weight: 800;
+          font-weight: bold;
           font-size: 40px;
-          line-height: 95%;
-          letter-spacing: -0.01em;
+          line-height: 100%;
+          letter-spacing: -0.025em;
           color: $c-white;
 
           @media (max-width: $break-smsm) {

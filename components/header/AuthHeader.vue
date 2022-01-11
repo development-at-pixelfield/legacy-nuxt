@@ -44,7 +44,7 @@
         <div class="user-info not-auth">
           <nuxt-link
             to="/login"
-            class="no-color-link display-f"
+            class="no-color-link display-f text-m-bold"
             :class="{ current: active === 4 }"
             >{{ $t("auth.login") }}</nuxt-link
           >

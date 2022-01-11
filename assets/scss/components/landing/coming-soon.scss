@@ -26,8 +26,13 @@
 
     h1 {
       font-weight: 800;
-      font-size: 64px;
-      line-height: 95%;
+      font-style: normal;
+      font-size: 74px;
+      line-height: 100%;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      letter-spacing: -0.025em;
       color: #fff;
       margin-bottom: 16px;
       margin-top: 0;
@@ -37,8 +42,9 @@
 
       @media (max-width: $break-sms) {
         font-weight: 800;
-        font-size: 32px;
-        line-height: 95%;
+        font-size: 48px;
+        line-height: 100%;
+        letter-spacing: -0.025em;
       }
     }
 
