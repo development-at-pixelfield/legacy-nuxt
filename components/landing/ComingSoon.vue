@@ -49,6 +49,12 @@ export default {
       if (val) this.showAnimation();
     },
   },
+  mounted() {
+    if (this.$route.hash.includes("discover")) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      this.anchorLink();
+    }
+  },
   methods: {
     anchorLink() {
       this.$router.push("/register");

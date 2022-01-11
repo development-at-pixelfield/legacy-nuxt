@@ -64,6 +64,8 @@
         }
         &.view-offline {
           .user-tag {
+            z-index: 0;
+
             &-state {
               background-color: $c-not-connected;
             }
@@ -89,26 +91,59 @@
           position: relative;
           overflow: hidden;
           margin-right: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.2s ease-in-out;
 
           @media (max-width: $break-sms) {
             margin: 0 auto 24px auto;
+          }
+
+          .hover-img{
+            opacity: 0;
+            position: absolute;
+            transition: all 0.2s ease-in-out;
           }
 
           .avatar-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: all 0.2s ease-in-out;
           }
+
+          &:hover{
+            background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), $c-greyscale-120;
+          }
+          &:hover .hover-img{
+            opacity: 1;
+          }
+          &:hover .avatar-img{
+            opacity: .4;
+          }
+
+          &:active{
+            background: $c-greyscale-120;
+          }
+          &:active .hover-img{
+            opacity: 1;
+          }
+          &:active .avatar-img{
+            opacity: 0.4;
+          }
+
 
           .avatar-input {
             border-radius: 50%;
             width: 100%;
-            height: 129%;
+            height: 100%;
             opacity: 0;
             cursor: pointer;
             position: absolute;
             left: 0;
-            top: -22px;
+            top: 0;
+            z-index: 2;
           }
         }
 
@@ -124,7 +159,7 @@
               //background: #79affd;
               opacity: 0.8;
               box-shadow:  0 0 10px #7839FE;
-              filter: blur(12.2px);
+              filter: blur(4.2px);
               width: 14px;
               height: 14px;
               top: 2px;
@@ -190,6 +225,10 @@
           &-icon {
             padding-right: 36px;
             font-size: 0;
+
+            @media (max-width: $break-mds) {
+              padding-right: 0;
+            }
           }
           &-text {
             flex: 1;

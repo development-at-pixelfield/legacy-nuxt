@@ -2,6 +2,7 @@ html {
   overflow-y: scroll;
   scroll-behavior: smooth;
   height: 100%;
+  width: 100%;
   //background: #11011F;
 
 }
@@ -315,7 +316,7 @@ ul{
   text-decoration: none;
 }
 .no-dec-link{
-  text-decoration: none;
+  text-decoration: none !important;
 }
 .pointer{
   cursor: pointer;

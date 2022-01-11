@@ -9,15 +9,15 @@
 
       <Welcome />
 
-      <BecomeTester />
+      <BecomeTester :collections="feed.constellations.slice(0, 3)" />
 
       <JoinLegacy />
 
       <JoinUs />
 
-      <Blog />
+      <Blog :blogs="feed.blogs" />
 
-      <Faq />
+      <Faq :faqs="feed.faq" />
 
       <Discover />
 
@@ -52,6 +52,10 @@ export default {
   },
   layout: "landing",
   middleware: ["isLoggedIn"],
+  async asyncData({ store }) {
+    const feed = await store.dispatch("landing/feed");
+    return { feed };
+  },
 };
 </script>
 

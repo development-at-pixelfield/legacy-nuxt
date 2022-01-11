@@ -1,5 +1,5 @@
 <template>
-  <div class="discover-wrapper">
+  <div id="learn-more" class="discover-wrapper">
     <div class="discover">
       <div class="full-container">
         <div class="left-side">

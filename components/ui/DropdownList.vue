@@ -48,9 +48,7 @@
             <span class="text-m label-item">{{ item.label }}</span>
           </div>
           <div class="right-side">
-            <span v-if="item.haveNot" class="new-not text-s-bold">{{
-              item.haveNot
-            }}</span>
+            <span v-if="item.haveNot" class="new-not text-s-bold"></span>
           </div>
         </div>
         <div v-if="item.hasBorder" class="divider"></div>

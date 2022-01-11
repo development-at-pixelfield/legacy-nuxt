@@ -66,6 +66,7 @@
           :name.sync="idType"
           :value="'ID_CARD'"
           :label="'ID card'"
+          :error="idError"
         />
         <RadioCircle
           v-if="idList.DRIVERS_LICENSE"
@@ -73,6 +74,7 @@
           :name.sync="idType"
           :value="'DRIVERS_LICENSE'"
           :label="'Driver license'"
+          :error="idError"
         />
         <RadioCircle
           v-if="idList.PASSPORT"
@@ -80,12 +82,14 @@
           :name.sync="idType"
           :value="'PASSPORT'"
           :label="'Passport'"
+          :error="idError"
         />
         <RadioCircle
           v-if="idList.RESIDENCE_PERMIT"
           :name.sync="idType"
           :value="'RESIDENCE_PERMIT'"
           :label="'Passport'"
+          :error="idError"
         />
       </div>
 
@@ -128,7 +132,7 @@ export default {
   },
   layout: "auth",
   middleware: "auth",
-  async asyncData({ store }) {
+  async asyncData({ store, error }) {
     try {
       const resp = await store.dispatch("nfts/getCountries");
       let countries = [];
@@ -142,7 +146,9 @@ export default {
       });
 
       return { countries, options: resp };
-    } catch (e) {}
+    } catch (e) {
+      error({ statusCode: 404, message: "Page not found" });
+    }
   },
   data() {
     return {
@@ -153,6 +159,7 @@ export default {
       idList: {},
       isSubmit: false,
       countryError: false,
+      idError: false,
       countries: [],
       options: [],
       rules: {
@@ -217,8 +224,8 @@ export default {
           document_country: this.country,
         };
 
-        await this.$store.dispatch("nfts/verifyUser", data);
-        await this.$router.push("/settings");
+        const resp = await this.$store.dispatch("nfts/verifyUser", data);
+        window.location.replace(resp.url);
       } catch (e) {
         await this.$store.commit("setSnackbar", {
           show: true,

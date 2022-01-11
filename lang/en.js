@@ -242,6 +242,9 @@ Our idea was born from within us - we are ultimate fans ourselves, inspired and 
     galacticMilesSubTitle: `Collect Galactic Miles by buying NFTs through our platform. We will gift you 1 Galactic Mile when you buy a new NFT through our Marketplace. Use earned points to interact with VIP features. More coming soon!`,
     openMap: "Open roadmap",
     voteTitle: "Vote for next features!",
+    transferringToken: "Transferring token to",
+    otherStars: "Other stars in",
+    constellation_l: "constellation",
     voteDesc:
       "Vote for your favourite features with your Galactic Miles points. We regularly update the roadmap and add new suggestions.",
   },
@@ -269,6 +272,7 @@ Our idea was born from within us - we are ultimate fans ourselves, inspired and 
     emailUsed: "This email has already been registered",
     selectOption: "You must select one of the options",
     usernameLength: "Please enter at least 5 characters",
+    checkForm: "Please check out the error messages in the form",
   },
 
   snackbar: {
@@ -333,6 +337,8 @@ Our idea was born from within us - we are ultimate fans ourselves, inspired and 
     verificationTitle: "Verification error!",
     verifyHeader: "Unsuccessful verification attempt for the following reason:",
     doAgain: "Please try to verify your ID again.",
+    errorDoAgain:
+      "Unsuccessful verification attempt. Please try to verify your ID again.",
     total: "Total",
     copiedToClip: "Successfully copied hash to clipboard",
     completeIdentity: "Complete verification process",

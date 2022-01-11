@@ -1,14 +1,24 @@
 <template>
   <ScaffoldModal :heading="$t('nft_modal.verificationTitle')" @close="close">
-    <div class="buying-header no-color-link">
-      {{ $t("nft_modal.verifyHeader") }}
+    <div
+      v-if="status === 'abandoned'"
+      class="buying-header no-color-link mb-32"
+    >
+      {{ $t("nft_modal.errorDoAgain") }}
     </div>
-    <div class="divider" />
-    <div class="summary">
-      <div>{{ reason }}</div>
+
+    <div v-else>
+      <div class="buying-header no-color-link">
+        {{ $t("nft_modal.verifyHeader") }}
+      </div>
+      <div class="divider" />
+      <div class="summary">
+        <div>{{ reason }}</div>
+      </div>
+      <div class="divider" />
+      <p class="text-m no-color-link mb-32">{{ $t("nft_modal.doAgain") }}</p>
     </div>
-    <div class="divider" />
-    <p class="text-m no-color-link mb-32">{{ $t("nft_modal.doAgain") }}</p>
+
     <div class="button-wrap">
       <Button
         :background="'primary'"
@@ -34,6 +44,9 @@ export default {
   computed: {
     reason() {
       return this.$store.getters.modal.data.reason;
+    },
+    status() {
+      return this.$store.getters.modal.data.status;
     },
   },
   methods: {

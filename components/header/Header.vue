@@ -43,7 +43,10 @@
 
         <div class="waller-info">
           <span class="avatar">
-            <DropdownWallet class="profile-dropdown" />
+            <DropdownWallet
+              class="profile-dropdown"
+              :have-leaders="haveLeaders"
+            />
           </span>
         </div>
 
@@ -53,7 +56,7 @@
               :items="items"
               class="profile-dropdown"
               :src="userAvatar"
-              :miles="4"
+              :miles="userMiles"
               @action="actionHandler"
             />
           </span>
@@ -133,12 +136,20 @@ export default {
   data() {
     return {
       mobileMenu: false,
+      haveLeaders: false,
     };
+  },
+  async fetch() {
+    const leaders = await this.$store.dispatch("nfts/getLeaderboard");
+    this.haveLeaders = leaders.count;
   },
 
   computed: {
     logoLink() {
       return this.$auth.loggedIn && this.$auth.user ? "/profile" : "/landing";
+    },
+    userMiles() {
+      return this.$auth.user.miles_amount;
     },
     userAvatar() {
       if (this.$auth.loggedIn && this.$auth.user.avatar)

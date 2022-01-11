@@ -124,6 +124,7 @@ import FilterDropdown from "../../ui/FilterDropdown";
 import SearchFilter from "../../ui/SearchFilter";
 import Icon from "../../ui/Icon";
 import Button from "../../ui/Button";
+import fixed from "../../../mixins/fixed";
 const filterDefaultVars = {
   search: "",
   luminosity__in: [],
@@ -141,6 +142,7 @@ export default {
     Button,
     SearchFilter,
   },
+  mixins: [fixed],
   props: {
     count: {
       type: Number,
@@ -163,7 +165,6 @@ export default {
     return {
       showPanel: false,
       canShow: false,
-      type: "desktop",
       filter: {
         search: "",
         luminosity__in: [],
@@ -204,10 +205,6 @@ export default {
         this.filter = { ...filterDefaultVars };
       }
     },
-    type(val) {
-      if (val === "mobile" && this.showPanel) this.addFixed();
-      else this.removeFixed();
-    },
     queryFilter(val) {
       this.setFilters(val);
     },
@@ -228,13 +225,6 @@ export default {
   },
   created() {
     this.setFilters({ ...this.filter });
-  },
-  mounted() {
-    window.addEventListener("resize", this.reportWindowSize);
-    this.reportWindowSize();
-  },
-  beforeDestroy() {
-    window.removeEventListener("resize", this.reportWindowSize);
   },
   methods: {
     toggleFilter() {
@@ -263,23 +253,6 @@ export default {
       });
 
       this.filter = filter;
-    },
-
-    removeFixed() {
-      const header = document.getElementById("header");
-      const html = document.getElementsByTagName("html")[0];
-      header.style.position = "static";
-      html.style.position = "static";
-    },
-    addFixed() {
-      const header = document.getElementById("header");
-      const html = document.getElementsByTagName("html")[0];
-      header.style.position = "fixed";
-      html.style.position = "fixed";
-    },
-    reportWindowSize() {
-      if (window.innerWidth < 770) this.type = "mobile";
-      else this.type = "desktop";
     },
   },
 };

@@ -4,14 +4,23 @@
 <script>
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
+// Internal modules
+import GalaxyShaders from "./GalaxyShaders.js";
+import GalaxyVariables from "./GalaxyVariables.js";
+import GalaxyMaterials from "./GalaxyMaterials.js";
 export default {
   name: "WebGl",
   props: {
-    src: {
-      type: String,
-      default: "",
+    nft: {
+      type: Object,
+      default: () => {},
     },
   },
   data() {
@@ -32,222 +41,180 @@ export default {
       gemBackMaterial: null,
       gemFrontMaterial: null,
       objects: [],
+      finalPass: null,
+      goldMesh: null,
+      finalComposer: null,
+      bloomComposer: null,
     };
   },
   mounted() {
     this.init();
     this.animate();
+    window.addEventListener("resize", this.onWindowResize);
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onWindowResize);
   },
   methods: {
     init() {
-      this.container = document.createElement("div");
-      const div = document.getElementById("container");
-      div.appendChild(this.container);
-
-      this.camera = new THREE.PerspectiveCamera(40, 1, 1, 1000);
-      this.camera.position.set(0.0, -10, 20 * 2.9);
-
-      this.scene = new THREE.Scene();
-      // this.scene.background = new THREE.Color("#18022a");
-
-      this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-
-      this.gemBackMaterial = new THREE.MeshPhysicalMaterial({
-        map: null,
-        color: "#0000FF",
-        metalness: 1,
-        roughness: 0,
-        opacity: 0.5,
-        side: THREE.BackSide,
-        transparent: true,
-        envMapIntensity: 5,
-        premultipliedAlpha: true,
-        // TODO: Add custom blend mode that modulates background color by this materials color.
-      });
-
-      this.gemFrontMaterial = new THREE.MeshPhysicalMaterial({
-        map: null,
-        color: "#0000FF",
-        metalness: 0,
-        roughness: 0,
-        opacity: 0.25,
-        side: THREE.FrontSide,
-        transparent: true,
-        envMapIntensity: 10,
-        premultipliedAlpha: true,
-      });
-
-      const manager = new THREE.LoadingManager();
-      manager.onProgress = function (item, loaded, total) {
-        console.log(item, loaded, total);
-      };
-
-      const loader = new FBXLoader();
-      // loader.setCrossOrigin("anonymous");
-      const vm = this;
-      // https://threejs.org/examples/models/fbx/Samba%20Dancing.fbx
-      loader.load(this.src, function (object) {
-        // mixer = new THREE.AnimationMixer( object );
-
-        // const action = mixer.clipAction( object.animations[ 0 ] );
-        // action.play();
-
-        object.traverse(function (child) {
-          if (child.isMesh) {
-            child.castShadow = true;
-            child.receiveShadow = true;
-          }
-
-          if (child instanceof THREE.Mesh) {
-            child.material = vm.gemBackMaterial;
-            const second = child.clone();
-            second.material = vm.gemFrontMaterial;
-
-            const parent = new THREE.Group();
-            parent.add(second);
-            parent.add(child);
-            vm.scene.add(parent);
-
-            vm.objects.push(parent);
-          }
-        });
-
-        // scene.add( object );
-      });
-
-      const vm1 = this;
-      new RGBELoader().load("../../royal_esplanade_1k.hdr", function (texture) {
+      const scene = new THREE.Scene();
+      let goldMesh = null;
+      const dracoLoader = new DRACOLoader().setDecoderPath(
+        GalaxyVariables.assetsPath
+      );
+      const loader = new GLTFLoader();
+      loader.setDRACOLoader(dracoLoader);
+      const hdrLoader = new RGBELoader();
+      hdrLoader.load("../../../HDRI_Nebula.hdr", function (texture) {
         texture.mapping = THREE.EquirectangularReflectionMapping;
-
-        vm1.gemFrontMaterial.envMap = vm1.gemBackMaterial.envMap = texture;
-        vm1.gemFrontMaterial.needsUpdate =
-          vm1.gemBackMaterial.needsUpdate = true;
+        scene.background = texture;
+        scene.environment = texture;
       });
 
-      // Lights
-
-      this.scene.add(new THREE.AmbientLight(0x222222));
-
-      const pointLight1 = new THREE.PointLight("#FFFFFF");
-      pointLight1.position.set(150, 10, 0);
-      pointLight1.castShadow = false;
-      this.scene.add(pointLight1);
-
-      const pointLight2 = new THREE.PointLight("#FFFFFF");
-      pointLight2.position.set(-150, 0, 0);
-      this.scene.add(pointLight2);
-
-      const pointLight3 = new THREE.PointLight("#FFFFFF");
-      pointLight3.position.set(0, -10, -150);
-      this.scene.add(pointLight3);
-
-      const pointLight4 = new THREE.PointLight("#FFFFFF");
-      pointLight4.position.set(0, 0, 150);
-      this.scene.add(pointLight4);
-
-      this.renderer.setPixelRatio(window.devicePixelRatio);
-      // this.renderer.setSize(window.innerWidth - 17, window.innerHeight);
-      // this.renderer.setSize(364, 375);
-      if (window.innerWidth < 600) {
-        this.renderer.setSize(300, 300);
-      } else this.renderer.setSize(400, 400);
-
-      this.renderer.shadowMap.enabled = true;
+      this.renderer = new THREE.WebGLRenderer({ antialias: true });
+      this.renderer.setPixelRatio(1.0);
+      this.renderer.setSize(window.innerWidth - 17, 530);
       this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      this.container.appendChild(this.renderer.domElement);
-
       this.renderer.outputEncoding = THREE.sRGBEncoding;
+      this.renderer.toneMappingExposure = 1;
+      const div = document.getElementById("container");
+      div.appendChild(this.renderer.domElement);
 
-      // Fps
-      // this.stats = new Stats();
-      // this.container.appendChild(this.stats.dom);
-
+      this.camera = new THREE.PerspectiveCamera(
+        40,
+        window.innerWidth / 443,
+        1,
+        1000
+      );
       const controls = new OrbitControls(this.camera, this.renderer.domElement);
-      controls.minDistance = 20;
-      controls.maxDistance = 200;
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.03;
+      controls.update();
 
-      window.addEventListener("resize", this.onWindowResize);
+      this.camera.position.set(0, 0, 30);
+      scene.add(this.camera);
 
-      // eslint-disable-next-line no-undef
-      // if (process.client && window.document) {
-      //   const gui = new GUI();
-      //
-      //   gui.add(this.params, "reflectivity", 0, 1);
-      //   gui.add(this.params, "exposure", 0, 2);
-      //   gui.add(this.params, "autoRotate");
-      //   gui.add(this.params, "gemColor", [
-      //     "Blue",
-      //     "Green",
-      //     "Red",
-      //     "White",
-      //     "Black",
-      //   ]);
-      //   gui.open();
-      // }
+      // PostProcess and Render Pass
+      const renderScene = new RenderPass(scene, this.camera);
+      const bloomPass = new UnrealBloomPass(
+        new THREE.Vector2(window.innerWidth, window.innerHeight),
+        1.5,
+        0.4,
+        0.85
+      );
+      bloomPass.threshold = GalaxyVariables.bloomParams.bloomThreshold;
+      bloomPass.strength = GalaxyVariables.bloomParams.bloomStrength;
+      bloomPass.radius = GalaxyVariables.bloomParams.bloomRadius;
+
+      this.bloomComposer = new EffectComposer(this.renderer);
+      this.bloomComposer.renderToScreen = false;
+      this.bloomComposer.addPass(renderScene);
+      this.bloomComposer.addPass(bloomPass);
+      this.finalPass = new ShaderPass(
+        new THREE.ShaderMaterial({
+          uniforms: {
+            baseTexture: { value: null },
+            bloomTexture: { value: this.bloomComposer.renderTarget2.texture },
+          },
+          vertexShader: GalaxyShaders.bloomVertexShader(),
+          fragmentShader: GalaxyShaders.bloomFragmentShader(),
+          defines: {},
+        }),
+        "baseTexture"
+      );
+      this.finalPass.needsSwap = true;
+
+      this.finalComposer = new EffectComposer(this.renderer);
+      this.finalComposer.addPass(renderScene);
+      this.finalComposer.addPass(this.finalPass);
+
+      const dirLight = new THREE.DirectionalLight("white", 1.0);
+      const dirLight2 = new THREE.DirectionalLight("white", 1.0);
+      const dirLight3 = new THREE.DirectionalLight("white", 1.0);
+      const dirLight4 = new THREE.DirectionalLight("white", 1.0);
+      const dirLight5 = new THREE.DirectionalLight("white", 1.0);
+      dirLight2.position.set(0, 0, 10);
+      dirLight3.position.set(12, 0, 8);
+      dirLight4.position.set(-12, 0, 8);
+      dirLight4.position.set(-12, 0, 8);
+      dirLight5.position.set(0, 0, -5);
+      scene.add(dirLight);
+      scene.add(dirLight2);
+      scene.add(dirLight3);
+      scene.add(dirLight4);
+      scene.add(dirLight5);
+
+      GalaxyVariables.setData(this.nft);
+      loader.load(
+        GalaxyVariables.currentStar.modelPath,
+        function (gltf) {
+          gltf.scene.rotation.set(0, 0, 0);
+          gltf.scene.traverse(function (child) {
+            if (child.isMesh) {
+              // If the mesh is bear, assign the diamond/crystal material to it
+              switch (child.name) {
+                case "DMD_bear": {
+                  child.material = GalaxyMaterials.diamond;
+                  break;
+                }
+                case "GLD_honey": {
+                  GalaxyMaterials.gold = child.material;
+                  goldMesh = child;
+                  break;
+                }
+                default: {
+                  child.material = GalaxyMaterials.diamond;
+                }
+              }
+            }
+          });
+
+          gltf.scene.scale.set(45, 45, 45); // Scale the model up
+          scene.add(gltf.scene);
+          hdrLoader.load("../../../HDRI_Diamond.hdr", function (texture) {
+            texture.mapping = THREE.EquirectangularReflectionMapping;
+            GalaxyMaterials.diamond.envMap = texture;
+            GalaxyMaterials.diamond.needsUpdate = true;
+          });
+        },
+        undefined,
+        function (error) {
+          console.error(error);
+        }
+      );
+
+      this.goldMesh = goldMesh;
     },
 
     onWindowResize() {
-      // const width = window.innerWidth;
-      // const height = window.innerHeight;
-
-      this.camera.aspect = 1;
+      console.log("8888888");
+      const div = document.getElementById("header-img");
+      const width = div.clientWidth;
+      const height = 530;
+      this.camera.aspect = width / height;
       this.camera.updateProjectionMatrix();
 
-      if (window.innerWidth < 600) {
-        return this.renderer.setSize(300, 300);
-      }
+      // if (window.innerWidth < 600) {
+      //   return this.renderer.setSize(300, 300);
+      // }
 
-      this.renderer.setSize(400, 400);
+      this.renderer.setSize(width, height);
     },
 
     animate() {
+      if (this.goldMesh) this.goldMesh.material = GalaxyMaterials.dark;
+      this.bloomComposer.render();
+      if (this.goldMesh) this.goldMesh.material = GalaxyMaterials.gold;
+      this.finalComposer.render();
       requestAnimationFrame(this.animate);
-
-      // this.stats.begin();
-      this.render();
-      // this.stats.end();
-    },
-
-    render() {
-      if (
-        this.gemBackMaterial !== undefined &&
-        this.gemFrontMaterial !== undefined
-      ) {
-        this.gemFrontMaterial.reflectivity = this.gemBackMaterial.reflectivity =
-          this.params.reflectivity;
-
-        let newColor = this.gemBackMaterial.color;
-        switch (this.params.gemColor) {
-          case "Blue":
-            newColor = new THREE.Color(0x000088);
-            break;
-          case "Red":
-            newColor = new THREE.Color(0x880000);
-            break;
-          case "Green":
-            newColor = new THREE.Color(0x008800);
-            break;
-          case "White":
-            newColor = new THREE.Color(0x888888);
-            break;
-        }
-
-        this.gemBackMaterial.color = this.gemFrontMaterial.color = newColor;
-      }
-
-      this.renderer.toneMappingExposure = this.params.exposure;
-
-      this.camera.lookAt(this.scene.position);
-
-      if (this.params.autoRotate) {
-        for (let i = 0, l = this.objects.length; i < l; i++) {
-          const object = this.objects[i];
-          object.rotation.y += 0.005;
-        }
-      }
-
-      this.renderer.render(this.scene, this.camera);
     },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+#container {
+  position: absolute;
+  top: 0;
+}
+</style>

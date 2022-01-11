@@ -4,38 +4,18 @@
       <h2 class="mt-0 text-center header-h">{{ $t("faq.title") }}</h2>
 
       <div class="content">
-        <Accordion>
-          <span slot="count" class="count header-title1">01</span>
+        <Accordion
+          v-for="(faq, index) in faqs"
+          :key="`faq_${index}`"
+          :last="faqs.length - 1 === index"
+        >
+          <span slot="count" class="count header-title1">0{{ index + 1 }}</span>
           <div slot="header" class="header-title1 no-color-link">
-            {{ $t("faq.accTitle1") }}
+            {{ faq.question }}
           </div>
           <div slot="list" class="list">
             <p class="mtb text-m no-color-link">
-              {{ $t("faq.accDesc1") }}
-            </p>
-          </div>
-        </Accordion>
-
-        <Accordion>
-          <span slot="count" class="count header-title1">02</span>
-          <div slot="header" class="header-title1 no-color-link">
-            {{ $t("faq.accTitle1") }}
-          </div>
-          <div slot="list" class="list">
-            <p class="mtb text-m no-color-link">
-              {{ $t("faq.accDesc1") }}
-            </p>
-          </div>
-        </Accordion>
-
-        <Accordion :last="true">
-          <span slot="count" class="count header-title1">03</span>
-          <div slot="header" class="header-title1 no-color-link">
-            {{ $t("faq.accTitle1") }}
-          </div>
-          <div slot="list" class="list">
-            <p class="mtb text-m no-color-link">
-              {{ $t("faq.accDesc1") }}
+              {{ faq.answer }}
             </p>
           </div>
         </Accordion>
@@ -50,6 +30,12 @@ export default {
   name: "Faq",
   components: {
     Accordion,
+  },
+  props: {
+    faqs: {
+      type: Array,
+      required: true,
+    },
   },
 };
 </script>

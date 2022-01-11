@@ -33,6 +33,7 @@ export default {
   methods: {
     handle(emit) {
       this.$emit("close");
+      this.$router.push("/galactic-miles");
     },
     close() {
       this.$emit("close");

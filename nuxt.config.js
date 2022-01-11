@@ -98,7 +98,8 @@ export default {
     __dangerouslyDisableSanitizers: ['script'],
   },
 
-  loading: {color: "#1DD1A1"},
+  // loading: {color: "#1DD1A1"},
+  loading: '@/components/LoadingBar.vue',
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: ["@/assets/scss/global.scss"],
@@ -143,6 +144,11 @@ export default {
       useCookie: true,
       cookieKey: "i18n_redirected",
       onlyOnRoot: true, // recommended
+    },
+  },
+  hooks: {
+    'generate:page': page => {
+      page.html = page.html.replace('head data-n-head=""', 'head');
     },
   },
 

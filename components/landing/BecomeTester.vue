@@ -8,58 +8,21 @@
         </p>
       </div>
       <div class="form-group">
-        <div class="item">
+        <div
+          v-for="(collection, index) in collections"
+          :key="`collection_${index}`"
+          class="item"
+        >
           <span class="item-img">
-            <img src="~/assets/img/landing/nft-featured.png" alt="bear-image" />
+            <img
+              :src="getConstellationImage(collection.thumbnail)"
+              alt="bear-image"
+            />
           </span>
 
           <div class="info">
             <p class="no-color-link header-title1 mb-16 mt-24 text-center">
-              Athlete Legends
-            </p>
-
-            <div class="action center-block">
-              <Button
-                :label="$t('landing.availableNow')"
-                :background="'primary'"
-                :size="'medium'"
-                :color="'c-white'"
-                @on-click="$router.push('/marketplace')"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="item">
-          <span class="item-img">
-            <img src="~/assets/img/landing/nft-featured.png" alt="bear-image" />
-          </span>
-
-          <div class="info">
-            <p class="no-color-link header-title1 mb-16 mt-24 text-center">
-              Athlete Legends
-            </p>
-
-            <div class="action center-block">
-              <Button
-                :label="$t('landing.availableNow')"
-                :background="'primary'"
-                :size="'medium'"
-                :color="'c-white'"
-                @on-click="$router.push('/marketplace')"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="item">
-          <span class="item-img">
-            <img src="~/assets/img/landing/nft-featured.png" alt="bear-image" />
-          </span>
-
-          <div class="info">
-            <p class="no-color-link header-title1 mb-16 mt-24 text-center">
-              Athlete Legends
+              {{ collection.name }}
             </p>
 
             <div class="action center-block">
@@ -85,8 +48,21 @@ export default {
   components: {
     Button,
   },
+  props: {
+    collections: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {};
+  },
+  computed: {
+    getConstellationImage() {
+      return (thumbnail) => {
+        return thumbnail ?? require("~/assets/img/landing/nft-featured.png");
+      };
+    },
   },
 };
 </script>

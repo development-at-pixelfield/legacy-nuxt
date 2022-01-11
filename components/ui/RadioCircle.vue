@@ -6,7 +6,7 @@
         <span class="ml-8 text-m" :class="{ bold: checked }">{{ label }}</span>
       </label>
 
-      <span class="circle" :class="{ current: checked }"> </span>
+      <span class="circle" :class="{ current: checked, error }"> </span>
 
       <!--      <input-->
       <!--        v-model="propModel"-->
@@ -16,9 +16,9 @@
       <!--        :name="radioName"-->
       <!--      />-->
     </div>
-    <div v-if="error" class="errors-list">
-      <p class="text-s">{{ error }}</p>
-    </div>
+    <!--    <div v-if="error" class="errors-list">-->
+    <!--      <p class="text-s">{{ error }}</p>-->
+    <!--    </div>-->
   </div>
 </template>
 
@@ -44,7 +44,7 @@ export default {
       default: "",
     },
     error: {
-      type: String,
+      type: [String, Boolean],
       required: false,
       default: null,
     },

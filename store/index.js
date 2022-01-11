@@ -1,6 +1,7 @@
 import Vuex from "vuex";
 import user from "./user/state";
 import nfts from "./nfts/state";
+import landing from "./landing/state";
 
 export const defaultValues = () => ({
   snackbar: {
@@ -72,6 +73,7 @@ const createStore = () =>
     modules: {
       user,
       nfts,
+      landing,
     },
   });
 

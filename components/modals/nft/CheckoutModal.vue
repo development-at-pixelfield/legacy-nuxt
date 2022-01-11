@@ -198,6 +198,11 @@ export default {
             type: null,
           });
           setTimeout(async () => {
+            const offerUid = this.nftData.last_offer.uid.replaceAll("-", "");
+            console.log("Adding transfer token", offerUid);
+            await this.$store.dispatch("nfts/addTransferToken", {
+              offer_uid: offerUid,
+            });
             await this.$store.commit("setModal", {
               show: true,
               type: "purchase",

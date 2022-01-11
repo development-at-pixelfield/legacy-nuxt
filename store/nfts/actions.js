@@ -77,6 +77,16 @@ export const actions = {
     return this.$axios.$post(`/nfts/sell_offers/payment/init/`, payload);
   },
 
+  /**
+   * Create transfer token
+   * @param context
+   * @param payload{Object<{offer_uid: string}>}
+   * @returns {Promise<any>}
+   */
+  async addTransferToken(context, payload) {
+    return await this.$axios.$post(`/nfts/token/transfer/`, payload);
+  },
+
   voteRoadmap(context, payload) {
     return this.$axios.$post(`/nfts/roadmap/vote/${payload}/`);
   },

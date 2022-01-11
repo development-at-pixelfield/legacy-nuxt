@@ -1,12 +1,17 @@
 <template>
   <div class="main-container">
     <div class="content-container">
-      <div class="header-title1 mb-16">More from {{ constellationName }}</div>
+      <div class="header-title1 mb-16">
+        {{ $t("marketplace.otherStars") }} {{ constellationName }}
+        {{ $t("marketplace.constellation_l") }}
+      </div>
       <div class="collection">
         <MarketItem
-          v-for="(item, index) in items"
+          v-for="(item, index) in relatedNfts.slice(0, 12)"
           :key="`item_${index}`"
+          :is-collection="true"
           class="item"
+          @on-click="$router.push(`/marketplace/${item.uid}`)"
         >
           <img
             slot="image"
@@ -21,7 +26,7 @@
             {{ item.name }} <br />
           </p>
           <p slot="profit" class="profit mtb text-m text-center">
-            {{ item.price_eth }}Ξ
+            {{ formatPrice(item.price_eth) }}Ξ
           </p>
           <p slot="finance" class="finance mtb text-m-bold text-center">
             {{ convertEthereum(item.price_eth) }}
@@ -46,13 +51,24 @@ export default {
       required: false,
       default: "",
     },
-  },
-  data() {
-    return {
-      items: Array(10).fill({ name: "Example", price_eth: 1 }),
-    };
+
+    relatedNfts: {
+      type: Array,
+      required: false,
+      default: () => [],
+    },
+    ethPrice: {
+      type: String,
+      required: false,
+      default: "0",
+    },
   },
   computed: {
+    formatPrice() {
+      return (price) => {
+        return Number(price).toFixed(3);
+      };
+    },
     convertEthereum() {
       return (price) => {
         return "est. $" + Number(this.ethPrice * price).toFixed(2);
