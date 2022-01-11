@@ -10,7 +10,7 @@
           {{ $t("landing.welcomeSubTitle") }}
         </p>
 
-        <p class="mtb desc text-m no-color-link">
+        <p class="mtb desc text-m-bold no-color-link">
           {{ $t("landing.welcomeDesc") }}
         </p>
       </div>
