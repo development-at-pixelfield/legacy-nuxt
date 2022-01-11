@@ -98,8 +98,8 @@ export default {
     __dangerouslyDisableSanitizers: ['script'],
   },
 
-  // loading: {color: "#1DD1A1"},
-  loading: '@/components/LoadingBar.vue',
+  loading: {color: "#3843FF"},
+  // loading: '@/components/LoadingBar.vue',
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: ["@/assets/scss/global.scss"],

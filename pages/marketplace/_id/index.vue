@@ -50,9 +50,8 @@
                 <Button
                   class="single-btn"
                   :label="$t('marketplace.buyNow')"
-                  :background="'grey-m'"
+                  :background="'disabled-new'"
                   :size="'medium'"
-                  :color="'c-white'"
                   :tooltip="'Community re-listing coming soon!'"
                 />
               </div>
@@ -117,10 +116,10 @@
           </div>
         </div>
 
-        <div class="auction block-margin">
+        <div v-if="showAuction" class="auction block-margin">
           <div class="left-side">
             <div class="img-block">
-              <img src="~/assets/img/icons/auction-tags.svg" alt="auction" />
+              <img src="~/assets/img/auction.png" alt="auction" />
             </div>
             <div class="info">
               <p class="mt-0 mb-4 header-title1">Dutch auction</p>
@@ -134,19 +133,14 @@
           <div class="right-side">
             <div class="text">
               <span class="display-f">
-                <img
-                  class="auction-bell"
-                  src="~/assets/img/auction-bell.svg"
-                  alt="bell"
-                />
+                <img src="~/assets/img/icons/bell.svg" alt="bell" />
               </span>
               <span class="text-m-bold valid-text"
-                >The price will decrease in</span
+                >The current price is valid for</span
               >
             </div>
             <div class="timer text-l">
               <AuctionTimer
-                v-if="nft && nft.last_offer"
                 :time="nft.last_offer.price_changes_at"
                 :show-auction.sync="showAuction"
                 @finished="timerFinished"
@@ -208,6 +202,33 @@
             >
           </div>
         </a>
+
+        <div class="auction satisfaction">
+          <div class="left-side">
+            <div class="img-block">
+              <img src="~/assets/img/satisfaction.png" alt="satisfaction" />
+            </div>
+            <div class="info">
+              <p class="mt-0 mb-4 header-title1">100% satisfaction!</p>
+              <p class="mtb text-m-bold">
+                Time to swap your Galaxy NFTs for hard assets? All our NFTs are
+                backed up with real diamonds.
+              </p>
+            </div>
+          </div>
+
+          <div class="right-side">
+            <Button
+              class="second-btn"
+              :label="$t('marketplace.exchangeToken')"
+              :background="isOwner ? 'primary' : 'grey'"
+              :size="'medium'"
+              :disabled="!isOwner"
+              :color="isOwner ? 'c-white' : 'c-grey'"
+              @on-click="exchangeToken"
+            />
+          </div>
+        </div>
       </div>
     </div>
     <Collection
@@ -234,8 +255,8 @@ export default {
   components: {
     Navigation,
     Button,
-    Collection,
     AuctionTimer,
+    Collection,
     WebGl,
   },
   mixins: [converter, metamask],
@@ -264,7 +285,7 @@ export default {
   data() {
     return {
       showCard: false,
-      showAuction: true,
+      showAuction: false,
       ethPrice: null,
       nft: null,
     };

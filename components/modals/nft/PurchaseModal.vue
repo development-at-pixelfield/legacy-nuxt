@@ -1,6 +1,8 @@
 <template>
   <ScaffoldModal :heading="headingText" @close="close">
-    <img src="~/assets/img/nft-preview.png" />
+    <div class="preview-block">
+      <img src="~/assets/img/nft-preview.png" />
+    </div>
     <div v-if="status === 'approval'" class="approving-nft" @click="next">
       {{ $t("nft_modal.confirmFromMetaMask") }}
     </div>
