@@ -411,7 +411,7 @@ Use earned points to access VIP features!`,
         title: "Installing MetaMask app (2 min)",
         step1: {
           title:
-            'Go to the <a href="https://metamask.io/" class="link-c">MetaMask website</a> (https://metamask.io/) and tap "Download now". <br />Tap “Install MetaMask for iPhone” or “Install MetaMask for Android”',
+            'Go to the <a href="https://metamask.io/" class="link-c-lighter">MetaMask website</a> (https://metamask.io/) and tap "Download now". <br />Tap “Install MetaMask for iPhone” or “Install MetaMask for Android”',
           img1Title: "MetaMask official website",
           img2Title: "Install button for iOS",
         },
@@ -473,7 +473,7 @@ Use earned points to access VIP features!`,
         title: "Installing MetaMask extension (2 min)",
         step1: {
           title:
-            'Go to the <a href="https://metamask.io/" class="link-c">MetaMask website</a> (https://metamask.io/) and tap "Download now". <br />Tap “Install MetaMask for iPhone” or “Install MetaMask for Android”',
+            'Go to the <a href="https://metamask.io/" class="link-c-lighter">MetaMask website</a> (https://metamask.io/) and tap "Download now". <br />Tap “Install MetaMask for iPhone” or “Install MetaMask for Android”',
           img1Title: "MeataMask official website",
         },
         step2: {

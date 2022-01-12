@@ -191,7 +191,7 @@ export default {
       if (this.count === 0) {
         return this.$store.commit("setModal", {
           show: true,
-          type: "legacy-scores",
+          type: "galactic-miles",
         });
       }
 

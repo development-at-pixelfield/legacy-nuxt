@@ -1,7 +1,7 @@
 <template>
   <ScaffoldModal :heading="$t('nft_modal.galacticHeader')" @close="close()">
     <div class="verification-container">
-      <img class="image img-width" src="~/assets/img/scores-box.png" />
+      <img class="image img-width-s" src="~/assets/img/scores-box.png" />
       <div class="verification-container_textbox">
         <div class="verification-container_textbox_title">
           {{ $t("nft_modal.galacticTitle") }}

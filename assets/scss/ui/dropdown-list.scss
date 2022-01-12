@@ -34,7 +34,7 @@
         width: 24px;
         height: 24px;
         display: block;
-        background: #261632;
+        background: $c-greyscale-120;
 
         &:hover{
           background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), $c-greyscale-120;

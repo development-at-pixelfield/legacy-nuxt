@@ -6,7 +6,7 @@
       <p class="text-m mt-0">{{ $t("helpPage.p2") }}</p>
       <PanelContainer>
         <template slot="left">
-          <img src="~/assets/img/help/wallet-1.svg" alt="Install" />
+          <img src="~/assets/img/help/wallet-1.png" alt="Install" />
         </template>
         <template slot="right">
           <Button
@@ -28,7 +28,7 @@
       </PanelContainer>
       <PanelContainer>
         <template slot="left">
-          <img src="~/assets/img/help/wallet-2.svg" alt="Buy ETH" />
+          <img src="~/assets/img/help/wallet-2.png" alt="Buy ETH" />
         </template>
         <template slot="right">
           <Button

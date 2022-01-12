@@ -1,7 +1,7 @@
 <template>
   <ScaffoldModal :heading="$t('nft_modal.featuresHeader')" @close="close()">
     <div class="verification-container">
-      <img class="image img-width" src="~/assets/img/gift-list.png" />
+      <img class="image img-width-s" src="~/assets/img/scores-modal.png" />
       <div class="verification-container_textbox">
         <div class="verification-container_textbox_title">
           {{ $t("nft_modal.collectTitle") }}
@@ -33,7 +33,7 @@ export default {
   methods: {
     handle(emit) {
       this.$emit("close");
-      this.$router.push("/galactic-miles");
+      this.$router.push("/legacy-scores");
     },
     close() {
       this.$emit("close");
