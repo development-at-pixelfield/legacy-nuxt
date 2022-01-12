@@ -77,7 +77,7 @@
 
       <div v-else class="empty-wrapper">
         <span class="empty-image"
-          ><img src="~/assets/img/empty-img.svg" alt="empty-image"
+          ><img src="~/assets/img/empty-img.png" alt="empty-image"
         /></span>
         <p
           class="description mt-0 mb-16 text-center"

@@ -2,7 +2,7 @@
   <div class="main-container">
     <div class="content-container">
       <div class="header-title1 mb-16">
-        {{ $t("marketplace.otherStars") }} {{ constellationName }}
+        {{ $t("marketplace.moreFrom") }} {{ constellationName }}
         {{ $t("marketplace.constellation_l") }}
       </div>
       <div class="collection">

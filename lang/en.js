@@ -244,6 +244,7 @@ Our idea was born from within us - we are ultimate fans ourselves, inspired and 
     voteTitle: "Vote for next features!",
     transferringToken: "Transferring token to",
     otherStars: "Other stars in",
+    moreFrom: "More from",
     constellation_l: "constellation",
     voteDesc:
       "Vote for your favourite features with your Galactic Miles points. We regularly update the roadmap and add new suggestions.",
