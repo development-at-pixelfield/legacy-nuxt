@@ -161,74 +161,57 @@ export default {
     this.scene.add(backLight);
     this.scene.add(frontLight);
 
-    // Fetch API JSON
-    let url;
-    if (LegacyVariables.useLocal) {
-      url =
-        "https://api-legacy.bypixelfield.com/api/nfts/39822427-08d0-4981-8346-53d90634ee9a/";
-    } else {
-      const href = location.href;
-      const urlParts = new URL(href).pathname.split("/");
-      const urlLastSegment = urlParts.pop() || urlParts.pop();
-      url =
-        "https://api-legacy.bypixelfield.com/api/nfts/" + urlLastSegment + "/";
-    }
+    LegacyVariables.setData(this.nft);
+    LegacyMaterials.loadTexturesFromApi(this.nft);
+    this.setupParticles(this.scene);
 
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        LegacyVariables.setData(data);
-        LegacyMaterials.loadTexturesFromApi(data);
-        this.setupParticles(this.scene);
-
-        // Models
-        this.loader.load(
-          "../../../models/Card.glb",
-          (gltf) => {
-            gltf.scene.traverse((child) => {
-              if (child.isMesh) {
-                switch (child.name) {
-                  case "Card_1": {
-                    child.material = LegacyMaterials.card;
-                    break;
-                  }
-                  case "Card_2": {
-                    child.material = LegacyMaterials.background;
-                    break;
-                  }
-                  case "Person": {
-                    child.material = LegacyMaterials.person;
-                    break;
-                  }
-                  case "Signature": {
-                    child.material = LegacyMaterials.signature;
-                    break;
-                  }
-                  case "Name": {
-                    child.material = LegacyMaterials.name;
-                    break;
-                  }
-                  case "Frame": {
-                    child.material = LegacyMaterials.frame;
-                    break;
-                  }
-                  default: {
-                    child.material = LegacyMaterials.card;
-                  }
-                }
-                LegacyVariables.cardMeshes.push(child);
-                LegacyVariables.cardMaterials.push(child.material);
+    // Models
+    this.loader.load(
+      "../../../models/Card.glb",
+      (gltf) => {
+        gltf.scene.traverse((child) => {
+          if (child.isMesh) {
+            switch (child.name) {
+              case "Card_1": {
+                child.material = LegacyMaterials.card;
+                break;
               }
-            });
-            gltf.scene.scale.set(45, 45, 45); // Scale the model up
-            this.scene.add(gltf.scene);
-          },
-          undefined,
-          function (error) {
-            console.error(error);
+              case "Card_2": {
+                child.material = LegacyMaterials.background;
+                break;
+              }
+              case "Person": {
+                child.material = LegacyMaterials.person;
+                break;
+              }
+              case "Signature": {
+                child.material = LegacyMaterials.signature;
+                break;
+              }
+              case "Name": {
+                child.material = LegacyMaterials.name;
+                break;
+              }
+              case "Frame": {
+                child.material = LegacyMaterials.frame;
+                break;
+              }
+              default: {
+                child.material = LegacyMaterials.card;
+              }
+            }
+            LegacyVariables.cardMeshes.push(child);
+            LegacyVariables.cardMaterials.push(child.material);
           }
-        );
-      });
+        });
+        gltf.scene.scale.set(45, 45, 45); // Scale the model up
+        this.scene.add(gltf.scene);
+      },
+      undefined,
+      function (error) {
+        console.error(error);
+      }
+    );
 
     // Background Logo
     this.loader.load(

@@ -5,5 +5,5 @@
 - Remove package.lock && node_modules
 - brew install nvm && brew link nvm
 - source ~/.nvm/nvm.sh
-- nvm install 15
+- nvm install 16
 - npm i && npm run dev
