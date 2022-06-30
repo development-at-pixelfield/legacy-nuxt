@@ -1,0 +1,13 @@
+.modal-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .heading {
+    margin-bottom: 24px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+}
+}

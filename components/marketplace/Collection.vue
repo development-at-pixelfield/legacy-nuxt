@@ -3,7 +3,6 @@
     <div class="content-container">
       <div class="header-title1 mb-16">
         {{ $t("marketplace.moreFrom") }} {{ constellationName }}
-        {{ $t("marketplace.constellation_l") }}
       </div>
       <div class="collection">
         <MarketItem
@@ -16,9 +15,9 @@
           <img
             slot="image"
             :src="
-              item.image_cover
-                ? item.image_cover
-                : require('~/assets/img/bear-head.svg')
+              item.thumbnail
+                ? item.thumbnail
+                : require('~/assets/img/landing/default-marketplace-thumbnail.png')
             "
             alt="image"
           />

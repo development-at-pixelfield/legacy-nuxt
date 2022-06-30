@@ -27,8 +27,10 @@ export default {
   },
 
   landing: {
-    mainTitle: "The Legacy starts here.",
-    mainDesc: "Raving metaverse community for ultra fans and mega stars.",
+    flip: "Flip card",
+    mainTitle: "We build emotion between you and celebrities across the world.",
+    mainDesc: "Get closer to each other.",
+    moreInfo: "More information",
     discover: "Discover",
     roadmap: "Roadmap",
     becomeTester: "Become a tester",
@@ -54,9 +56,8 @@ export default {
     joinTitle: "What happens when you join Legacy fandom?",
     joinDesc:
       "We prepared amazing features and perks, so your experience is always exciting and full of surprises. ",
-    discoverTitle: "We are a small team with great dreams ;)",
-    discoverDesc: `Our team is spread across the world, and our passion lies in creating exciting new ventures in business and technology.
-Our idea was born from within us - we are ultimate fans ourselves, inspired and starstrack by legendary personalities. We want to bring the world of NFTs and build ultimate fandom communities.`,
+    discoverTitle: "Behind the project is a powerful company named D.I.C.",
+    discoverDesc: `More than 15 years of experience in the production and sale of luxury products. You can visit us in our showrooms in Prague and Bratislava. During the time of our existence we have met many successful people and we ourselves have reaped a lot of success, we consider the biggest one to be the manufacturer of the crown for the most prestigious beauty contest Miss Universe in 2014-2016. In addition to beautiful diamonds, we always offer our clients something special. Emotions that our clients can identify with. That's exactly what the Legacy project is all about. We build emotions between a celebrity and their fans.`,
     soundGood: "Join our Discord community?",
     orJoin: "or join us on other platforms",
     joinUsDiscord:
@@ -94,8 +95,9 @@ Our idea was born from within us - we are ultimate fans ourselves, inspired and 
     starTitle7: "COLLAB WITH METAVERSES",
     starTitle8: "DUBAI EVENT",
     starTitle9: "HOLOGRAM",
-    becomeTesterTitle: "Become the top fan in the metaverse",
-    becomeTesterDesc: `All collections are packed with unique NFT cards and exciting personalised gifts from the top sports, arts and VIP celebrities. `,
+    becomeTesterTitle: "Become a V.I.P. fan",
+    becomeTesterDesc:
+      "By purchasing an NFT, you support the personality/celebrity in their career and personal growth.",
     textSecTitle:
       " A diamond company with more than 15 years experience has our backs.",
     textSecDesc1: `To give our project even more credibility, we are proud to announce
@@ -115,19 +117,21 @@ Our idea was born from within us - we are ultimate fans ourselves, inspired and 
     joinItemDesc2: `Top fans who buy the first ‘virgin’ NFT token are going to be awarded with commission in secondary market re-sales.`,
     joinItem3: "Rewards for fandom members",
     joinItemDesc3: `The legends prepared amazing rewards to celebrate their top fans - from personalised merch to a chance to meet them in person.`,
-    welcomeTitle: "The ultimate fandom experience",
+    welcomeTitle: "The ultimate fan experience",
     welcomeSubTitle: "Taking the fandom to the next level.",
-    welcomeDesc:
-      "Our vision is to make Legacy the best fandom hub in the metaverse. We want to give our Legends a well-deserved platform to celebrate their triumphs and share appreciation for their beloved top fans, just like yourself!",
-    joinTitle1: "Want to join the Legacy community?",
+    welcomeDesc: `Thanks to state-of-the-art NFT technology that guarantees transparent ownership of the digital item, we decided to create beautiful, fully interactive NFT and very limited 
+    collectible cards that bring you closer to your favourite celebrity than ever before!`,
+    joinTitle1: "Join the Legacy community!",
     joinDesc1:
-      "Connect with us on Discord to chat, ask questions and stay in touch :)",
+      "Join our official Discord server, Instagram profile or Facebook page. You'll find important information from the Legacy world everywhere.",
     joinBtn1: "Join us on Discord",
   },
 
   faq: {
-    title: "All your burning questions answered",
-    desc: "Your questions answered",
+    title: "Do you have any questions about our project?",
+    desc: "Please, find the answers below.",
+    noAnswer:
+      "If you haven't found the answer to your question, do not hesitate to contact us on our communication networks.",
     accTitle1: "Why diamonds?",
     accDesc1: `Diamonds are long-standing security for many investors, now, you can be the first to experience this in the NFT world with us. We give our project even more credibility, we are proud to announce that Diamond International Corporation (DIC) company stands behind the project. We have many years of experience with luxury diamond jewellery. As well as luxury showrooms in the main cities of the Czech and Slovak Republic. Facts: DIC manufactured the crowns for MISS Universe in the years 2014-2016. DIC is also a member of prestigious world diamond exchanges. `,
     accTitle2: "Question",
@@ -144,7 +148,6 @@ Our idea was born from within us - we are ultimate fans ourselves, inspired and 
     email_is_not_verified: "Please, verify your email to be able to buy nft",
     is_not_logged: "Please, log in to be able to buy nft",
     user_not_verified: "Please, verify your person to be able to buy nft",
-    miles: "Legacy Scores",
     verifyTitle: "Verify your identity",
     verifyDesc1:
       "Before buying or making an offer you must verify your identity.",
@@ -209,9 +212,17 @@ Our idea was born from within us - we are ultimate fans ourselves, inspired and 
   },
 
   marketplace: {
+    interact: "Interact",
+    category: "Category",
+    careerLevel: "Career Level",
+    collection: "Collection",
+    discipline: "Discipline",
+    nationality: "Nationality",
     marketplace: "Marketplace",
+    about: "About",
+    achievements: "Achievements",
+    utilities: "Utilities",
     galacticMiles: "Galactic Miles",
-    legacyScores: "Legacy Scores",
     help: "Help",
     luminosity: "Luminosity",
     copyright: "Copyright © 2022. Galaxy. All rights reserved.",
@@ -277,6 +288,7 @@ Our idea was born from within us - we are ultimate fans ourselves, inspired and 
   },
 
   snackbar: {
+    successSubscription: "Successfully signed up to the newsletter!",
     successRegister: "Successfully registered",
     successLoggedIn: "Successfully logged in",
     successTester:

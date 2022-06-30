@@ -7,23 +7,19 @@
       <p class="mt-0 mb-0 no-color-link desc" :class="{ show: show3 }">
         {{ $t("landing.mainDesc") }}
       </p>
-      <div class="action" :class="{ show: show2 }">
-        <Button
-          :label="$t('landing.registerNow')"
-          :background="'primary'"
-          :size="'medium'"
-          :color="'c-white'"
-          @on-click="anchorLink"
-        />
-      </div>
       <span :class="{ show: show }" class="web-span">
         <img
           id="header-logo"
-          src="~/assets/img/landing/nfts.png"
+          src="~/assets/img/landing/landing-nfts.png"
           alt="header-logo"
           @load="isLoaded = true"
         />
       </span>
+      <Button
+        :class="{ show: show2 }"
+        :label="$t('landing.moreInfo')"
+        :background="'dark'"
+      />
     </div>
   </div>
 </template>

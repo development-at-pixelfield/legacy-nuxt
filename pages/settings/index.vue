@@ -62,7 +62,7 @@
           <p class="mtb text-m-bold">
             {{ $t("settings.advancedVerification") }}
           </p>
-          <span class="text-s">2 {{ $t("settings.minutes") }}</span>
+          <span class="text-s">5 {{ $t("settings.minutes") }}</span>
         </div>
         <p class="mt-0 mb-16 text-m no-color-link">
           {{ $t("settings.verifyDesc") }}

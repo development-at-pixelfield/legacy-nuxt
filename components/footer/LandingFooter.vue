@@ -15,13 +15,6 @@
             >
           </li>
           <li>
-            <nuxt-link
-              to="/legacy-scores"
-              class="text-m-bold no-color-dec-link"
-              >{{ $t("marketplace.legacyScores") }}</nuxt-link
-            >
-          </li>
-          <li>
             <nuxt-link to="/help" class="text-m-bold no-color-dec-link">
               {{ $t("marketplace.help") }}
             </nuxt-link>
@@ -37,23 +30,13 @@
         </ul>
 
         <div class="socials">
-          <a
-            href="https://discord.com/invite/galaxydiamonds"
-            target="_blank"
-            class="social-link"
-          >
-            <img src="~/assets/img/landing/discord.svg" alt="discord-icon" />
-          </a>
-          <a
-            href="https://twitter.com/GalaxyDiaNFT"
-            target="_blank"
-            class="social-link"
-          >
-            <img src="~/assets/img/landing/twitter.svg" alt="twitter-icon" />
-          </a>
-          <a href="/discord" target="_blank" class="social-link">
-            <img src="~/assets/img/landing/medium.svg" alt="medium-icon" />
-          </a>
+          <img
+            v-for="(icon, index) in socials"
+            :key="`icon_${index}`"
+            class="link"
+            :src="require(`~/assets/img/icons/socials/${icon}.svg`)"
+            @click="handle(icon)"
+          />
         </div>
       </div>
 
@@ -69,6 +52,16 @@
 <script>
 export default {
   name: "LandingFooter",
+  data() {
+    return {
+      socials: ["discord", "instagram", "facebook"],
+    };
+  },
+  methods: {
+    handle(icon) {
+      // TODO implement icon links
+    },
+  },
 };
 </script>
 

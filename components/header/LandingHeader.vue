@@ -11,13 +11,6 @@
                 >{{ $t("marketplace.marketplace") }}</span
               ></nuxt-link
             >
-            <nuxt-link to="/legacy-scores" class="ml-24"
-              ><span
-                class="text-m marketplace-link"
-                :class="{ current: active === 2 }"
-                >{{ $t("marketplace.legacyScores") }}</span
-              ></nuxt-link
-            >
             <nuxt-link to="/help" class="ml-24"
               ><span
                 class="text-m marketplace-link"
@@ -84,20 +77,6 @@
             @click.native="mobileMenu = false"
             ><span class="header-title1 marketplace-link">{{
               $t("marketplace.marketplace")
-            }}</span></nuxt-link
-          >
-        </p>
-        <p
-          class="mt-0 mb-40 pointer"
-          :class="{ 'active-link': $route.path === '/legacy-scores' }"
-          @click="toLink('/legacy-scores')"
-        >
-          <nuxt-link
-            to="/legacy-scores"
-            class="ml-16"
-            @click.native="mobileMenu = false"
-            ><span class="header-title1 marketplace-link">{{
-              $t("marketplace.legacyScores")
             }}</span></nuxt-link
           >
         </p>

@@ -9,16 +9,14 @@
         <p class="sub-title no-color-link">
           {{ $t("landing.joinDesc1") }}
         </p>
-
-        <div class="action mt-16 display-f">
-          <a
-            href="https://discord.com/invite/galaxydiamonds"
-            class="discord-btn no-color-dec-link text-m-bold"
-            target="_blank"
-          >
-            {{ $t("landing.joinBtn1") }}
-          </a>
-        </div>
+        <img
+          v-for="(icon, index) in icons"
+          :key="`icon_${index}`"
+          :src="require(`~/assets/img/icons/socials/${icon}.svg`)"
+          alt=""
+          class="icon"
+          @click="handle(icon)"
+        />
       </div>
 
       <div class="right-side">
@@ -33,6 +31,16 @@
 <script>
 export default {
   name: "Welcome",
+  data() {
+    return {
+      icons: ["discord", "facebook", "instagram"],
+    };
+  },
+  methods: {
+    handle(icon) {
+      // TODO implement icon links
+    },
+  },
 };
 </script>
 

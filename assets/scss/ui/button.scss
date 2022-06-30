@@ -99,6 +99,53 @@
     outline: none;
   }
 
+  &__dark {
+    background: #0D0F28;
+    color: white;
+
+    &:hover {
+      filter: brightness(1.1);
+    }
+    &:active {
+      filter: brightness(0.9);
+    }
+  }
+
+  &__available {
+    background: #FFBC0F;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: capitalize;
+    line-height: 150%;
+    letter-spacing: 0.05rem;
+
+    &:hover {
+      filter: brightness(1.1);
+    }
+    &:active {
+      filter: brightness(0.9);
+    }
+  }
+
+  &__white-outline{
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: capitalize;
+    line-height: 150%;
+    letter-spacing: 0.05rem;
+
+    &:hover {
+      filter: brightness(1.1);
+    }
+    &:active {
+      filter: brightness(0.9);
+    }
+  }
+
   &__primary{
     background: $c-primary;
     position: relative;
@@ -128,6 +175,10 @@
   &__grey-m{
     background: $c-greyscale-60;
     position: relative;
+  }
+
+  &__white {
+    color: white;
   }
 
 

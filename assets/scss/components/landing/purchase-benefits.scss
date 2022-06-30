@@ -1,0 +1,65 @@
+.purchase-benefits {
+  color: white;
+  padding: 126px 0;
+
+  @media (max-width: 550px) {
+    padding: 60px 0;
+  }
+
+  .content {
+    z-index: 1;
+    position: relative;
+
+    .title {
+      font-weight: 700;
+      font-size: 40px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .card-wrapper {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      row-gap: 16px;
+      column-gap: 16px;
+
+      @media (max-width: 750px) {
+        display: block;
+      }
+
+      .card {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        padding: 20px;
+        border-radius: 16px;
+        background-color: rgba($color: #3843FF, $alpha: 0.1);
+
+        @media (max-width: 750px) {
+          margin-bottom: 16px;
+        }
+
+        &:last-child {
+          font-weight: 700;
+          background-color: rgba($color: white, $alpha: 0.05);
+        }
+
+        .icon {
+          height: 40px;
+          width: 40px;
+          margin-bottom: 16px;
+        }
+      }
+    }
+
+    .celebrity-note {
+      font-size: 20px;
+      text-align: center;
+      margin-top: 64px;
+    }
+
+  }
+}

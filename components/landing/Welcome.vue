@@ -6,10 +6,6 @@
           {{ $t("landing.welcomeTitle") }}
         </h2>
 
-        <p class="sub-title no-color-link">
-          {{ $t("landing.welcomeSubTitle") }}
-        </p>
-
         <p class="mtb desc text-m-bold no-color-link">
           {{ $t("landing.welcomeDesc") }}
         </p>
@@ -17,16 +13,25 @@
 
       <div class="right-side">
         <span class="img-block">
-          <img src="~/assets/img/landing/nft-texture.png" alt="texture" />
+          <img src="~/assets/img/landing/welcome-image.png" alt="texture" />
         </span>
+        <Button
+          class="flip-action"
+          :label="$t('landing.flip')"
+          :background="'dark'"
+          ><span slot="left-icon"
+            ><img class="b-icon" src="~/assets/img/icons/flip.svg" /></span
+        ></Button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Button from "~/components/ui/Button.vue";
 export default {
   name: "Welcome",
+  components: [Button],
 };
 </script>
 

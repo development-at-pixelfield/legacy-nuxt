@@ -8,3 +8,4 @@ coverage/
 *.txt
 *.png
 *.png
+components/webgl

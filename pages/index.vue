@@ -9,11 +9,17 @@
 
       <Welcome />
 
+      <WhoFind />
+
+      <PurchaseBenefits />
+
       <BecomeTester :collections="feed.constellations.slice(0, 3)" />
 
-      <JoinLegacy />
+      <HowItWorks />
 
       <JoinUs />
+
+      <Newsletter />
 
       <Blog :blogs="feed.blogs" />
 
@@ -33,20 +39,27 @@ import ComingSoon from "../components/landing/ComingSoon";
 import LandingFooter from "../components/footer/LandingFooter";
 import Blog from "../components/landing/Blog";
 import Faq from "../components/landing/Faq";
-import JoinLegacy from "../components/landing/JoinLegacy";
 import Welcome from "../components/landing/Welcome";
 import JoinUs from "../components/landing/JoinUs";
 import LandingHeader from "../components/header/LandingHeader";
+import WhoFind from "../components/landing/WhoCanYouFind.vue";
+import PurchaseBenefits from "../components/landing/PurchaseBenefits.vue";
+import HowItWorks from "../components/landing/HowItWorks.vue";
+import Newsletter from "../components/landing/Newsletter.vue";
 export default {
   components: {
     Faq,
-    JoinLegacy,
     LandingFooter,
     Discover,
+    // eslint-disable-next-line vue/no-unused-components
     BecomeTester,
+    WhoFind,
     ComingSoon,
+    PurchaseBenefits,
     Blog,
+    HowItWorks,
     Welcome,
+    Newsletter,
     JoinUs,
     LandingHeader,
   },

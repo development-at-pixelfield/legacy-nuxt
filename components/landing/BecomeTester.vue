@@ -7,6 +7,10 @@
           {{ $t("landing.becomeTesterDesc") }}
         </p>
       </div>
+      <span class="category-h"
+        ><div class="category">Sport</div>
+        <Button :label="'AVAILABLE NOW'" :background="'available'"
+      /></span>
       <div class="form-group">
         <div
           v-for="(collection, index) in collections"
@@ -37,6 +41,15 @@
           </div>
         </div>
       </div>
+      <div class="category-h">
+        <div class="category">Great Actors & Singers</div>
+        <Button :label="'COMING SOON'" :background="'white-outline'" />
+      </div>
+      <img
+        class="blurred-image"
+        src="~/assets/img/landing/actors-blurred.png"
+        alt=""
+      />
     </div>
   </div>
 </template>

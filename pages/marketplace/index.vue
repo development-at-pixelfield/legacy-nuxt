@@ -57,9 +57,9 @@
           <img
             slot="image"
             :src="
-              item.image_cover
-                ? item.image_cover
-                : require('~/assets/img/bear-head.svg')
+              item.thumbnail
+                ? item.thumbnail
+                : require('~/assets/img/landing/default-marketplace-thumbnail.png')
             "
             alt="image"
           />
@@ -125,9 +125,9 @@ const filterDefaultVars = {
   page_size: 12,
   ordering: "",
   search: "",
-  luminosity__in: [],
-  quality_level__in: [],
-  age__in: [],
+  collection__category__in: [],
+  career_level__in: [],
+  collection__in: [],
   constellation: "",
 };
 
@@ -152,13 +152,9 @@ export default {
     try {
       const formOptions = await store.dispatch("nfts/getNftsForm");
 
-      // const leaders = await store.dispatch("nfts/getLeaderboard");
-
-      // console.log(formOptions, "formOptions");
-
       const query = route.query;
       const filter = { ...filterDefaultVars };
-      const arr = ["luminosity__in", "quality_level__in"];
+      const arr = ["collection__category__in", "career_level__in"];
       Object.keys(filter).forEach((key) => {
         if (arr.includes(query[key]) && typeof query[key] === "string") {
           filter[key] = query[key].split(",");

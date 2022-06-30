@@ -4,11 +4,24 @@
       {{ $t("nft_modal.you_are_buying") }} <strong>{{ nft.name }}</strong>
     </div>
     <div class="divider" />
-    <div class="summary">
-      <div>{{ $t("nft_modal.total") }}</div>
+    <div v-if="wyre" class="summary mb-16">
+      <div>{{ $t("nft_modal.currentPrice") }}</div>
       <div>
         <div class="summary_heading">{{ nft.price_eth }}Ξ</div>
         <div class="summary_sub-heading">(${{ nft.price_usd }})</div>
+      </div>
+    </div>
+    <div v-if="wyre" class="summary mb-16">
+      <div>{{ $t("nft_modal.wyreFee") }}</div>
+      <div>
+        <div class="summary_sub-heading">${{ wyreFee(false) }}</div>
+      </div>
+    </div>
+    <div class="summary">
+      <div>{{ $t("nft_modal.total") }}</div>
+      <div>
+        <div class="summary_heading">{{ totalEth }}Ξ</div>
+        <div class="summary_sub-heading">(${{ totalUsd }})</div>
       </div>
     </div>
     <div class="divider" />
@@ -85,20 +98,55 @@ export default {
     Spinner,
   },
   mixins: [converter, metamask],
+  props: {
+    wyre: {
+      type: Boolean,
+      default: false,
+    },
+    ethPrice: {
+      type: [Number, String],
+      default: 0,
+    },
+  },
   data() {
     return {
       agree: false,
       checkError: "",
       nftData: this.$store.getters.modal.data,
+      seaport: this.$store.getters.seaport,
       loading: true,
     };
   },
   computed: {
+    wyreFee() {
+      return (isEth = false) => {
+        const currency = isEth ? this.nft.price_eth : this.nft.price_usd;
+        const fees = 0.029 + 0.3;
+        const price = Number(currency * fees).toFixed(2);
+        const total = price <= 5 ? 5 : +price;
+        if (!isEth) return total.toFixed(2);
+        return (total / this.ethPrice).toFixed(4);
+      };
+    },
+    wyreTotal() {
+      const fee = this.wyreFee;
+      const nftCost = Number(this.ethPrice * this.nft.price_eth).toFixed(2);
+      return +fee + +nftCost;
+    },
+    totalEth() {
+      if (!this.wyre) return this.nft.price_eth;
+      return +this.nft.price_eth + +this.wyreFee(true);
+    },
+    totalUsd() {
+      if (!this.wyre) return this.nft.price_usd;
+      return (+this.nft.price_usd + +this.wyreFee()).toFixed(2);
+    },
     nft() {
       const data = this.nftData;
-      const priceEth = +data.last_offer.eth_current_price;
+      const priceEth = data.price_eth;
       const priceUsd = +this.ethToUsd(priceEth);
       return {
+        wyre: data.wyre,
         name: data.name,
         price_eth: priceEth.toFixed(4),
         price_usd: priceUsd.toFixed(4),
@@ -144,7 +192,65 @@ export default {
         this.checkError = this.$t("validations.termAgree");
         return false;
       }
-      await this.processPayment();
+      const contractAddress = this.nftData.nft_token.contract_address;
+      const tokenId = this.nftData.nft_token.token_id;
+      const network = this.nftData.nft_token.network_name;
+      if (!network.toLowerCase().includes("rinkeby")) {
+        return await this.$store.commit("setSnackbar", {
+          show: true,
+          message: this.$t("snackbar.payments.unsupportedNetwork"),
+          color: "error",
+        });
+      }
+      const devAccount = process.env.DEVELOPER_ACCOUNT_OWNER_NFT;
+      if (this.metamaskAccount === devAccount) {
+        return await this.$store.commit("setSnackbar", {
+          show: true,
+          message: this.$t("snackbar.payments.accountIsDev"),
+          color: "error",
+        });
+      }
+      if (!tokenId || !contractAddress) {
+        return await this.$store.commit("setSnackbar", {
+          show: true,
+          message: this.$t("snackbar.payments.noContractOrTokenId"),
+          color: "error",
+        });
+      }
+      try {
+        const payload = {
+          assetContractAddress: contractAddress,
+          tokenIds: String(tokenId),
+          side: "ask",
+          protocol: "seaport",
+        };
+        console.log(payload);
+        const order = await this.seaport.api.getOrders(payload);
+        console.log("order", order);
+
+        if ("orders" in order && !order.orders) {
+          return await this.$store.commit("setSnackbar", {
+            show: true,
+            message:
+              "No sell offer found for this listing! Please try again later",
+            color: "error",
+          });
+        }
+        const transactionHash = await this.seaport.fulfillOrder({
+          order,
+          accountAddress: this.metamaskAccount,
+          protocol: "seaport",
+        });
+        console.log("info");
+        console.log("hash", transactionHash);
+      } catch (e) {
+        console.log("err", e);
+        await this.$store.commit("setSnackbar", {
+          show: true,
+          message: e.message,
+          color: "error",
+        });
+      }
     },
     close() {
       this.$emit("close");
@@ -199,10 +305,10 @@ export default {
           });
           setTimeout(async () => {
             const offerUid = this.nftData.last_offer.uid.replaceAll("-", "");
-            console.log("Adding transfer token", offerUid);
             await this.$store.dispatch("nfts/addTransferToken", {
               offer_uid: offerUid,
             });
+            await this.$auth.fetchUser();
             await this.$store.commit("setModal", {
               show: true,
               type: "purchase",

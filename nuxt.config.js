@@ -184,7 +184,19 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
-    transpile: ["three"]
+    extend (config, { isDev, isClient }) {
+      config.node = {
+           fs: 'empty'
+      },
+      config.optimization.minimize = false,
+      config.performance.maxEntrypointSize = 2000000
+      config.module.rules.push({
+          test: /\.js$/,
+          loader: 'babel-loader',
+          exclude: /(node_modules)/
+      })
+    },
+    transpile: ["three"],
   },
 
   axios: {

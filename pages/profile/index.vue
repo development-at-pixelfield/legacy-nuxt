@@ -46,21 +46,6 @@
                   alt="icon"
                 />
               </li>
-              <li class="user-tag" @click="$router.push('/legacy-scores')">
-                <img
-                  :src="require(`assets/img/icons/gift.png`)"
-                  class="user-tag-gift"
-                  alt="icon"
-                />
-                <span class="text-m-bold user-tag-text"
-                  >{{ balance }} {{ $t("profile.miles") }}</span
-                >
-                <img
-                  :src="require(`assets/img/icons/caret-right.svg`)"
-                  class="user-tag-icon"
-                  alt="icon"
-                />
-              </li>
             </ul>
           </div>
         </div>

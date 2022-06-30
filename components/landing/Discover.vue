@@ -12,7 +12,7 @@
           <span class="img-block">
             <img
               class="bear-img"
-              src="~/assets/img/landing/discover-img.png"
+              src="~/assets/img/landing/dic-logo.png"
               alt="discover"
             />
           </span>

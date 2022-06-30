@@ -1,4 +1,9 @@
 .welcome-wrapper{
+  padding: 126px 0;
+
+  @media (max-width: 550px) {
+    padding: 60px 0;
+  }
 
   @media (max-width: 1380px) {
     padding-left: 136px;
@@ -28,6 +33,15 @@
     padding: 55px 80px;
     position: relative;
     overflow: hidden;
+
+    .icon {
+      height: 40px;
+      width: 40px;
+      
+      &:not(:last-child) {
+        margin-right: 16px;
+      }
+    }
 
     @media (max-width: $break-sm) {
       flex-direction: column;

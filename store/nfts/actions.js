@@ -20,6 +20,16 @@ export const actions = {
     return this.$axios.$get(url);
   },
 
+  /**
+   * Create transfer token
+   * @param context
+   * @param payload{Object<{offer_uid: string}>}
+   * @returns {Promise<any>}
+   */
+  async openseaTokenTransfer(context, payload) {
+    return await this.$axios.$post(`/opensea/token/transfer/`, payload);
+  },
+
   getRoadmap(context, payload) {
     payload.page = payload && payload.page ? +payload.page : 1;
     payload.page_size = payload && payload.page_size ? +payload.page_size : 10;

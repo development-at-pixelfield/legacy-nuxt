@@ -19,12 +19,6 @@
             <span class="img-block">
               <img src="~/assets/img/gift-box.png" alt="gift-box" />
             </span>
-            <div class="ml-8">
-              <p class="mtb text-s-bold no-color-link">
-                {{ $t("marketplace.legacyScores") }}
-              </p>
-              <p class="mtb text-m-bold no-color-link">{{ miles }}</p>
-            </div>
           </div>
           <div class="right-side">
             <img

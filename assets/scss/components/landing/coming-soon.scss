@@ -1,39 +1,33 @@
 .coming-soon {
   width: 100%;
-  //height: 100%;
-  background: url("~assets/img/geometry2.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  height: 100vh;
+  height: 100%;
+  padding: 80px 0;
   position: relative;
 
-  &::before{
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: black;
-    width: 100%;
-    height: 100%;
-    opacity: 0.4;
-  }
-  //
   @media (max-width: $break-md) {
     background-size: cover;
     background-position: center;
   }
-
+  
   .content {
-    padding-bottom: 100px;
-    padding-top: 80px;
+    padding-left: 168px;
+    padding-right: 168px;
     text-align: center;
     height: 100%;
-    justify-content: center;
     align-items: center;
     display: flex;
+    justify-content: center;
     flex-direction: column;
+
+    @media (max-width: 1380px) {
+      padding-left: 60px;
+      padding-right: 60px;
+    }
+
+    @media (max-width: 550px) {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
 
     h1 {
       font-weight: 800;
@@ -67,6 +61,7 @@
       font-size: 32px;
       line-height: 100%;
       letter-spacing: -0.025em;
+      margin-bottom: 50px;
 
       @media (max-width: $break-sms) {
         font-weight: 800;

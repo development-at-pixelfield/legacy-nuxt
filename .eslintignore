@@ -10,3 +10,4 @@ ecosystem.config.js
 nuxt.config.js
 plugins/qrcode.js
 static
+components/webgl

@@ -3,12 +3,23 @@
   padding-top: 80px;
   padding-bottom: 80px;
 
-  h2{
-    margin-bottom: 78px;
+  .subtitle {
+    color: white;
+    font-size: 20px;
+    font-weight: 800;
+    text-align: center;
+  }
 
-    @media (max-width: $break-sms){
-      margin-bottom: 38px
-    }
+  .mb-78 {
+    margin-bottom: 78px;
+  }
+
+  .mt-50 {
+    margin-top: 50px;
+  }
+
+  h2{
+    margin-bottom: 24px;
   }
 
   .desc{
@@ -26,3 +37,20 @@
     }
   }
 }
+
+.icon-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  .icon {
+    width: 40px;
+    height: 40px;
+  
+    &:not(:last-child) {
+      margin-right: 16px;
+    }
+  }
+}
+

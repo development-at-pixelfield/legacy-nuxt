@@ -1,0 +1,91 @@
+.who-find {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 126px 0;
+
+  @media (max-width: 550px) {
+    padding: 60px 0;
+  }
+
+  .content {
+    z-index: 1;
+    position: relative;
+
+    .title {
+      font-weight: 700;
+      font-size: 40px;
+      margin-bottom: 24px;
+
+
+    }
+
+    .subtitle {
+      font-weight: 800;
+      font-size: 20px;
+      margin-bottom: 64px;
+    }
+
+    .card-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      @media (max-width: 750px) {
+        display: block;
+      }
+
+      .card {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        border-radius: 16px;
+        padding: 16px;
+        text-align: center;
+        flex: 1;
+
+        @media (max-width: 750px) {
+          &:not(:last-child) {
+            margin-bottom: 16px;
+          }
+        }
+
+        img {
+          margin-bottom: 4px;
+        }
+
+        .title {
+          font-size: 20px;
+          font-weight: 800;
+          margin-bottom: 4px;
+        }
+
+        .subtitle {
+          font-size: 16px;
+          font-weight: 400;
+          margin-bottom: 0;
+        }
+
+        &_red {
+          background-color: rgba($color: #E26, $alpha: 0.1);
+        }
+
+        &_blue {
+          background-color: rgba($color: #3843FF, $alpha: 0.1);
+        }
+
+        &_yellow {
+          background-color: rgba($color: #F3BA25, $alpha: 0.1);
+        }
+
+        &:not(:last-child) {
+          margin-right: 16px;
+        }
+      }
+    }
+  }
+}

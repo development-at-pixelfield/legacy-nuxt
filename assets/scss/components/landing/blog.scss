@@ -10,8 +10,7 @@
 
   .header-h{
     margin-bottom: 64px;
-    text-align: left;
-    max-width: 500px;
+    text-align: center;
 
     @media (max-width: $break-smd) {
       margin-bottom: 40px;
@@ -24,7 +23,8 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-
+    z-index: 1;
+    
     @media (max-width: $break-sm) {
       flex-direction: column;
     }

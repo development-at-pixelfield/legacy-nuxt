@@ -1,20 +1,24 @@
 <template>
-  <div id="container"></div>
+  <div id="canvasContainer"></div>
 </template>
 <script>
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
-import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+import { GUI } from "three/examples/jsm/libs/lil-gui.module.min.js";
+import * as TWEEN from "@tweenjs/tween.js";
+import Stats from "~/webgl/js/legacy/stats.js";
+
 // Internal modules
-import GalaxyShaders from "./GalaxyShaders.js";
-import GalaxyVariables from "./GalaxyVariables.js";
-import GalaxyMaterials from "./GalaxyMaterials.js";
+import LegacyShaders from "~/webgl/js/legacy/LegacyShaders.js";
+import LegacyVariables from "~/webgl/js/legacy/LegacyVariables.js";
+import LegacyMaterials from "~/webgl/js/legacy/LegacyMaterials.js";
 export default {
   name: "WebGl",
   props: {
@@ -22,199 +26,474 @@ export default {
       type: Object,
       default: () => {},
     },
+    canInteract: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
-      container: null,
-      stats: null,
-      params: {
-        projection: "normal",
-        autoRotate: true,
-        reflectivity: 1,
-        background: false,
-        exposure: 0.3,
-        gemColor: "White",
-      },
-      camera: null,
       scene: null,
+      loader: null,
+      textureLoader: null,
+      camera: null,
+      canvas: null,
       renderer: null,
-      gemBackMaterial: null,
-      gemFrontMaterial: null,
-      objects: [],
-      finalPass: null,
-      goldMesh: null,
+      bloomPass: null,
       finalComposer: null,
       bloomComposer: null,
+      controls: null,
+      renderScene: null,
+      stats: null,
     };
   },
+  watch: {
+    canInteract(val) {
+      const container = document.getElementById("canvasContainer");
+      if (!val) {
+        container.style.overflow = "hidden";
+        container.style.pointerEvents = "all";
+      } else {
+        container.style.overflow = "auto";
+        container.style.pointerEvents = "none";
+      }
+    },
+  },
   mounted() {
-    this.init();
-    this.animate();
-    window.addEventListener("resize", this.onWindowResize);
-  },
-  beforeDestroy() {
-    window.removeEventListener("resize", this.onWindowResize);
-  },
-  methods: {
-    init() {
-      const scene = new THREE.Scene();
-      let goldMesh = null;
-      const dracoLoader = new DRACOLoader().setDecoderPath(
-        GalaxyVariables.assetsPath
-      );
-      const loader = new GLTFLoader();
-      loader.setDRACOLoader(dracoLoader);
-      const hdrLoader = new RGBELoader();
-      hdrLoader.load("../../../HDRI_Nebula.hdr", function (texture) {
-        texture.mapping = THREE.EquirectangularReflectionMapping;
-        scene.background = texture;
-        scene.environment = texture;
+    // Scene and loaders setup
+    this.scene = new THREE.Scene();
+
+    const dracoLoader = new DRACOLoader().setDecoderPath(
+      LegacyVariables.assetsPath
+    );
+    this.loader = new GLTFLoader();
+    this.loader.setDRACOLoader(dracoLoader);
+
+    this.textureLoader = new THREE.TextureLoader();
+
+    LegacyMaterials.logo = new THREE.MeshStandardMaterial({
+      map: this.textureLoader.load(
+        "../../../textures/logo/T_Background_logo_BC.png"
+      ),
+      emissiveMap: this.textureLoader.load(
+        "../../../textures/logo/T_Background_logo_BC.png"
+      ),
+      emissive: 0x444433,
+      transparent: true,
+      toneMapped: false,
+      envMapIntensity: 0.0,
+    });
+
+    const hdrLoader = new RGBELoader();
+
+    // Scene background
+    hdrLoader.load("../../../hdri/snow.hdr", (texture) => {
+      texture.mapping = THREE.EquirectangularReflectionMapping;
+      this.scene.environment = texture;
+    });
+
+    this.renderer = new THREE.WebGLRenderer({ antialias: false });
+    this.canvas = this.renderer.domElement;
+    this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    this.renderer.toneMappingExposure = 1.5;
+    LegacyVariables.canvasContainer =
+      document.getElementById("canvasContainer");
+    LegacyVariables.canvasContainer.appendChild(this.canvas);
+
+    this.camera = new THREE.PerspectiveCamera(
+      45,
+      this.canvas.clientWidth / this.canvas.clientHeight,
+      1,
+      10000
+    );
+    this.controls = new OrbitControls(this.camera, this.canvas);
+    this.controls.enableDamping = true;
+    this.controls.dampingFactor = 0.03;
+    this.controls.maxPolarAngle = (Math.PI * 1.1) / 2;
+    this.controls.minDistance = 7.2;
+    this.controls.maxDistance = 20;
+    this.controls.enablePan = false;
+    this.controls.update();
+
+    this.camera.position.set(0, 0, 15);
+    this.scene.add(this.camera);
+
+    // PostProcess and Render Pass
+    this.renderScene = new RenderPass(this.scene, this.camera);
+    this.bloomPass = new UnrealBloomPass(
+      new THREE.Vector2(this.canvas.clientWidth, this.canvas.clientHeight),
+      1.5,
+      0.4,
+      0.85
+    );
+    this.bloomPass.threshold = LegacyVariables.bloomParams.bloomThreshold;
+    this.bloomPass.strength = LegacyVariables.bloomParams.bloomStrength;
+    this.bloomPass.radius = LegacyVariables.bloomParams.bloomRadius;
+
+    this.bloomComposer = new EffectComposer(this.renderer);
+    this.bloomComposer.renderToScreen = false;
+    this.bloomComposer.addPass(this.renderScene);
+    this.bloomComposer.addPass(this.bloomPass);
+    const finalPass = new ShaderPass(
+      new THREE.ShaderMaterial({
+        uniforms: {
+          baseTexture: { value: null },
+          bloomTexture: { value: this.bloomComposer.renderTarget2.texture },
+        },
+        vertexShader: LegacyShaders.bloomVertexShader(),
+        fragmentShader: LegacyShaders.bloomFragmentShader(),
+        defines: {},
+      }),
+      "baseTexture"
+    );
+    finalPass.needsSwap = true;
+
+    this.finalComposer = new EffectComposer(this.renderer);
+    this.finalComposer.addPass(this.renderScene);
+    this.finalComposer.addPass(finalPass);
+
+    // Lights
+    const backLight = new THREE.DirectionalLight(0xeeeeee, 0.05);
+    const frontLight = new THREE.DirectionalLight(0xffffff, 0.005);
+    backLight.position.set(0, 0, -10);
+    frontLight.position.set(0, 1, 10);
+    this.scene.add(backLight);
+    this.scene.add(frontLight);
+
+    // Fetch API JSON
+    let url;
+    if (LegacyVariables.useLocal) {
+      url =
+        "https://api-legacy.bypixelfield.com/api/nfts/39822427-08d0-4981-8346-53d90634ee9a/";
+    } else {
+      const href = location.href;
+      const urlParts = new URL(href).pathname.split("/");
+      const urlLastSegment = urlParts.pop() || urlParts.pop();
+      url =
+        "https://api-legacy.bypixelfield.com/api/nfts/" + urlLastSegment + "/";
+    }
+
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        LegacyVariables.setData(data);
+        LegacyMaterials.loadTexturesFromApi(data);
+        this.setupParticles(this.scene);
+
+        // Models
+        this.loader.load(
+          "../../../models/Card.glb",
+          (gltf) => {
+            gltf.scene.traverse((child) => {
+              if (child.isMesh) {
+                switch (child.name) {
+                  case "Card_1": {
+                    child.material = LegacyMaterials.card;
+                    break;
+                  }
+                  case "Card_2": {
+                    child.material = LegacyMaterials.background;
+                    break;
+                  }
+                  case "Person": {
+                    child.material = LegacyMaterials.person;
+                    break;
+                  }
+                  case "Signature": {
+                    child.material = LegacyMaterials.signature;
+                    break;
+                  }
+                  case "Name": {
+                    child.material = LegacyMaterials.name;
+                    break;
+                  }
+                  case "Frame": {
+                    child.material = LegacyMaterials.frame;
+                    break;
+                  }
+                  default: {
+                    child.material = LegacyMaterials.card;
+                  }
+                }
+                LegacyVariables.cardMeshes.push(child);
+                LegacyVariables.cardMaterials.push(child.material);
+              }
+            });
+            gltf.scene.scale.set(45, 45, 45); // Scale the model up
+            this.scene.add(gltf.scene);
+          },
+          undefined,
+          function (error) {
+            console.error(error);
+          }
+        );
       });
 
-      this.renderer = new THREE.WebGLRenderer({ antialias: true });
-      this.renderer.setPixelRatio(1.0);
-      this.renderer.setSize(window.innerWidth - 17, 530);
-      this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      this.renderer.outputEncoding = THREE.sRGBEncoding;
-      this.renderer.toneMappingExposure = 1;
-      const div = document.getElementById("container");
-      div.appendChild(this.renderer.domElement);
+    // Background Logo
+    this.loader.load(
+      "../../../models/Logo.glb",
+      (gltf) => {
+        LegacyMaterials.flipLogoTextures();
 
-      this.camera = new THREE.PerspectiveCamera(
-        40,
-        window.innerWidth / 443,
-        1,
-        1000
-      );
-      const controls = new OrbitControls(this.camera, this.renderer.domElement);
-      controls.enableDamping = true;
-      controls.dampingFactor = 0.03;
-      controls.update();
-
-      this.camera.position.set(0, 0, 30);
-      scene.add(this.camera);
-
-      // PostProcess and Render Pass
-      const renderScene = new RenderPass(scene, this.camera);
-      const bloomPass = new UnrealBloomPass(
-        new THREE.Vector2(window.innerWidth, window.innerHeight),
-        1.5,
-        0.4,
-        0.85
-      );
-      bloomPass.threshold = GalaxyVariables.bloomParams.bloomThreshold;
-      bloomPass.strength = GalaxyVariables.bloomParams.bloomStrength;
-      bloomPass.radius = GalaxyVariables.bloomParams.bloomRadius;
-
-      this.bloomComposer = new EffectComposer(this.renderer);
-      this.bloomComposer.renderToScreen = false;
-      this.bloomComposer.addPass(renderScene);
-      this.bloomComposer.addPass(bloomPass);
-      this.finalPass = new ShaderPass(
-        new THREE.ShaderMaterial({
-          uniforms: {
-            baseTexture: { value: null },
-            bloomTexture: { value: this.bloomComposer.renderTarget2.texture },
-          },
-          vertexShader: GalaxyShaders.bloomVertexShader(),
-          fragmentShader: GalaxyShaders.bloomFragmentShader(),
-          defines: {},
-        }),
-        "baseTexture"
-      );
-      this.finalPass.needsSwap = true;
-
-      this.finalComposer = new EffectComposer(this.renderer);
-      this.finalComposer.addPass(renderScene);
-      this.finalComposer.addPass(this.finalPass);
-
-      const dirLight = new THREE.DirectionalLight("white", 1.0);
-      const dirLight2 = new THREE.DirectionalLight("white", 1.0);
-      const dirLight3 = new THREE.DirectionalLight("white", 1.0);
-      const dirLight4 = new THREE.DirectionalLight("white", 1.0);
-      const dirLight5 = new THREE.DirectionalLight("white", 1.0);
-      dirLight2.position.set(0, 0, 10);
-      dirLight3.position.set(12, 0, 8);
-      dirLight4.position.set(-12, 0, 8);
-      dirLight4.position.set(-12, 0, 8);
-      dirLight5.position.set(0, 0, -5);
-      scene.add(dirLight);
-      scene.add(dirLight2);
-      scene.add(dirLight3);
-      scene.add(dirLight4);
-      scene.add(dirLight5);
-
-      GalaxyVariables.setData(this.nft);
-      loader.load(
-        GalaxyVariables.currentStar.modelPath,
-        function (gltf) {
-          gltf.scene.rotation.set(0, 0, 0);
-          gltf.scene.traverse(function (child) {
-            if (child.isMesh) {
-              // If the mesh is bear, assign the diamond/crystal material to it
-              switch (child.name) {
-                case "DMD_bear": {
-                  child.material = GalaxyMaterials.diamond;
-                  break;
-                }
-                case "GLD_honey": {
-                  GalaxyMaterials.gold = child.material;
-                  goldMesh = child;
-                  break;
-                }
-                default: {
-                  child.material = GalaxyMaterials.diamond;
-                }
+        gltf.scene.traverse((child) => {
+          if (child.isMesh) {
+            switch (child.name) {
+              default: {
+                child.material = LegacyMaterials.logo;
+                LegacyVariables.logoMesh = child;
               }
             }
-          });
+          }
+        });
 
-          gltf.scene.scale.set(45, 45, 45); // Scale the model up
-          scene.add(gltf.scene);
-          hdrLoader.load("../../../HDRI_Diamond.hdr", function (texture) {
-            texture.mapping = THREE.EquirectangularReflectionMapping;
-            GalaxyMaterials.diamond.envMap = texture;
-            GalaxyMaterials.diamond.needsUpdate = true;
-          });
-        },
-        undefined,
-        function (error) {
-          console.error(error);
+        gltf.scene.scale.set(45, 45, 45); // Scale the model up
+        gltf.scene.position.set(0, 1, -30);
+        this.scene.add(gltf.scene);
+
+        // Animate the logo
+        const tweenData = {
+          opacity: 1.0,
+        };
+
+        new TWEEN.Tween(tweenData)
+          .to(
+            {
+              opacity: 0.6,
+            },
+            2000
+          )
+          .easing(TWEEN.Easing.Linear.None)
+          .repeat(Infinity)
+          .yoyo(true)
+          .onUpdate(function () {
+            LegacyVariables.logoMesh.material.opacity = tweenData.opacity;
+          })
+          .start();
+      },
+      undefined,
+      function (error) {
+        console.error(error);
+      }
+    );
+
+    // Particles under card
+
+    // GUI
+    this.stats;
+    if (LegacyVariables.showGUI) {
+      const gui = new GUI();
+      // FPS
+      this.stats = new Stats();
+      document.body.appendChild(this.stats.dom);
+    }
+
+    this.initCanvas();
+  },
+  methods: {
+    resizeCanvas() {
+      const { renderer, bloomComposer, canvas, finalComposer, camera } = this;
+      renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+      bloomComposer.setSize(canvas.clientWidth, canvas.clientHeight);
+      finalComposer.setSize(canvas.clientWidth, canvas.clientHeight);
+
+      camera.aspect = canvas.clientWidth / canvas.clientHeight;
+      camera.updateProjectionMatrix();
+    },
+    setupParticles() {
+      const numParticles = LegacyVariables.AMOUNTX * LegacyVariables.AMOUNTY;
+      const positions = new Float32Array(numParticles * 3);
+      const scales = new Float32Array(numParticles);
+
+      let i = 0;
+      let j = 0;
+
+      for (let ix = 0; ix < LegacyVariables.AMOUNTX; ix++) {
+        for (let iy = 0; iy < LegacyVariables.AMOUNTY; iy++) {
+          positions[i] =
+            ix * LegacyVariables.SEPARATION -
+            (LegacyVariables.AMOUNTX * LegacyVariables.SEPARATION) / 2; // x
+          positions[i + 1] = 0; // y
+          positions[i + 2] =
+            iy * LegacyVariables.SEPARATION -
+            (LegacyVariables.AMOUNTY * LegacyVariables.SEPARATION) / 2; // z
+
+          scales[j] = 1;
+
+          i += 3;
+          j++;
         }
+      }
+
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(positions, 3)
       );
+      geometry.setAttribute("scale", new THREE.BufferAttribute(scales, 1));
 
-      this.goldMesh = goldMesh;
+      const material = new THREE.ShaderMaterial({
+        uniforms: {
+          color: { value: new THREE.Color(LegacyVariables.particleColor) },
+        },
+        vertexShader: LegacyShaders.particlesVertexShader(),
+        fragmentShader: LegacyShaders.particlesFragmentShader(),
+      });
+
+      LegacyVariables.particles = new THREE.Points(geometry, material);
+      LegacyVariables.particles.rotation.set(0, Math.PI / 4, 0);
+      LegacyVariables.particles.position.set(0, -3.5, 0);
+      this.scene.add(LegacyVariables.particles);
     },
 
-    onWindowResize() {
-      console.log("8888888");
-      const div = document.getElementById("header-img");
-      const width = div.clientWidth;
-      const height = 530;
-      this.camera.aspect = width / height;
-      this.camera.updateProjectionMatrix();
+    initCanvas() {
+      const {
+        renderer,
+        bloomComposer,
+        finalComposer,
+        camera,
+        controls,
+        canvas,
+      } = this;
 
-      // if (window.innerWidth < 600) {
-      //   return this.renderer.setSize(300, 300);
-      // }
+      const containerWidth = LegacyVariables.canvasContainer.clientWidth;
+      const containerHeight = LegacyVariables.canvasContainer.clientHeight;
 
-      this.renderer.setSize(width, height);
+      renderer.setSize(containerWidth, 133, false);
+      bloomComposer.setSize(containerWidth, containerHeight);
+      finalComposer.setSize(containerWidth, containerHeight);
+
+      camera.aspect = containerWidth / containerHeight;
+      camera.updateProjectionMatrix();
+
+      window.addEventListener("resize", this.resizeCanvas());
+
+      // Toggle orbit controls on event
+      document.addEventListener("webglToggle", () => {
+        if (controls.enabled) {
+          controls.enabled = false;
+          canvas.style.touchAction = "auto";
+        } else {
+          controls.enabled = true;
+          canvas.style.touchAction = "none";
+        }
+      });
+
+      setTimeout(() => {
+        // this.resizeCanvas();
+        this.animate(); // start animation loop
+      }, 100);
     },
-
     animate() {
-      if (this.goldMesh) this.goldMesh.material = GalaxyMaterials.dark;
-      this.bloomComposer.render();
-      if (this.goldMesh) this.goldMesh.material = GalaxyMaterials.gold;
-      this.finalComposer.render();
+      const { stats, bloomComposer, controls, finalComposer } = this;
+      stats ? stats.begin() : null;
+      controls.update();
+
+      if (LegacyVariables.particles) this.updateParticles();
+      this.updateParallax();
+      TWEEN.update();
+
+      // Do not render some materials in bloom PP
+      for (let i = 0; i < LegacyVariables.cardMeshes.length; i++) {
+        LegacyVariables.cardMeshes[i].material = LegacyMaterials.dark;
+      }
+      bloomComposer.render();
+      for (let i = 0; i < LegacyVariables.cardMeshes.length; i++) {
+        LegacyVariables.cardMeshes[i].material =
+          LegacyVariables.cardMaterials[i];
+      }
+
+      finalComposer.render();
+
+      stats ? stats.end() : null;
       requestAnimationFrame(this.animate);
+    },
+
+    // Update particles position
+    updateParticles() {
+      const positions =
+        LegacyVariables.particles.geometry.attributes.position.array;
+      const scales = LegacyVariables.particles.geometry.attributes.scale.array;
+
+      let i = 0;
+      let j = 0;
+      for (let ix = 0; ix < LegacyVariables.AMOUNTX; ix++) {
+        for (let iy = 0; iy < LegacyVariables.AMOUNTY; iy++) {
+          positions[i + 1] =
+            Math.sin((ix + LegacyVariables.count) * 0.3) * 0.1 +
+            Math.sin((iy + LegacyVariables.count) * 0.3) * 0.1;
+          scales[j] =
+            (Math.sin((ix + LegacyVariables.count) * 0.3) + 1.8) * 2 +
+            (Math.sin((iy + LegacyVariables.count) * 0.3) + 1.8) * 2;
+          i += 3;
+          j++;
+        }
+      }
+
+      LegacyVariables.particles.geometry.attributes.position.needsUpdate = true;
+      LegacyVariables.particles.geometry.attributes.scale.needsUpdate = true;
+      LegacyVariables.count += 0.05;
+    },
+
+    // Update the card layers position (parallax effect)
+    updateParallax() {
+      const { controls } = this;
+      const moveX =
+        ((controls.getPolarAngle() - Math.PI / 2) *
+          LegacyVariables.parallaxForce) /
+        LegacyVariables.parallaxMaxAngle;
+      const moveY =
+        (controls.getAzimuthalAngle() * LegacyVariables.parallaxForce) /
+        LegacyVariables.parallaxMaxAngle;
+
+      const movement = {
+        y: -Math.min(Math.max(moveX, -1.0), 1.0),
+        x: -Math.min(Math.max(moveY, -1.0), 1.0),
+      };
+
+      try {
+        LegacyMaterials.background.map.offset.x = movement.x * 0.1;
+        LegacyMaterials.background.map.offset.y = movement.y * 0.1;
+        LegacyMaterials.background.emissiveMap.offset.x = movement.x * 0.1;
+        LegacyMaterials.background.emissiveMap.offset.y = movement.y * 0.1;
+        LegacyMaterials.background.needsUpdate = true;
+
+        LegacyMaterials.name.map.offset.x = movement.x * 0.07;
+        LegacyMaterials.name.map.offset.y = movement.y * 0.07;
+        LegacyMaterials.name.emissiveMap.offset.x = movement.x * 0.07;
+        LegacyMaterials.name.emissiveMap.offset.y = movement.y * 0.07;
+        LegacyMaterials.name.needsUpdate = true;
+
+        LegacyMaterials.person.map.offset.x = movement.x * 0.03;
+        LegacyMaterials.person.map.offset.y = movement.y * 0.03;
+        LegacyMaterials.person.emissiveMap.offset.x = movement.x * 0.03;
+        LegacyMaterials.person.emissiveMap.offset.y = movement.y * 0.03;
+        LegacyMaterials.person.needsUpdate = true;
+
+        LegacyMaterials.signature.map.offset.x = movement.x * 0.005;
+        LegacyMaterials.signature.map.offset.y = movement.y * 0.005;
+        LegacyMaterials.signature.emissiveMap.offset.x = movement.x * 0.005;
+        LegacyMaterials.signature.emissiveMap.offset.y = movement.y * 0.005;
+        LegacyMaterials.signature.needsUpdate = true;
+      } catch (e) {
+        // Assets not yet loaded, just wait a little bit more
+      }
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-#container {
+canvas {
+  height: 100%;
+}
+#canvasContainer {
   position: absolute;
   top: 0;
+  width: 100vw;
+  height: 530px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
