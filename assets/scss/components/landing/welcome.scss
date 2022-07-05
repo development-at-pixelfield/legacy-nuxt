@@ -1,4 +1,4 @@
-.welcome-wrapper{
+.welcome-wrapper {
 
   @media (max-width: 1380px) {
     padding-left: 136px;
@@ -20,7 +20,7 @@
     padding-right: 16px;
   }
 
-  .content{
+  .content {
     background: #0D0F28;
     border-radius: 16px;
     display: flex;
@@ -37,7 +37,7 @@
       padding: 55px 16px;
     }
 
-    &::before{
+    &::before {
       content: "";
       background: url("~assets/img/landing/ellipse.png") no-repeat;
       background-size: 100% 100%;
@@ -61,7 +61,7 @@
       }
     }
 
-    .left-side{
+    .left-side {
       padding-top: 60px;
       width: 460px;
       position: relative;
@@ -73,7 +73,7 @@
         padding-top: 16px;
       }
 
-      h2{
+      h2 {
         text-align: left;
         margin-bottom: 16px;
 
@@ -82,7 +82,7 @@
         }
       }
 
-      .sub-title{
+      .sub-title {
         font-weight: 800;
         font-size: 20px;
         line-height: 29px;
@@ -91,7 +91,7 @@
       }
     }
 
-    .right-side{
+    .right-side {
       position: relative;
       display: flex;
       align-items: center;
@@ -110,10 +110,38 @@
         }
       }
 
-      .img-block{
+      .img-block {
         width: 214.63px;
         height: 330.89px;
         display: flex;
+
+        .card {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          transition: transform 1s;
+          transform-style: preserve-3d;
+
+          .card-front,
+          .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          .card-back {
+            transform: rotateY(180deg);
+          }
+
+          &_flipped {
+            transform: rotateY(180deg);
+          }
+        }
 
         @media (max-width: $break-sm) {
           margin: 0 auto;
@@ -124,7 +152,7 @@
           height: 278px;
         }
 
-        img{
+        img {
           width: 100%;
           height: 100%;
           object-fit: cover;

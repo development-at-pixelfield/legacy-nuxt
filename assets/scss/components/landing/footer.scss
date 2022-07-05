@@ -1,3 +1,7 @@
+.leg-link {
+  margin-right: 32px;
+}
+
 footer{
   background: #100C0F;
   padding-top: 70px;
@@ -14,6 +18,7 @@ footer{
     justify-content: space-between;
     align-items: center;
     position: relative;
+    z-index: 10;
 
     @media (max-width: $break-mds) {
       flex-direction: column;
@@ -53,10 +58,10 @@ footer{
     }
 
     .socials{
+      z-index: 100;
       .link:not(:last-child) {
         margin-right: 16px;;
       }
     }
   }
 }
-

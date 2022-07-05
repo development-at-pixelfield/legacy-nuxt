@@ -3,45 +3,45 @@ export default {
   head: {
     titleTemplate: "Legacy | Own the universe",
     title: "Legacy | Own the universe",
-    meta: [
-      {charset: "utf-8"},
-      {
-        name: "viewport",
-        content:
-          "width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1",
-      },
-      {name: "msapplication-TileColor", content: "#da532c"},
-      {name: "theme-color", content: "#ffffff"},
-      {hid: "description", name: "description", content: "NFT floating through galaxy. Own a piece of the universe."},
-      {hid: "author", name: "author", content: "Galaxy.diamonds"},
-      {hid: "DC.title", name: "DC.title", content: "Galaxy.diamonds"},
-      {hid: "DC.creator", name: "DC.creator", content: "Galaxy.diamonds"},
-      {hid: "og:type", name: "og:type", content: "website"},
-      {hid: "og:url", name: "og:url", content: "https://galaxy.diamonds/"},
-      {
-        hid: "og:title",
-        name: "og:title",
-        content: "Galaxy.diamonds | Own the universe",
-      },
-      {
-        hid: "og:description",
-        name: "og:description",
-        content:
-          "🚀 NFT floating through galaxy. Own a piece of the universe.",
-      },
-      {
-        hid: "og:image",
-        name: "og:image",
-        content:
-          "https://galaxy.diamonds/galaxy-opengraph.jpg",
-      },
-      {
-        hid: "twitter:image",
-        name: "twitter:image",
-        content:
-          "https://galaxy.diamonds/galaxy-opengraph.jpg",
-      },
-    ],
+    // meta: [
+    //   {charset: "utf-8"},
+    //   {
+    //     name: "viewport",
+    //     content:
+    //       "width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1",
+    //   },
+    //   {name: "msapplication-TileColor", content: "#da532c"},
+    //   {name: "theme-color", content: "#ffffff"},
+    //   {hid: "description", name: "description", content: "NFT floating through galaxy. Own a piece of the universe."},
+    //   {hid: "author", name: "author", content: "Galaxy.diamonds"},
+    //   {hid: "DC.title", name: "DC.title", content: "Galaxy.diamonds"},
+    //   {hid: "DC.creator", name: "DC.creator", content: "Galaxy.diamonds"},
+    //   {hid: "og:type", name: "og:type", content: "website"},
+    //   {hid: "og:url", name: "og:url", content: "https://galaxy.diamonds/"},
+    //   {
+    //     hid: "og:title",
+    //     name: "og:title",
+    //     content: "Galaxy.diamonds | Own the universe",
+    //   },
+    //   {
+    //     hid: "og:description",
+    //     name: "og:description",
+    //     content:
+    //       "🚀 NFT floating through galaxy. Own a piece of the universe.",
+    //   },
+    //   {
+    //     hid: "og:image",
+    //     name: "og:image",
+    //     content:
+    //       "https://galaxy.diamonds/galaxy-opengraph.jpg",
+    //   },
+    //   {
+    //     hid: "twitter:image",
+    //     name: "twitter:image",
+    //     content:
+    //       "https://galaxy.diamonds/galaxy-opengraph.jpg",
+    //   },
+    // ],
     link: [
       {rel: "icon", type: "image/x-icon", href: "/favicon.ico"},
       {rel: "manifest", href: "/site.webmanifest"},

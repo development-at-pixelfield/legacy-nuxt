@@ -9,7 +9,7 @@
           <img
             v-if="index !== cards.length - 1"
             class="icon"
-            src="~/assets/img/icons/purchase-check.svg"
+            src="~/assets/img/icons/purchase-check.png"
             alt=""
           />
           <div>

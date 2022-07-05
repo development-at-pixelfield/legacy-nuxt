@@ -12,10 +12,10 @@
         <img
           v-for="(icon, index) in icons"
           :key="`icon_${index}`"
-          :src="require(`~/assets/img/icons/socials/${icon}.svg`)"
+          :src="require(`~/assets/img/icons/socials/${icon.img}.svg`)"
           alt=""
-          class="icon"
-          @click="handle(icon)"
+          class="icon pointer"
+          @click="handle(icon.link)"
         />
       </div>
 
@@ -33,12 +33,16 @@ export default {
   name: "Welcome",
   data() {
     return {
-      icons: ["discord", "facebook", "instagram"],
+      icons: [
+        { img: "discord", link: "https://discord.gg/vhKsVPdEnP" },
+        { img: "facebook", link: "https://www.facebook.com/legacynftcom" },
+        { img: "instagram", link: "https://www.instagram.com/legacynftcom/" },
+      ],
     };
   },
   methods: {
-    handle(icon) {
-      // TODO implement icon links
+    handle(link) {
+      window.open(link, "_blank");
     },
   },
 };

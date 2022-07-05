@@ -9,14 +9,15 @@
             :with-query="true"
             class="nav"
             :trailing-action="true"
-            :trailing-label="canInteract ? 'Interact' : 'Disconnect'"
+            :trailing-label="!canInteract ? 'Interact' : 'Stop'"
             @toggle="canInteract = !canInteract"
           />
         </div>
-        <WebGl :nft="nft" :can-interact="canInteract" />
       </div>
 
-      <div class="main-container detail-info">
+      <WebGl :nft="nft" :can-interact="canInteract" />
+
+      <div v-if="nft" class="main-container detail-info">
         <div class="detail">
           <div class="main-info block-margin">
             <div class="left-side">
@@ -96,9 +97,11 @@
                 <Button
                   class="first-btn"
                   :label="$t('marketplace.payCard')"
-                  :background="'ghost'"
+                  :background="!buttonsActive ? 'grey' : 'ghost'"
+                  :color="!buttonsActive ? 'c-grey' : 'c-white'"
                   :size="'medium'"
-                  :color="'c-white'"
+                  :tooltip="tooltipText"
+                  :disabled="!buttonsActive"
                   @on-click="payCard"
                 >
                   <span slot="left-icon" class="mr-8 display-f">
@@ -111,9 +114,10 @@
                 <Button
                   class="second-btn"
                   :label="$t('marketplace.buyNow')"
-                  :background="'primary'"
+                  :background="!buttonsActive ? 'grey' : 'primary'"
                   :size="'medium'"
-                  :color="'c-white'"
+                  :disabled="!buttonsActive"
+                  :color="!buttonsActive ? 'c-grey' : 'c-white'"
                   @on-click="buyNow"
                 >
                   <span slot="left-icon" class="mr-8 display-f">
@@ -127,7 +131,7 @@
             </div>
           </div>
 
-          <div v-if="nft.collection" class="traits">
+          <div v-if="nft.collection && nft.collection.category" class="traits">
             <div class="left-side">
               <div class="tile-wrapper">
                 <div class="tile">
@@ -153,7 +157,7 @@
             </div>
           </div>
 
-          <div v-if="showAuction" class="auction block-margin">
+          <div v-if="nft.dutch_auction" class="auction block-margin">
             <div class="left-side">
               <div class="img-block">
                 <img src="~/assets/img/auction.png" alt="auction" />
@@ -178,8 +182,8 @@
               </div>
               <div class="timer text-l">
                 <AuctionTimer
-                  :time="nft.last_offer.price_changes_at"
-                  :show-auction.sync="showAuction"
+                  :time="nft.dutch_auction.expiration"
+                  :show-auction.sync="nft.dutch_auction"
                   @finished="timerFinished"
                 />
               </div>
@@ -201,7 +205,10 @@
             </div>
           </div>
 
-          <div class="content block-margin">
+          <div
+            v-if="nft.collection.achievements.length"
+            class="content block-margin"
+          >
             <div class="header-title">{{ $t("marketplace.achievements") }}</div>
             <div class="achievements-wrapper">
               <div
@@ -221,7 +228,10 @@
             </div>
           </div>
 
-          <div class="content block-margin">
+          <div
+            v-if="nft.collection.utilities.length"
+            class="content block-margin"
+          >
             <div class="header-title">{{ $t("marketplace.utilities") }}</div>
             <div class="utilities-wrapper">
               <div
@@ -230,7 +240,7 @@
                 class="utility"
               >
                 <div class="period">{{ u.amount }}x/{{ u.period }}</div>
-                <img src="~/assets/img/icons/padlock-green.svg" alt="icon" />
+                <img src="~/assets/img/icons/padlock-green.png" alt="icon" />
                 <div class="title">
                   {{ u.utility }}
                 </div>
@@ -256,37 +266,10 @@
               >
             </div>
           </a>
-
-          <div class="auction satisfaction">
-            <div class="left-side">
-              <div class="img-block">
-                <img src="~/assets/img/satisfaction.png" alt="satisfaction" />
-              </div>
-              <div class="info">
-                <p class="mt-0 mb-4 header-title1">100% satisfaction!</p>
-                <p class="mtb text-m-bold">
-                  Time to swap your Galaxy NFTs for hard assets? All our NFTs
-                  are backed up with real diamonds.
-                </p>
-              </div>
-            </div>
-
-            <div class="right-side">
-              <Button
-                class="second-btn"
-                :label="$t('marketplace.exchangeToken')"
-                :background="isOwner ? 'primary' : 'grey'"
-                :size="'medium'"
-                :disabled="!isOwner"
-                :color="isOwner ? 'c-white' : 'c-grey'"
-                @on-click="exchangeToken"
-              />
-            </div>
-          </div>
         </div>
       </div>
       <Collection
-        v-if="nft.related"
+        v-if="nft && nft.collection"
         :constellation-name="nft.collection.name"
         :related-nfts="nft.related"
         :eth-price="ethPrice"
@@ -328,14 +311,11 @@ export default {
       const nft = await store.dispatch("nfts/getNftsById", { uid: params.id });
       const ethPrice = (await store.dispatch("fetchEthPrice")).rate;
 
-      let showAuction = false;
-      if (nft.last_offer && nft.last_offer.category === "timed") {
-        showAuction = true;
-      }
-
-      return { nft, ethPrice, showAuction };
+      return { nft, ethPrice };
     } catch (e) {
-      error({ statusCode: 404, message: "Page not found" });
+      console.log(e);
+      console.log(e.response);
+      // error({ statusCode: 404, message: "Page not found" });
     }
   },
   data() {
@@ -362,7 +342,6 @@ export default {
       ],
       seaport: null,
       showCard: false,
-      showAuction: false,
       ethPrice: null,
       nft: null,
       canInteract: false,
@@ -382,6 +361,9 @@ export default {
     ],
   },
   computed: {
+    buttonsActive() {
+      return this.nft.is_active;
+    },
     categoryIcon() {
       const icon = this.nft.collection.category.icon;
       return icon || require("~/assets/img/icons/default-category-icon.svg");
@@ -441,6 +423,8 @@ export default {
       });
     });
 
+    console.log(this.nft);
+
     if (
       Object.keys(this.$route.query).includes("wyre_success", "orderId") &&
       this.$auth.loggedIn
@@ -496,7 +480,7 @@ export default {
         window.web3.currentProvider,
         {
           networkName: Network[networkName],
-          apiKey: networkName === "Main" ? API_KEY : null,
+          apiKey: API_KEY,
         },
         (arg) => console.log("arg", arg)
       );

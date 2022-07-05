@@ -50,11 +50,11 @@ export default {
   watch: {
     canInteract(val) {
       const container = document.getElementById("canvasContainer");
-      if (!val) {
+      if (val) {
         container.style.overflow = "hidden";
         container.style.pointerEvents = "all";
       } else {
-        container.style.overflow = "auto";
+        container.style.overflow = "hidden";
         container.style.pointerEvents = "none";
       }
     },
@@ -62,6 +62,13 @@ export default {
   mounted() {
     // Scene and loaders setup
     this.scene = new THREE.Scene();
+
+    const container = document.getElementById("canvasContainer");
+    container.style.top = "57px";
+
+    if (document.getElementById("track")) {
+      container.style.top = "95px";
+    }
 
     const dracoLoader = new DRACOLoader().setDecoderPath(
       LegacyVariables.assetsPath
@@ -94,6 +101,8 @@ export default {
 
     this.renderer = new THREE.WebGLRenderer({ antialias: false });
     this.canvas = this.renderer.domElement;
+    this.canvas.style.height = "100%";
+    this.canvas.style.width = "100%";
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.5;
@@ -154,8 +163,10 @@ export default {
     this.finalComposer.addPass(finalPass);
 
     // Lights
-    const backLight = new THREE.DirectionalLight(0xeeeeee, 0.05);
-    const frontLight = new THREE.DirectionalLight(0xffffff, 0.005);
+    // eslint-disable-next-line prettier/prettier
+    const backLight = new THREE.DirectionalLight(0xEEEEEE, 0.05);
+    // eslint-disable-next-line prettier/prettier
+    const frontLight = new THREE.DirectionalLight(0xFFFFFF, 0.005);
     backLight.position.set(0, 0, -10);
     frontLight.position.set(0, 1, 10);
     this.scene.add(backLight);
@@ -275,12 +286,19 @@ export default {
   },
   methods: {
     resizeCanvas() {
-      const { renderer, bloomComposer, canvas, finalComposer, camera } = this;
-      renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
-      bloomComposer.setSize(canvas.clientWidth, canvas.clientHeight);
-      finalComposer.setSize(canvas.clientWidth, canvas.clientHeight);
+      const { renderer, bloomComposer, finalComposer, camera } = this;
+      const container = document.getElementById("canvasContainer");
+      renderer.setSize(container.clientWidth, container.clientHeight, false);
+      bloomComposer.setSize(container.clientWidth, container.clientHeight);
+      finalComposer.setSize(container.clientWidth, container.clientHeight);
 
-      camera.aspect = canvas.clientWidth / canvas.clientHeight;
+      console.log(
+        "updating canvas",
+        container.clientHeight,
+        container.clientWidth
+      );
+
+      camera.aspect = container.clientWidth / container.clientHeight;
       camera.updateProjectionMatrix();
     },
     setupParticles() {
@@ -338,18 +356,18 @@ export default {
         controls,
         canvas,
       } = this;
+      const container = document.getElementById("canvasContainer");
+      const containerWidth = container.clientWidth;
+      const containerHeight = container.clientHeight;
 
-      const containerWidth = LegacyVariables.canvasContainer.clientWidth;
-      const containerHeight = LegacyVariables.canvasContainer.clientHeight;
-
-      renderer.setSize(containerWidth, 133, false);
+      renderer.setSize(containerWidth, containerHeight, false);
       bloomComposer.setSize(containerWidth, containerHeight);
       finalComposer.setSize(containerWidth, containerHeight);
 
       camera.aspect = containerWidth / containerHeight;
       camera.updateProjectionMatrix();
 
-      window.addEventListener("resize", this.resizeCanvas());
+      window.addEventListener("resize", this.resizeCanvas);
 
       // Toggle orbit controls on event
       document.addEventListener("webglToggle", () => {
@@ -363,7 +381,7 @@ export default {
       });
 
       setTimeout(() => {
-        // this.resizeCanvas();
+        this.resizeCanvas();
         this.animate(); // start animation loop
       }, 100);
     },
@@ -467,16 +485,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-canvas {
-  height: 100%;
-}
 #canvasContainer {
   position: absolute;
-  top: 0;
   width: 100vw;
   height: 530px;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  pointer-events: none;
+}
+canvas {
+  width: 100% !important;
+  height: 100% !important;
 }
 </style>

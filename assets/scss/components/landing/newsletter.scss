@@ -20,6 +20,11 @@
       font-size: 40px;
       text-align: center;
       margin-bottom: 40px;
+      width: 432px;
+
+      @media (max-width: 440px) {
+        width: 10%;
+      }
     }
 
     .languages {

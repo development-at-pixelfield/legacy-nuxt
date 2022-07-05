@@ -26,9 +26,10 @@
         <img
           v-for="(icon, index) in socials"
           :key="`icon_${index}`"
-          class="icon"
-          :src="require(`~/assets/img/icons/socials/${icon}.svg`)"
+          class="icon pointer"
+          :src="require(`~/assets/img/icons/socials/${icon.img}.svg`)"
           alt="icon"
+          @click="handleClick(icon.link)"
         />
       </div>
     </div>
@@ -50,8 +51,18 @@ export default {
   },
   data() {
     return {
-      socials: ["discord", "instagram", "facebook", "email"],
+      socials: [
+        { img: "discord", link: "https://discord.gg/vhKsVPdEnP" },
+        { img: "facebook", link: "https://www.facebook.com/legacynftcom" },
+        { img: "instagram", link: "https://www.instagram.com/legacynftcom/" },
+        { img: "email", link: "mailto:support@legacy-nft.com" },
+      ],
     };
+  },
+  methods: {
+    handleClick(link) {
+      window.open(link, "_blank");
+    },
   },
 };
 </script>

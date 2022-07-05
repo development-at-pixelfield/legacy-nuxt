@@ -88,7 +88,6 @@
     margin-top: -50px;
 
     @media (max-width: $break-sms) {
-      margin-top: -120px;
       padding: 24px 16px;
     }
 
@@ -288,6 +287,7 @@
       padding: 28px 24px;
       display: flex;
       justify-content: space-between;
+      margin-top: 24px;
 
       @media (max-width: $break-md) {
         flex-direction: column;

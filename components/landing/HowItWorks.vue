@@ -5,7 +5,7 @@
       <div class="step-wrapper">
         <div v-for="(step, index) in steps" :key="`step_${index}`" class="step">
           <img
-            :src="require(`~/assets/img/icons/landing-steps/${index + 1}.svg`)"
+            :src="require(`~/assets/img/icons/landing-steps/${index + 1}.png`)"
             alt=""
           />
           <div>
@@ -27,7 +27,7 @@
 import Button from "~/components/ui/Button.vue";
 export default {
   name: "HowItWorks",
-  components: [Button],
+  components: { Button },
   data() {
     return {
       steps: [

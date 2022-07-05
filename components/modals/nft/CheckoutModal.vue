@@ -82,6 +82,7 @@
 </template>
 
 <script>
+import { OrderSide } from "opensea-js/lib/types";
 import Checkbox from "../../../components/ui/Checkbox";
 import Button from "../../ui/Button";
 import converter from "../../../mixins/converter";
@@ -210,6 +211,7 @@ export default {
           color: "error",
         });
       }
+      console.log(tokenId, contractAddress);
       if (!tokenId || !contractAddress) {
         return await this.$store.commit("setSnackbar", {
           show: true,
@@ -220,15 +222,12 @@ export default {
       try {
         const payload = {
           assetContractAddress: contractAddress,
-          tokenIds: String(tokenId),
+          tokenIds: [tokenId],
           side: "ask",
           protocol: "seaport",
         };
-        console.log(payload);
-        const order = await this.seaport.api.getOrders(payload);
-        console.log("order", order);
-
-        if ("orders" in order && !order.orders) {
+        const order = await this.seaport.api.getOrder(payload);
+        if (!order) {
           return await this.$store.commit("setSnackbar", {
             show: true,
             message:
@@ -236,13 +235,13 @@ export default {
             color: "error",
           });
         }
-        const transactionHash = await this.seaport.fulfillOrder({
+        console.log(order);
+        await this.seaport.fulfillOrder({
           order,
           accountAddress: this.metamaskAccount,
-          protocol: "seaport",
         });
-        console.log("info");
-        console.log("hash", transactionHash);
+        // console.log("info");
+        // console.log("hash", transactionHash);
       } catch (e) {
         console.log("err", e);
         await this.$store.commit("setSnackbar", {

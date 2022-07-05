@@ -13,12 +13,24 @@
 
       <div class="right-side">
         <span class="img-block">
-          <img src="~/assets/img/landing/welcome-image.png" alt="texture" />
+          <div class="card" :class="{ card_flipped: flipped }">
+            <img
+              class="card-front"
+              src="~/assets/img/flip-front.png"
+              alt="texture"
+            />
+            <img
+              class="card-back"
+              src="~/assets/img/flip-back.png"
+              alt="texture"
+            />
+          </div>
         </span>
         <Button
           class="flip-action"
           :label="$t('landing.flip')"
           :background="'dark'"
+          @on-click="flipped = !flipped"
           ><span slot="left-icon"
             ><img class="b-icon" src="~/assets/img/icons/flip.svg" /></span
         ></Button>
@@ -31,7 +43,12 @@
 import Button from "~/components/ui/Button.vue";
 export default {
   name: "Welcome",
-  components: [Button],
+  components: { Button },
+  data() {
+    return {
+      flipped: false,
+    };
+  },
 };
 </script>
 

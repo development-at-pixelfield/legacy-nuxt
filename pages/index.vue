@@ -13,7 +13,10 @@
 
       <PurchaseBenefits />
 
-      <BecomeTester :collections="feed.constellations.slice(0, 3)" />
+      <BecomeTester
+        v-if="feed.collections"
+        :collections="feed.collections.slice(0, 3)"
+      />
 
       <HowItWorks />
 

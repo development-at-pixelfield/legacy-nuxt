@@ -35,7 +35,7 @@
     "eslint-plugin-number-literal-case": "^1.0.0",
     "nuxt": "^2.14.6",
     "nuxt-i18n": "^6.16.0",
-    "opensea-js": "4.0.0",
+    "opensea-js": "4.0.4",
     "stats": "^1.0.0",
     "three": "^0.135.0",
     "three-obj-loader": "^1.1.3",

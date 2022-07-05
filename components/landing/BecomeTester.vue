@@ -35,7 +35,7 @@
                 :background="'primary'"
                 :size="'medium'"
                 :color="'c-white'"
-                @on-click="$router.push('/marketplace')"
+                @on-click="toMarketplaceCollection(collection)"
               />
             </div>
           </div>
@@ -67,14 +67,18 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {};
-  },
   computed: {
     getConstellationImage() {
       return (thumbnail) => {
         return thumbnail ?? require("~/assets/img/landing/nft-featured.png");
       };
+    },
+  },
+  methods: {
+    toMarketplaceCollection(collection) {
+      this.$router.push(
+        `/marketplace/collection__in=${collection.id}&page=1&ordering=-deployed_at`
+      );
     },
   },
 };

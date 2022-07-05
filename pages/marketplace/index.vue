@@ -66,7 +66,11 @@
           <p slot="title" class="text-m-bold mt-8 mb-8 text-center">
             {{ item.name }} <br />
           </p>
-          <p slot="profit" class="profit mtb text-m text-center">
+          <p
+            v-if="item.price_eth"
+            slot="profit"
+            class="profit mtb text-m text-center"
+          >
             {{ item.price_eth }}Ξ
           </p>
           <p slot="finance" class="finance mtb text-m-bold text-center">
@@ -197,6 +201,9 @@ export default {
     },
     convertEthereum() {
       return (price) => {
+        if (!price) {
+          return "Coming Soon";
+        }
         return this.ethPrice
           ? "est. $" + Number((this.ethPrice * 100 * price) / 100).toFixed(2)
           : "...";

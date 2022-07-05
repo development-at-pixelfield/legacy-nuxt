@@ -28,7 +28,8 @@ export default {
 
   landing: {
     flip: "Flip card",
-    mainTitle: "We build emotion between you and celebrities across the world.",
+    mainTitle:
+      "We build emotions between you and celebrities across the world.",
     mainDesc: "Get closer to each other.",
     moreInfo: "More information",
     discover: "Discover",

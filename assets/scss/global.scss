@@ -3,8 +3,9 @@ html {
   scroll-behavior: smooth;
   height: 100%;
   width: 100%;
+  overflow-x: hidden !important;
   //background: #11011F;
-
+  
 }
 
 #__nuxt, #__layout{
@@ -17,6 +18,7 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: $font-primary;
+  overflow-x: hidden !important;
   //background: linear-gradient(180deg, #08010E 0%, #17012A 100%) fixed;
   background: $c-background;
   height: 100%;

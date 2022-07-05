@@ -13,7 +13,7 @@
           :class="`card_${card.background}`"
           class="card"
         >
-          <img :src="card.icon" alt="" />
+          <img class="icon" :src="card.icon" alt="" />
           <div class="title">{{ card.title }}</div>
           <div class="subtitle">{{ card.subtitle }}</div>
         </div>
@@ -29,21 +29,21 @@ export default {
     return {
       cards: [
         {
-          icon: require("~/assets/img/icons/who-find/red.svg"),
+          icon: require("~/assets/img/icons/who-find/red.png"),
           background: "red",
           title: "Rising Star",
           subtitle:
             "A person at the beginning of his/her career with great potential for success. We support the journey towards their dream destination.",
         },
         {
-          icon: require("~/assets/img/icons/who-find/blue.svg"),
+          icon: require("~/assets/img/icons/who-find/blue.png"),
           background: "blue",
           title: "Elite",
           subtitle:
             "A well-known personality who has retired from his/her career, but still wants to be as close to his/her loyal fans as possible.",
         },
         {
-          icon: require("~/assets/img/icons/who-find/yellow.svg"),
+          icon: require("~/assets/img/icons/who-find/yellow.png"),
           background: "yellow",
           title: "Legend",
           subtitle:
