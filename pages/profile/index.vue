@@ -6,14 +6,17 @@
           <div class="avatar-block">
             <img v-if="imgSrc" :src="imgSrc" alt="avatar" class="avatar-img" />
             <input type="file" class="avatar-input" @change="fileUpload" />
+
+            <span class="hover-img display-f">
+              <img src="~/assets/img/icons/plus-circle.svg" alt="plus-icon" />
+            </span>
           </div>
 
           <div class="user-block">
             <p class="mt-0 mb-8 header-title">
               {{ username }}
-              <span class="img-block">
+              <span v-if="isVerified" class="img-block">
                 <img
-                  v-if="isVerified"
                   :src="require(`assets/img/icons/verified-account.svg`)"
                   alt="icon"
                 />
@@ -43,21 +46,6 @@
                   alt="icon"
                 />
               </li>
-              <li class="user-tag" @click="$router.push('/galactic-miles')">
-                <img
-                  :src="require(`assets/img/gift.svg`)"
-                  class="user-tag-gift"
-                  alt="icon"
-                />
-                <span class="text-m-bold user-tag-text"
-                  >{{ balance }} {{ $t("profile.miles") }}</span
-                >
-                <img
-                  :src="require(`assets/img/icons/caret-right.svg`)"
-                  class="user-tag-icon"
-                  alt="icon"
-                />
-              </li>
             </ul>
           </div>
         </div>
@@ -68,7 +56,7 @@
       <div class="user-content">
         <div v-if="!isVerified" class="user-action-block">
           <div class="user-action-block-icon">
-            <img :src="require(`assets/img/verify-profile.svg`)" alt="icon" />
+            <img :src="require(`assets/img/verify-profile.png`)" alt="icon" />
           </div>
           <div class="user-action-block-text">
             <p class="mt-0 mb-4 header-title">
@@ -90,7 +78,7 @@
         </div>
         <div v-if="!connectedWallet" class="user-action-block view-wallet">
           <div class="user-action-block-icon">
-            <img :src="require(`assets/img/wallet-profile.svg`)" alt="icon" />
+            <img :src="require(`assets/img/wallet-profile.png`)" alt="icon" />
           </div>
           <div class="user-action-block-text">
             <p class="mt-0 mb-4 header-title">
@@ -165,7 +153,7 @@
         >
           <div class="user-action-block-icon">
             <img
-              :src="require(`assets/img/collection-profile.svg`)"
+              :src="require(`assets/img/collection-profile.png`)"
               alt="icon"
             />
           </div>
@@ -193,7 +181,7 @@
         </div>
         <div class="user-action-block view-wallet">
           <div class="user-action-block-icon">
-            <img :src="require(`assets/img/gift.png`)" alt="icon" />
+            <img :src="require(`assets/img/scores.png`)" alt="icon" />
           </div>
           <div class="user-action-block-text">
             <p class="mt-0 mb-4 header-title">

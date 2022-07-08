@@ -13,6 +13,10 @@
           v-if="modal.type === 'verification-required'"
           @close="close"
         />
+        <WyreProcessingModal
+          v-if="modal.type === 'wyre-processing'"
+          @close="close"
+        />
         <CheckoutModal
           v-if="modal.type === 'checkout'"
           @close="close"
@@ -56,10 +60,13 @@ import VerifyId from "./nft/VerifyId";
 import InfoVerification from "./nft/InfoVerification";
 import UnlockedFeatures from "./nft/UnlockedFeatures";
 import GalacticMiles from "./nft/GalacticMiles";
+import WyreProcessingModal from "./nft/WyreProcessing.vue";
+
 export default {
   name: "Modals",
   components: {
     GalacticMiles,
+    WyreProcessingModal,
     UnlockedFeatures,
     DeleteAccount,
     StarInfo,

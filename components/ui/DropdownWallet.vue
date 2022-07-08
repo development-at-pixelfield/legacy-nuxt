@@ -10,7 +10,11 @@
       </span>
     </div>
     <div v-if="show">
-      <div v-if="connectedWallet" class="dropdown-wallet">
+      <div
+        v-if="connectedWallet"
+        class="dropdown-wallet"
+        :class="{ 'custom-top': haveLeaders }"
+      >
         <p class="text-s-bold mb-16 mt-0">
           {{ $t("modals.wallet") }}
           <span class="dropdown-wallet-close pointer" @click="openDropdown">
@@ -26,12 +30,7 @@
             <p class="text-m-bold mb-0 mt-0">{{ $t("modals.walletActive") }}</p>
           </div>
           <div
-            class="
-              dropdown-wallet-connect-button
-              view-disconnect
-              text-btn
-              pointer
-            "
+            class="dropdown-wallet-connect-button view-disconnect text-btn pointer"
             @click="disconnectMetamask()"
           >
             {{ $t("modals.disconnect") }}
@@ -125,17 +124,22 @@
 <script>
 import Button from "../../components/ui/Button";
 import metamask from "../../mixins/metamask";
+import fixed from "../../mixins/fixed";
 export default {
   name: "DropdownWallet",
   components: {
     Button,
   },
-  mixins: [metamask],
+  mixins: [metamask, fixed],
   props: {
     indexNumber: {
       type: Number,
       required: false,
       default: null,
+    },
+    haveLeaders: {
+      type: Number,
+      default: 0,
     },
   },
   data() {

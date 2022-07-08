@@ -27,12 +27,17 @@ export default {
   },
 
   landing: {
-    mainTitle: "Own a piece of Galaxy through Diamond-backed NFT",
+    flip: "Flip card",
+    mainTitle:
+      "We build emotions between you and celebrities across the world.",
+    mainDesc: "Get closer to each other.",
+    moreInfo: "More information",
     discover: "Discover",
     roadmap: "Roadmap",
     becomeTester: "Become a tester",
     joinTheCommunity: "Join the community",
     learnMore: "Learn More",
+    registerNow: "Register Now",
     ourTeam: "Our team",
     ourRoadMap: "Roadmap",
     days: "Days",
@@ -49,17 +54,18 @@ export default {
       "Pre-purchase rights to unique and beautiful jewellery in metaverse",
     uniqueDesc3: "Description text text text",
     orFollow: "or follow us on other platforms",
-    discoverTitle:
-      "Be the first one to wear luxury diamond assets in the metaverse.",
-    discoverDesc: `We are aware of all the magic the NFT world brings and what is currently happening in our and NFT world. Therefore, we want to bring something new. Something unique. The only thing we can see is a big goal ahead of us - to become the first and largest vendor of luxury diamond assets in the metaverse(s). <br/>
-Where did the idea of our NFT project come from? Diamonds are fallen stars. We've decided to put them back where they belong. Back to the sky. To the galaxy.`,
+    joinTitle: "What happens when you join Legacy fandom?",
+    joinDesc:
+      "We prepared amazing features and perks, so your experience is always exciting and full of surprises. ",
+    discoverTitle: "Behind the project is a powerful company named D.I.C.",
+    discoverDesc: `More than 15 years of experience in the production and sale of luxury products. You can visit us in our showrooms in Prague and Bratislava. During the time of our existence we have met many successful people and we ourselves have reaped a lot of success, we consider the biggest one to be the manufacturer of the crown for the most prestigious beauty contest Miss Universe in 2014-2016. In addition to beautiful diamonds, we always offer our clients something special. Emotions that our clients can identify with. That's exactly what the Legacy project is all about. We build emotions between a celebrity and their fans.`,
     soundGood: "Join our Discord community?",
     orJoin: "or join us on other platforms",
     joinUsDiscord:
       "to have a chance to become the first owner of our 3D NFT or to win luxury diamond jewelery.",
     name: "Name",
     signUp: "Join the community",
-    availableNow: "Available now",
+    availableNow: "Explore Collection",
     backTop: "BACK TO TOP",
     teamDesc: `Our team is based around the world.`,
     roadDesc: `Find out more about our plans by clicking on each star.`,
@@ -90,7 +96,9 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     starTitle7: "COLLAB WITH METAVERSES",
     starTitle8: "DUBAI EVENT",
     starTitle9: "HOLOGRAM",
-    becomeTesterTitle: "Explore our collections",
+    becomeTesterTitle: "Become a V.I.P. fan",
+    becomeTesterDesc:
+      "By purchasing an NFT, you support the personality/celebrity in their career and personal growth.",
     textSecTitle:
       " A diamond company with more than 15 years experience has our backs.",
     textSecDesc1: `To give our project even more credibility, we are proud to announce
@@ -104,11 +112,27 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
           be the first to experience this in the NFT world with us.`,
     blogTitle: "Read our blog to stay up to date with latest news",
     readArticle: "Read article",
+    joinItem1: "Connect with the Legends",
+    joinItemDesc1: `We offer a chance to meet your Legends and connect with other fans through exclusive virtual meet and greets and private chat rooms.`,
+    joinItem2: "Commission system for first owners",
+    joinItemDesc2: `Top fans who buy the first ‘virgin’ NFT token are going to be awarded with commission in secondary market re-sales.`,
+    joinItem3: "Rewards for fandom members",
+    joinItemDesc3: `The legends prepared amazing rewards to celebrate their top fans - from personalised merch to a chance to meet them in person.`,
+    welcomeTitle: "The ultimate fan experience",
+    welcomeSubTitle: "Taking the fandom to the next level.",
+    welcomeDesc: `Thanks to state-of-the-art NFT technology that guarantees transparent ownership of the digital item, we decided to create beautiful, fully interactive NFT and very limited 
+    collectible cards that bring you closer to your favourite celebrity than ever before!`,
+    joinTitle1: "Join the Legacy community!",
+    joinDesc1:
+      "Join our official Discord server, Instagram profile or Facebook page. You'll find important information from the Legacy world everywhere.",
+    joinBtn1: "Join us on Discord",
   },
 
   faq: {
-    title: "Faq",
-    desc: "Your questions answered",
+    title: "Do you have any questions about our project?",
+    desc: "Please, find the answers below.",
+    noAnswer:
+      "If you haven't found the answer to your question, do not hesitate to contact us on our communication networks.",
     accTitle1: "Why diamonds?",
     accDesc1: `Diamonds are long-standing security for many investors, now, you can be the first to experience this in the NFT world with us. We give our project even more credibility, we are proud to announce that Diamond International Corporation (DIC) company stands behind the project. We have many years of experience with luxury diamond jewellery. As well as luxury showrooms in the main cities of the Czech and Slovak Republic. Facts: DIC manufactured the crowns for MISS Universe in the years 2014-2016. DIC is also a member of prestigious world diamond exchanges. `,
     accTitle2: "Question",
@@ -125,7 +149,6 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     email_is_not_verified: "Please, verify your email to be able to buy nft",
     is_not_logged: "Please, log in to be able to buy nft",
     user_not_verified: "Please, verify your person to be able to buy nft",
-    miles: "Galaxy Miles",
     verifyTitle: "Verify your identity",
     verifyDesc1:
       "Before buying or making an offer you must verify your identity.",
@@ -190,7 +213,16 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
   },
 
   marketplace: {
+    interact: "Interact",
+    category: "Category",
+    careerLevel: "Career Level",
+    collection: "Collection",
+    discipline: "Discipline",
+    nationality: "Nationality",
     marketplace: "Marketplace",
+    about: "About",
+    achievements: "Achievements",
+    utilities: "Utilities",
     galacticMiles: "Galactic Miles",
     help: "Help",
     luminosity: "Luminosity",
@@ -204,7 +236,8 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     select: "Select",
     partTitle: "PART OF CONSTELLATION?",
     partLabel: "Show only items that are a part of a constellation",
-    constellation: "CONSTELLATION",
+    // constellation: "CONSTELLATION",
+    constellation: "Constellation",
     planet: "Planet",
     star: "Star",
     search: "Search",
@@ -221,6 +254,10 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     galacticMilesSubTitle: `Collect Galactic Miles by buying NFTs through our platform. We will gift you 1 Galactic Mile when you buy a new NFT through our Marketplace. Use earned points to interact with VIP features. More coming soon!`,
     openMap: "Open roadmap",
     voteTitle: "Vote for next features!",
+    transferringToken: "Transferring token to",
+    otherStars: "Other stars in",
+    moreFrom: "More from",
+    constellation_l: "constellation",
     voteDesc:
       "Vote for your favourite features with your Galactic Miles points. We regularly update the roadmap and add new suggestions.",
   },
@@ -248,9 +285,11 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     emailUsed: "This email has already been registered",
     selectOption: "You must select one of the options",
     usernameLength: "Please enter at least 5 characters",
+    checkForm: "Please check out the error messages in the form",
   },
 
   snackbar: {
+    successSubscription: "Successfully signed up to the newsletter!",
     successRegister: "Successfully registered",
     successLoggedIn: "Successfully logged in",
     successTester:
@@ -312,6 +351,8 @@ Where did the idea of our NFT project come from? Diamonds are fallen stars. We'v
     verificationTitle: "Verification error!",
     verifyHeader: "Unsuccessful verification attempt for the following reason:",
     doAgain: "Please try to verify your ID again.",
+    errorDoAgain:
+      "Unsuccessful verification attempt. Please try to verify your ID again.",
     total: "Total",
     copiedToClip: "Successfully copied hash to clipboard",
     completeIdentity: "Complete verification process",
@@ -329,7 +370,7 @@ your MetaMask wallet with ethereum. `,
     collectDesc: `We want to gift you some sweet Galactic Miles for buying a  new NFT collectable through our platform.
 Use earned points to access VIP features, such as community voting! More features coming up ;)`,
     collectBtn: "Access exclusive features",
-    galacticHeader: "Collect Galactic Miles",
+    galacticHeader: "Collect Legacy Scores",
     galacticTitle: "Exclusive features awaiting!",
     galacticDesc: `Collect Galactic Miles by buying NFTs through our marketplace.
 Use earned points to access VIP features!`,

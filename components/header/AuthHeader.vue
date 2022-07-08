@@ -11,13 +11,6 @@
                 >{{ $t("marketplace.marketplace") }}</span
               ></nuxt-link
             >
-            <nuxt-link to="/galactic-miles" class="ml-24"
-              ><span
-                class="text-m marketplace-link"
-                :class="{ current: active === 2 }"
-                >{{ $t("marketplace.galacticMiles") }}</span
-              ></nuxt-link
-            >
             <nuxt-link to="/help" class="ml-24"
               ><span
                 class="text-m marketplace-link"
@@ -44,7 +37,7 @@
         <div class="user-info not-auth">
           <nuxt-link
             to="/login"
-            class="no-color-link display-f"
+            class="no-color-link display-f text-m-bold"
             :class="{ current: active === 4 }"
             >{{ $t("auth.login") }}</nuxt-link
           >
@@ -84,20 +77,6 @@
             @click.native="mobileMenu = false"
             ><span class="header-title1 marketplace-link">{{
               $t("marketplace.marketplace")
-            }}</span></nuxt-link
-          >
-        </p>
-        <p
-          class="mt-0 mb-40 pointer"
-          :class="{ 'active-link': $route.path === '/galactic-miles' }"
-          @click="toLink('/galactic-miles')"
-        >
-          <nuxt-link
-            to="/galactic-miles"
-            class="ml-16"
-            @click.native="mobileMenu = false"
-            ><span class="header-title1 marketplace-link">{{
-              $t("marketplace.galacticMiles")
             }}</span></nuxt-link
           >
         </p>

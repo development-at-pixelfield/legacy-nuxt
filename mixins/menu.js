@@ -19,7 +19,7 @@ export default {
     checkRoute(val) {
       if (["marketplace", "marketplace-id"].includes(val)) {
         this.active = 1;
-      } else if (["galactic-miles"].includes(val)) {
+      } else if (["legacy-scores", "road-map"].includes(val)) {
         this.active = 2;
       } else if (["help", "help-installation", "help-buy-eth"].includes(val)) {
         this.active = 3;

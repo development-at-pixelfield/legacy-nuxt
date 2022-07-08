@@ -3,6 +3,7 @@
     class="marketplace-wrapper"
     :class="{ 'no-items': !nfts.results || !nfts.results.length }"
   >
+    <LoadingBar></LoadingBar>
     <div class="filter">
       <FilterList
         :is-open-panel.sync="isOpenPanel"
@@ -56,16 +57,20 @@
           <img
             slot="image"
             :src="
-              item.image_cover
-                ? item.image_cover
-                : require('~/assets/img/bear-head.svg')
+              item.thumbnail
+                ? item.thumbnail
+                : require('~/assets/img/landing/default-marketplace-thumbnail.png')
             "
             alt="image"
           />
           <p slot="title" class="text-m-bold mt-8 mb-8 text-center">
             {{ item.name }} <br />
           </p>
-          <p slot="profit" class="profit mtb text-m text-center">
+          <p
+            v-if="item.price_eth"
+            slot="profit"
+            class="profit mtb text-m text-center"
+          >
             {{ item.price_eth }}Ξ
           </p>
           <p slot="finance" class="finance mtb text-m-bold text-center">
@@ -76,7 +81,7 @@
 
       <div v-else class="empty-wrapper">
         <span class="empty-image"
-          ><img src="~/assets/img/empty-img.svg" alt="empty-image"
+          ><img src="~/assets/img/empty-img.png" alt="empty-image"
         /></span>
         <p
           class="description mt-0 mb-16 text-center"
@@ -117,15 +122,16 @@ import Button from "../../components/ui/Button";
 import { functions } from "../../utils";
 import { catchErrors } from "../../utils/catchErrors";
 import converter from "../../mixins/converter";
+import LoadingBar from "../../components/LoadingBar";
 
 const filterDefaultVars = {
   page: 1,
   page_size: 12,
   ordering: "",
   search: "",
-  luminosity__in: [],
-  quality_level__in: [],
-  age__in: [],
+  collection__category__in: [],
+  career_level__in: [],
+  collection__in: [],
   constellation: "",
 };
 
@@ -138,6 +144,7 @@ export default {
     FilterList,
     FiltersItems,
     Button,
+    LoadingBar,
   },
   mixins: [converter],
   layout(context) {
@@ -145,15 +152,13 @@ export default {
       return "auth";
     }
   },
-  async asyncData({ store, route, error }) {
+  async asyncData({ app, store, route, error }) {
     try {
       const formOptions = await store.dispatch("nfts/getNftsForm");
 
-      // console.log(formOptions, "formOptions");
-
       const query = route.query;
       const filter = { ...filterDefaultVars };
-      const arr = ["luminosity__in", "quality_level__in"];
+      const arr = ["collection__category__in", "career_level__in"];
       Object.keys(filter).forEach((key) => {
         if (arr.includes(query[key]) && typeof query[key] === "string") {
           filter[key] = query[key].split(",");
@@ -196,6 +201,9 @@ export default {
     },
     convertEthereum() {
       return (price) => {
+        if (!price) {
+          return "Coming Soon";
+        }
         return this.ethPrice
           ? "est. $" + Number((this.ethPrice * 100 * price) / 100).toFixed(2)
           : "...";

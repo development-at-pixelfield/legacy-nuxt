@@ -87,8 +87,14 @@ import Checkbox from "../../components/ui/Checkbox";
 import Button from "../../components/ui/Button";
 import passwordValidate from "../../mixins/passwordValidate";
 import FooterLinks from "../../components/footer/FooterLinks";
-import { catchErrors } from "../../utils/catchErrors";
 import isLoggedIn from "../../middleware/isLoggedIn";
+
+const Errors = {
+  usernameEmail: "Users with this email and username already registered",
+  username: "User with this username is already registered",
+  email: "User with this email is already registered",
+};
+
 export default {
   name: "Index",
   components: {
@@ -167,6 +173,7 @@ export default {
         !this.$v.$invalid &&
         !this.customErrors.length &&
         !this.customEmailErrors.length &&
+        !this.customUsernameError.length &&
         !this.checkError
       );
     },
@@ -179,6 +186,11 @@ export default {
     email(val) {
       if (!this.$v.email.$invalid) {
         this.customEmailErrors = {};
+      }
+    },
+    username() {
+      if (!this.$v.username.$invalid) {
+        this.customUsernameError = {};
       }
     },
   },
@@ -216,22 +228,27 @@ export default {
           });
           await this.$router.push("/profile");
         } catch (e) {
-          if (e.response.data.detail === "User is already regsitered") {
-            return (this.customEmailErrors = {
+          const response = e.response.data.detail;
+          const config = {
+            usernameRegistered: response === Errors.username,
+            emailRegistered: response === Errors.email,
+            bothRegistered: response === Errors.usernameEmail,
+          };
+          if (config.emailRegistered || config.bothRegistered) {
+            this.customEmailErrors = {
               errors: [`This email is already registered`],
               type: "object",
-            });
+            };
           }
-          if (e.response.data.detail === "User is already regsitered") {
-            return (this.customEmailErrors = {
-              errors: [`This username is already exists`],
+          if (config.usernameRegistered || config.bothRegistered) {
+            this.customUsernameError = {
+              errors: [`This username is already registered`],
               type: "object",
-            });
+            };
           }
-
           await this.$store.commit("setSnackbar", {
             show: true,
-            message: catchErrors(e),
+            message: this.$t("validations.checkForm"),
             color: "error",
           });
         }

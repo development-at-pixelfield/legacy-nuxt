@@ -1,4 +1,10 @@
 .navigation{
+  .left-side {
+    display: flex;
+    align-items: center;
+  }
+  
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }

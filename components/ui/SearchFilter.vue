@@ -133,10 +133,10 @@ export default {
     selectorStyles() {
       return {
         borderColor: this.visible
-          ? "#6B00C1"
+          ? "#3843FF"
           : this.error || this.errorBorder
           ? "#FC4E4E"
-          : "#261632",
+          : "#11121B",
         borderWidth: "1px",
         borderStyle: "solid",
       };

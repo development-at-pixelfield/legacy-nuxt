@@ -3,52 +3,52 @@ export default {
   head: {
     titleTemplate: "Legacy | Own the universe",
     title: "Legacy | Own the universe",
-    meta: [
-      {charset: "utf-8"},
-      {
-        name: "viewport",
-        content:
-          "width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1",
-      },
-      {name: "msapplication-TileColor", content: "#da532c"},
-      {name: "theme-color", content: "#ffffff"},
-      {hid: "description", name: "description", content: "NFT floating through galaxy. Own a piece of the universe."},
-      {hid: "author", name: "author", content: "Galaxy.diamonds"},
-      {hid: "DC.title", name: "DC.title", content: "Galaxy.diamonds"},
-      {hid: "DC.creator", name: "DC.creator", content: "Galaxy.diamonds"},
-      {hid: "og:type", name: "og:type", content: "website"},
-      {hid: "og:url", name: "og:url", content: "https://galaxy.diamonds/"},
-      {
-        hid: "og:title",
-        name: "og:title",
-        content: "Galaxy.diamonds | Own the universe",
-      },
-      {
-        hid: "og:description",
-        name: "og:description",
-        content:
-          "🚀 NFT floating through galaxy. Own a piece of the universe.",
-      },
-      {
-        hid: "og:image",
-        name: "og:image",
-        content:
-          "https://galaxy.diamonds/galaxy-opengraph.jpg",
-      },
-      {
-        hid: "twitter:image",
-        name: "twitter:image",
-        content:
-          "https://galaxy.diamonds/galaxy-opengraph.jpg",
-      },
-    ],
+    // meta: [
+    //   {charset: "utf-8"},
+    //   {
+    //     name: "viewport",
+    //     content:
+    //       "width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1",
+    //   },
+    //   {name: "msapplication-TileColor", content: "#da532c"},
+    //   {name: "theme-color", content: "#ffffff"},
+    //   {hid: "description", name: "description", content: "NFT floating through galaxy. Own a piece of the universe."},
+    //   {hid: "author", name: "author", content: "Galaxy.diamonds"},
+    //   {hid: "DC.title", name: "DC.title", content: "Galaxy.diamonds"},
+    //   {hid: "DC.creator", name: "DC.creator", content: "Galaxy.diamonds"},
+    //   {hid: "og:type", name: "og:type", content: "website"},
+    //   {hid: "og:url", name: "og:url", content: "https://galaxy.diamonds/"},
+    //   {
+    //     hid: "og:title",
+    //     name: "og:title",
+    //     content: "Galaxy.diamonds | Own the universe",
+    //   },
+    //   {
+    //     hid: "og:description",
+    //     name: "og:description",
+    //     content:
+    //       "🚀 NFT floating through galaxy. Own a piece of the universe.",
+    //   },
+    //   {
+    //     hid: "og:image",
+    //     name: "og:image",
+    //     content:
+    //       "https://galaxy.diamonds/galaxy-opengraph.jpg",
+    //   },
+    //   {
+    //     hid: "twitter:image",
+    //     name: "twitter:image",
+    //     content:
+    //       "https://galaxy.diamonds/galaxy-opengraph.jpg",
+    //   },
+    // ],
     link: [
       {rel: "icon", type: "image/x-icon", href: "/favicon.ico"},
       {rel: "manifest", href: "/site.webmanifest"},
       {
         rel: "stylesheet",
         href:
-          "https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;500;600;700;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap",
+          "https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;500;600;700;800&family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap",
       },
       {
         rel: "apple-touch-icon",
@@ -98,7 +98,8 @@ export default {
     __dangerouslyDisableSanitizers: ['script'],
   },
 
-  loading: {color: "#1DD1A1"},
+  loading: {color: "#3843FF"},
+  // loading: '@/components/LoadingBar.vue',
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: ["@/assets/scss/global.scss"],
@@ -145,6 +146,11 @@ export default {
       onlyOnRoot: true, // recommended
     },
   },
+  hooks: {
+    'generate:page': page => {
+      page.html = page.html.replace('head data-n-head=""', 'head');
+    },
+  },
 
   auth: {
     strategies: {
@@ -178,7 +184,19 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
-    transpile: ["three"]
+    extend (config, { isDev, isClient }) {
+      config.node = {
+           fs: 'empty'
+      },
+      config.optimization.minimize = false,
+      config.performance.maxEntrypointSize = 2000000
+      config.module.rules.push({
+          test: /\.js$/,
+          loader: 'babel-loader',
+          exclude: /(node_modules)/
+      })
+    },
+    transpile: ["three"],
   },
 
   axios: {

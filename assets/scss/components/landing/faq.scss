@@ -1,24 +1,27 @@
 .faq-wrapper{
-  background: #11011F;
+  //background: #11011F;
   padding-top: 80px;
   padding-bottom: 80px;
+  z-index: 10;
+  position: relative;
 
+  .subtitle {
+    color: white;
+    font-size: 20px;
+    font-weight: 800;
+    text-align: center;
+  }
+
+  .mb-78 {
+    margin-bottom: 78px;
+  }
+
+  .mt-50 {
+    margin-top: 50px;
+  }
 
   h2{
-    color: $c-white;
-    font-weight: 800;
-    font-size: 64px;
-    line-height: 95%;
-    letter-spacing: -0.01em;
-    margin-bottom: 32px;
-    text-transform: uppercase;
-
-    @media (max-width: $break-smsm) {
-      text-align: center;
-      margin-bottom: 16px;
-      font-size: 37px;
-      letter-spacing: -0.02em;
-    }
+    margin-bottom: 24px;
   }
 
   .desc{
@@ -36,3 +39,20 @@
     }
   }
 }
+
+.icon-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  .icon {
+    width: 40px;
+    height: 40px;
+  
+    &:not(:last-child) {
+      margin-right: 16px;
+    }
+  }
+}
+

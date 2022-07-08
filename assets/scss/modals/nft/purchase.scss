@@ -19,7 +19,7 @@
 }
 
 .finished-nft {
-  background-color: #301C3F;
+  background-color: $c-greyscale-120;
   padding: 24px;
   color: white;
   font-size: 16px;
@@ -31,13 +31,13 @@
 
   &_special-text {
     color: #64A4FF;
+    text-decoration: none;
   }
 }
 
 .tooltip {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black;
 }
 
 .tooltip .tooltiptext {
@@ -50,7 +50,7 @@
   position: absolute;
   z-index: 1;
   bottom: 125%;
-  left: -100%;
+  left: -200%;
   opacity: 0;
   transition: opacity 0.3s;
 
@@ -78,4 +78,10 @@
 
 img{
   width: 100%;
+}
+
+.preview-block{
+  width: 114px;
+  height: 176px;
+  margin: 0 auto;
 }

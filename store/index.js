@@ -1,6 +1,8 @@
 import Vuex from "vuex";
 import user from "./user/state";
 import nfts from "./nfts/state";
+import landing from "./landing/state";
+import wyre from "./wyre/state";
 
 export const defaultValues = () => ({
   snackbar: {
@@ -19,11 +21,15 @@ export const defaultValues = () => ({
   ethPrice: null,
   hasWallet: false,
   walletAccount: null,
+  seaport: null,
 });
 
 export const state = defaultValues;
 
 export const mutations = {
+  seaport(state, seaport) {
+    state.seaport = seaport;
+  },
   setSnackbar(state, payload) {
     state.snackbar = payload;
   },
@@ -59,6 +65,7 @@ export const getters = {
   ethPrice: (state) => state.ethPrice,
   hasWallet: (state) => state.hasWallet,
   walletAccount: (state) => state.walletAccount,
+  seaport: (state) => state.seaport,
 };
 
 const createStore = () =>
@@ -72,6 +79,8 @@ const createStore = () =>
     modules: {
       user,
       nfts,
+      landing,
+      wyre,
     },
   });
 

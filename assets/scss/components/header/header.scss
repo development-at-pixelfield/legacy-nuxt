@@ -4,8 +4,8 @@ a {
 
 header{
   height: 56px;
-  background: #08010E;
-  border-bottom: 1px solid #301C3F;
+  background: $c-background;
+  border-bottom: 1px solid $c-greyscale-100;
   position: relative;
 
   .header-full-container {
@@ -23,6 +23,10 @@ header{
     @media (max-width: $break-md) {
       padding-left: 32px;
       padding-right: 32px;
+    }
+
+    @media (max-width: $break-sm) {
+      padding: 0 16px;
     }
 
     //@media (max-width: 1280px){
@@ -75,7 +79,6 @@ header{
     }
 
     .user-info{
-      z-index: 1;
       display: flex;
       position: absolute;
       align-items: center;
@@ -86,7 +89,7 @@ header{
       }
     }
     .waller-info{
-      z-index: 1;
+      z-index: 1000;
       display: flex;
       position: absolute;
       right: 47px;

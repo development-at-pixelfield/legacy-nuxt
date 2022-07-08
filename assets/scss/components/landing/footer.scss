@@ -1,7 +1,11 @@
+.leg-link {
+  margin-right: 32px;
+}
+
 footer{
-  background: linear-gradient(0deg, #11011F, #11011F), linear-gradient(170.73deg, #000 4.64%, #00081C 17.98%, #000B28 92.98%);
-  padding-top: 80px;
-  padding-bottom: 80px;
+  background: #100C0F;
+  padding-top: 70px;
+  padding-bottom: 45px;
   position: relative;
 
   @media (max-width: $break-sms) {
@@ -13,6 +17,8 @@ footer{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    z-index: 10;
 
     @media (max-width: $break-mds) {
       flex-direction: column;
@@ -22,7 +28,18 @@ footer{
 
     ul{
       list-style-type: none;
+      //display: flex;
+      //margin: 0;
+      position: absolute;
+      width: 100%;
       display: flex;
+      justify-content: center;
+
+      @media (max-width: $break-mds) {
+        margin-bottom: 16px;
+        margin-top: 16px;
+        position: static;
+      }
 
       li{
         margin-right: 16px;
@@ -39,6 +56,12 @@ footer{
         }
       }
     }
+
+    .socials{
+      z-index: 100;
+      .link:not(:last-child) {
+        margin-right: 16px;;
+      }
+    }
   }
 }
-

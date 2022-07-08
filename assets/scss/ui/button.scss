@@ -99,6 +99,53 @@
     outline: none;
   }
 
+  &__dark {
+    background: #0D0F28;
+    color: white;
+
+    &:hover {
+      filter: brightness(1.1);
+    }
+    &:active {
+      filter: brightness(0.9);
+    }
+  }
+
+  &__available {
+    background: #FFBC0F;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: capitalize;
+    line-height: 150%;
+    letter-spacing: 0.05rem;
+
+    &:hover {
+      filter: brightness(1.1);
+    }
+    &:active {
+      filter: brightness(0.9);
+    }
+  }
+
+  &__white-outline{
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: capitalize;
+    line-height: 150%;
+    letter-spacing: 0.05rem;
+
+    &:hover {
+      filter: brightness(1.1);
+    }
+    &:active {
+      filter: brightness(0.9);
+    }
+  }
+
   &__primary{
     background: $c-primary;
     position: relative;
@@ -125,16 +172,27 @@
     position: relative;
   }
 
+  &__grey-m{
+    background: $c-greyscale-60;
+    position: relative;
+  }
+
+  &__white {
+    color: white;
+  }
+
+
+
   &__warning{
     background: transparent;
     position: relative;
-    border: 1px solid $c-system-error;
+    border: 1px solid $c-error;
   }
 
   &__full-warning{
-    background: $c-system-error;
+    background: $c-error;
     position: relative;
-    border: 1px solid $c-system-error;
+    border: 1px solid $c-error
   }
 
   &__circle{
@@ -150,7 +208,7 @@
     font-size: 16px;
     line-height: 150%;
     letter-spacing: 0.05em;
-    border-radius: 3px;
+    border-radius: 12px;
     font-family: $font-primary;
   }
   &__custom-medium{
@@ -160,7 +218,7 @@
     font-size: 16px;
     line-height: 150%;
     letter-spacing: 0.05em;
-    border-radius: 3px;
+    border-radius: 12px;
     font-family: $font-primary;
   }
   &__large{
@@ -170,7 +228,7 @@
     line-height: 24px;
     letter-spacing: 0.04em;
     font-family: $font-primary;
-    border-radius: 4px;
+    border-radius: 12px;
   }
   &__small{
     padding: 3px 15px;
@@ -179,7 +237,7 @@
     line-height: 24px;
     letter-spacing: 0.04em;
     font-family: $font-primary;
-    border-radius: 4px;
+    border-radius: 12px;
   }
   &__full{
     width: 100%;
@@ -189,7 +247,7 @@
     font-size: 16px;
     line-height: 150%;
     letter-spacing: 0.05em;
-    border-radius: 3px;
+    border-radius: 12px;
     font-family: $font-primary;
   }
 
@@ -204,7 +262,7 @@
     color: $c-black
   }
   &__c-warning{
-    color: $c-system-error
+    color: $c-error
   }
   &__c-grey{
     color: $c-greyscale-20
@@ -236,7 +294,7 @@
 
   &__disabled-new{
     cursor: not-allowed;
-    background: $c-greyscale-80;
+    background: $c-greyscale-60;
     color: $c-greyscale-20;
   }
 

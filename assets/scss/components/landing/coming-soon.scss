@@ -1,44 +1,73 @@
 .coming-soon {
   width: 100%;
   height: 100%;
-  //background: url("~assets/img/landing/galaxy-landing-img.png");
-  //background-position: center;
-  //background-repeat: no-repeat;
-  //background-size: 100% 100%;
-  //background: #0c0116;
-  //height: 100vh;
-  //position: relative;
-  //
+  padding: 80px 0;
+  position: relative;
+
   @media (max-width: $break-md) {
     background-size: cover;
     background-position: center;
   }
-
+  
   .content {
-    padding-bottom: 100px;
-    //padding-top: 100px;
+    padding-left: 168px;
+    padding-right: 168px;
     text-align: center;
     height: 100%;
-    justify-content: center;
     align-items: center;
     display: flex;
+    justify-content: center;
     flex-direction: column;
+
+    @media (max-width: 1380px) {
+      padding-left: 60px;
+      padding-right: 60px;
+    }
+
+    @media (max-width: 550px) {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
 
     h1 {
       font-weight: 800;
-      font-size: 64px;
-      line-height: 95%;
+      font-style: normal;
+      font-size: 74px;
+      line-height: 100%;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      letter-spacing: -0.025em;
       color: #fff;
-      margin-bottom: 40px;
-      margin-top: 40px;
+      margin-bottom: 16px;
+      margin-top: 0;
       opacity: 0;
       transition: all 0.5s ease-in-out;
       transform: translateY(-15px);
 
       @media (max-width: $break-sms) {
         font-weight: 800;
-        font-size: 32px;
-        line-height: 95%;
+        font-size: 48px;
+        line-height: 100%;
+        letter-spacing: -0.025em;
+      }
+    }
+
+    .desc{
+      transform: translateY(-15px);
+      opacity: 0;
+      transition: all 0.5s ease-in-out;
+      font-weight: 600;
+      font-size: 32px;
+      line-height: 100%;
+      letter-spacing: -0.025em;
+      margin-bottom: 50px;
+
+      @media (max-width: $break-sms) {
+        font-weight: 800;
+        font-size: 20px;
+        line-height: 29px;
+        letter-spacing: -0.01em;
       }
     }
 
@@ -49,9 +78,16 @@
     }
 
     .action{
+      margin-top: 64px;
       opacity: 0;
       transition: all 0.5s ease-in-out;
       transform: translateY(-15px);
+      margin-bottom: 60px;
+
+      @media (max-width: $break-sms) {
+        margin-top: 40px;
+        margin-bottom: 38px;
+      }
     }
 
     .show{
@@ -62,8 +98,8 @@
 }
 
 .web-span{
-  width: 159px;
-  height: 154px;
+  //width: 159px;
+  //height: 154px;
 
   img{
     width: 100%;

@@ -72,16 +72,20 @@ export default {
     }
   },
   middleware: "auth",
-  async asyncData({ app, store, route, redirect }) {
+  async asyncData({ app, store, route, redirect, error }) {
     let label = "";
     if (route.query.nft) {
-      const nft = await store.dispatch("nfts/getNftsById", {
-        uid: route.query.nft,
-      });
-      label = nft.name;
+      try {
+        const nft = await store.dispatch("nfts/getNftsById", {
+          uid: route.query.nft,
+        });
+        label = nft.name;
 
-      if (!nft.owner || nft.owner.username !== app.$auth.user.username) {
-        redirect("/marketplace");
+        if (!nft.owner || nft.owner.username !== app.$auth.user.username) {
+          redirect("/marketplace");
+        }
+      } catch (e) {
+        error({ statusCode: 404, message: "Page not found" });
       }
     }
 

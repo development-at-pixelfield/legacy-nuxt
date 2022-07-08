@@ -1,39 +1,34 @@
 <template>
   <div class="coming-soon">
-    <LandingHeader />
-
     <div class="content full-container">
+      <h1 :class="{ show: show1 }">
+        {{ $t("landing.mainTitle") }}
+      </h1>
+      <p class="mt-0 mb-0 no-color-link desc" :class="{ show: show3 }">
+        {{ $t("landing.mainDesc") }}
+      </p>
       <span :class="{ show: show }" class="web-span">
         <img
           id="header-logo"
-          src="~/assets/img/landing/Bear_front.png"
+          src="~/assets/img/landing/landing-nfts.png"
           alt="header-logo"
           @load="isLoaded = true"
         />
       </span>
-      <h1 :class="{ show: show1 }">
-        {{ $t("landing.mainTitle") }}
-      </h1>
-      <div class="action" :class="{ show: show2 }">
-        <Button
-          :label="$t('landing.learnMore')"
-          :background="'primary'"
-          :size="'medium'"
-          :color="'c-white'"
-          @on-click="anchorLink"
-        />
-      </div>
+      <Button
+        :class="{ show: show2 }"
+        :label="$t('landing.moreInfo')"
+        :background="'dark'"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import LandingHeader from "../header/LandingHeader";
 import Button from "../ui/Button";
 export default {
   name: "ComingSoon",
   components: {
-    LandingHeader,
     Button,
   },
   data() {
@@ -41,6 +36,7 @@ export default {
       show: false,
       show1: false,
       show2: false,
+      show3: false,
       isLoaded: false,
     };
   },
@@ -49,23 +45,30 @@ export default {
       if (val) this.showAnimation();
     },
   },
+  mounted() {
+    if (this.$route.hash.includes("discover")) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      this.anchorLink();
+    }
+  },
   methods: {
     anchorLink() {
-      document.location = "#discover";
+      this.$router.push("/register");
     },
     showAnimation() {
       const vm = this;
 
       setTimeout(function () {
-        vm.show = true;
+        vm.show1 = true;
+        vm.show3 = true;
       }, 500);
 
       setTimeout(function () {
-        vm.show1 = true;
+        vm.show2 = true;
       }, 750);
 
       setTimeout(function () {
-        vm.show2 = true;
+        vm.show = true;
       }, 1000);
     },
   },

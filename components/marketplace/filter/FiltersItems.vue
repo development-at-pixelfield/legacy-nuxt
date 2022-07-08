@@ -30,9 +30,9 @@ import Icon from "../../ui/Icon";
 
 const filterDefaultVars = {
   search: "",
-  luminosity__in: [],
-  quality_level__in: [],
-  age__in: [],
+  collection__category__in: [],
+  career_level__in: [],
+  collection__in: [],
   constellation: "",
 };
 export default {
@@ -54,9 +54,17 @@ export default {
     return {
       list: [
         { key: "search", value: "Search", form: "search" },
-        { key: "luminosity__in", value: "Luminosity", form: "luminosity" },
-        { key: "quality_level__in", value: "Quality", form: "quality" },
-        { key: "age__in", value: "Age", form: "age" },
+        {
+          key: "collection__category__in",
+          value: "Category",
+          form: "category",
+        },
+        {
+          key: "career_level__in",
+          value: "Career Level",
+          form: "career_level",
+        },
+        { key: "collection__in", value: "Collection", form: "collection" },
         {
           key: "constellation",
           value: "Constellation",

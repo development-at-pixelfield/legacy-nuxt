@@ -41,59 +41,76 @@
         />
 
         <MultiFilterDropdown
-          v-if="formOptions.luminosity"
-          :list="formOptions.luminosity"
+          v-if="formOptions.category"
+          :list="formOptions.category"
           :return-object="false"
           :item-value="'value'"
           :item-label="'label'"
-          :name.sync="filter.luminosity__in"
-          :selected-items="convertArray(filter.luminosity__in)"
-          :label="$t('marketplace.luminosity')"
+          :name.sync="filter.collection__category__in"
+          :selected-items="convertArray(filter.collection__category__in)"
+          :label="$t('marketplace.category')"
           :show-count="true"
-          :field="'luminosity__in'"
+          :field="'collection__category__in'"
           :placeholder="$t('marketplace.select')"
           class="mb-0 first-filter"
         />
 
         <MultiFilterDropdown
-          v-if="formOptions.quality"
-          :list="formOptions.quality"
+          v-if="formOptions.career_level"
+          :list="formOptions.career_level"
           :return-object="false"
           :item-value="'value'"
           :item-label="'label'"
-          :name.sync="filter.quality_level__in"
-          :selected-items="convertArray(filter.quality_level__in)"
-          :label="$t('marketplace.quality')"
+          :name.sync="filter.collection__career_level__in"
+          :selected-items="convertArray(filter.collection__career_level__in)"
+          :label="$t('marketplace.careerLevel')"
           :show-count="true"
           :placeholder="$t('marketplace.select')"
           class="mb-0 first-filter"
         />
 
         <MultiFilterDropdown
-          v-if="formOptions.ages"
-          :list="formOptions.ages"
+          v-if="formOptions.collection"
+          :list="formOptions.collection"
           :return-object="false"
           :item-value="'value'"
           :item-label="'label'"
-          :label="$t('marketplace.age')"
+          :label="$t('marketplace.collection')"
           :placeholder="$t('marketplace.select')"
-          :selected-items="convertArray(filter.age__in)"
+          :selected-items="convertArray(filter.collection__in)"
           :show-count="true"
-          :name.sync="filter.age__in"
+          :name.sync="filter.collection__in"
           class="mb-0"
         />
 
-        <FilterDropdown
-          :list="formOptions.constellations"
+        <MultiFilterDropdown
+          v-if="formOptions.discipline"
+          :list="formOptions.discipline"
           :return-object="false"
           :item-value="'value'"
           :item-label="'label'"
-          :label="$t('marketplace.constellation')"
+          :label="$t('marketplace.discipline')"
           :placeholder="$t('marketplace.select')"
-          :name.sync="filter.constellation"
-          :must-scroll="true"
+          :selected-items="convertArray(filter.collection__discipline__in)"
+          :show-count="true"
+          :name.sync="filter.collection__discipline__in"
           class="mb-0"
         />
+
+        <MultiFilterDropdown
+          v-if="formOptions.nationality"
+          :list="formOptions.nationality"
+          :return-object="false"
+          :item-value="'value'"
+          :item-label="'label'"
+          :label="$t('marketplace.nationality')"
+          :placeholder="$t('marketplace.select')"
+          :selected-items="convertArray(filter.collection__nationality__in)"
+          :show-count="true"
+          :name.sync="filter.collection__nationality__in"
+          class="mb-0"
+        />
+
         <div class="apply-action mb-24">
           <Button
             :label="$t('marketplace.applyFilters')"
@@ -120,27 +137,27 @@
 
 <script>
 import MultiFilterDropdown from "../../ui/MultiFilterDropdown";
-import FilterDropdown from "../../ui/FilterDropdown";
 import SearchFilter from "../../ui/SearchFilter";
 import Icon from "../../ui/Icon";
 import Button from "../../ui/Button";
+import fixed from "../../../mixins/fixed";
 const filterDefaultVars = {
   search: "",
-  luminosity__in: [],
-  quality_level__in: [],
-  age__in: [],
-
-  constellation: "",
+  collection__category__in: [],
+  collection__carrer_level__in: [],
+  collection__in: [],
+  collection__nationality__in: [],
+  collection__discipline__in: [],
 };
 export default {
   name: "FilterList",
   components: {
     Icon,
     MultiFilterDropdown,
-    FilterDropdown,
     Button,
     SearchFilter,
   },
+  mixins: [fixed],
   props: {
     count: {
       type: Number,
@@ -163,13 +180,13 @@ export default {
     return {
       showPanel: false,
       canShow: false,
-      type: "desktop",
       filter: {
         search: "",
-        luminosity__in: [],
-        quality_level__in: [],
-        age__in: [],
-        constellation: "",
+        collection__category__in: [],
+        collection__carrer_level__in: [],
+        collection__in: [],
+        collection__nationality__in: [],
+        collection__discipline__in: [],
       },
       luminosityArr: [],
       qualityLevelArr: [],
@@ -204,10 +221,6 @@ export default {
         this.filter = { ...filterDefaultVars };
       }
     },
-    type(val) {
-      if (val === "mobile" && this.showPanel) this.addFixed();
-      else this.removeFixed();
-    },
     queryFilter(val) {
       this.setFilters(val);
     },
@@ -229,13 +242,6 @@ export default {
   created() {
     this.setFilters({ ...this.filter });
   },
-  mounted() {
-    window.addEventListener("resize", this.reportWindowSize);
-    this.reportWindowSize();
-  },
-  beforeDestroy() {
-    window.removeEventListener("resize", this.reportWindowSize);
-  },
   methods: {
     toggleFilter() {
       this.showPanel = !this.showPanel;
@@ -253,7 +259,13 @@ export default {
       const query = this.$route.query;
       const filter = { ...values };
 
-      const arr = ["luminosity__in", "quality_level__in", "age__in"];
+      const arr = [
+        "collection__in",
+        "collection__career_level__in",
+        "collection__category__in",
+        "collection__nationality__in",
+        "collection__discipline__in",
+      ];
       Object.keys(filterDefaultVars).forEach((key) => {
         if (arr.includes(query[key]) && typeof query[key] === "string") {
           filter[key] = query[key].split(",");
@@ -263,23 +275,6 @@ export default {
       });
 
       this.filter = filter;
-    },
-
-    removeFixed() {
-      const header = document.getElementById("header");
-      const html = document.getElementsByTagName("html")[0];
-      header.style.position = "static";
-      html.style.position = "static";
-    },
-    addFixed() {
-      const header = document.getElementById("header");
-      const html = document.getElementsByTagName("html")[0];
-      header.style.position = "fixed";
-      html.style.position = "fixed";
-    },
-    reportWindowSize() {
-      if (window.innerWidth < 770) this.type = "mobile";
-      else this.type = "desktop";
     },
   },
 };

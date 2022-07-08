@@ -2,8 +2,10 @@ html {
   overflow-y: scroll;
   scroll-behavior: smooth;
   height: 100%;
+  width: 100%;
+  overflow-x: hidden !important;
   //background: #11011F;
-
+  
 }
 
 #__nuxt, #__layout{
@@ -16,7 +18,9 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: $font-primary;
-  background: linear-gradient(180deg, #08010E 0%, #17012A 100%) fixed;
+  overflow-x: hidden !important;
+  //background: linear-gradient(180deg, #08010E 0%, #17012A 100%) fixed;
+  background: $c-background;
   height: 100%;
   //background: linear-gradient(180deg, #08010E 0%, #17012A 100%);
   //background: radial-gradient(182.78% 182.93% at 74.58% -40.24%, #000 0%, #1E0037 100%);
@@ -180,10 +184,10 @@ ul{
   color: $c-white;
   text-align: center;
   font-style: normal;
-  font-weight: 800;
+  font-weight: bold;
   font-size: 40px;
   line-height: 38px;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.025em;
   margin-top: 0;
 
   @media (max-width: $break-sms) {
@@ -314,7 +318,7 @@ ul{
   text-decoration: none;
 }
 .no-dec-link{
-  text-decoration: none;
+  text-decoration: none !important;
 }
 .pointer{
   cursor: pointer;
@@ -359,7 +363,7 @@ input{
   //}
 
   &:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 30px #301C3F inset !important;
+    -webkit-box-shadow: 0 0 0 30px $c-greyscale-120 inset !important;
     -webkit-text-fill-color: white !important;
     -webkit-border-radius: 0 !important;
     font-size: 16px;
@@ -439,8 +443,8 @@ input{
   }
 
   @media (max-width: $break-sms) {
-    padding-left: 32px;
-    padding-right: 32px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }
 
@@ -452,6 +456,10 @@ input{
 }
 .c-grey {
   color: $c-greyscale-20 !important;
+}
+
+.p-r{
+  position: relative;
 }
 
 .nav{

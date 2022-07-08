@@ -6,7 +6,7 @@ $caret-size: 16px;
 .simple-dropdown {
   .title {
     position: relative;
-    border: 1px solid #261632;
+    border: 1px solid $c-greyscale-120;
     margin-bottom: 16px;
     padding: $paddings;
     cursor: pointer;
@@ -26,7 +26,7 @@ $caret-size: 16px;
 
   .content {
     overflow: hidden;
-    background-color: #261632;
+    background-color: $c-greyscale-140;
     // transition: height $animation-time $animation-function;
     // height: 0;
     display: none;

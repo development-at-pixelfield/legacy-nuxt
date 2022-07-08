@@ -16,7 +16,7 @@
     transition: $transition-3;
 
     &:hover{
-      background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), #301C3F;
+      background: linear-gradient(0deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04)), #1C1D2B;
     }
 
     .custom-height{
@@ -144,7 +144,7 @@
         align-items: center;
 
         &:hover {
-          background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), #301C3F;
+          background: linear-gradient(0deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04)), #1C1D2B;
         }
         &:active {
           background: $c-prim-darker-10;
@@ -173,7 +173,7 @@
       background: $c-primary;
     }
     .hover-key{
-      background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), #301C3F;
+      background: linear-gradient(0deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04)), #1C1D2B;
     }
 
     .hidden {
