@@ -11,9 +11,10 @@
     "lint:style": "stylelint **/*.{vue,css} --ignore-path .gitignore",
     "lint": "npm run lint:js && npm run lint:style",
     "test": "jest",
-    "build-cloud": "gcloud builds submit --tag gcr.io/pfld-galaxy/pfld-legacy-nuxt . --project pfld-galaxy --timeout=86400",
-    "deploy-cloud": "gcloud run deploy pfld-legacy-nuxt --project pfld-galaxy --image=gcr.io/pfld-galaxy/pfld-legacy-nuxt --region europe-west3 --platform managed --port 3000",
-    "deploy-cloud-production": "gcloud run deploy pfld-galaxy-nuxt-production --project pfld-galaxy --update-env-vars API_URL=https://api-galaxy.bypixelfield.com/api/ --image=gcr.io/pfld-galaxy/pfld-galaxy-nuxt --region europe-west1 --platform managed --port 3000"
+    "build-cloud-test": "gcloud builds submit --timeout=12000 --tag gcr.io/pfld-galaxy/pfld-legacy-nuxt . --project pfld-galaxy",
+    "deploy-cloud-test": "gcloud run deploy pfld-legacy-nuxt --project pfld-galaxy --update-env-vars API_URL=https://api-legacy.bypixelfield.com/api/ --image=gcr.io/pfld-galaxy/pfld-legacy-nuxt --region europe-west3 --platform managed --port 3000",
+    "build-cloud-stage": "gcloud builds submit --timeout=12000 --tag gcr.io/pfld-galaxy/pfld-legacy-nuxt-stage . --project pfld-galaxy",
+    "deploy-cloud-stage": "gcloud run deploy pfld-legacy-nuxt-stage --project pfld-galaxy --update-env-vars API_URL=https://api-legacy-stage.bypixelfield.com/api/ --image=gcr.io/pfld-galaxy/pfld-legacy-nuxt-stage --region europe-west3 --platform managed --port 3000"
   },
   "lint-staged": {
     "*.{js,vue}": "eslint",
