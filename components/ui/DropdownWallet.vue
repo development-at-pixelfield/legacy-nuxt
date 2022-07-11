@@ -30,12 +30,7 @@
             <p class="text-m-bold mb-0 mt-0">{{ $t("modals.walletActive") }}</p>
           </div>
           <div
-            class="
-              dropdown-wallet-connect-button
-              view-disconnect
-              text-btn
-              pointer
-            "
+            class="dropdown-wallet-connect-button view-disconnect text-btn pointer"
             @click="disconnectMetamask()"
           >
             {{ $t("modals.disconnect") }}

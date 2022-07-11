@@ -393,7 +393,9 @@ export default {
     },
     transactionsListLink() {
       const token = this.nft.nft_token;
-      return `${process.env.NETWORK_ETHERSCAN}token/${token.contract_address}?a=${token.token_id}`;
+      return token
+        ? `${process.env.NETWORK_ETHERSCAN}token/${token.contract_address}?a=${token.token_id}`
+        : null;
     },
     user() {
       return this.$auth.user;
