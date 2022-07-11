@@ -100,7 +100,6 @@
                   :background="!buttonsActive ? 'grey' : 'ghost'"
                   :color="!buttonsActive ? 'c-grey' : 'c-white'"
                   :size="'medium'"
-                  :tooltip="tooltipText"
                   :disabled="!buttonsActive"
                   @on-click="payCard"
                 >
@@ -314,8 +313,10 @@ export default {
       return { nft, ethPrice };
     } catch (e) {
       console.log(e);
-      console.log(e.response);
-      // error({ statusCode: 404, message: "Page not found" });
+      console.log(e.response.status);
+      if (e.response.status === 404) {
+        error({ statusCode: 404, message: "Page not found" });
+      }
     }
   },
   data() {
