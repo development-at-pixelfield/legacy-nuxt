@@ -1,6 +1,6 @@
 <template>
   <div class="how-it-works">
-    <div class="content full-container">
+    <div class="content tablet-container">
       <div class="title">How does it all work?</div>
       <div class="step-wrapper">
         <div v-for="(step, index) in steps" :key="`step_${index}`" class="step">

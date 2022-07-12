@@ -110,7 +110,7 @@ export default {
           world diamond exchanges.`,
     textSecDesc2: `Diamonds are long-standing security for many investors, now, you can
           be the first to experience this in the NFT world with us.`,
-    blogTitle: "Read our blog to stay up to date with latest news",
+    blogTitle: `Read interesting articles about the NFT technology and our project`,
     readArticle: "Read article",
     joinItem1: "Connect with the Legends",
     joinItemDesc1: `We offer a chance to meet your Legends and connect with other fans through exclusive virtual meet and greets and private chat rooms.`,

@@ -19,8 +19,6 @@
       font-weight: 700;
       font-size: 40px;
       margin-bottom: 24px;
-
-
     }
 
     .subtitle {
@@ -70,18 +68,19 @@
           font-size: 16px;
           font-weight: 400;
           margin-bottom: 0;
+          line-height: 150%;
         }
 
         &_red {
-          background-color: rgba($color: #E26, $alpha: 0.1);
+          background-color: rgba($color: #e26, $alpha: 0.1);
         }
 
         &_blue {
-          background-color: rgba($color: #3843FF, $alpha: 0.1);
+          background-color: rgba($color: #3843ff, $alpha: 0.1);
         }
 
         &_yellow {
-          background-color: rgba($color: #F3BA25, $alpha: 0.1);
+          background-color: rgba($color: #f3ba25, $alpha: 0.1);
         }
 
         &:not(:last-child) {

@@ -1,6 +1,6 @@
 <template>
   <div class="coming-soon">
-    <div class="content full-container">
+    <div class="content tablet-container">
       <h1 :class="{ show: show1 }">
         {{ $t("landing.mainTitle") }}
       </h1>
@@ -15,11 +15,13 @@
           @load="isLoaded = true"
         />
       </span>
-      <Button
-        :class="{ show: show2 }"
-        :label="$t('landing.moreInfo')"
-        :background="'dark'"
-      />
+      <a href="#more_info">
+        <Button
+          :class="{ show: show2 }"
+          :label="$t('landing.moreInfo')"
+          :background="'dark'"
+        />
+      </a>
     </div>
   </div>
 </template>

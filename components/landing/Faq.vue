@@ -1,6 +1,6 @@
 <template>
   <div class="faq-wrapper">
-    <div class="full-container">
+    <div class="tablet-container">
       <h2 class="mt-0 text-center header-h">{{ $t("faq.title") }}</h2>
       <div class="subtitle mb-78">{{ $t("faq.desc") }}</div>
 

@@ -1,15 +1,15 @@
 <template>
   <header id="header" :class="{ fixed: $route.name === 'marketplace' }">
-    <div class="content header-full-container">
+    <div class="content tablet-container">
       <div class="content-wrapper">
         <div class="header-menu">
           <div class="desktop-menu">
-            <nuxt-link to="/marketplace"
+            <!-- <nuxt-link to="/marketplace"
               ><span
                 class="text-m marketplace-link"
                 :class="{ current: active === 1 }"
                 >{{ $t("marketplace.marketplace") }}</span
-              ></nuxt-link
+              ></nuxt-link -->
             >
             <nuxt-link to="/help" class="ml-24"
               ><span

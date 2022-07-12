@@ -1,19 +1,19 @@
 <template>
   <footer>
-    <div class="full-container">
+    <div class="tablet-container">
       <div class="content">
         <div class="img-block display-f">
           <img src="~/assets/img/header-logo.svg" alt="footer-logo" />
         </div>
 
         <ul>
-          <li>
+          <!-- <li>
             <nuxt-link
               to="/marketplace"
               class="text-m-bold no-color-dec-link"
               >{{ $t("marketplace.marketplace") }}</nuxt-link
             >
-          </li>
+          </li> -->
           <li>
             <nuxt-link to="/help" class="text-m-bold no-color-dec-link">
               {{ $t("marketplace.help") }}

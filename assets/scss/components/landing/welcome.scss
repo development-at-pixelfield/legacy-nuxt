@@ -1,5 +1,4 @@
 .welcome-wrapper {
-
   @media (max-width: 1380px) {
     padding-left: 136px;
     padding-right: 136px;
@@ -21,7 +20,7 @@
   }
 
   .content {
-    background: #0D0F28;
+    background: #0d0f28;
     border-radius: 16px;
     display: flex;
     justify-content: space-between;
@@ -103,10 +102,15 @@
       }
 
       .flip-action {
-        margin-top: 16px;
+        margin-top: 25px;
 
-        .b-icon {
-          margin-right: 8px;
+        .icon_inner {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          .b-icon {
+            margin-right: 8px;
+          }
         }
       }
 
@@ -114,6 +118,7 @@
         width: 214.63px;
         height: 330.89px;
         display: flex;
+        filter: drop-shadow(0 20px 40px #310819);
 
         .card {
           position: relative;

@@ -1,6 +1,6 @@
 <template>
   <div class="purchase-benefits">
-    <div class="content full-container">
+    <div class="content tablet-container">
       <div class="title">
         Purchasing an NFT card gives you many great benefits
       </div>
@@ -34,10 +34,10 @@ export default {
     return {
       cards: [
         "On-line meet up with celebrities",
-        "Personal meeting",
-        "Dinner with a celebrity",
+        "Personal & group on-line meetings",
+        "Dinner with a celebrities",
         "Exclusive competitions for tickets and merch",
-        "Private group for communication with the celebrity",
+        "Private group for communication with the celebrities",
         "And much more!",
       ],
     };

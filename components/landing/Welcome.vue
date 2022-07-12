@@ -1,6 +1,6 @@
 <template>
   <div class="welcome-wrapper">
-    <div class="content full-container">
+    <div class="content tablet-container">
       <div class="left-side">
         <h2 class="header-h no-color-link">
           {{ $t("landing.welcomeTitle") }}
@@ -31,7 +31,7 @@
           :label="$t('landing.flip')"
           :background="'dark'"
           @on-click="flipped = !flipped"
-          ><span slot="left-icon"
+          ><span slot="left-icon" class="icon_inner"
             ><img class="b-icon" src="~/assets/img/icons/flip.svg" /></span
         ></Button>
       </div>

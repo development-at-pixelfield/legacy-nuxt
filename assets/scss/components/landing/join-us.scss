@@ -1,9 +1,5 @@
-.welcome-wrapper{
-  padding: 126px 0;
-
-  @media (max-width: 550px) {
-    padding: 60px 0;
-  }
+.welcome-wrapper {
+  padding: 40px 0;
 
   @media (max-width: 1380px) {
     padding-left: 136px;
@@ -25,8 +21,8 @@
     padding-right: 16px;
   }
 
-  .content{
-    background: #0D0F28;
+  .content {
+    background: #0d0f28;
     border-radius: 16px;
     display: flex;
     justify-content: space-between;
@@ -37,7 +33,7 @@
     .icon {
       height: 40px;
       width: 40px;
-      
+
       &:not(:last-child) {
         margin-right: 16px;
       }
@@ -47,12 +43,11 @@
       flex-direction: column;
     }
 
-
     @media (max-width: $break-sms) {
       padding: 55px 16px;
     }
 
-    &::before{
+    &::before {
       content: "";
       background: url("~assets/img/landing/ellipse1.png") no-repeat;
       width: 100%;
@@ -72,11 +67,10 @@
       @media (max-width: $break-sms) {
         top: 51%;
         left: -58%;
-
       }
     }
 
-    .left-side{
+    .left-side {
       padding-top: 60px;
       width: 460px;
       position: relative;
@@ -88,7 +82,7 @@
         padding-top: 16px;
       }
 
-      h2{
+      h2 {
         text-align: left;
         margin-bottom: 16px;
 
@@ -97,7 +91,7 @@
         }
       }
 
-      .sub-title{
+      .sub-title {
         font-weight: 800;
         font-size: 20px;
         line-height: 29px;
@@ -105,28 +99,28 @@
         margin-bottom: 16px;
       }
 
-      .action{
+      .action {
         @media (max-width: $break-sm) {
           justify-content: center;
         }
       }
 
-      .discord-btn{
+      .discord-btn {
         padding: 12px 20px;
-        background: #0D0F28;
+        background: #0d0f28;
         border-radius: 12px;
         letter-spacing: 0.05em;
       }
     }
 
-    .right-side{
+    .right-side {
       position: relative;
 
       @media (max-width: $break-sm) {
         order: 1;
       }
 
-      .img-block{
+      .img-block {
         //width: 214.63px;
         //height: 330.89px;
         display: flex;
@@ -140,7 +134,7 @@
           width: auto;
         }
 
-        img{
+        img {
           width: 288px;
           height: 288px;
           object-fit: cover;
