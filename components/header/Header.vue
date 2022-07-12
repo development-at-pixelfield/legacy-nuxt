@@ -4,13 +4,6 @@
       <div class="content-wrapper">
         <div class="header-menu">
           <div class="desktop-menu">
-            <nuxt-link to="/marketplace"
-              ><span
-                class="text-m marketplace-link"
-                :class="{ current: active === 1 }"
-                >{{ $t("marketplace.marketplace") }}</span
-              ></nuxt-link
-            >
             <nuxt-link to="/help" class="ml-24"
               ><span
                 class="text-m marketplace-link"

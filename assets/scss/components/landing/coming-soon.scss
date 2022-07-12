@@ -8,10 +8,8 @@
     background-size: cover;
     background-position: center;
   }
-  
+
   .content {
-    padding-left: 168px;
-    padding-right: 168px;
     text-align: center;
     height: 100%;
     align-items: center;
@@ -122,4 +120,9 @@
 
 .all-show{
   height: 608px;
+}
+
+.not-underline {
+  border: none;
+  text-decoration: none;
 }

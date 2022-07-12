@@ -2,13 +2,13 @@
   <div class="footer-links">
     <a
       target="_blank"
-      href="https://storage.googleapis.com/pfld-outdoor-production-documents-bucket/ISIAjobs_Terms_and_Conditions_2021_10_05_revMP_fin%20(1).pdf"
+      href="https://storage.googleapis.com/galaxy-nft/VOP_LEGACY.pdf"
       class="no-color-dec-link text-btn"
       >{{ $t("auth.termCond") }}</a
     >
     <a
       target="_blank"
-      href="https://storage.googleapis.com/pfld-outdoor-production-documents-bucket/ISIAjobs_Privacy_Policy_2021_10_05_v1_revMP_fin.pdf"
+      href="https://storage.googleapis.com/galaxy-nft/Legacy%20Privacy%20Notice.pdf"
       class="no-color-dec-link text-btn"
       >{{ $t("auth.policy") }}</a
     >

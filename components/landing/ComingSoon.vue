@@ -15,7 +15,7 @@
           @load="isLoaded = true"
         />
       </span>
-      <a href="#more_info">
+      <a class="not-underline" href="#more_info">
         <Button
           :class="{ show: show2 }"
           :label="$t('landing.moreInfo')"

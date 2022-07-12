@@ -67,7 +67,6 @@ export default {
     LandingHeader,
   },
   layout: "landing",
-  middleware: ["isLoggedIn"],
   async asyncData({ store }) {
     const feed = await store.dispatch("landing/feed");
     return { feed };

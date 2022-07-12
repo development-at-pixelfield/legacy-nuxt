@@ -10,37 +10,37 @@ export default {
         content:
           "width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1",
       },
-    //   {name: "msapplication-TileColor", content: "#da532c"},
-    //   {name: "theme-color", content: "#ffffff"},
-    //   {hid: "description", name: "description", content: "NFT floating through galaxy. Own a piece of the universe."},
-    //   {hid: "author", name: "author", content: "Galaxy.diamonds"},
-    //   {hid: "DC.title", name: "DC.title", content: "Galaxy.diamonds"},
-    //   {hid: "DC.creator", name: "DC.creator", content: "Galaxy.diamonds"},
-    //   {hid: "og:type", name: "og:type", content: "website"},
-    //   {hid: "og:url", name: "og:url", content: "https://galaxy.diamonds/"},
-    //   {
-    //     hid: "og:title",
-    //     name: "og:title",
-    //     content: "Galaxy.diamonds | Own the universe",
-    //   },
-    //   {
-    //     hid: "og:description",
-    //     name: "og:description",
-    //     content:
-    //       "🚀 NFT floating through galaxy. Own a piece of the universe.",
-    //   },
-    //   {
-    //     hid: "og:image",
-    //     name: "og:image",
-    //     content:
-    //       "https://galaxy.diamonds/galaxy-opengraph.jpg",
-    //   },
-    //   {
-    //     hid: "twitter:image",
-    //     name: "twitter:image",
-    //     content:
-    //       "https://galaxy.diamonds/galaxy-opengraph.jpg",
-    //   },
+      {name: "msapplication-TileColor", content: "#da532c"},
+      {name: "theme-color", content: "#ffffff"},
+      {hid: "description", name: "description", content: "We build emotions between you and celebrities across the world."},
+      {hid: "author", name: "author", content: "Legacy NFT"},
+      {hid: "DC.title", name: "DC.title", content: "Legacy NFT"},
+      {hid: "DC.creator", name: "DC.creator", content: "Legacy NFT"},
+      {hid: "og:type", name: "og:type", content: "website"},
+      {hid: "og:url", name: "og:url", content: "https://www.legacy-nft.com/"},
+      {
+        hid: "og:title",
+        name: "og:title",
+        content: "Legacy NFT | The ultimate fan experience",
+      },
+      {
+        hid: "og:description",
+        name: "og:description",
+        content:
+          "We build emotions between you and celebrities across the world.",
+      },
+      {
+        hid: "og:image",
+        name: "og:image",
+        content:
+          "https://galaxy.diamonds/galaxy-opengraph.jpg",
+      },
+      {
+        hid: "twitter:image",
+        name: "twitter:image",
+        content:
+          "https://galaxy.diamonds/galaxy-opengraph.jpg",
+      },
     ],
     link: [
       {rel: "icon", type: "image/x-icon", href: "/favicon.ico"},
@@ -83,17 +83,34 @@ export default {
     ],
     script: [
       {
-        hid: "lead-hub",
+        hid: "facebook-pixel",
         innerHTML: `
-         (function(w,d,x,n,u,t,f,s,o){f='LHInsights';w[n]=w[f]=w[f]||function(n,d){
-        (w[f].q=w[f].q||[]).push([n,d])};w[f].l=1*new Date();s=d.createElement(x);
-        s.async=1;s.src=u+'?t='+t;o=d.getElementsByTagName(x)[0];o.parentNode.insertBefore(s,o)
-        })(window,document,'script','lhi','//www.lhinsights.com/agent.js','SgpQueeBRUaTeFm');
-        lhi('pageview');
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '369489891964660');
+        fbq('track', 'PageView');
         `,
         type: "text/javascript",
         charset: "utf-8",
       },
+      {
+        src: "https://www.googletagmanager.com/gtag/js?id=G-F6ZW3CDN76",
+      },
+      {
+        hid: "googletag",
+        innerHTML: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-F6ZW3CDN76');
+        `
+      }
     ],
     __dangerouslyDisableSanitizers: ['script'],
   },

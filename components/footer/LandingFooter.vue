@@ -22,7 +22,7 @@
           <li>
             <a
               target="_blank"
-              href="https://storage.googleapis.com/pfld-outdoor-production-documents-bucket/ISIAjobs_Terms_and_Conditions_2021_10_05_revMP_fin%20(1).pdf"
+              href="https://storage.googleapis.com/galaxy-nft/VOP_LEGACY.pdf"
               class="text-m-bold no-color-dec-link"
               >T&C</a
             >
