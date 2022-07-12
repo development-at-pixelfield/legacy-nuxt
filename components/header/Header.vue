@@ -61,21 +61,6 @@
             <img src="~/assets/img/icons/close-modal.svg" alt="close-icon"
           /></span>
         </div>
-
-        <p
-          class="mt-0 mb-40 pointer"
-          :class="{ 'active-link': $route.path === '/marketplace' }"
-          @click="toLink('/marketplace')"
-        >
-          <nuxt-link
-            to="/marketplace"
-            class="ml-16"
-            @click.native="mobileMenu = false"
-            ><span class="header-title1 marketplace-link">{{
-              $t("marketplace.marketplace")
-            }}</span></nuxt-link
-          >
-        </p>
         <p
           class="mt-0 mb-40 pointer"
           :class="{ 'active-link': $route.path === '/help' }"

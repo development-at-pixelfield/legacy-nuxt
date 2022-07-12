@@ -33,13 +33,13 @@ export default {
         hid: "og:image",
         name: "og:image",
         content:
-          "https://galaxy.diamonds/galaxy-opengraph.jpg",
+          "https://www.legacy-nft.com/legacy-opengraph.jpg",
       },
       {
         hid: "twitter:image",
         name: "twitter:image",
         content:
-          "https://galaxy.diamonds/galaxy-opengraph.jpg",
+          "https://www.legacy-nft.com/legacy-opengraph.jpg",
       },
     ],
     link: [
@@ -78,7 +78,7 @@ export default {
       },
       {
         rel: "image_src",
-        href: "https://galaxy.diamonds/galaxy-opengraph.jpg",
+        href: "https://www.legacy-nft.com/legacy-opengraph.jpg",
       },
     ],
     script: [
