@@ -1,6 +1,6 @@
 <template>
   <div class="welcome-wrapper">
-    <div class="content full-container">
+    <div class="content tablet-container">
       <div class="left-side">
         <h2 class="header-h no-color-link">
           {{ $t("landing.joinTitle1") }}

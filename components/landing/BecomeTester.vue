@@ -1,6 +1,6 @@
 <template>
   <div id="become-tester" class="become-tester">
-    <div class="content full-container">
+    <div class="content tablet-container">
       <div class="mt-0 header-block">
         <span class="header-h">{{ $t("landing.becomeTesterTitle") }}</span>
         <p class="header-desc no-color-link">
@@ -29,7 +29,7 @@
               {{ collection.name }}
             </p>
 
-            <div class="action center-block">
+            <!-- <div class="action center-block">
               <Button
                 :label="$t('landing.availableNow')"
                 :background="'primary'"
@@ -37,7 +37,7 @@
                 :color="'c-white'"
                 @on-click="toMarketplaceCollection(collection)"
               />
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="who-find">
-    <div class="content full-container">
+    <div class="content tablet-container">
       <div class="title">Who can you find on our platform?</div>
       <div class="subtitle">
         With the help of sports agents and artistic managers, we establish
@@ -40,7 +40,7 @@ export default {
           background: "blue",
           title: "Elite",
           subtitle:
-            "A well-known personality who has retired from his/her career, but still wants to be as close to his/her loyal fans as possible.",
+            "A personality with an active career, he/she has had various successes and is actively working on his/her career.",
         },
         {
           icon: require("~/assets/img/icons/who-find/yellow.png"),

@@ -1,6 +1,6 @@
 <template>
   <div class="blog-wrapper">
-    <div class="full-container">
+    <div class="tablet-container">
       <h2 class="header-h">{{ $t("landing.blogTitle") }}</h2>
 
       <div class="content">

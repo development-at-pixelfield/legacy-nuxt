@@ -1,6 +1,6 @@
 <template>
   <div class="coming-soon">
-    <div class="content full-container">
+    <div class="content tablet-container">
       <h1 :class="{ show: show1 }">
         {{ $t("landing.mainTitle") }}
       </h1>

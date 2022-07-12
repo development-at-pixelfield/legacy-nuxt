@@ -8,12 +8,12 @@
   justify-content: center;
   //overflow: hidden;
 
-  .tooltip{
+  .tooltip {
     display: none;
   }
 
-  &:hover{
-    .tooltip{
+  &:hover {
+    .tooltip {
       display: block;
       position: absolute;
       top: -55px;
@@ -34,7 +34,7 @@
         top: -75px;
       }
 
-      &::after{
+      &::after {
         content: "";
         position: absolute;
         width: 0;
@@ -52,21 +52,20 @@
     }
   }
 
-
-  .has-icon{
+  .has-icon {
     @media (max-width: $break-sms) {
       margin-right: 5px;
     }
   }
 
-  .svg{
+  .svg {
     display: inline-block;
     vertical-align: middle;
     margin-right: 8px;
     cursor: pointer;
   }
 
-  .input-upload{
+  .input-upload {
     opacity: 0;
     width: 100%;
     position: absolute;
@@ -76,31 +75,31 @@
     cursor: pointer;
   }
 
-  .text{
+  .text {
     cursor: pointer;
   }
 
-  .no-label{
+  .no-label {
     margin-right: 0 !important;
   }
 
-  .no-label-mobile{
+  .no-label-mobile {
     @media (max-width: $break-sms) {
       margin-right: 0 !important;
     }
   }
 
-  .custom-size{
+  .custom-size {
     width: 18px;
     height: 18px;
   }
 
-  &:focus{
+  &:focus {
     outline: none;
   }
 
   &__dark {
-    background: #0D0F28;
+    background: #0d0f28;
     color: white;
 
     &:hover {
@@ -112,7 +111,7 @@
   }
 
   &__available {
-    background: #FFBC0F;
+    background: #ffbc0f;
     color: black;
     font-size: 16px;
     font-weight: bold;
@@ -128,7 +127,7 @@
     }
   }
 
-  &__white-outline{
+  &__white-outline {
     background: transparent;
     border: 1px solid white;
     color: white;
@@ -146,33 +145,33 @@
     }
   }
 
-  &__primary{
+  &__primary {
     background: $c-primary;
     position: relative;
     border: 1px solid $c-primary;
     //overflow: hidden;
 
-    &:hover{
-      background: $c-prim-lighter-10
+    &:hover {
+      background: $c-prim-lighter-10;
     }
 
-    &:active{
-      background: $c-prim-darker-10
+    &:active {
+      background: $c-prim-darker-10;
     }
   }
 
-  &__ghost{
+  &__ghost {
     background: transparent;
     position: relative;
     border: 1px solid rgba(214, 210, 217, 1);
   }
 
-  &__grey{
+  &__grey {
     background: $c-greyscale-80;
     position: relative;
   }
 
-  &__grey-m{
+  &__grey-m {
     background: $c-greyscale-60;
     position: relative;
   }
@@ -181,28 +180,26 @@
     color: white;
   }
 
-
-
-  &__warning{
+  &__warning {
     background: transparent;
     position: relative;
     border: 1px solid $c-error;
   }
 
-  &__full-warning{
+  &__full-warning {
     background: $c-error;
     position: relative;
-    border: 1px solid $c-error
+    border: 1px solid $c-error;
   }
 
-  &__circle{
+  &__circle {
     border-radius: 50% !important;
     width: 48px;
     height: 48px;
   }
 
-  &__medium{
-    padding: 11px 17px;
+  &__medium {
+    padding: 12px 20px;
     font-style: normal;
     font-weight: bold;
     font-size: 16px;
@@ -211,7 +208,7 @@
     border-radius: 12px;
     font-family: $font-primary;
   }
-  &__custom-medium{
+  &__custom-medium {
     padding: 3px 43px;
     font-style: normal;
     font-weight: bold;
@@ -221,7 +218,7 @@
     border-radius: 12px;
     font-family: $font-primary;
   }
-  &__large{
+  &__large {
     padding: 15px 56px;
     font-weight: 700;
     font-size: 16px;
@@ -230,7 +227,7 @@
     font-family: $font-primary;
     border-radius: 12px;
   }
-  &__small{
+  &__small {
     padding: 3px 15px;
     font-weight: 700;
     font-size: 16px;
@@ -239,7 +236,7 @@
     font-family: $font-primary;
     border-radius: 12px;
   }
-  &__full{
+  &__full {
     width: 100%;
     padding: 11px 17px;
     font-style: normal;
@@ -251,55 +248,49 @@
     font-family: $font-primary;
   }
 
-  .emoji{
+  .emoji {
     font-weight: 100;
   }
 
-  &__c-white{
+  &__c-white {
     color: $c-white;
   }
-  &__c-black{
-    color: $c-black
+  &__c-black {
+    color: $c-black;
   }
-  &__c-warning{
-    color: $c-error
+  &__c-warning {
+    color: $c-error;
   }
-  &__c-grey{
-    color: $c-greyscale-20
+  &__c-grey {
+    color: $c-greyscale-20;
   }
 
-
-  .btn-label{
+  .btn-label {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  &__disabled-primary{
+  &__disabled-primary {
     cursor: not-allowed;
     background: $c-greyscale-20;
     color: $c-greyscale-120;
 
-    &:hover{
-      background: $c-greyscale-20
+    &:hover {
+      background: $c-greyscale-20;
     }
-    &:active{
-      background: $c-greyscale-20
+    &:active {
+      background: $c-greyscale-20;
     }
   }
 
-  &__disabled-grey{
+  &__disabled-grey {
     cursor: not-allowed;
   }
 
-  &__disabled-new{
+  &__disabled-new {
     cursor: not-allowed;
     background: $c-greyscale-60;
     color: $c-greyscale-20;
   }
-
 }
-
-
-
-

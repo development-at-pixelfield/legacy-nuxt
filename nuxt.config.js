@@ -3,13 +3,13 @@ export default {
   head: {
     titleTemplate: "Legacy | Own the universe",
     title: "Legacy | Own the universe",
-    // meta: [
-    //   {charset: "utf-8"},
-    //   {
-    //     name: "viewport",
-    //     content:
-    //       "width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1",
-    //   },
+    meta: [
+      {charset: "utf-8"},
+      {
+        name: "viewport",
+        content:
+          "width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1",
+      },
     //   {name: "msapplication-TileColor", content: "#da532c"},
     //   {name: "theme-color", content: "#ffffff"},
     //   {hid: "description", name: "description", content: "NFT floating through galaxy. Own a piece of the universe."},
@@ -41,7 +41,7 @@ export default {
     //     content:
     //       "https://galaxy.diamonds/galaxy-opengraph.jpg",
     //   },
-    // ],
+    ],
     link: [
       {rel: "icon", type: "image/x-icon", href: "/favicon.ico"},
       {rel: "manifest", href: "/site.webmanifest"},

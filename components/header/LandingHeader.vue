@@ -1,6 +1,6 @@
 <template>
   <header id="header" :class="{ fixed: $route.name === 'marketplace' }">
-    <div class="content header-full-container">
+    <div class="content tablet-container">
       <div class="content-wrapper">
         <div class="header-menu">
           <div class="desktop-menu">
