@@ -7,7 +7,7 @@
 
       <ComingSoon />
 
-      <Welcome />
+      <Welcome id="more_info" />
 
       <WhoFind />
 

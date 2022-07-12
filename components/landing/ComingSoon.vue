@@ -15,11 +15,13 @@
           @load="isLoaded = true"
         />
       </span>
-      <Button
-        :class="{ show: show2 }"
-        :label="$t('landing.moreInfo')"
-        :background="'dark'"
-      />
+      <a href="#more_info">
+        <Button
+          :class="{ show: show2 }"
+          :label="$t('landing.moreInfo')"
+          :background="'dark'"
+        />
+      </a>
     </div>
   </div>
 </template>

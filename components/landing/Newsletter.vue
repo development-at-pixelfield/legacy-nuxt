@@ -2,7 +2,7 @@
   <div class="newsletter">
     <div class="content tablet-container">
       <div class="title">
-        Subscribe to our newsletter so you don't miss any more news.
+        Subscribe to our newsletter <br />so you don't miss any more news.
       </div>
       <div class="fields">
         <Input

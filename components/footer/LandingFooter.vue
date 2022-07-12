@@ -7,13 +7,13 @@
         </div>
 
         <ul>
-          <li>
+          <!-- <li>
             <nuxt-link
               to="/marketplace"
               class="text-m-bold no-color-dec-link"
               >{{ $t("marketplace.marketplace") }}</nuxt-link
             >
-          </li>
+          </li> -->
           <li>
             <nuxt-link to="/help" class="text-m-bold no-color-dec-link">
               {{ $t("marketplace.help") }}

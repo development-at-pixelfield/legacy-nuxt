@@ -12,7 +12,7 @@
         <Button :label="'AVAILABLE NOW'" :background="'available'"
       /></span>
       <div class="form-group">
-        <div
+        <!-- <div
           v-for="(collection, index) in collections"
           :key="`collection_${index}`"
           class="item"
@@ -29,7 +29,7 @@
               {{ collection.name }}
             </p>
 
-            <!-- <div class="action center-block">
+            <div class="action center-block">
               <Button
                 :label="$t('landing.availableNow')"
                 :background="'primary'"
@@ -37,7 +37,37 @@
                 :color="'c-white'"
                 @on-click="toMarketplaceCollection(collection)"
               />
-            </div> -->
+            </div>
+          </div>
+        </div> -->
+        <div class="item">
+          <span class="item-img">
+            <img src="@/assets/img/landing/Malikova-min.png" alt="bear-image" />
+          </span>
+          <div class="info">
+            <p class="no-color-link header-title1 mb-16 mt-24 text-center">
+              Rising Stars
+            </p>
+          </div>
+        </div>
+        <div class="item">
+          <span class="item-img">
+            <img src="@/assets/img/landing/Dano-min.png" alt="bear-image" />
+          </span>
+          <div class="info">
+            <p class="no-color-link header-title1 mb-16 mt-24 text-center">
+              Elite
+            </p>
+          </div>
+        </div>
+        <div class="item">
+          <span class="item-img">
+            <img src="@/assets/img/landing/Kuzmina-min.png" alt="bear-image" />
+          </span>
+          <div class="info">
+            <p class="no-color-link header-title1 mb-16 mt-24 text-center">
+              Legend
+            </p>
           </div>
         </div>
       </div>
@@ -45,11 +75,23 @@
         <div class="category">Great Actors & Singers</div>
         <Button :label="'COMING SOON'" :background="'white-outline'" />
       </div>
-      <img
-        class="blurred-image"
-        src="~/assets/img/landing/actors-blurred.png"
-        alt=""
-      />
+      <div class="blur_images">
+        <img
+          class="blurred-image"
+          src="~/assets/img/landing/blur_one.png"
+          alt=""
+        />
+        <img
+          class="blurred-image"
+          src="~/assets/img/landing/blur_two.png"
+          alt=""
+        />
+        <img
+          class="blurred-image"
+          src="~/assets/img/landing/blur_three.png"
+          alt=""
+        />
+      </div>
     </div>
   </div>
 </template>
