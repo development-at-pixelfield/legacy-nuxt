@@ -1,7 +1,7 @@
 <template>
   <div id="learn-more" class="discover-wrapper">
     <div class="discover">
-      <div class="tablet-container">
+      <div class="full-container">
         <div class="left-side">
           <h2 class="mt-0 no-color-link">
             {{ $t("landing.discoverTitle") }}

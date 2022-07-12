@@ -23,7 +23,11 @@
       // max-width: 565px;
 
       @media (max-width: 440px) {
-        width: 10%;
+        width: 100%;
+        font-size: 37px;
+        br {
+          display: none;
+        }
       }
     }
 
