@@ -1,9 +1,9 @@
 .purchase-benefits {
   color: white;
-  padding: 126px 0;
+  padding: 8px 0;
 
   @media (max-width: 550px) {
-    padding: 60px 0;
+    padding: 40px 0;
   }
 
   .content {
@@ -36,7 +36,7 @@
         text-align: center;
         padding: 20px;
         border-radius: 16px;
-        background-color: rgba($color: #3843FF, $alpha: 0.1);
+        background-color: rgba($color: #3843ff, $alpha: 0.1);
 
         @media (max-width: 750px) {
           margin-bottom: 16px;
@@ -60,6 +60,5 @@
       text-align: center;
       margin-top: 64px;
     }
-
   }
 }
