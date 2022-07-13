@@ -1,8 +1,8 @@
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    titleTemplate: "Legacy | Own the universe",
-    title: "Legacy | Own the universe",
+    titleTemplate: "Legacy | The ultimate fandom experience",
+    title: "Legacy | The ultimate fandom experience",
     meta: [
       { charset: "utf-8" },
       {
