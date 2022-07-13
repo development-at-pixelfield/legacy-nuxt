@@ -19,16 +19,16 @@ $number-size: 24px;
       padding: 0;
       width: $number-size;
       height: $number-size;
-      border-radius: $number-size / 2;
+      border-radius: $number-size * 0.5;
       background-color: $c-prim-lighter-20;
       line-height: $number-size;
       text-align: center;
-      font-size: $number-size / 2;
+      font-size: $number-size * 0.5;
       min-width: $number-size;
       position: relative;
       z-index: 1;
 
-      &::before{
+      &::before {
         @media (max-width: $break-sms) {
           content: "";
           position: absolute;
@@ -47,13 +47,13 @@ $number-size: 24px;
     }
   }
   .content {
-    margin-left: $number-size / 2;
+    margin-left: $number-size * 0.5;
     border-left: 1px solid $c-prim-lighter-20;
-    padding-left: $number-size / 2 + $paddings;
-    margin-top: $paddings / 2;
-    margin-bottom: $paddings / 2;
-    padding-top: $paddings / 2;
-    padding-bottom: $paddings / 2;
+    padding-left: $number-size * 0.5 + $paddings;
+    margin-top: $paddings * 0.5;
+    margin-bottom: $paddings * 0.5;
+    padding-top: $paddings * 0.5;
+    padding-bottom: $paddings * 0.5;
   }
 
   .link-c {

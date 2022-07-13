@@ -39,7 +39,7 @@
         <div class="item">
           <p class="mt-0 mb-16 text-m-bold">{{ $t("exchange.itemTitle1") }}</p>
 
-          <p class="mtb text-m" v-html="$t('exchange.itemDesc1')"></p>
+          <p class="mtb text-m" :inner-html.prop="$t('exchange.itemDesc1')"></p>
         </div>
 
         <div class="item">

@@ -6,7 +6,10 @@
           <h2 class="mt-0 no-color-link">
             {{ $t("landing.joinTitle") }}
           </h2>
-          <p class="mb-0 text-m desc" v-html="$t('landing.joinDesc')"></p>
+          <p
+            class="mb-0 text-m desc"
+            :inner-html.prop="$t('landing.joinDesc')"
+          ></p>
         </div>
         <div class="right-side">
           <div class="info-item purple">

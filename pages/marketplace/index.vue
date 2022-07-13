@@ -85,7 +85,7 @@
         /></span>
         <p
           class="description mt-0 mb-16 text-center"
-          v-html="$t('marketplace.emptyDesc')"
+          :inner-html.prop="$t('marketplace.emptyDesc')"
         ></p>
         <Button
           :label="$t('marketplace.applyFilters')"

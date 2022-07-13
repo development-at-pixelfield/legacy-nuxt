@@ -15,10 +15,8 @@
     "deploy-cloud-test": "gcloud run deploy pfld-legacy-nuxt --project pfld-galaxy --update-env-vars API_URL=https://api-legacy.bypixelfield.com/api/ --image=gcr.io/pfld-galaxy/pfld-legacy-nuxt --region europe-west3 --platform managed --port 3000",
     "build-cloud-stage": "gcloud builds submit --timeout=12000 --tag gcr.io/pfld-galaxy/pfld-legacy-nuxt-stage . --project pfld-galaxy",
     "deploy-cloud-stage": "gcloud run deploy pfld-legacy-nuxt-stage --project pfld-galaxy --update-env-vars API_URL=https://api-stage-legacy.bypixelfield.com/api/ --image=gcr.io/pfld-galaxy/pfld-legacy-nuxt-stage --region europe-west3 --platform managed --port 3000",
-
     "build-cloud-production": "gcloud builds submit --timeout=12000 --tag gcr.io/pfld-galaxy/pfld-legacy-nuxt-production . --project pfld-galaxy",
     "deploy-cloud-production": "gcloud run deploy pfld-legacy-nuxt-production --project pfld-galaxy --update-env-vars API_URL=https://api.legacy-nft.com/api/ --image=gcr.io/pfld-galaxy/pfld-legacy-nuxt-production --region europe-west1 --platform managed --port 3000"
-
   },
   "lint-staged": {
     "*.{js,vue}": "eslint",

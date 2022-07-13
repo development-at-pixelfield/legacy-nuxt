@@ -1,6 +1,6 @@
 <template>
   <div class="welcome-wrapper">
-    <div class="content tablet-container">
+    <div v-if="showContent" class="content tablet-container">
       <div class="left-side">
         <h2 class="header-h no-color-link">
           {{ $t("landing.joinTitle1") }}
@@ -38,9 +38,21 @@ export default {
         { img: "facebook", link: "https://www.facebook.com/legacynftcom" },
         { img: "instagram", link: "https://www.instagram.com/legacynftcom/" },
       ],
+      showContent: false,
     };
   },
+  mounted() {
+    this.handleContent();
+  },
   methods: {
+    handleContent() {
+      // This fixes a rendering issue on IOS Safari (iPhone 12 Pro)
+      this.$nextTick(() => {
+        setTimeout(() => {
+          this.showContent = true;
+        }, 1000);
+      });
+    },
     handle(link) {
       window.open(link, "_blank");
     },

@@ -22,7 +22,9 @@
         <div>
           <GuideLineElement number="1">
             <template slot="title">
-              <div v-html="$t('helpPage.install.dropdown1.step1.title')"></div>
+              <div
+                :inner-html.prop="$t('helpPage.install.dropdown1.step1.title')"
+              ></div>
             </template>
             <div>
               <ImageWithTitle
@@ -81,7 +83,9 @@
         <div>
           <GuideLineElement number="1">
             <template slot="title">
-              <div v-html="$t('helpPage.install.dropdown2.step1.title')"></div>
+              <div
+                :inner-html.prop="$t('helpPage.install.dropdown2.step1.title')"
+              ></div>
             </template>
             <div>
               <ImageWithTitle
@@ -102,7 +106,9 @@
           </GuideLineElement>
           <GuideLineElement number="2">
             <template slot="title">
-              <div v-html="$t('helpPage.install.dropdown2.step2.title')"></div>
+              <div
+                :inner-html.prop="$t('helpPage.install.dropdown2.step2.title')"
+              ></div>
             </template>
             <div>
               <ImageWithTitle
@@ -123,7 +129,9 @@
           </GuideLineElement>
           <GuideLineElement number="3">
             <template slot="title">
-              <div v-html="$t('helpPage.install.dropdown2.step3.title')"></div>
+              <div
+                :inner-html.prop="$t('helpPage.install.dropdown2.step3.title')"
+              ></div>
             </template>
             <div>
               <ImageWithTitle
@@ -137,7 +145,9 @@
           </GuideLineElement>
           <GuideLineElement number="4">
             <template slot="title">
-              <div v-html="$t('helpPage.install.dropdown2.step4.title')"></div>
+              <div
+                :inner-html.prop="$t('helpPage.install.dropdown2.step4.title')"
+              ></div>
             </template>
             <div>
               <ImageWithTitle
@@ -161,7 +171,9 @@
           </GuideLineElement>
           <GuideLineElement number="5">
             <template slot="title">
-              <div v-html="$t('helpPage.install.dropdown2.step5.title')"></div>
+              <div
+                :inner-html.prop="$t('helpPage.install.dropdown2.step5.title')"
+              ></div>
             </template>
             <div>
               <p>{{ $t("helpPage.install.dropdown2.step5.p1") }}</p>
@@ -184,7 +196,9 @@
           </GuideLineElement>
           <GuideLineElement number="6">
             <template slot="title">
-              <div v-html="$t('helpPage.install.dropdown2.step6.title')"></div>
+              <div
+                :inner-html.prop="$t('helpPage.install.dropdown2.step6.title')"
+              ></div>
             </template>
             <div>
               <p>{{ $t("helpPage.install.dropdown2.step6.p1") }}</p>
@@ -220,7 +234,9 @@
         <div>
           <GuideLineElement number="1">
             <template slot="title">
-              <div v-html="$t('helpPage.install.dropdown3.step1.title')"></div>
+              <div
+                :inner-html.prop="$t('helpPage.install.dropdown3.step1.title')"
+              ></div>
             </template>
             <div>
               <ImageWithTitle
@@ -234,7 +250,9 @@
           </GuideLineElement>
           <GuideLineElement number="2">
             <template slot="title">
-              <div v-html="$t('helpPage.install.dropdown3.step2.title')"></div>
+              <div
+                :inner-html.prop="$t('helpPage.install.dropdown3.step2.title')"
+              ></div>
             </template>
             <div>
               <ImageWithTitle
@@ -248,7 +266,9 @@
           </GuideLineElement>
           <GuideLineElement number="3">
             <template slot="title">
-              <div v-html="$t('helpPage.install.dropdown3.step3.title')"></div>
+              <div
+                :inner-html.prop="$t('helpPage.install.dropdown3.step3.title')"
+              ></div>
             </template>
             <div>
               <ImageWithTitle
@@ -262,7 +282,9 @@
           </GuideLineElement>
           <GuideLineElement number="4">
             <template slot="title">
-              <div v-html="$t('helpPage.install.dropdown3.step4.title')"></div>
+              <div
+                :inner-html.prop="$t('helpPage.install.dropdown3.step4.title')"
+              ></div>
             </template>
             <div>
               <ImageWithTitle
@@ -276,7 +298,9 @@
           </GuideLineElement>
           <GuideLineElement number="5">
             <template slot="title">
-              <div v-html="$t('helpPage.install.dropdown3.step5.title')"></div>
+              <div
+                :inner-html.prop="$t('helpPage.install.dropdown3.step5.title')"
+              ></div>
             </template>
             <div>
               <ImageWithTitle
@@ -300,7 +324,9 @@
         <div>
           <GuideLineElement number="1">
             <template slot="title">
-              <div v-html="$t('helpPage.install.dropdown4.step1.title')"></div>
+              <div
+                :inner-html.prop="$t('helpPage.install.dropdown4.step1.title')"
+              ></div>
             </template>
             <div>
               <p>{{ $t("helpPage.install.dropdown4.step1.p1") }}</p>
@@ -316,7 +342,9 @@
           </GuideLineElement>
           <GuideLineElement number="2">
             <template slot="title">
-              <div v-html="$t('helpPage.install.dropdown4.step2.title')"></div>
+              <div
+                :inner-html.prop="$t('helpPage.install.dropdown4.step2.title')"
+              ></div>
             </template>
             <div>
               <ImageWithTitle
@@ -330,7 +358,9 @@
           </GuideLineElement>
           <GuideLineElement number="3">
             <template slot="title">
-              <div v-html="$t('helpPage.install.dropdown4.step3.title')"></div>
+              <div
+                :inner-html.prop="$t('helpPage.install.dropdown4.step3.title')"
+              ></div>
             </template>
             <div>
               <ImageWithTitle
@@ -344,7 +374,9 @@
           </GuideLineElement>
           <GuideLineElement number="4">
             <template slot="title">
-              <div v-html="$t('helpPage.install.dropdown4.step4.title')"></div>
+              <div
+                :inner-html.prop="$t('helpPage.install.dropdown4.step4.title')"
+              ></div>
             </template>
             <div>
               <ImageWithTitle
@@ -358,7 +390,9 @@
           </GuideLineElement>
           <GuideLineElement number="5">
             <template slot="title">
-              <div v-html="$t('helpPage.install.dropdown4.step5.title')"></div>
+              <div
+                :inner-html.prop="$t('helpPage.install.dropdown4.step5.title')"
+              ></div>
             </template>
             <div>
               <ImageWithTitle
@@ -372,7 +406,9 @@
           </GuideLineElement>
           <GuideLineElement number="6">
             <template slot="title">
-              <div v-html="$t('helpPage.install.dropdown4.step6.title')"></div>
+              <div
+                :inner-html.prop="$t('helpPage.install.dropdown4.step6.title')"
+              ></div>
             </template>
             <div>
               <ImageWithTitle
@@ -386,7 +422,9 @@
           </GuideLineElement>
           <GuideLineElement number="7">
             <template slot="title">
-              <div v-html="$t('helpPage.install.dropdown4.step7.title')"></div>
+              <div
+                :inner-html.prop="$t('helpPage.install.dropdown4.step7.title')"
+              ></div>
             </template>
             <div>
               <ImageWithTitle
@@ -400,7 +438,9 @@
           </GuideLineElement>
           <GuideLineElement number="8">
             <template slot="title">
-              <div v-html="$t('helpPage.install.dropdown4.step8.title')"></div>
+              <div
+                :inner-html.prop="$t('helpPage.install.dropdown4.step8.title')"
+              ></div>
             </template>
             <div>
               <ImageWithTitle

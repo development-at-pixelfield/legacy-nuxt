@@ -57,7 +57,25 @@
             href="https://storage.googleapis.com/pfld-outdoor-production-documents-bucket/ISIAjobs_Terms_and_Conditions_2021_10_05_revMP_fin%20(1).pdf"
             target="_blank"
             class="no-color-link"
+            @click.stop="() => {}"
             >{{ $t("auth.termCond") }}</a
+          >
+        </label>
+      </Checkbox>
+
+      <Checkbox
+        :name.sync="agreePrivacy"
+        class="mb-32"
+        :error="checkPrivacyError"
+      >
+        <label slot="label" class="text-m">
+          {{ $t("auth.agreeWith") }} &nbsp;
+          <a
+            href="https://storage.googleapis.com/galaxy-nft/Legacy%20Privacy%20Notice.pdf"
+            target="_blank"
+            class="no-color-link"
+            @click.stop="() => {}"
+            >{{ $t("auth.policy") }}</a
           >
         </label>
       </Checkbox>
@@ -132,8 +150,10 @@ export default {
       password: "",
       repeatPassword: "",
       agree: false,
+      agreePrivacy: false,
       isSubmit: false,
       checkError: "",
+      checkPrivacyError: "",
       customEmailErrors: {},
       customUsernameError: {},
       rules: {
@@ -174,7 +194,8 @@ export default {
         !this.customErrors.length &&
         !this.customEmailErrors.length &&
         !this.customUsernameError.length &&
-        !this.checkError
+        !this.checkError &&
+        !this.checkPrivacyError
       );
     },
   },
@@ -182,6 +203,9 @@ export default {
   watch: {
     agree(val) {
       if (val) this.checkError = "";
+    },
+    agreePrivacy(val) {
+      if (val) this.checkPrivacyError = "";
     },
     email(val) {
       if (!this.$v.email.$invalid) {
@@ -201,6 +225,8 @@ export default {
 
       this.isSubmit = true;
       if (!this.agree) this.checkError = this.$t("validations.termAgree");
+      if (!this.agreePrivacy)
+        this.checkPrivacyError = this.$t("validations.privacyAgree");
     },
 
     async register() {

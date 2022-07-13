@@ -4,7 +4,7 @@
       <h2 class="text-xl mt-0">{{ $t("landing.ourRoadMap") }}</h2>
       <p
         class="mtb text-l text-center desc"
-        v-html="$t('landing.roadDesc')"
+        :inner-html.prop="$t('landing.roadDesc')"
       ></p>
 
       <div class="content">

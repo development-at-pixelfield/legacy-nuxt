@@ -25,7 +25,9 @@
         <div>
           <GuideLineElement number="1">
             <template slot="title">
-              <div v-html="$t('helpPage.buyEth.dropdown1.step1.title')"></div>
+              <div
+                :inner-html.prop="$t('helpPage.buyEth.dropdown1.step1.title')"
+              ></div>
             </template>
             <div>
               <p>{{ $t("helpPage.buyEth.dropdown1.step1.p1") }}</p>
@@ -94,7 +96,9 @@
           </GuideLineElement>
           <GuideLineElement number="4">
             <template slot="title">
-              <div v-html="$t('helpPage.buyEth.dropdown1.step4.title')"></div>
+              <div
+                :inner-html.prop="$t('helpPage.buyEth.dropdown1.step4.title')"
+              ></div>
             </template>
           </GuideLineElement>
         </div>
@@ -112,7 +116,9 @@
         <div>
           <GuideLineElement number="1">
             <template slot="title">
-              <div v-html="$t('helpPage.buyEth.dropdown2.step1.title')"></div>
+              <div
+                :inner-html.prop="$t('helpPage.buyEth.dropdown2.step1.title')"
+              ></div>
             </template>
             <div>
               <ImageWithTitle
@@ -168,7 +174,9 @@
           </GuideLineElement>
           <GuideLineElement number="4">
             <template slot="title">
-              <div v-html="$t('helpPage.buyEth.dropdown2.step4.title')"></div>
+              <div
+                :inner-html.prop="$t('helpPage.buyEth.dropdown2.step4.title')"
+              ></div>
             </template>
           </GuideLineElement>
         </div>
