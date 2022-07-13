@@ -56,7 +56,7 @@
           </span>
           <div class="info">
             <p class="no-color-link header-title1 mb-16 mt-24 text-center">
-              Elite
+              Elites
             </p>
           </div>
         </div>
@@ -66,7 +66,7 @@
           </span>
           <div class="info">
             <p class="no-color-link header-title1 mb-16 mt-24 text-center">
-              Legend
+              Legends
             </p>
           </div>
         </div>

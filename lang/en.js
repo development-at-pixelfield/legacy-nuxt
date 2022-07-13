@@ -226,7 +226,7 @@ export default {
     galacticMiles: "Galactic Miles",
     help: "Help",
     luminosity: "Luminosity",
-    copyright: "Copyright © 2022. Galaxy. All rights reserved.",
+    copyright: "Copyright © 2022. Legacy. All rights reserved.",
     story: "Story",
     filter: "Filter",
     clearAll: "Clear All",
@@ -279,7 +279,8 @@ export default {
   validations: {
     notEmpty: "This field cannot be empty.",
     sameAsPassword: "Please make sure your passwords match.",
-    termAgree: "Please agree to  Terms and Conditions.",
+    termAgree: "Please agree to Terms and Conditions.",
+    privacyAgree: "Please agree to Privacy Policy.",
     addEmail: "Please include an ‘@’ in the email address.",
     validEmail: "Please enter valid email address",
     emailUsed: "This email has already been registered",

@@ -52,6 +52,22 @@
           </div>
         </div>
       </div>
+      <Checkbox
+        :name.sync="agreePrivacy"
+        class="mb-32"
+        :error="checkPrivacyError"
+      >
+        <label slot="label" class="text-m">
+          {{ $t("auth.agreeWith") }} &nbsp;
+          <a
+            href="https://storage.googleapis.com/galaxy-nft/Legacy%20Privacy%20Notice.pdf"
+            target="_blank"
+            class="no-color-link"
+            @click.stop="() => {}"
+            >{{ $t("auth.policy") }}</a
+          >
+        </label>
+      </Checkbox>
       <Button :label="'Subscribe'" :color="'white'" @on-click="subscribe" />
     </div>
   </div>
@@ -61,12 +77,14 @@
 import { email, required } from "vuelidate/lib/validators";
 import Input from "~/components/ui/Input.vue";
 import Button from "~/components/ui/Button.vue";
+import Checkbox from "~/components/ui/Checkbox";
 
 export default {
   name: "Newsletter",
   components: {
     Input,
     Button,
+    Checkbox,
   },
   validations: {
     email: {
@@ -82,6 +100,8 @@ export default {
   },
   data() {
     return {
+      agreePrivacy: false,
+      checkPrivacyError: "",
       name: "",
       email: "",
       language: "cz",
@@ -105,16 +125,23 @@ export default {
       },
     };
   },
+  watch: {
+    agreePrivacy(val) {
+      if (val) this.checkPrivacyError = "";
+    },
+  },
   methods: {
     async beforeUpdate() {
       await this.$v.$touch();
       this.isSubmit = true;
       this.customErrors.email = [];
+      if (!this.agreePrivacy)
+        this.checkPrivacyError = this.$t("validations.privacyAgree");
     },
     async subscribe() {
       await this.beforeUpdate();
 
-      if (!this.$v.$invalid) {
+      if (!this.$v.$invalid && this.agreePrivacy) {
         try {
           const payload = {
             name: this.name,

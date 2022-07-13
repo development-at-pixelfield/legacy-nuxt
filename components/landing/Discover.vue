@@ -6,7 +6,10 @@
           <h2 class="mt-0 no-color-link">
             {{ $t("landing.discoverTitle") }}
           </h2>
-          <p class="mb-0 text-m" v-html="$t('landing.discoverDesc')"></p>
+          <p
+            class="mb-0 text-m"
+            :inner-html.prop="$t('landing.discoverDesc')"
+          ></p>
         </div>
         <div class="right-side">
           <span class="img-block">

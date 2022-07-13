@@ -69,6 +69,14 @@ export default {
   layout: "landing",
   async asyncData({ store }) {
     const feed = await store.dispatch("landing/feed");
+    // Remove dublicated FAQs
+    feed.faq = feed.faq.filter(
+      (value, index, self) =>
+        index ===
+        self.findIndex(
+          (t) => t.question === value.question && t.answer === value.answer
+        )
+    );
     return { feed };
   },
 };

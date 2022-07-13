@@ -18,6 +18,7 @@ module.exports = {
     "vue/script-setup-uses-vars": "off",
     "import/no-mutable-exports": "off",
     "no-var": "off",
+    "number-literal-case/number-literal-case": "off",
   },
   extends: [
     "@nuxtjs",
